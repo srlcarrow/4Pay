@@ -32,6 +32,7 @@
     <script src="<?php echo Yii::app()->baseUrl . '/js/lib/jquery-3.2.1.min.js'; ?>"></script>
     <!--JS | Bootstrap -->
     <script src="<?php echo Yii::app()->baseUrl . '/js/bootstrap.min.js'; ?>"></script>
+    <script src="<?php echo Yii::app()->baseUrl . '/js/common/component.js'; ?>"></script>
 
 
     <title></title>

@@ -1,9 +1,39 @@
+
 .f-left {
   float: left;
   width: 100%;
+  min-height: 1px;
 }
 
 .f-right {
   float: right;
   width: 100%;
+  min-height: 1px;
 }
+
+.ds-block {
+  display: block;
+}
+
+.ds-inline-block {
+  display: inline-block;
+}
+
+.ds-table-block {
+  display: table;
+  width: 100%;
+
+  .cell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+  }
+}
+
+@for $i from 1 through 100 {
+  .width-#{$i} {
+    width: $i * 1% !important;
+  }
+}
+
+
