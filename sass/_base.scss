@@ -1,0 +1,42 @@
+
+h1, h2, h3, h5, h6, div, a {
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: $font-size-xxx-large;
+}
+
+h2 {
+  font-size: $font-size-xx-large;
+}
+
+h3 {
+  font-size: $font-size-xx-large;
+}
+
+h4 {
+  font-size: $font-size-large;
+}
+
+h5 {
+  font-size: $font-size-regular;
+}
+
+h6 {
+  font-size: $font-size-small;
+}
+
+a, div, p,span {
+  font-size: $font-size-regular;
+}
+
+body {
+  background: #F7F7F7;
+}
+
+.navbar {
+  background: #fff;
+}

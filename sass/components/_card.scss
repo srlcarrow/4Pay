@@ -1,0 +1,33 @@
+/*Card*/
+.card {
+  position: relative;
+  -webkit-box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14);
+  -moz-box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14);
+  min-height: 1px;
+  background: #fff;
+  padding: 30px;
+  @extend .f-left;
+
+  &:not(:last-child) {
+    margin-bottom: 30px !important;
+  }
+
+  .card-header {
+    margin-bottom: 40px;
+    @extend .f-left;
+  }
+
+  .card-content {
+    @extend .f-left;
+  }
+
+  .card-footer {
+    @extend .f-left;
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*padding: 30px;*/
+    margin-top: 30px;
+  }
+}
