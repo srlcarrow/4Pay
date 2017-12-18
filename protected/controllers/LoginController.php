@@ -7,4 +7,8 @@ class LoginController extends Controller{
     {
         $this->render('index');
     }
+
+    public function actionTest(){
+     $this->render('index');
+    }
 }
