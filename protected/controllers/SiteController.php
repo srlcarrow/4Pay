@@ -25,7 +25,6 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-//        var_dump('rrrr');exit;
         if (Yii::app()->user->isGuest) {
             $this->redirect(array('login'));
         } else {
