@@ -26,7 +26,7 @@ class employeeController extends Controller {
 
     public function actionAddEmployee() {
         $model = new EmpBasic();
-        $this->renderPartial('ajaxLoad/addEmployee', array('model' => $model));
+        $this->render('ajaxLoad/addEmployee', array('model' => $model));
     }
 
     public function actionSaveEmployee() {
@@ -40,6 +40,11 @@ class employeeController extends Controller {
         $model->emp_full_name = $_POST['emp_full_name'];
         $model->emp_name_with_initials = $_POST['emp_name_with_initials'];
         $model->emp_display_name = $_POST['emp_display_name'];
+        $model->emp_dob = $_POST['emp_dob'];
+        $model->ref_race = Yii::app()->request->getPost('EmpBasic')['ref_race'];
+        $model->emp_nic = $_POST['emp_nic'];
+        $model->ref_religion = Yii::app()->request->getPost('EmpBasic')['ref_religion'];
+        $model->created_date = date('Y-m-d H:i:s');
 
         if ($model->save(false)) {
             $empContacts = new EmpContacts();

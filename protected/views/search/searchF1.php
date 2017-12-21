@@ -5,10 +5,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
     <div class="col-md-12">
         <div class="card">
             <div class="card-content">
-                <div class="col s12">
-                    <button class="cm-btn add right addNewCompany" type="button" onclick="addEmployee()">Add New
-                    </button>
-                </div>
+                
                 <div class="search-box">
                     <div class="item width-90">
                         <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search" onkeyup="viewEmployeeData(1)">
@@ -79,22 +76,5 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
             }
         });
     }
-
-    function addEmployee() {
-        var page = 1;
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo Yii::app()->baseUrl . '/Employee/AddEmployee'; ?>",
-            data: $('#searchF1').serialize() + "&page=" + page,
-            success: function (responce) {
-                $(".ajaxLoad").html(responce);
-            }
-        });
-    }
-    
-    function colseEmployee() {
-        viewEmployeeData(1);
-    }
-    
-
+   
 </script>
