@@ -24,6 +24,13 @@ class Controller extends CController {
      */
     public $breadcrumbs = array();
 
+    public function redirectionToLogin() {
+        parent::init();
+        if (yii::app()->user->isGuest) {
+            $this->redirect(array('site/Login', 'controllerAction' => Yii::app()->urlManager->parseUrl(Yii::app()->request), 'request_arr' => $_REQUEST));
+        }
+    }
+
     public static function msgHandler($code, $msg, $data = NULL) {
         if ($code == 200) {
             echo json_encode(array("code" => $code, "msg" => $msg, "data" => $data));
@@ -84,16 +91,10 @@ class Controller extends CController {
 
         return $str;
     }
-    
-    public function viewStatusArry() {
-        return array('Male' => 'Male', 'Female' => 'Female');
+
+    public static function getTimeZone() {
+        $timezone = 5.5 * 3600;
+        return $timezone;
     }
-    
-    public function viewTitleArry() {
-        return array('Mr.' => 'Mr', 'Mrs.' => 'Mrs', 'Miss.' => 'Miss', 'Ms.' => 'Ms', 'Dr.' => 'Dr');
-    }
-    
-    public function viewCivilstatusArry() {
-        return array('Single' => 'Single', 'Married' => 'Married', 'Divorced' => 'Divorced', 'Widow' => 'Widow');
-    }
+
 }
