@@ -42,6 +42,38 @@ var EVENT = {};
             });
         });
 
+    });
+
+    // Ajax Tab
+    $(document).on('click.cm-ajax-tab', '.cm-ajax-tab li a', function (e) {
+        e.preventDefault();
+
+        var $this = $(this);
+        $this.parents('.cm-ajax-tab').find('a').removeClass('is-active');
+        $this.addClass('is-active');
+    });
+
+    // Accordion
+    $(function () {
+        $(document).find('.cm-accordion').each(function () {
+            var $this = $(this);
+
+            $this.find('.cm-accordion-row:first').addClass('is-open');
+            $this.find('.cm-accordion-row:first').find('.cm-accordion-content').slideDown('fast');
+
+            $this.find('.cm-accordion-row').on('click.cm-accordion-header', '.cm-accordion-header', function () {
+                var _this = $(this),
+                    $parent = _this.parent();
+
+                if (!$parent.hasClass('is-open')) {
+                    $this.find('.cm-accordion-row').removeClass('is-open');
+                    $parent.addClass('is-open');
+
+                    $this.find('.cm-accordion-content').slideUp('fast');
+                    $parent.find('.cm-accordion-content').slideDown('fast')
+                }
+            })
+        });
     })
 
 })();

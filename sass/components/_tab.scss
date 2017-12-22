@@ -1,0 +1,23 @@
+ul.cm-tab {
+  @extend .f-left;
+
+  li {
+    cursor: pointer;
+    float: left;
+
+    a {
+      padding: 21px 100px 16px 0;
+      font-size: $font-size-large;
+      display: block;
+      border-bottom: 3px solid transparent;
+      color: $tabFontColor;
+      line-height: $font-size-large;
+
+      &.is-active {
+        border-color: $tabBorderColor;
+        color: $tabActiveColor;
+      }
+    }
+  }
+
+}

@@ -24,4 +24,8 @@ class employeeController extends Controller {
         $this->renderPartial('ajaxLoad/viewEmployeeData', array('employeeData' => $employeeData));
     }
 
+    public function actionProfile() {
+        $this->render('profile');
+    }
+
 }
