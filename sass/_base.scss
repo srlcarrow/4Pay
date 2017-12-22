@@ -29,7 +29,15 @@ h6 {
   font-size: $font-size-small;
 }
 
-a, div, p,span {
+a,
+a:active,
+a:focus,
+a:hover {
+  text-decoration: none;
+
+}
+
+a, div, p, span {
   font-size: $font-size-regular;
 }
 
@@ -39,4 +47,13 @@ body {
 
 .navbar {
   background: #fff;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+  }
 }
