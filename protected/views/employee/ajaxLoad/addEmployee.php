@@ -17,21 +17,21 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Emp No.</label>
-                                <input type="text" name="empno" class="form-control" required>
+                                <input type="text" name="empno" value="<?php echo $model->empno; ?>" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>EPF No.</label>
-                                <input type="text" name="epf_no" class="form-control">
+                                <input type="text" name="epf_no" value="<?php echo $model->epf_no; ?>" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Attendance No.</label>
-                                <input type="text" name="attendance_no" class="form-control">
+                                <input type="text" name="attendance_no" value="<?php echo $model->attendance_no; ?>" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -48,14 +48,14 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Full Name</label>
-                                <input type="text" name="emp_full_name" class="form-control" required>
+                                <input type="text" name="emp_full_name" value="<?php echo $model->emp_full_name; ?>" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Name with Initials</label>
-                                <input type="text" name="emp_name_with_initials" class="form-control">
+                                <input type="text" name="emp_name_with_initials" value="<?php echo $model->emp_name_with_initials; ?>" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Display Name</label>
-                                <input type="text" name="emp_display_name" class="form-control">
+                                <input type="text" name="emp_display_name" value="<?php echo $model->emp_display_name; ?>" class="form-control">
                             </div>
                         </div>
 
@@ -89,7 +89,7 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Date of Birth</label>
-                                <input type="text" name="emp_dob" class="form-control">
+                                <input type="text" name="emp_dob" value="<?php echo $model->emp_dob; ?>" class="form-control">
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>NIC</label>
-                                <input type="text" name="emp_nic" class="form-control">                            
+                                <input type="text" name="emp_nic" value="<?php echo $model->emp_nic; ?>" class="form-control">                            
                             </div>
                         </div>
                     </div>
@@ -125,14 +125,14 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>Permanent Address</label>
-                                <input type="text" name="con_permenant_add" class="form-control" required>
+                                <input type="text" name="con_permenant_add" value="<?php echo $contact->con_permenant_add; ?>" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>Temporary Address</label>
-                                <input type="text" name="con_temp_add" class="form-control">
+                                <input type="text" name="con_temp_add" value="<?php echo $contact->con_temp_add; ?>" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -141,19 +141,19 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Office Email</label>
-                                <input type="text" name="con_office_email" class="form-control email" required>
+                                <input type="text" name="con_office_email" value="<?php echo $contact->con_office_email; ?>" class="form-control email" required>
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Personal Email</label>
-                                <input type="text" name="con_personal_email" class="form-control email">
+                                <input type="text" name="con_personal_email" value="<?php echo $contact->con_personal_email; ?>" class="form-control email">
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Home Contact Number</label>
-                                <input type="text" name="con_home_tel" class="form-control number">
+                                <input type="text" name="con_home_tel" value="<?php echo $contact->con_home_tel; ?>" class="form-control number">
                             </div>
                         </div>                   
                     </div>
@@ -162,13 +162,13 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Mobile 1</label>
-                                <input type="text" name="con_mobile1" class="form-control number">
+                                <input type="text" name="con_mobile1" value="<?php echo $contact->con_mobile1; ?>" class="form-control number">
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Mobile 2</label>
-                                <input type="text" name="con_mobile2" class="form-control number">
+                                <input type="text" name="con_mobile2" value="<?php echo $contact->con_mobile2; ?>" class="form-control number">
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Date of Joined</label>
-                                <input type="text" name="empl_joined_date" class="form-control" required>
+                                <input type="text" name="empl_joined_date" value="<?php echo $employment->empl_joined_date; ?>" class="form-control" required>
                             </div>
                         </div>
 
@@ -201,24 +201,27 @@
                     </div>
 
                     <div class="row form-wrapper">
-                         <div class="col-md-4 ">
+                        <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Branch</label>
                                 <?php echo $form->dropdownlist($employment, 'ref_branch_id', CHtml::listData(AdmBranch::model()->findAll(), 'br_id', 'br_name'), array('empty' => '', 'class' => 'form-control')); ?>
-                            </div>                  
-                        </div>
-                        
-                        <div class="col-md-4 ">
-                            <div class="form-group">
-                                <label>Department</label>
-                                <?php echo $form->dropdownlist($employment, 'ref_department_id', CHtml::listData(AdmDepartment::model()->findAll(), 'dept_id', 'dept_name'), array('empty' => '', 'class' => 'form-control')); ?>
                             </div>                  
                         </div>
 
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Section</label>
-                                <?php echo $form->dropdownlist($employment, 'ref_section_id', CHtml::listData(AdmSection::model()->findAll(), 'section_id', 'section_name'), array('empty' => '', 'class' => 'form-control')); ?>
+                                <?php echo $form->dropdownlist($employment, 'ref_department_id', CHtml::listData(AdmDepartment::model()->findAll(), 'dept_id', 'dept_name'), array('empty' => '', 'onChange' => 'loadSections()', 'class' => 'form-control')); ?>
+                            </div>                  
+                        </div>
+
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                 <label>Department</label>
+
+                                <select id="section" name="section" class="form-control">
+                                    <option value="0">Select</option>
+                                </select>
                             </div>                  
                         </div>                                              
                     </div>
@@ -239,10 +242,10 @@
                         </div>
                         <div class="col-md-4 ">
                             <div class="form-group">
-                                    <?php
-                                    echo $form->checkBox($employment, 'is_generalshift_emp', array('class' => 'form-control-txtbx'), array('value' => '', 'uncheckValue' => 0));
-                                    ?>
-                                    <span class="chkbox-lbl">Is general shift</span>
+                                <?php
+                                echo $form->checkBox($employment, 'is_generalshift_emp', array('class' => 'form-control-txtbx'), array('value' => '', 'uncheckValue' => 0));
+                                ?>
+                                <span class="chkbox-lbl">Is general shift</span>
                             </div>                
                         </div>
                     </div>
@@ -279,11 +282,39 @@
         }
     });
 
+    function loadSections() {
+        $("#section").empty();
+        var id = $('#Employment_ref_department_id').val();
+
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/Employee/GetSectionsByDepartmentID'; ?>",
+            data: {id: id},
+            dataType: 'json',
+            success: function (responce) {
+                if (responce.code == 200) {
+                    var sections = responce.data.sectionData;
+                    addEmptyToAjaxDropDowns('section', 'section');
+                    for (var i = 0, max = sections.length; i < max; i++) {
+                        $('#section').append(
+                                $("<option>" + sections[i]['section_name'] + "</option>")
+                                .attr("value", sections[i]['section_id'])
+                                .text(sections[i]['section_name'])
+                                );
+                    }
+                    setTimeout(function () {
+                        Select.init();
+                    }, 200)
+                }
+            }
+        });
+    }
+
     function saveEmployee() {
         $.ajax({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/SaveEmployee'; ?>",
-            data: $('#formEmployee').serialize(),
+            data: $('#formEmployee').serialize() + '&empId=<?php echo $empId; ?>',
             dataType: 'json',
             success: function (responce) {
                 if (responce.code == 200) {
@@ -298,4 +329,14 @@
     function colseEmployee() {
         window.location.href = '<?php echo Yii::app()->baseUrl . '/Employee/ViewEmployee'; ?>';
     }
+    
+    function addEmptyToAjaxDropDowns(id, defaultText) {
+        var text = defaultText != undefined ? defaultText : "Select";
+        $('#' + id).append(
+                $("<option>Select</option>")
+                .attr("value", 0)
+                .text("Select")
+                );
+    }
+    
 </script>

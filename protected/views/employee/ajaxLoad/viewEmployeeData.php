@@ -37,7 +37,7 @@
                                         <td><?php echo "Email"; ?></td>
                                         <td><?php echo "Contact"; ?></td>
                                         <td class="tb-action text-right">
-                                            <button type="button" class="btn btn-sm btn-warning">Edit</button>
+                                            <button type="button" onclick="editEmployee('<?php echo $employee->emp_id; ?>')"  class="btn btn-sm btn-warning">Edit</button>
                                             <!--<button type="button" class="btn btn-sm btn-danger">Delete</button>-->
                                         </td>
                                     </tr>
@@ -58,6 +58,10 @@
 
     function addEmployee() {
         window.location.href = '<?php echo Yii::app()->baseUrl . '/Employee/AddEmployee'; ?>';
+    }
+    
+    function editEmployee(id) { 
+        window.location.href = '<?php echo Yii::app()->baseUrl . '/Employee/AddEmployee/id/'; ?>' + id;
     }
 
 </script>
