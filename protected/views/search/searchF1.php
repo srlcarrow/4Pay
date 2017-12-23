@@ -7,7 +7,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
             <div class="card-content">
                 <div class="search-box">
                     <div class="item width-90">
-                        <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search" onkeyup="viewEmployeeData(1)">
+                        <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search" onkeyup="viewSearchData(1)">
                     </div>
                     <div class="item width-10">
                         <button type="button" class="btn btn-advance">Advance</button>
@@ -20,25 +20,32 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
                             <div class="row form-wrapper">
                                 <div class="col-md-4 ">
                                     <div class="form-group">
-                                        <label>Name</label>
+                                        <label>Branch</label>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 ">
                                     <div class="form-group">
-                                        <label>Email</label>
+                                        <label>Department</label>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 ">
                                     <div class="form-group">
-                                        <label>Phone Number</label>
+                                        <label>Section</label>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
 
+                            </div>
+                            <div class="row form-wrapper">
+                                <div class="col-md-4 ">
+                                    <?php echo Chtml::label('Page Size', '', array('class' => 'control-label')); ?>
+                                    <?php $dataArray = array('15' => '15', '30' => '30', '50' => '50', '100' => '100', '200' => '200'); ?>
+                                    <?php echo Chtml::dropdownlist('noOfData', '', $dataArray, array('class' => 'form-control')); ?>
+                                </div>
                             </div>
                         </div>
 
@@ -46,7 +53,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
                             <div class="row">
                                 <div class="col-md-12 text-right">
                                     <button type="button" class="btn btn-default btn-close">Close</button>
-                                    <button type="button" class="btn btn-primary">Search</button>
+                                    <button type="button" class="btn btn-primary" onclick="viewSearchData(1)">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -62,10 +69,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
 
 <script>
     $(document).ready(function (e) {
-        viewEmployeeData(1);
+        viewSearchData(1);
     });
 
-    function viewEmployeeData(page) {
+    function viewSearchData(page) {
         $.ajax({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/' . $controller . '/' . $action; ?>",

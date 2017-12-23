@@ -14,3 +14,4 @@ Thumbs.db
 /node_modules/
 /uploads/company/logo/
 !/uploads/company/logo/
+/protected/config/database.php
