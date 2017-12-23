@@ -44,7 +44,7 @@ class employeeController extends Controller {
         $pageCount = $data['count'];
         $currentPage = Yii::app()->request->getPost('page');
 
-        $this->renderPartial('issueUserAccounts', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => 1, 'count' => $pageCount));
+        $this->renderPartial('issueUserAccounts', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
     public function actionIssueAccounts() {
@@ -90,8 +90,8 @@ class employeeController extends Controller {
 //            EmailGenerator::SendEmail($msg, $to, $subjct);
         }
     }
-    
-     public function actionUpdateAccounts() {
+
+    public function actionUpdateAccounts() {
         $selectedEmployees = $_POST['selectedIds'];
         $userId = Yii::app()->user->getId();
 
@@ -128,10 +128,10 @@ class employeeController extends Controller {
                 $user->save(false);
             }
         }
+    }
 
     public function actionProfile() {
         $this->render('profile');
-
     }
 
 }
