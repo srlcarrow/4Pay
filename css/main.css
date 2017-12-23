@@ -21,6 +21,12 @@ h5 {
 h6 {
   font-size: 12px; }
 
+a,
+a:active,
+a:focus,
+a:hover {
+  text-decoration: none; }
+
 a, div, p, span {
   font-size: 14px; }
 
@@ -30,7 +36,13 @@ body {
 .navbar {
   background: #fff; }
 
-.f-left, .card, .card .card-header, .card .card-content, .card .card-footer, .search-advance, .search-advance .content, .search-advance .footer {
+ul {
+  margin: 0;
+  padding: 0; }
+  ul li {
+    list-style: none; }
+
+.f-left, .card, .card .card-header, .card .card-content, .card .card-footer, ul.cm-tab, .cm-accordion, .cm-accordion .cm-accordion-row, .cm-accordion .cm-accordion-row .cm-accordion-header, .cm-accordion .cm-accordion-row .cm-accordion-content, .search-advance, .search-advance .content, .search-advance .footer {
   float: left;
   width: 100%;
   min-height: 1px; }
@@ -354,6 +366,11 @@ body {
 .width-100 {
   width: 100% !important; }
 
+.text-info {
+  font-size: 16px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.86); }
+
 /*Card*/
 .card {
   position: relative;
@@ -363,6 +380,10 @@ body {
   min-height: 1px;
   background: #fff;
   padding: 30px; }
+  .card.flat {
+    box-shadow: none;
+    border-radius: 3px;
+    border: 2px solid #f7f5f5; }
   .card:not(:last-child) {
     margin-bottom: 30px !important; }
   .card .card-header {
@@ -374,8 +395,58 @@ body {
     /*padding: 30px;*/
     margin-top: 30px; }
 
+ul.cm-tab li {
+  cursor: pointer;
+  float: left; }
+  ul.cm-tab li a {
+    padding: 21px 100px 16px 0;
+    font-size: 18px;
+    display: block;
+    border-bottom: 3px solid transparent;
+    color: rgba(0, 0, 0, 0.86);
+    line-height: 18px; }
+    ul.cm-tab li a.is-active {
+      border-color: #0288d1;
+      color: #0288d1; }
+
 .form-wrapper:not(:last-child) {
   margin-bottom: 30px; }
+
+.cm-accordion .cm-accordion-row .cm-accordion-header {
+  border-bottom: 1px solid #000;
+  padding: 10px 0;
+  cursor: pointer;
+  position: relative; }
+  .cm-accordion .cm-accordion-row .cm-accordion-header::before {
+    width: 13px;
+    height: 7px;
+    position: absolute;
+    display: block;
+    content: '';
+    right: 0;
+    top: 17px;
+    background: url("./../images/icon/accordion/ic_arrow.png"); }
+  .cm-accordion .cm-accordion-row .cm-accordion-header h5 {
+    font-size: 16px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.86); }
+
+.cm-accordion .cm-accordion-row .cm-accordion-content {
+  padding: 30px 0;
+  display: none; }
+
+.cm-accordion .cm-accordion-row.is-open .cm-accordion-header {
+  border-color: #0288d1;
+  -webkit-transition: all ease-in 0.3s;
+  -moz-transition: all ease-in 0.3s;
+  -ms-transition: all ease-in 0.3s;
+  -o-transition: all ease-in 0.3s;
+  transition: all ease-in 0.3s; }
+  .cm-accordion .cm-accordion-row.is-open .cm-accordion-header::before {
+    background: url("./../images/icon/accordion/ic_arrow_active.png"); }
+  .cm-accordion .cm-accordion-row.is-open .cm-accordion-header h5 {
+    color: #0288d1; }
 
 /*table*/
 td.tb-action,
@@ -394,16 +465,20 @@ th.tb-action {
     border-radius: 0;
     height: 34px;
     padding-left: 15px; }
-  .search-box .item .btn-advance {
+  .search-box .item .btn-advance, .search-box .item .btn-search {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
     width: 100%;
-    outline: 0; }
-    .search-box .item .btn-advance:active {
+    outline: 0;
+    background: rgba(0, 0, 0, 0.04); }
+    .search-box .item .btn-advance:active, .search-box .item .btn-search:active {
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
       box-shadow: none; }
+  .search-box .item .btn-search {
+    background: #ea3939;
+    color: #fff; }
 
 .search-advance {
   display: none; }
@@ -413,11 +488,31 @@ th.tb-action {
 .form-group {
   margin-bottom: 0; }
 
+.navbar {
+  margin-bottom: 0; }
+
 .mb-30 {
   margin-bottom: 30px !important; }
+
+.mt-10 {
+  margin-top: 10px !important; }
+
+.mt-30 {
+  margin-top: 30px !important; }
+
+.mb-not-last-25:not(:last-child) {
+  margin-bottom: 25px; }
 
 .p-0 {
   padding: 0 !important; }
 
 .p-30 {
   padding: 30px !important; }
+
+.p-tb-50 {
+  padding-top: 50px !important;
+  padding-bottom: 50px !important; }
+
+.p-lr-100 {
+  padding-left: 100px !important;
+  padding-right: 100px !important; }

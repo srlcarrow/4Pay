@@ -1,0 +1,66 @@
+@import "./../common_mix";
+
+.cm-accordion {
+  @extend .f-left;
+
+  .cm-accordion-row {
+    @extend .f-left;
+
+    .cm-accordion-header {
+      @extend .f-left;
+      border-bottom: 1px solid $accordionBorderColor;
+      padding: 10px 0;
+      cursor: pointer;
+      position: relative;
+
+      &::before {
+        width: 13px;
+        height: 7px;
+        position: absolute;
+        display: block;
+        content: '';
+        right: 0;
+        top:17px;
+        background: url("./../images/icon/accordion/ic_arrow.png");
+      }
+
+      h5 {
+        font-size: 16px;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: $accordionFontColor;
+      }
+
+    }
+
+    .cm-accordion-content {
+      @extend .f-left;
+      padding: 30px 0;
+      display: none;
+    }
+
+    &.is-open {
+      .cm-accordion-header {
+        border-color: $accordionActiveBorderColor;
+        -webkit-transition: all ease-in 0.3s;
+        -moz-transition: all ease-in 0.3s;
+        -ms-transition: all ease-in 0.3s;
+        -o-transition: all ease-in 0.3s;
+        transition: all ease-in 0.3s;
+
+        &::before {
+          background: url("./../images/icon/accordion/ic_arrow_active.png");
+        }
+
+        h5 {
+          color: $accordionFontActiveColor;
+        }
+      }
+      .cm-accordion-content {
+
+      }
+
+    }
+  }
+
+}
