@@ -128,6 +128,10 @@ class employeeController extends Controller {
                 $user->save(false);
             }
         }
+
+    public function actionProfile() {
+        $this->render('profile');
+
     }
 
 }
