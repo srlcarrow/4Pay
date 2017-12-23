@@ -13,6 +13,15 @@
         =========================================================-->
         <!--CSS | bootstrap-->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css">
+
+        <!--CSS | Plugins -->
+        <!-- Datepicker -->
+        <link rel="stylesheet" type="text/css"
+              href="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/airDatepicker/datepicker.min.css">
+        <!-- Timepicker -->
+        <link rel="stylesheet" type="text/css"
+              href="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/timepicker/jquery-clockpicker.min.css">
+
         <!--CSS | Main-->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 
@@ -20,10 +29,6 @@
         <!--========================================================
             Javascript
         =========================================================-->
-        <?php
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/validate/jquery.validate.js', CClientScript::POS_HEAD);
-        ?>
-
         <script>
             var BASE_URL = "<?php echo Yii::app()->baseUrl; ?>";
         </script>
@@ -34,8 +39,19 @@
 
         <!--JS | Jquery Lib-->
         <script src="<?php echo Yii::app()->baseUrl . '/js/lib/jquery-3.2.1.min.js'; ?>"></script>
+
         <!--JS | Bootstrap -->
         <script src="<?php echo Yii::app()->baseUrl . '/js/bootstrap.min.js'; ?>"></script>
+
+        <!--JS | Plugins -->
+        <!--##### Datepicker #####-->
+        <script src="<?php echo Yii::app()->baseUrl . '/js/plugins/airDatepicker/datepicker.min.js'; ?>"></script>
+        <script src="<?php echo Yii::app()->baseUrl . '/js/plugins/airDatepicker/i18n/datepicker.en.js'; ?>"></script>
+
+        <!--##### Time Picker #####-->
+        <script src="<?php echo Yii::app()->baseUrl . '/js/plugins/timepicker/jquery-clockpicker.min.js'; ?>"></script>
+
+        <!--JS | Component -->
         <script src="<?php echo Yii::app()->baseUrl . '/js/common/component.js'; ?>"></script>
 
 
@@ -55,5 +71,7 @@
         <div class="container">
             <?php echo $content; ?>
         </div>
+
+
     </body>
 </html>

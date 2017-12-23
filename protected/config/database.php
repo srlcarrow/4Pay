@@ -8,7 +8,7 @@ return array(
 	'connectionString' => 'mysql:host=localhost:3307;dbname=p1',
 	'emulatePrepare' => true,
 	'username' => 'root',
-	'password' => 'chathu123',
+	'password' => 'BattelShip',
 	'charset' => 'utf8',
 
 );

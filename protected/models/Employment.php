@@ -1,27 +1,5 @@
 <?php
 
-/**
- * This is the model class for table "emp_employment".
- *
- * The followings are the available columns in table 'emp_employment':
- * @property integer $empl_id
- * @property integer $ref_emp_id
- * @property string $empl_joined_date
- * @property integer $ref_employment_type
- * @property integer $ref_branch_id
- * @property integer $ref_designation
- * @property integer $ref_department_id
- * @property integer $ref_section_id
- * @property integer $ref_employment_category
- * @property integer $ref_attendance_group
- * @property string $empl_employment_status
- * @property string $empl_resigned_date
- * @property integer $is_generalshift_emp
- * @property string $created_date
- * @property integer $created_by
- * @property string $updated_date
- * @property integer $updated_by
- */
 class Employment extends CActiveRecord
 {
 	/**

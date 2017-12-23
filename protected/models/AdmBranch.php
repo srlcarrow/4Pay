@@ -1,24 +1,5 @@
 <?php
 
-/**
- * This is the model class for table "adm_branch".
- *
- * The followings are the available columns in table 'adm_branch':
- * @property integer $br_id
- * @property string $br_name
- * @property string $br_address
- * @property integer $br_tel
- * @property integer $br_no_employees
- * @property string $br_active
- * @property string $br_code
- * @property integer $br_fax
- * @property string $br_day
- * @property string $br_worktimestart
- * @property string $br_worktimeend
- * @property string $br_email
- * @property string $br_longitude
- * @property string $br_latitude
- */
 class AdmBranch extends CActiveRecord
 {
 	/**
