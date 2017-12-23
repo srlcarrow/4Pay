@@ -63,7 +63,7 @@ class Controller extends CController {
             $askedWhere = $askedQuery[1] == NULL ? '' : ' AND ' . $askedQuery[1];
         }
 
-        $orderBy = $orderBy != NULL ? 'ORDER BY ' . $orderBy . " DESC" : "";
+        $orderBy = $orderBy != NULL ? 'ORDER BY ' . $orderBy : "";
         $returnQuery = $askedQuery[0] . $join . ' WHERE ' . $where . $askedWhere . ' ' . $orderBy . $sqlLimit;
         $returnQueryCount = $askedQuery[0] . $join . ' WHERE ' . $where . $askedWhere . ' ';
         $result = yii::app()->db->createCommand($returnQuery)->setFetchMode(PDO::FETCH_OBJ)->queryAll();
@@ -95,6 +95,31 @@ class Controller extends CController {
     public static function getTimeZone() {
         $timezone = 5.5 * 3600;
         return $timezone;
+    }
+
+    public static function empBasicFields() {
+        $reqBasicFields = array('emp.empno' => 'EMP No', 'emp.epf_no' => 'EPF No', 'emp.attendance_no' => 'Attendance No', 'emp.emp_title' => 'Title', 'emp.emp_display_name' => 'Display Name', 'emp.emp_full_name' => 'Full Name', 'emp.emp_name_with_initials' => 'Name With Initials', 'emp.emp_gender' => 'Gender');
+        return $reqBasicFields;
+    }
+
+    public static function empEmploymentFields() {
+        
+    }
+
+    public static function attendanceFields() {
+        $reqAttendanceFields = array('aa.day' => 'Day', 'aa.date_in' => 'Date In', 'aa.punch_in' => 'Punch In', 'aa.date_out' => 'Date Out', 'aa.punch_out' => 'Punch Out', 'aa.early_time' => 'Early In', 'aa.late_time' => 'Late', 'aa.early_living' => 'Early Leaving', 'aa.over_time' => 'Over Time', 'aa.punch_in_location' => 'In Location', 'aa.punch_out_location' => 'Out Location');
+        return $reqAttendanceFields;
+    }
+
+    public static function randomPassword($length = 16) {
+        $chars = "abcdefghijklmnopqrstuvwxyz";
+        $chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $chars2 = "0123456789";
+        $password = substr(str_shuffle($chars), 0, 4);
+        $password1 = substr(str_shuffle($chars1), 0, 3);
+        $password2 = substr(str_shuffle($chars2), 0, 1);
+        $passwordNew = str_shuffle($password . $password1 . $password2);
+        return $passwordNew;
     }
 
 }
