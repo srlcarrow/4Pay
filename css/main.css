@@ -371,6 +371,12 @@ ul {
   line-height: 16px;
   color: rgba(0, 0, 0, 0.86); }
 
+.no-select > * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
 /*Card*/
 .card {
   position: relative;
@@ -489,7 +495,18 @@ th.tb-action {
   margin-bottom: 0; }
 
 .navbar {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0; }
+
+.container {
+  margin-top: 80px; }
 
 .mb-30 {
   margin-bottom: 30px !important; }
@@ -499,6 +516,9 @@ th.tb-action {
 
 .mt-30 {
   margin-top: 30px !important; }
+
+.mb-10 {
+  margin-bottom: 10px !important; }
 
 .mb-not-last-25:not(:last-child) {
   margin-bottom: 25px; }
