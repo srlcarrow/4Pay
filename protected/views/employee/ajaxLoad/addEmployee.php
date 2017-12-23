@@ -9,7 +9,7 @@
             <div class="card-content">
                 <?php $form = $this->beginWidget('CActiveForm', array('id' => 'formEmployee')); ?>
                 <div class="content">
-                    
+
                     <div class="card-header">
                         <h4>Basic Details</h4>
                     </div>
@@ -121,14 +121,141 @@
                         <h4>Contact Details</h4>
                     </div>
 
+                    <div class="row form-wrapper">
+                        <div class="col-md-6 ">
+                            <div class="form-group">
+                                <label>Permanent Address</label>
+                                <input type="text" name="con_permenant_add" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <div class="form-group">
+                                <label>Temporary Address</label>
+                                <input type="text" name="con_temp_add" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-wrapper">
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Office Email</label>
+                                <input type="text" name="con_office_email" class="form-control email" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Personal Email</label>
+                                <input type="text" name="con_personal_email" class="form-control email">
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Home Contact Number</label>
+                                <input type="text" name="con_home_tel" class="form-control number">
+                            </div>
+                        </div>                   
+                    </div>
+
+                    <div class="row form-wrapper">
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Mobile 1</label>
+                                <input type="text" name="con_mobile1" class="form-control number">
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Mobile 2</label>
+                                <input type="text" name="con_mobile2" class="form-control number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+                        <h4>Employment Details</h4>
+                    </div>
+
+                    <div class="row form-wrapper">
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Date of Joined</label>
+                                <input type="text" name="empl_joined_date" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Designation</label>
+                                <?php echo $form->dropdownlist($employment, 'ref_designation', CHtml::listData(AdmDesignation::model()->findAll(), 'desig_id', 'designation'), array('empty' => '', 'class' => 'form-control')); ?>
+                            </div>                  
+                        </div>
+
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Employment Type</label>
+                                <?php echo $form->dropdownlist($employment, 'ref_employment_type', CHtml::listData(AdmEmptype::model()->findAll(), 'etype_id', 'emp_type'), array('empty' => '', 'class' => 'form-control')); ?>
+                            </div>                  
+                        </div>                       
+                    </div>
+
+                    <div class="row form-wrapper">
+                         <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Branch</label>
+                                <?php echo $form->dropdownlist($employment, 'ref_branch_id', CHtml::listData(AdmBranch::model()->findAll(), 'br_id', 'br_name'), array('empty' => '', 'class' => 'form-control')); ?>
+                            </div>                  
+                        </div>
+                        
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Department</label>
+                                <?php echo $form->dropdownlist($employment, 'ref_department_id', CHtml::listData(AdmDepartment::model()->findAll(), 'dept_id', 'dept_name'), array('empty' => '', 'class' => 'form-control')); ?>
+                            </div>                  
+                        </div>
+
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Section</label>
+                                <?php echo $form->dropdownlist($employment, 'ref_section_id', CHtml::listData(AdmSection::model()->findAll(), 'section_id', 'section_name'), array('empty' => '', 'class' => 'form-control')); ?>
+                            </div>                  
+                        </div>                                              
+                    </div>
+
+                    <div class="row form-wrapper">
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Employment Category</label>
+                                <?php echo $form->dropdownlist($employment, 'ref_employment_category', CHtml::listData(AdmEmpCategory::model()->findAll(), 'empcat_id', 'cat_name'), array('empty' => '', 'class' => 'form-control')); ?>
+                            </div>                  
+                        </div>                        
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <?php $activeStatus = $this->getActiveFilter(); ?>
+                                <label>Employment Status</label>                               
+                                <?php echo $form->dropdownlist($employment, 'empl_employment_status', $activeStatus, array('empty' => '', 'class' => 'form-control required')); ?>
+                            </div>                
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                    <?php
+                                    echo $form->checkBox($employment, 'is_generalshift_emp', array('class' => 'form-control-txtbx'), array('value' => '', 'uncheckValue' => 0));
+                                    ?>
+                                    <span class="chkbox-lbl">Is general shift</span>
+                            </div>                
+                        </div>
+                    </div>
                 </div>
 
                 <div class="footer">
                     <div class="col-md-12">
                         <div class="cm-message message"></div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="alert "></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert "></div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-right">
@@ -137,7 +264,7 @@
                         </div>
                     </div>
                 </div>
-                <?php $this->endWidget(); ?>
+                <?php $this->endWidget(); ?>   
             </div>
 
         </div>
