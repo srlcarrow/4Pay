@@ -1,0 +1,7 @@
+.f-left, .calender-wrapper, .calender-wrapper .cln-per-header, .calender-wrapper .cln-header, .calender-wrapper .cln-date-container {
+  float: left;
+  width: 100%;
+  min-height: 1px; }
+
+.calender-wrapper .cln-per-header h5 {
+  color: #000; }
