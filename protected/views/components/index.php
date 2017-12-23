@@ -121,6 +121,24 @@
                             </div>
 
                         </div>
+                        <div class="row form-wrapper">
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label>Date Picker</label>
+                                    <input type="text" class="input-datepicker form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 ">
+
+                                <div class="form-group">
+                                    <label>Time Picker</label>
+                                    <input type="text" class="input-timepicker form-control">
+                                </div>
+                            </div>
+
+
+                        </div>
 
                         <div class="row form-wrapper">
                             <div class="col-md-12 form-group">
@@ -253,3 +271,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    // This function when call datepicker date is selected
+    $(document).on('onDateSelect', function (e, date, fdate) {
+        console.log('Date ', date);
+        console.log('Formatted Date ', fdate);
+    });
+
+    // This function when call time picker time is selected
+    $(document).on('onTimeSelect', function (e, time, input) {
+        console.log('Time ', time);
+        console.log('Input ', input);
+    });
+
+</script>
