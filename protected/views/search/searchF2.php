@@ -105,11 +105,11 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
             }
             ?>
 
-            <input type="hidden" class="checkedInput">
-
         </div>
     </div>
 </div>
+
+<input type="hidden" class="checkedInput">
 
 <?php $this->endWidget(); ?>
 <div class="col s12 ajaxLoad"></div>
@@ -117,18 +117,24 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 
 <script>
 
-    var getSelectedCheckbox = function () {
-        var result = [];
-        $('input[type="checkbox"]:checked').each(function () {
-            var name = $(this).attr('name');
-            result.push({name: name});
-        });
+    var result = [];
 
-        console.log(result);
-        console.log(JSON.stringify(result));
-        console.log(typeof JSON.stringify(result));
-        return result;
-    };
+    $(function () {
+
+        $('input[type="checkbox"]').on('change', function () {
+            var $this = $(this),
+                name = $this.attr('name');
+
+            if ($this.is(':checked')) {
+                result.push(name);
+            } else {
+                result.splice(result.indexOf(name), 1);
+            }
+
+            $('.checkedInput').val(JSON.stringify(result));
+        });
+    });
+
 
     $(document).ready(function (e) {
         viewEmployeeData(1);
@@ -137,11 +143,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 
     function viewEmployeeData(page) {
 
-        var selectedCheckbox = getSelectedCheckbox();
-
-        var json = JSON.stringify(selectedCheckbox);
-
-        $('.checkedInput').val(json);
+        var checkedItemString = $('.checkedInput').val();
+//        console.log(checkedItemString);
 
         $.ajax({
             type: 'POST',
