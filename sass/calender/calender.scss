@@ -1,0 +1,29 @@
+@import "./../variable";
+
+.f-left {
+  float: left;
+  width: 100%;
+  min-height: 1px;
+}
+
+.calender-wrapper {
+  @extend .f-left;
+
+  .cln-per-header {
+    @extend .f-left;
+    
+    h5 {
+      color: #000;
+    }
+  }
+
+  .cln-header {
+    @extend .f-left;
+  }
+
+  .cln-date-container {
+    @extend .f-left;
+
+  }
+
+}
