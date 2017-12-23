@@ -394,16 +394,20 @@ th.tb-action {
     border-radius: 0;
     height: 34px;
     padding-left: 15px; }
-  .search-box .item .btn-advance {
+  .search-box .item .btn-advance, .search-box .item .btn-search {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
     width: 100%;
-    outline: 0; }
-    .search-box .item .btn-advance:active {
+    outline: 0;
+    background: rgba(0, 0, 0, 0.04); }
+    .search-box .item .btn-advance:active, .search-box .item .btn-search:active {
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
       box-shadow: none; }
+  .search-box .item .btn-search {
+    background: #ea3939;
+    color: #fff; }
 
 .search-advance {
   display: none; }
