@@ -1,6 +1,11 @@
 <div class="row mb-30">
     <div class="col-md-12">
         <div class="card">
+            
+            <div class="col s12">
+                <button class="cm-btn add right addNewCompany" type="button" onclick="addEmployee()">Add New
+                </button>
+            </div>
 
             <div class="card-header">
                 <h1>Employees </h1>
@@ -26,13 +31,13 @@
                                 foreach ($employeeData as $employee) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $employee->epf_no;  ?></td>
-                                        <td><?php echo $employee->empno;  ?></td>
-                                        <td><?php echo $employee->emp_name_with_initials;  ?></td>
-                                        <td><?php echo "Email";  ?></td>
-                                        <td><?php echo "Contact";  ?></td>
+                                        <td><?php echo $employee->epf_no; ?></td>
+                                        <td><?php echo $employee->empno; ?></td>
+                                        <td><?php echo $employee->emp_name_with_initials; ?></td>
+                                        <td><?php echo "Email"; ?></td>
+                                        <td><?php echo "Contact"; ?></td>
                                         <td class="tb-action text-right">
-                                            <button type="button" class="btn btn-sm btn-warning">Edit</button>
+                                            <button type="button" onclick="editEmployee('<?php echo $employee->emp_id; ?>')"  class="btn btn-sm btn-warning">Edit</button>
                                             <!--<button type="button" class="btn btn-sm btn-danger">Delete</button>-->
                                         </td>
                                     </tr>
@@ -48,3 +53,15 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    function addEmployee() {
+        window.location.href = '<?php echo Yii::app()->baseUrl . '/Employee/AddEmployee'; ?>';
+    }
+    
+    function editEmployee(id) { 
+        window.location.href = '<?php echo Yii::app()->baseUrl . '/Employee/AddEmployee/id/'; ?>' + id;
+    }
+
+</script>

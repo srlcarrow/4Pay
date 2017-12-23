@@ -1,26 +1,5 @@
 <?php
 
-/**
- * This is the model class for table "emp_employment".
- *
- * The followings are the available columns in table 'emp_employment':
- * @property integer $empl_id
- * @property integer $ref_emp_id
- * @property string $empl_joined_date
- * @property integer $ref_employment_type
- * @property integer $ref_branch_id
- * @property integer $ref_designation
- * @property integer $ref_section_id
- * @property integer $ref_employment_category
- * @property integer $ref_attendance_group
- * @property string $empl_employment_status
- * @property string $empl_resigned_date
- * @property integer $is_generalshift_emp
- * @property string $created_date
- * @property integer $created_by
- * @property string $updated_date
- * @property integer $updated_by
- */
 class Employment extends CActiveRecord
 {
 	/**
@@ -39,12 +18,13 @@ class Employment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ref_emp_id, empl_joined_date, ref_employment_type, ref_branch_id, ref_designation, ref_section_id, ref_employment_category, ref_attendance_group, empl_employment_status, empl_resigned_date, is_generalshift_emp, created_date, created_by, updated_date, updated_by', 'required'),
-			array('ref_emp_id, ref_employment_type, ref_branch_id, ref_designation, ref_section_id, ref_employment_category, ref_attendance_group, is_generalshift_emp, created_by, updated_by', 'numerical', 'integerOnly'=>true),
+			array('ref_emp_id', 'required'),
+			array('ref_emp_id, ref_employment_type, ref_branch_id, ref_designation, ref_department_id, ref_section_id, ref_employment_category, ref_attendance_group, is_generalshift_emp, created_by, updated_by', 'numerical', 'integerOnly'=>true),
 			array('empl_employment_status', 'length', 'max'=>255),
+			array('empl_joined_date, empl_resigned_date, created_date, updated_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('empl_id, ref_emp_id, empl_joined_date, ref_employment_type, ref_branch_id, ref_designation, ref_section_id, ref_employment_category, ref_attendance_group, empl_employment_status, empl_resigned_date, is_generalshift_emp, created_date, created_by, updated_date, updated_by', 'safe', 'on'=>'search'),
+			array('empl_id, ref_emp_id, empl_joined_date, ref_employment_type, ref_branch_id, ref_designation, ref_department_id, ref_section_id, ref_employment_category, ref_attendance_group, empl_employment_status, empl_resigned_date, is_generalshift_emp, created_date, created_by, updated_date, updated_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +51,7 @@ class Employment extends CActiveRecord
 			'ref_employment_type' => 'Ref Employment Type',
 			'ref_branch_id' => 'Ref Branch',
 			'ref_designation' => 'Ref Designation',
+			'ref_department_id' => 'Ref Department',
 			'ref_section_id' => 'Ref Section',
 			'ref_employment_category' => 'Ref Employment Category',
 			'ref_attendance_group' => 'Ref Attendance Group',
@@ -108,6 +89,7 @@ class Employment extends CActiveRecord
 		$criteria->compare('ref_employment_type',$this->ref_employment_type);
 		$criteria->compare('ref_branch_id',$this->ref_branch_id);
 		$criteria->compare('ref_designation',$this->ref_designation);
+		$criteria->compare('ref_department_id',$this->ref_department_id);
 		$criteria->compare('ref_section_id',$this->ref_section_id);
 		$criteria->compare('ref_employment_category',$this->ref_employment_category);
 		$criteria->compare('ref_attendance_group',$this->ref_attendance_group);

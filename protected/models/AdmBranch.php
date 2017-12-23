@@ -1,15 +1,5 @@
 <?php
 
-/**
- * This is the model class for table "adm_branch".
- *
- * The followings are the available columns in table 'adm_branch':
- * @property integer $br_id
- * @property string $br_name
- * @property string $br_address
- * @property string $br_contact1
- * @property string $br_contact2
- */
 class AdmBranch extends CActiveRecord
 {
 	/**
@@ -28,11 +18,16 @@ class AdmBranch extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('br_name, br_address, br_contact1, br_contact2', 'required'),
-			array('br_name, br_address, br_contact1, br_contact2', 'length', 'max'=>255),
+			array('br_name', 'required'),
+			array('br_tel, br_no_employees, br_fax', 'numerical', 'integerOnly'=>true),
+			array('br_name, br_address, br_code', 'length', 'max'=>200),
+			array('br_active', 'length', 'max'=>10),
+			array('br_day, br_longitude, br_latitude', 'length', 'max'=>255),
+			array('br_email', 'length', 'max'=>50),
+			array('br_worktimestart, br_worktimeend', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('br_id, br_name, br_address, br_contact1, br_contact2', 'safe', 'on'=>'search'),
+			array('br_id, br_name, br_address, br_tel, br_no_employees, br_active, br_code, br_fax, br_day, br_worktimestart, br_worktimeend, br_email, br_longitude, br_latitude', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,8 +51,17 @@ class AdmBranch extends CActiveRecord
 			'br_id' => 'Br',
 			'br_name' => 'Br Name',
 			'br_address' => 'Br Address',
-			'br_contact1' => 'Br Contact1',
-			'br_contact2' => 'Br Contact2',
+			'br_tel' => 'Br Tel',
+			'br_no_employees' => 'Br No Employees',
+			'br_active' => 'Br Active',
+			'br_code' => 'Br Code',
+			'br_fax' => 'Br Fax',
+			'br_day' => 'Br Day',
+			'br_worktimestart' => 'Br Worktimestart',
+			'br_worktimeend' => 'Br Worktimeend',
+			'br_email' => 'Br Email',
+			'br_longitude' => 'Br Longitude',
+			'br_latitude' => 'Br Latitude',
 		);
 	}
 
@@ -82,8 +86,17 @@ class AdmBranch extends CActiveRecord
 		$criteria->compare('br_id',$this->br_id);
 		$criteria->compare('br_name',$this->br_name,true);
 		$criteria->compare('br_address',$this->br_address,true);
-		$criteria->compare('br_contact1',$this->br_contact1,true);
-		$criteria->compare('br_contact2',$this->br_contact2,true);
+		$criteria->compare('br_tel',$this->br_tel);
+		$criteria->compare('br_no_employees',$this->br_no_employees);
+		$criteria->compare('br_active',$this->br_active,true);
+		$criteria->compare('br_code',$this->br_code,true);
+		$criteria->compare('br_fax',$this->br_fax);
+		$criteria->compare('br_day',$this->br_day,true);
+		$criteria->compare('br_worktimestart',$this->br_worktimestart,true);
+		$criteria->compare('br_worktimeend',$this->br_worktimeend,true);
+		$criteria->compare('br_email',$this->br_email,true);
+		$criteria->compare('br_longitude',$this->br_longitude,true);
+		$criteria->compare('br_latitude',$this->br_latitude,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

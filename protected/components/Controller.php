@@ -92,6 +92,22 @@ class Controller extends CController {
         return $str;
     }
 
+    public function viewStatusArry() {
+        return array('Male' => 'Male', 'Female' => 'Female');
+    }
+
+    public function viewTitleArry() {
+        return array('Mr.' => 'Mr', 'Mrs.' => 'Mrs', 'Miss.' => 'Miss', 'Ms.' => 'Ms', 'Dr.' => 'Dr');
+    }
+
+    public function viewCivilstatusArry() {
+        return array('Single' => 'Single', 'Married' => 'Married', 'Divorced' => 'Divorced', 'Widow' => 'Widow');
+    }
+
+    public function getActiveFilter() {
+        return array('active' => 'Active', 'inactive' => 'Inactive', 'resign' => 'Resigned', 'discontinue' => 'Discontinue', 'vacate' => 'Vacate');
+    }
+
     public static function getTimeZone() {
         $timezone = 5.5 * 3600;
         return $timezone;
