@@ -7,7 +7,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
             <div class="card-content">
                 <div class="search-box">
                     <div class="item width-90">
-                        <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search" onkeyup="viewSearchData(1)">
+                        <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search" onkeyup="searchData(1)">
                     </div>
                     <div class="item width-10">
                         <button type="button" class="btn btn-advance">Advance</button>
@@ -34,8 +34,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
 
                                 <div class="col-md-4 ">
                                     <div class="form-group">
-                                        <label>Section</label>
-                                        <input type="text" class="form-control">
+                                        <label>Designation</label>
+                                        <?php // echo Chtml::dropDownList('ref_designation', "", CHtml::listData(UserType::model()->findAll(), 'ut_id', 'ut_name'), array('class' => 'form-control', 'options' => array($userTypeId => array('selected' => true)))); ?>
                                     </div>
                                 </div>
 
@@ -53,7 +53,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
                             <div class="row">
                                 <div class="col-md-12 text-right">
                                     <button type="button" class="btn btn-default btn-close">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="viewSearchData(1)">Search</button>
+                                    <button type="button" class="btn btn-primary" onclick="searchData(1)">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -69,10 +69,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
 
 <script>
     $(document).ready(function (e) {
-        viewSearchData(1);
+        searchData(1);
     });
 
-    function viewSearchData(page) {
+    function searchData(page) {
         $.ajax({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/' . $controller . '/' . $action; ?>",

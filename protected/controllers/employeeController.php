@@ -44,7 +44,7 @@ class employeeController extends Controller {
         $pageCount = $data['count'];
         $currentPage = Yii::app()->request->getPost('page');
 
-        $this->renderPartial('issueUserAccounts', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => 1, 'count' => $pageCount));
+        $this->renderPartial('issueUserAccounts', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
     public function actionIssueAccounts() {
