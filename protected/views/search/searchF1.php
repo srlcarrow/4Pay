@@ -73,17 +73,13 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
     });
 
     function searchData(page) {
-    $.ajax({
-    type: 'POST',
+        $.ajax({
+            type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/' . $controller . '/' . $action; ?>",
             data: $('#searchF1').serialize() + "&page=" + page,
             success: function (responce) {
-            $(".ajaxLoad").html(responce);
+                $(".ajaxLoad").html(responce);
             }
-    });
+        });
     }
-    << << << < HEAD
-
-            === === =
-            >>> >>> > master
 </script>
