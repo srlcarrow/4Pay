@@ -60,7 +60,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/c
 
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-12 mt-20 text-right">
+                            <div class="col-md-12 mb-10 text-right">
                                 <button type="button" class="btn btn-default">Next</button>
                                 <button type="button" class="btn btn-default">Prev</button>
                             </div>
@@ -70,11 +70,115 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/c
 
                             <div class="col-md-6">
                                 <div class="calender-wrapper">
+                                    <div class="cln-per-header">
+                                        <h4>Jan 2017</h4>
+                                    </div>
+
+                                    <div class="cln-header">
+                                        <div class="day">Mo</div>
+                                        <div class="day">Tu</div>
+                                        <div class="day">We</div>
+                                        <div class="day">Th</div>
+                                        <div class="day">Fr</div>
+                                        <div class="day">Sa</div>
+                                        <div class="day">Su</div>
+                                    </div>
+                                    <div class="cln-date-container">
+                                        <div class="date"><span>28</span></div>
+                                        <div class="date"><span>29</span></div>
+                                        <div class="date"><span>30</span></div>
+                                        <div class="date"><span>31</span></div>
+                                        <div class="date is-leave"><span>1</span></div>
+                                        <div class="date is-leave"><span>2</span></div>
+                                        <div class="date "><span>3</span></div>
+                                        <div class="date"><span>4</span></div>
+                                        <div class="date"><span>5</span></div>
+                                        <div class="date"><span>6</span></div>
+                                        <div class="date"><span>7</span></div>
+                                        <div class="date"><span>8</span></div>
+                                        <div class="date"><span>9</span></div>
+                                        <div class="date"><span>10</span></div>
+                                        <div class="date is-holiday"><span>11</span></div>
+                                        <div class="date"><span>12</span></div>
+                                        <div class="date"><span>13</span></div>
+                                        <div class="date"><span>14</span></div>
+                                        <div class="date"><span>15</span></div>
+                                        <div class="date"><span>16</span></div>
+                                        <div class="date"><span>17</span></div>
+                                        <div class="date"><span>18</span></div>
+                                        <div class="date"><span>19</span></div>
+                                        <div class="date"><span>20</span></div>
+                                        <div class="date"><span>21</span></div>
+                                        <div class="date"><span>22</span></div>
+                                        <div class="date"><span>23</span></div>
+                                        <div class="date"><span>24</span></div>
+                                        <div class="date"><span>25</span></div>
+                                        <div class="date"><span>26</span></div>
+                                        <div class="date"><span>27</span></div>
+                                        <div class="date"><span>28</span></div>
+                                        <div class="date"><span>29</span></div>
+                                        <div class="date"><span>30</span></div>
+                                        <div class="date"><span>31</span></div>
+                                    </div>
 
                                 </div>
                             </div>
 
-                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <div class="calender-wrapper">
+                                    <div class="cln-per-header">
+                                        <h4>Feb 2017</h4>
+                                    </div>
+
+                                    <div class="cln-header">
+                                        <div class="day">Mo</div>
+                                        <div class="day">Tu</div>
+                                        <div class="day">We</div>
+                                        <div class="day">Th</div>
+                                        <div class="day">Fr</div>
+                                        <div class="day">Sa</div>
+                                        <div class="day">Su</div>
+                                    </div>
+                                    <div class="cln-date-container">
+                                        <div class="date"><span>28</span></div>
+                                        <div class="date"><span>29</span></div>
+                                        <div class="date"><span>30</span></div>
+                                        <div class="date"><span>31</span></div>
+                                        <div class="date"><span>1</span></div>
+                                        <div class="date"><span>2</span></div>
+                                        <div class="date"><span>3</span></div>
+                                        <div class="date"><span>4</span></div>
+                                        <div class="date"><span>5</span></div>
+                                        <div class="date"><span>6</span></div>
+                                        <div class="date"><span>7</span></div>
+                                        <div class="date"><span>8</span></div>
+                                        <div class="date"><span>9</span></div>
+                                        <div class="date"><span>10</span></div>
+                                        <div class="date"><span>11</span></div>
+                                        <div class="date"><span>12</span></div>
+                                        <div class="date"><span>13</span></div>
+                                        <div class="date"><span>14</span></div>
+                                        <div class="date"><span>15</span></div>
+                                        <div class="date"><span>16</span></div>
+                                        <div class="date"><span>17</span></div>
+                                        <div class="date"><span>18</span></div>
+                                        <div class="date"><span>19</span></div>
+                                        <div class="date"><span>20</span></div>
+                                        <div class="date"><span>21</span></div>
+                                        <div class="date"><span>22</span></div>
+                                        <div class="date"><span>23</span></div>
+                                        <div class="date"><span>24</span></div>
+                                        <div class="date"><span>25</span></div>
+                                        <div class="date"><span>26</span></div>
+                                        <div class="date"><span>27</span></div>
+                                        <div class="date"><span>28</span></div>
+                                        <div class="date"><span>29</span></div>
+                                        <div class="date"><span>30</span></div>
+                                        <div class="date"><span>31</span></div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,7 +193,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/c
 
                     <div class="col-md-12 text-right">
                         <button type="button" class="btn btn-default">Clear</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-primary">Apply</button>
                     </div>
                 </div>
             </div>
@@ -98,3 +202,11 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/c
 
     </div>
 </div>
+
+<script src="<?php echo Yii::app()->baseUrl?>/js/plugins/selectable/selectable.js"></script>
+
+<script>
+
+    $('.cln-date-container').Selectable();
+
+</script>

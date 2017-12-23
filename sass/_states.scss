@@ -4,4 +4,16 @@
 
 .navbar {
   margin-bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.container {
+  margin-top: 80px;
 }
