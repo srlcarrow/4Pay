@@ -39,5 +39,5 @@ class AttendanceController extends Controller {
 
         $this->renderPartial('/reports/attendance/ajaxLoad/viewAttendanceReportData', array('employeeData' => $employeeData));
     }
-
+     
 }
