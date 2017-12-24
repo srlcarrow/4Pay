@@ -299,7 +299,7 @@ class employeeController extends Controller {
 
             $thu->ref_emp_id = $empId;
             $thu->day = "Thursday";
-            $thu->ref_shift_id = $_POST['wed_' . $empId];
+            $thu->ref_shift_id = $_POST['thu_' . $empId];
             $thu->save(false);
 
 //          Friday
@@ -310,7 +310,7 @@ class employeeController extends Controller {
 
             $fri->ref_emp_id = $empId;
             $fri->day = "Friday";
-            $fri->ref_shift_id = $_POST['wed_' . $empId];
+            $fri->ref_shift_id = $_POST['fri_' . $empId];
             $fri->save(false);
 
 //            Saturday
@@ -321,7 +321,7 @@ class employeeController extends Controller {
 
             $sat->ref_emp_id = $empId;
             $sat->day = "Saturday";
-            $sat->ref_shift_id = $_POST['wed_' . $empId];
+            $sat->ref_shift_id = $_POST['sat_' . $empId];
             $sat->save(false);
 
             $sun = ShiftsForGeneralShiftEmployees::model()->findByAttributes(array('ref_emp_id' => $empId, 'day' => 'Sunday'));
@@ -331,7 +331,7 @@ class employeeController extends Controller {
 
             $sun->ref_emp_id = $empId;
             $sun->day = "Sunday";
-            $sun->ref_shift_id = $_POST['wed_' . $empId];
+            $sun->ref_shift_id = $_POST['sun_' . $empId];
             $sun->save(false);     
         }
     }

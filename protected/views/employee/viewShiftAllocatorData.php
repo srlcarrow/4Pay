@@ -47,7 +47,7 @@
                                         <td>
                                             <?php
                                             $tue = ShiftsForGeneralShiftEmployees::model()->findByAttributes(array('ref_emp_id' => $employee->emp_id, 'day' => 'Tuesday'));
-                                            $id = count($tue) > 0 ? $mon->ref_shift_id : 0;
+                                            $id = count($tue) > 0 ? $tue->ref_shift_id : 0;
                                             echo Chtml::dropDownList('tue_' . $employee->emp_id, "", CHtml::listData(Rostershift::model()->findAll(), 'shift_id', 'shift_title'), array('empty' => '-', 'class' => 'form-control', 'options' => array($id => array('selected' => true))));
                                             ?>
                                         </td>
