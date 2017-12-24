@@ -1,4 +1,3 @@
-
 (function () {
 
 
@@ -74,6 +73,32 @@
                 }
             })
         });
+    });
+
+    $(function () {
+
+        $(document).on('click.dropdown_list', '.dropdown_list input[type="text"]', function (e) {
+            var $this = $(this);
+            var $dropDownList = $this.parents('.dropdown_list');
+            var $dropUl = $dropDownList.find('ul');
+
+            $dropDownList.addClass('is-open');
+
+            $dropUl.find('li').on('click', function () {
+                var $li = $(this);
+                $this.val($li.find('h5').text());
+                $this.trigger('onDropItemClick', [$li.attr('data-id'), $li]);
+                $('.dropdown_list').removeClass('is-open');
+            })
+
+        });
+
+        $(document).on('click.dropdown_list', function (e) {
+            if ($(e.target).closest('.dropdown_list').length === 0) {
+                $('.dropdown_list').removeClass('is-open');
+            }
+        })
+
     })
 
 })();

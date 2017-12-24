@@ -1,6 +1,6 @@
 <?php
 
-class LeaveController extends Controller
+class Leave1Controller extends Controller
 {
 
 

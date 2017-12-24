@@ -1,0 +1,57 @@
+@import "./../variable";
+
+@mixin box-shadow {
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.13);
+  -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.13);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.13);
+}
+
+.f-left {
+  float: left;
+  width: 100%;
+}
+
+.dropdown_list {
+  @extend .f-left;
+  position: relative;
+
+  .search-area {
+    @extend .f-left;
+  }
+
+  .drop-result {
+    @include box-shadow;
+    position: absolute;
+    z-index: 98;
+    top: 36px;
+    left: 0;
+    width: 100%;
+    background: $white;
+    max-height: 160px;
+    overflow-y: scroll;
+    display: none;
+
+    li {
+      padding: 6px 10px;
+      cursor: pointer;
+
+      h5 {
+        color: rgba($primaryFontColor, $lighten);
+      }
+
+      h6 {
+        color: rgba($primaryFontColor, $lighten-xx);
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
+
+  &.is-open {
+    .drop-result {
+      display: block;
+    }
+  }
+}

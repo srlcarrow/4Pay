@@ -42,7 +42,7 @@ ul {
   ul li {
     list-style: none; }
 
-.f-left, .card, .card .card-header, .card .card-content, .card .card-footer, ul.cm-tab, .cm-accordion, .cm-accordion .cm-accordion-row, .cm-accordion .cm-accordion-row .cm-accordion-header, .cm-accordion .cm-accordion-row .cm-accordion-content, .search-advance, .search-advance .content, .search-advance .footer {
+.f-left, .card, .card .card-header, .card .card-content, .card .card-footer, ul.cm-tab, .cm-accordion, .cm-accordion .cm-accordion-row, .cm-accordion .cm-accordion-row .cm-accordion-header, .cm-accordion .cm-accordion-row .cm-accordion-content, .dropdown_list, .dropdown_list .search-area, .search-advance, .search-advance .content, .search-advance .footer {
   float: left;
   width: 100%;
   min-height: 1px; }
@@ -453,6 +453,37 @@ ul.cm-tab li {
     background: url("./../images/icon/accordion/ic_arrow_active.png"); }
   .cm-accordion .cm-accordion-row.is-open .cm-accordion-header h5 {
     color: #0288d1; }
+
+.f-left, .card, .card .card-header, .card .card-content, .card .card-footer, ul.cm-tab, .cm-accordion, .cm-accordion .cm-accordion-row, .cm-accordion .cm-accordion-row .cm-accordion-header, .cm-accordion .cm-accordion-row .cm-accordion-content, .dropdown_list, .dropdown_list .search-area, .search-advance, .search-advance .content, .search-advance .footer {
+  float: left;
+  width: 100%; }
+
+.dropdown_list {
+  position: relative; }
+  .dropdown_list .drop-result {
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.13);
+    position: absolute;
+    z-index: 98;
+    top: 36px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    max-height: 160px;
+    overflow-y: scroll;
+    display: none; }
+    .dropdown_list .drop-result li {
+      padding: 6px 10px;
+      cursor: pointer; }
+      .dropdown_list .drop-result li h5 {
+        color: rgba(0, 0, 0, 0.86); }
+      .dropdown_list .drop-result li h6 {
+        color: rgba(0, 0, 0, 0.3); }
+      .dropdown_list .drop-result li:hover {
+        background: rgba(0, 0, 0, 0.08); }
+  .dropdown_list.is-open .drop-result {
+    display: block; }
 
 /*table*/
 td.tb-action,
