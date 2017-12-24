@@ -13,7 +13,6 @@ class AttendanceController extends Controller {
         }
     }
 
-    
     public function actionViewAttendanceReport() {
         $controller = "Attendance";
         $action = "ViewAttendanceDataReport";
@@ -24,20 +23,22 @@ class AttendanceController extends Controller {
     }
 
     public function actionViewAttendanceDataReport() {
-//        var_dump($_POST);exit;
+        $selectedItems = implode(',', json_decode($_POST["selected"], true));
         $sql = Yii::app()->db->createCommand()
-                ->select('*')
-                ->from('emp_basic emp')
+                ->select($selectedItems)
+                ->from('att_attendance aa')
                 ->getText();
 
-        $limit = 5;
-        $data = Controller::createSearchForEmployee($sql, 'emp.emp_id', Yii::app()->request->getPost('page'), $limit, 'emp.epf_no');
 
-        $employeeData = $data['result'];
+        $limit = $_POST['noOfData'];
+        $data = Controller::createSearchForEmployee($sql, 'aa.ref_emp_id', Yii::app()->request->getPost('page'), $limit, 'CAST(emp.epf_no AS DECIMAL),aa.day ASC', 'empbasic');
+
+        $attendanceData = $data['result'];
         $pageCount = $data['count'];
         $currentPage = Yii::app()->request->getPost('page');
 
-        $this->renderPartial('/reports/attendance/ajaxLoad/viewAttendanceReportData', array('employeeData' => $employeeData));
+        $headers = explode(',', $selectedItems);
+        $this->renderPartial('/reports/attendance/ajaxLoad/viewAttendanceReportData', array('attendanceData' => $attendanceData, 'headers' => $headers, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
 }
