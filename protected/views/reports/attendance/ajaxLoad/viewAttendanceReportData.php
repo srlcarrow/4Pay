@@ -9,8 +9,9 @@
             <div class="card-content">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <thead>
+                        <div class="table-scroll-x scroll-table">
+                            <table class="table table-bordered">
+                                <thead>
                                 <tr>
                                     <?php
                                     foreach ($headers as $header) {
@@ -20,9 +21,9 @@
                                     }
                                     ?>
                                 </tr>
-                            </thead>
+                                </thead>
 
-                            <tbody>
+                                <tbody>
                                 <?php
                                 foreach ($attendanceData as $attendance) {
                                     ?>
@@ -38,8 +39,9 @@
                                     <?php
                                 }
                                 ?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,3 +62,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $(".scroll-table").mCustomScrollbar({
+            theme: "dark-3",
+            axis: "x"
+        });
+    });
+</script>
