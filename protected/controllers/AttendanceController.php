@@ -13,7 +13,6 @@ class AttendanceController extends Controller {
         }
     }
 
-    
     public function actionViewAttendanceReport() {
         $controller = "Attendance";
         $action = "ViewAttendanceDataReport";
@@ -24,7 +23,7 @@ class AttendanceController extends Controller {
     }
 
     public function actionViewAttendanceDataReport() {
-//        var_dump($_POST);exit;
+        $selectedItems = implode(',', json_decode($_POST["selected"], true));
         $sql = Yii::app()->db->createCommand()
                 ->select('*')
                 ->from('emp_basic emp')
@@ -37,7 +36,8 @@ class AttendanceController extends Controller {
         $pageCount = $data['count'];
         $currentPage = Yii::app()->request->getPost('page');
 
+
         $this->renderPartial('/reports/attendance/ajaxLoad/viewAttendanceReportData', array('employeeData' => $employeeData));
     }
-     
+
 }

@@ -8,10 +8,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                 <div class="search-box">
                     <div class="item width-80">
                         <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search"
-                               onkeyup="viewEmployeeData(1)">
+                               onkeyup="searchData(1)">
                     </div>
                     <div class="item width-5">
-                        <button type="button" onclick="viewEmployeeData(1)" class="btn btn-search">Search</button>
+                        <button type="button" onclick="searchData(1)" class="btn btn-search">Search</button>
                     </div>
                     <div class="item width-10">
                         <button type="button" class="btn btn-advance">Advance</button>
@@ -51,7 +51,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                         <div class="row">
                             <div class="col-md-12 text-right">
                                 <button type="button" class="btn btn-default btn-close">Close</button>
-                                <button type="button" onclick="viewEmployeeData(1)" class="btn btn-primary">Search
+                                <button type="button" onclick="searchData(1)" class="btn btn-primary">Search
                                 </button>
                             </div>
                         </div>
@@ -112,7 +112,9 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 <input type="hidden" class="checkedInput">
 
 <?php $this->endWidget(); ?>
-<div class="col s12 ajaxLoad"></div>
+<div class="col s12 ajaxLoad">
+
+</div>
 
 
 <script>
@@ -123,7 +125,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 
         $('input[type="checkbox"]').on('change', function () {
             var $this = $(this),
-                name = $this.attr('name');
+                    name = $this.attr('name');
 
             if ($this.is(':checked')) {
                 result.push(name);
@@ -135,21 +137,21 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
         });
     });
 
-
+    var loaderHtml = "<div align='center' class='absolute' id='loadingmessage'><img src='<?php echo Yii::app()->baseUrl; ?>/images/loader/Radio.gif'/></div>";
     $(document).ready(function (e) {
-        viewEmployeeData(1);
+        searchData(1);
     });
 
 
-    function viewEmployeeData(page) {
-
+    function searchData(page) {
+        $(".ajaxLoad").html(loaderHtml);
         var checkedItemString = $('.checkedInput').val();
 //        console.log(checkedItemString);
 
         $.ajax({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/' . $controller . '/' . $action; ?>",
-            data: $('#searchF2').serialize() + "&page=" + page,
+            data: $('#searchF2').serialize() + "&selected=" + checkedItemString + "&page=" + page,
             success: function (responce) {
                 $(".ajaxLoad").html(responce);
             }
