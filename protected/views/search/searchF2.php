@@ -77,7 +77,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                     <div class="col-md-2 ">
                         <div class="checkbox">
                             <label>
-                                <input name="<?php echo $key; ?>" value="1"
+                                <input data-label="<?php echo $reqBasicField; ?>" name="<?php echo $key; ?>" value="1"
                                        type="checkbox"><?php echo $reqBasicField; ?>
                             </label>
                         </div>
@@ -99,7 +99,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                     <div class="col-md-2 ">
                         <div class="checkbox">
                             <label>
-                                <input name="<?php echo $key; ?>" value="1"
+                                <input data-label="<?php echo $reqAttendanceField; ?>" name="<?php echo $key; ?>" value="1"
                                        type="checkbox"><?php echo $reqAttendanceField; ?>
                             </label>
                         </div>
@@ -114,6 +114,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 </div>
 
 <input type="hidden" class="checkedInput">
+<input type="hidden" class="checkedLabel">
 
 <?php $this->endWidget(); ?>
 <div class="col s12 ajaxLoad">
@@ -124,20 +125,25 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 <script>
 
     var result = [];
+    var arrayLabel = [];
 
     $(function () {
 
         $('input[type="checkbox"]').on('change', function () {
             var $this = $(this),
-                    name = $this.attr('name');
+                name = $this.attr('name'),
+                label = $this.data('label');
 
             if ($this.is(':checked')) {
                 result.push(name);
+                arrayLabel.push(label);
             } else {
                 result.splice(result.indexOf(name), 1);
+                arrayLabel.splice(arrayLabel.indexOf(label), 1);
             }
 
             $('.checkedInput').val(JSON.stringify(result));
+            $('.checkedLabel').val(JSON.stringify(arrayLabel));
         });
     });
 
@@ -150,7 +156,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
     function searchData(page) {
         $(".ajaxLoad").html(loaderHtml);
         var checkedItemString = $('.checkedInput').val();
-//        console.log(checkedItemString);
+        var checkedLabelString = $('.checkedLabel').val();
+        console.log(checkedLabelString);
 
         $.ajax({
             type: 'POST',
