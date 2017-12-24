@@ -266,6 +266,50 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="row">
+                    <h4>Scroll Table</h4>
+                    <div class="col-md-12">
+                        <div class="table-scroll-x scroll-table">
+                            <table class="table table-bordered cm-table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Name</th>
+                                    <th>Name</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Email</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th class="tb-action">Action</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Natasha Guanwardana</td>
+                                    <td>Natasha Guanwardana</td>
+                                    <td>Natasha Guanwardana</td>
+                                    <td>Natasha Guanwardana</td>
+                                    <td>natasha@gmail.com</td>
+                                    <td>078 123 2312</td>
+                                    <td>078 123 2312</td>
+                                    <td>078 123 2312</td>
+                                    <td class="tb-action text-right">
+                                        <button type="button" class="btn btn-sm btn-warning">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -285,4 +329,17 @@
         console.log('Input ', input);
     });
 
+    //Scrollbar
+    $(function () {
+        $(".scroll-table").mCustomScrollbar({
+            theme: "dark-3",
+            axis:"x"
+        });
+    });
+
+    $(function () {
+        $(".scroll-y").mCustomScrollbar({
+            theme: "dark-3",
+        });
+    })
 </script>

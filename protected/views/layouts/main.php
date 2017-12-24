@@ -21,7 +21,9 @@
     <!-- Timepicker -->
     <link rel="stylesheet" type="text/css"
           href="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/timepicker/jquery-clockpicker.min.css">
-
+    <!-- Scrollbar -->
+    <link rel="stylesheet" type="text/css"
+          href="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/scrollbar/jquery.mCustomScrollbar.min.css">
     <!--CSS | Main-->
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 
@@ -51,6 +53,7 @@
     <!--##### Time Picker #####-->
     <script src="<?php echo Yii::app()->baseUrl . '/js/plugins/timepicker/jquery-clockpicker.min.js'; ?>"></script>
 
+
     <!--JS | Component -->
     <script src="<?php echo Yii::app()->baseUrl . '/js/common/component.js'; ?>"></script>
 
@@ -71,6 +74,10 @@
 <div class="container">
     <?php echo $content; ?>
 </div>
+
+
+<!--##### Scrollbar #####-->
+<script src="<?php echo Yii::app()->baseUrl . '/js/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js'; ?>"></script>
 
 
 </body>

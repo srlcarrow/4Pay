@@ -2,5 +2,15 @@
 td.tb-action,
 th.tb-action {
   width: 122px;
+}
 
+table.table {
+  margin-bottom: 0;
+}
+
+table.cm-table {
+
+  th, td {
+    white-space: nowrap;
+  }
 }

@@ -371,6 +371,9 @@ ul {
   line-height: 16px;
   color: rgba(0, 0, 0, 0.86); }
 
+.table-scroll-x {
+  width: 1080px; }
+
 /*Card*/
 .card {
   position: relative;
@@ -452,6 +455,12 @@ ul.cm-tab li {
 td.tb-action,
 th.tb-action {
   width: 122px; }
+
+table.table {
+  margin-bottom: 0; }
+
+table.cm-table th, table.cm-table td {
+  white-space: nowrap; }
 
 .search-box {
   -webkit-border-radius: 2px;
