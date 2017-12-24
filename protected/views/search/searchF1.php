@@ -18,7 +18,6 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
                 </div>
 
                 <div class="search-advance">
-                    <form action="">
                         <div class="content">
                             <div class="row form-wrapper">
                                 <div class="col-md-4 ">
@@ -60,7 +59,6 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>

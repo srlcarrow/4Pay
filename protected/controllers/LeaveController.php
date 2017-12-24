@@ -57,4 +57,26 @@ class LeaveController extends Controller {
         $this->msgHandler(200, "Save Successfull...");
     }
 
+    public function actionViewManageLeave() {
+        $controller = "Leave";
+        $action = "ViewManageLeaveData";
+        $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
+    }
+
+    public function actionViewManageLeaveData() {
+        $sql = Yii::app()->db->createCommand()
+                ->select('*')
+                ->from('emp_basic emp')
+                ->getText();
+
+        $limit = $_REQUEST['noOfData'];
+        $data = Controller::createSearchForEmployee($sql, 'emp.emp_id', Yii::app()->request->getPost('page'), $limit, 'emp.epf_no ASC');
+
+        $employeeData = $data['result'];
+        $pageCount = $data['count'];
+        $currentPage = Yii::app()->request->getPost('page');
+
+        $this->renderPartial('viewManageLeaveData', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
+    }
+
 }
