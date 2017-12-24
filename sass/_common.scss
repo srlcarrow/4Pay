@@ -42,9 +42,18 @@
   color: rgba($primaryFontColor, $lighten);
 }
 
+
 .table-scroll-x {
   width: 1080px;
 }
 
+.no-select {
+  & > * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
 
 

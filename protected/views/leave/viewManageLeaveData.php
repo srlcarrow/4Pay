@@ -1,10 +1,14 @@
-<?php $form = $this->beginWidget('CActiveForm', array('id' => 'accountIssue')); ?>
+<?php
+$form = $this->beginWidget('CActiveForm', array('id' => 'manageLeave'));
+
+$leaveTypes = AdmLeavetypes::model()->findAll();
+?>
 <div class="row mb-30">
     <div class="col-md-12">
         <div class="card">
 
             <div class="card-header">
-                <h1>Issue User Accounts</h1>
+                <h1>Manage Leave / Short Leave</h1>
             </div>
 
             <div class="card-content">
@@ -17,46 +21,39 @@
                                     <th>EPF No</th>
                                     <th>EMP No</th>
                                     <th>Name</th>
-                                    <th>User Name</th>
-                                    <th>Email</th>
-                                    <th>User Type</th>
-                                    <th>Issued Status</th>
-                                    <th>Issued Date</th>
+                                    <th>Apply Leave</th>
+                                    <th>Apply S-Leave</th>
+
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <?php
                                 foreach ($employeeData as $employee) {
-                                    $userData = User::model()->findByAttributes(array('ref_emp_id' => $employee->emp_id));
                                     ?>
                                     <tr class="ch_bx">
                                         <td><input type="checkbox"  class="check_sc" name="selectedIds[]" value="<?php echo $employee->emp_id; ?>"></td>
                                         <td><?php echo $employee->epf_no; ?></td>
                                         <td><?php echo $employee->empno; ?></td>
                                         <td><?php echo $employee->emp_name_with_initials; ?></td>
-                                        <td><?php echo $employee->epf_no; ?></td>
-                                        <td><?php echo $employee->con_office_email; ?></td>
-                                        <td>
-                                            <?php
-                                            $userTypeId = count($userData) > 0 ? $userData->ref_user_type_id : 1;
-                                            echo Chtml::dropDownList('userType_' . $employee->emp_id, "", CHtml::listData(UserType::model()->findAll(), 'ut_id', 'ut_name'), array('class' => 'form-control', 'options' => array($userTypeId => array('selected' => true))));
-                                            ?>
+                                        <td class="tb-action text-right">
+                                            <button type="button" class="btn btn-sm btn-warning">Apply</button>                                           
                                         </td>
-                                        <td><?php echo count($userData) > 0 && $userData->is_acc_issued == 1 ? "Issued" : ""; ?></td>
-                                        <td><?php echo count($userData) > 0 && $userData->is_acc_issued == 1 ? date('Y-m-d', strtotime($userData->user_acc_issued_date)) : ""; ?></td>
-                                    </tr>
-                                    <?php
-                                }
-                                ?>
+                                        <td class="tb-action text-right">
+                                            <button type="button" class="btn btn-sm btn-danger">Apply</button>                                         
+                                        </td>
+                                        <?php
+                                    }
+                                    ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <button type="button" class="btn btn-sm btn-warning" onclick="issueAccounts()">Issue Accounts</button>
-                <button type="button" class="btn btn-sm btn-warning" onclick="updateAccounts()">Update User Type</button>
+                
             </div>
-
+            <div class="col-md-12">
+                <div class="alert "></div>
+            </div>
             <div class="col-md-12">
                 <div class="col-md-12 mt-15 mb-15" id="pagination">
                     <?php
@@ -85,28 +82,15 @@
     });
 </script>
 <script>
-    function issueAccounts() {
+    function save() {
         $.ajax({
             type: 'POST',
-            url: "<?php echo Yii::app()->baseUrl . '/employee/IssueAccounts'; ?>",
-            data: $('#accountIssue').serialize(),
+            url: "<?php echo Yii::app()->baseUrl . '/Leave/SaveLeaveAllocationData'; ?>",
+            data: $('#manageLeave').serialize(),
             dataType: 'json',
             success: function (responce) {
                 if (responce.code == 200) {
-
-                }
-            }
-        });
-    }
-    function updateAccounts() {
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo Yii::app()->baseUrl . '/employee/UpdateAccounts'; ?>",
-            data: $('#accountIssue').serialize(),
-            dataType: 'json',
-            success: function (responce) {
-                if (responce.code == 200) {
-
+                    $('.alert').addClass('alert-success').html('Successfully Saved....');
                 }
             }
         });

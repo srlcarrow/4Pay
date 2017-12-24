@@ -27,7 +27,6 @@
     <!--CSS | Main-->
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 
-
     <!--========================================================
         Javascript
     =========================================================-->
@@ -53,10 +52,8 @@
     <!--##### Time Picker #####-->
     <script src="<?php echo Yii::app()->baseUrl . '/js/plugins/timepicker/jquery-clockpicker.min.js'; ?>"></script>
 
-
     <!--JS | Component -->
     <script src="<?php echo Yii::app()->baseUrl . '/js/common/component.js'; ?>"></script>
-
 
     <title></title>
 </head>
@@ -75,10 +72,9 @@
     <?php echo $content; ?>
 </div>
 
-
 <!--##### Scrollbar #####-->
 <script src="<?php echo Yii::app()->baseUrl . '/js/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js'; ?>"></script>
 
-
 </body>
+
 </html>
