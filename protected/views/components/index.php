@@ -137,6 +137,14 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-4 ">
+
+                                <div class="form-group">
+                                    <label>Time Picker</label>
+                                    <input type="text" class="input-timepicker form-control">
+                                </div>
+                            </div>
+
 
                         </div>
 
