@@ -76,6 +76,9 @@ class Controller extends CController {
         $joinCriteria = Yii::app()->db->createCommand()
                 ->leftJoin('emp_employment empl', 'emp.emp_id=empl.ref_emp_id')
                 ->leftJoin('emp_contacts empcon', 'emp.emp_id=empcon.ref_emp_id')
+                ->leftJoin('adm_branch br', 'empl.ref_branch_id=br.br_id')
+                ->leftJoin('adm_designation desig', 'empl.ref_designation=desig.desig_id')
+                ->leftJoin('adm_department dept', 'empl.ref_department_id=dept.dept_id')
                 ->getText();
 
         $joinCriteria = explode("SELECT *", $joinCriteria, 2);
@@ -87,6 +90,15 @@ class Controller extends CController {
 
         if (!empty($_REQUEST['searchEmployeeText']) && $_REQUEST['searchEmployeeText'] != 'undefined') {
             $str .= " AND  ( emp.emp_full_name Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_name_with_initials Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_display_name Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.epf_no Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.empno Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_nic Like '%" . $_REQUEST['searchEmployeeText'] . "%')";
+        }
+        if (!empty($_REQUEST["ref_branch_id"]) && $_REQUEST["ref_branch_id"] != 'undefined' && $_REQUEST["ref_branch_id"] != "") {
+            $str .= " AND  empl.ref_branch_id=" . $_REQUEST["ref_branch_id"];
+        }
+        if (!empty($_REQUEST["ref_department_id"]) && $_REQUEST["ref_department_id"] != 'undefined' && $_REQUEST["ref_department_id"] != "") {
+            $str .= " AND  empl.ref_department_id=" . $_REQUEST["ref_department_id"];
+        }
+        if (!empty($_REQUEST['ref_designation']) && $_REQUEST['ref_designation'] != 'undefined' && $_REQUEST["ref_designation"] != "") {
+            $str .= " AND  empl.ref_designation=" . $_REQUEST["ref_designation"];
         }
 
         return $str;
