@@ -10,7 +10,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
                         <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search" onkeyup="searchData(1)">
                     </div>
                     <div class="item width-5">
-                        <button type="button" onclick="search(1)" class="btn btn-search">Search</button>
+                        <button type="button" onclick="searchData(1)" class="btn btn-search">Search</button>
                     </div>
                     <div class="item width-10">
                         <button type="button" class="btn btn-advance">Advance</button>
