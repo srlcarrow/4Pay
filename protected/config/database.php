@@ -6,7 +6,9 @@ return array(
 	// uncomment the following lines to use a MySQL database
 
 
+
 	'connectionString' => 'mysql:host=localhost;dbname=tts',
+
 
 	'emulatePrepare' => true,
 	'username' => 'root',

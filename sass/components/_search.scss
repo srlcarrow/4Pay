@@ -26,6 +26,7 @@
       border-radius: 0;
       width: 100%;
       outline: 0;
+      background: rgba(0, 0, 0, 0.04);
 
       &:active {
         -webkit-box-shadow: none;
@@ -33,6 +34,12 @@
         box-shadow: none;
       }
 
+    }
+
+    .btn-search {
+      @extend .btn-advance;
+      background: #ea3939;
+      color: #fff;
     }
   }
 }
