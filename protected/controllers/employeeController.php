@@ -1,18 +1,21 @@
 <?php
 
-class employeeController extends Controller {
+class employeeController extends Controller
+{
 
-    public function actionViewEmployee() {
+    public function actionViewEmployee()
+    {
         $controller = "employee";
         $action = "ViewEmployeeData";
         $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
     }
 
-    public function actionViewEmployeeData() {
+    public function actionViewEmployeeData()
+    {
         $sql = Yii::app()->db->createCommand()
-                ->select('*')
-                ->from('emp_basic emp')
-                ->getText();
+            ->select('*')
+            ->from('emp_basic emp')
+            ->getText();
 
         $limit = 5;
         $data = Controller::createSearchForEmployee($sql, 'emp.emp_id', Yii::app()->request->getPost('page'), $limit, 'emp.epf_no');
@@ -123,16 +126,18 @@ class employeeController extends Controller {
     }
 
     public function actionViewIssueUserAccounts() {
+
         $controller = "employee";
         $action = "ViewIssueUserAccountsData";
         $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
     }
 
-    public function actionViewIssueUserAccountsData() {
+    public function actionViewIssueUserAccountsData()
+    {
         $sql = Yii::app()->db->createCommand()
-                ->select('*')
-                ->from('emp_basic emp')
-                ->getText();
+            ->select('*')
+            ->from('emp_basic emp')
+            ->getText();
 
 
         $limit = $_REQUEST["noOfData"];
@@ -145,7 +150,8 @@ class employeeController extends Controller {
         $this->renderPartial('issueUserAccounts', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
-    public function actionIssueAccounts() {
+    public function actionIssueAccounts()
+    {
         $selectedEmployees = $_POST['selectedIds'];
         $userId = Yii::app()->user->getId();
 
@@ -190,6 +196,7 @@ class employeeController extends Controller {
     }
 
     public function actionUpdateAccounts() {
+
         $selectedEmployees = $_POST['selectedIds'];
         $userId = Yii::app()->user->getId();
 
@@ -228,7 +235,8 @@ class employeeController extends Controller {
         }
     }
 
-    public function actionProfile() {
+    public function actionProfile()
+    {
         $this->render('profile');
     }
 
@@ -332,7 +340,7 @@ class employeeController extends Controller {
             $sun->ref_emp_id = $empId;
             $sun->day = "Sunday";
             $sun->ref_shift_id = $_POST['sun_' . $empId];
-            $sun->save(false);     
+            $sun->save(false);
         }
     }
 
