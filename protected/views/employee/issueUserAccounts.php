@@ -62,7 +62,7 @@
                     <?php
                     Paginations::setLimit($pageSize);
                     Paginations::setPage($page);
-                    Paginations::setJSCallback("viewSearchData");
+                    Paginations::setJSCallback("searchData");
                     Paginations::setTotalPages($count);
                     Paginations::makePagination();
                     Paginations::drawPagination();

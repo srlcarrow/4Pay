@@ -20,30 +20,36 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                 </div>
 
                 <div class="search-advance">
-                    <!--                    <form action="">-->
                     <div class="content">
                         <div class="row form-wrapper">
                             <div class="col-md-4 ">
                                 <div class="form-group">
-                                    <label>Name</label>
-                                    <input name="name" type="text" class="form-control">
+                                    <label>Branch</label>
+                                    <?php echo Chtml::dropDownList('ref_branch_id', "", CHtml::listData(AdmBranch::model()->findAll(), 'br_id', 'br_name'), array('empty' => 'Select Branch', 'class' => 'form-control')); ?>
                                 </div>
                             </div>
 
                             <div class="col-md-4 ">
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text" class="form-control">
+                                    <label>Department</label>
+                                    <?php echo Chtml::dropDownList('ref_department_id', "", CHtml::listData(AdmDepartment::model()->findAll(), 'dept_id', 'dept_name'), array('empty' => 'Select Department', 'class' => 'form-control')); ?>
                                 </div>
                             </div>
 
                             <div class="col-md-4 ">
                                 <div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input type="text" class="form-control">
+                                    <label>Designation</label>
+                                    <?php echo Chtml::dropDownList('ref_designation', "", CHtml::listData(AdmDesignation::model()->findAll(), 'desig_id', 'designation'), array('empty' => 'Select Designations', 'class' => 'form-control')); ?>
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="row form-wrapper">
+                            <div class="col-md-4 ">
+                                <?php echo Chtml::label('Page Size ', ' ', array('class' => 'control-label')); ?>
+                                <?php $dataArray = array('15' => '15', '30' => '30', '50' => '50', '100' => '100', '200' => '200'); ?>
+                                <?php echo Chtml::dropdownlist('noOfData', '', $dataArray, array('class' => 'form-control')); ?>
+                            </div>
                         </div>
                     </div>
 
@@ -51,12 +57,10 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                         <div class="row">
                             <div class="col-md-12 text-right">
                                 <button type="button" class="btn btn-default btn-close">Close</button>
-                                <button type="button" onclick="searchData(1)" class="btn btn-primary">Search
-                                </button>
+                                <button type="button" class="btn btn-primary" onclick="searchData(1)">Search</button>
                             </div>
                         </div>
                     </div>
-                    <!--                    </form>-->
                 </div>
             </div>
         </div>

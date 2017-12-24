@@ -39,7 +39,7 @@ class Controller extends CController {
         }
     }
 
-    public static function createSearchForEmployee($query, $joinUsing, $page, $limit = NULL, $orderBy = NULL) {
+    public static function createSearchForEmployee($query, $joinUsing, $page, $limit = NULL, $orderBy = NULL, $empbasic = NULL) {
         $sqlLimit = '';
         if ($limit == NULL) {
             $limit = 10;
@@ -58,6 +58,10 @@ class Controller extends CController {
         $join = Controller::searchEmployeeJoinCriterias();
         $where = Controller::searchEmployeeWhereCriterias();
 
+        if ($empbasic != NULL) {
+            $join = ' JOIN `emp_basic` `emp` ON emp.emp_id=' . $joinUsing . ' ' . $join;
+        }
+
         $askedWhere = '';
         if (count($askedQuery) > 1) {
             $askedWhere = $askedQuery[1] == NULL ? '' : ' AND ' . $askedQuery[1];
@@ -66,6 +70,8 @@ class Controller extends CController {
         $orderBy = $orderBy != NULL ? 'ORDER BY ' . $orderBy : "";
         $returnQuery = $askedQuery[0] . $join . ' WHERE ' . $where . $askedWhere . ' ' . $orderBy . $sqlLimit;
         $returnQueryCount = $askedQuery[0] . $join . ' WHERE ' . $where . $askedWhere . ' ';
+
+      
         $result = yii::app()->db->createCommand($returnQuery)->setFetchMode(PDO::FETCH_OBJ)->queryAll();
         $count = count(yii::app()->db->createCommand($returnQueryCount)->setFetchMode(PDO::FETCH_OBJ)->queryAll());
 
