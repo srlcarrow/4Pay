@@ -42,7 +42,6 @@
   color: rgba($primaryFontColor, $lighten);
 }
 
-
 .table-scroll-x {
   width: 1080px;
 }
@@ -56,4 +55,38 @@
   }
 }
 
+//paginations
+.paginations {
+  float: right;
+  margin-top: 10px;
 
+  a {
+    display: block;
+    float: left;
+    width: 35px;
+    height: 35px;
+    color: rgba($primaryFontColor, $lighten-x);
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    padding: 10px 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-left: 10px;
+
+    &:first-child,
+    &:last-child {
+      width: auto;
+    }
+
+    &.disabled {
+      color: rgba($primaryFontColor, $lighten-xx);
+    }
+
+    &.current {
+      background: rgba($secondaryFontColor, 1);
+      color:rgba($white,1);
+    }
+  }
+}

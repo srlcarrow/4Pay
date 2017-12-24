@@ -380,6 +380,31 @@ ul {
   -ms-user-select: none;
   user-select: none; }
 
+.paginations {
+  float: right;
+  margin-top: 10px; }
+  .paginations a {
+    display: block;
+    float: left;
+    width: 35px;
+    height: 35px;
+    color: rgba(0, 0, 0, 0.56);
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    padding: 10px 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-left: 10px; }
+    .paginations a:first-child, .paginations a:last-child {
+      width: auto; }
+    .paginations a.disabled {
+      color: rgba(0, 0, 0, 0.3); }
+    .paginations a.current {
+      background: #0288d1;
+      color: white; }
+
 /*Card*/
 .card {
   position: relative;
