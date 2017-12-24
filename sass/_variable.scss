@@ -1,25 +1,40 @@
-
+$primaryFontColor: #000;
 //---------------
 // Typography
 //---------------
 
 //Font size
-$base-font-size:14px;
-$font-size-small:12px;
-$font-size-regular:14px;
-$font-size-large:18px;
-$font-size-x-large:24px;
-$font-size-xx-large:28px;
-$font-size-xxx-large:36px;
+$base-font-size: 14px;
+$font-size-small: 12px;
+$font-size-regular: 14px;
+$font-size-large: 18px;
+$font-size-x-large: 24px;
+$font-size-xx-large: 28px;
+$font-size-xxx-large: 36px;
 
 //Font weight
-$font-weight-light:300;
-$font-weight-regular:400;
-$font-weight-medium:500;
-$font-weight-bold:700;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
 
 //Font family
 //$font-family-text:''
+$lighten: 0.86;
+$lighten-x: 0.56;
+$lighten-xx: 0.30;
 
+$white: #fff;
+$white-lighten: rgba($white, $lighten);
+$white-lighten-x: rgba($white, $lighten-x);
 
+//Tab
+$tabBorderColor: #0288d1;
+$tabActiveColor: #0288d1;
+$tabFontColor: rgba($primaryFontColor, $lighten);
 
+//Accordion
+$accordionFontColor: rgba($primaryFontColor, $lighten);
+$accordionFontActiveColor: #0288d1;
+$accordionBorderColor: #000;
+$accordionActiveBorderColor: #0288d1;

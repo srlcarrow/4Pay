@@ -1,3 +1,5 @@
+$cardBorderColor: #f7f5f5;
+
 /*Card*/
 .card {
   position: relative;
@@ -8,6 +10,12 @@
   background: #fff;
   padding: 30px;
   @extend .f-left;
+
+  &.flat {
+    box-shadow: none;
+    border-radius: 3px;
+    border: 2px solid $cardBorderColor;
+  }
 
   &:not(:last-child) {
     margin-bottom: 30px !important;

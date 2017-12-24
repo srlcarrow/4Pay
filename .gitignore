@@ -1,7 +1,7 @@
 
 /.idea/
 /assets/
-/protected/config/database.php
+protected/config/database.php
 /protected/data/
 
 /protected/runtime/application.log
