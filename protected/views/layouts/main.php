@@ -11,6 +11,9 @@
     <!--========================================================
         Stylesheet
     =========================================================-->
+    <!-- CSS | Fonts Collection -->
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl . '/css/fonts.css'; ?>">
+
     <!--CSS | bootstrap-->
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css">
 
