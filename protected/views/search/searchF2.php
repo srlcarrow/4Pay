@@ -73,11 +73,15 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
             <?php
             if (count($reqBasicFields) > 0) {
                 foreach ($reqBasicFields as $key => $reqBasicField) {
+                    $ischecked = "";
+                    if (in_array($reqBasicField, $defaultChecked)) {
+                        $ischecked = "checked = checked";
+                    }
                     ?>
                     <div class="col-md-2 ">
                         <div class="checkbox">
                             <label>
-                                <input data-label="<?php echo $reqBasicField; ?>" name="<?php echo $key; ?>" value="1"
+                                <input data-label="<?php echo $reqBasicField; ?>" <?php echo $ischecked; ?> name="<?php echo $key; ?>" value="1"
                                        type="checkbox"><?php echo $reqBasicField; ?>
                             </label>
                         </div>
@@ -95,11 +99,15 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                 ?>
                 <?php
                 foreach ($reqAttendanceFields as $key => $reqAttendanceField) {
+                    $ischecked = "";
+                    if (in_array($reqAttendanceField, $defaultChecked)) {
+                        $ischecked = "checked = checked";
+                    }
                     ?>
                     <div class="col-md-2 ">
                         <div class="checkbox">
                             <label>
-                                <input data-label="<?php echo $reqAttendanceField; ?>" name="<?php echo $key; ?>" value="1"
+                                <input data-label="<?php echo $reqAttendanceField; ?>" <?php echo $ischecked; ?> name="<?php echo $key; ?>" value="1"
                                        type="checkbox"><?php echo $reqAttendanceField; ?>
                             </label>
                         </div>
@@ -131,8 +139,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 
         $('input[type="checkbox"]').on('change', function () {
             var $this = $(this),
-                name = $this.attr('name'),
-                label = $this.data('label');
+                    name = $this.attr('name'),
+                    label = $this.data('label');
 
             if ($this.is(':checked')) {
                 result.push(name);
@@ -157,12 +165,11 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
         $(".ajaxLoad").html(loaderHtml);
         var checkedItemString = $('.checkedInput').val();
         var checkedLabelString = $('.checkedLabel').val();
-        console.log(checkedLabelString);
 
         $.ajax({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/' . $controller . '/' . $action; ?>",
-            data: $('#searchF2').serialize() + "&selected=" + checkedItemString + "&page=" + page,
+            data: $('#searchF2').serialize() + "&selected=" + checkedItemString + "&selectedLabels=" + checkedLabelString + "&page=" + page,
             success: function (responce) {
                 $(".ajaxLoad").html(responce);
             }

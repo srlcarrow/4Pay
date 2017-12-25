@@ -1,21 +1,18 @@
 <?php
 
-class employeeController extends Controller
-{
+class employeeController extends Controller {
 
-    public function actionViewEmployee()
-    {
+    public function actionViewEmployee() {
         $controller = "employee";
         $action = "ViewEmployeeData";
         $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
     }
 
-    public function actionViewEmployeeData()
-    {
+    public function actionViewEmployeeData() {
         $sql = Yii::app()->db->createCommand()
-            ->select('*')
-            ->from('emp_basic emp')
-            ->getText();
+                ->select('*')
+                ->from('emp_basic emp')
+                ->getText();
 
         $limit = 5;
         $data = Controller::createSearchForEmployee($sql, 'emp.emp_id', Yii::app()->request->getPost('page'), $limit, 'emp.epf_no');
@@ -132,12 +129,11 @@ class employeeController extends Controller
         $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
     }
 
-    public function actionViewIssueUserAccountsData()
-    {
+    public function actionViewIssueUserAccountsData() {
         $sql = Yii::app()->db->createCommand()
-            ->select('*')
-            ->from('emp_basic emp')
-            ->getText();
+                ->select('*')
+                ->from('emp_basic emp')
+                ->getText();
 
 
         $limit = $_REQUEST["noOfData"];
@@ -150,8 +146,7 @@ class employeeController extends Controller
         $this->renderPartial('issueUserAccounts', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
-    public function actionIssueAccounts()
-    {
+    public function actionIssueAccounts() {
         $selectedEmployees = $_POST['selectedIds'];
         $userId = Yii::app()->user->getId();
 
@@ -233,11 +228,6 @@ class employeeController extends Controller
                 $user->save(false);
             }
         }
-    }
-
-    public function actionProfile()
-    {
-        $this->render('profile');
     }
 
     public function actionViewShiftAllocator() {
@@ -345,15 +335,44 @@ class employeeController extends Controller
     }
 
 
+    public function actionViewProfile() {
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $empBasicData = Empbasic::model()->findByPk($empId);
+        $empContactsData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
+        $empEmploymentData = Employment::model()->findByAttributes(array('ref_emp_id' => $empId));
+
+        $this->render('viewProfile', array('empId' => $empId, 'empBasicData' => $empBasicData, 'empContactsData' => $empContactsData, 'empEmploymentData' => $empEmploymentData));
+    }
+
+    public function actionViewProfileData() {
+        $this->renderPartial('ajaxLoad/viewMyProfile');
+    }
+
+    public function actionViewMyAttendance() {
+        if (count($_REQUEST) == 0) {
+            $dateFrom = "2017-08-01";
+            $dateTo = "2017-08-31";
+        } else {
+            $dateFrom = $_REQUEST["dateFrom"];
+            $dateTo = $_REQUEST["dateTo"];
+        }
+
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $attendanceData = Yii::app()->db->createCommand('SELECT * FROM att_attendance aa WHERE aa.ref_emp_id=' . $empId . ' AND aa.day BETWEEN "' . $dateFrom . '" AND "' . $dateTo . '" ORDER BY aa.day DESC')->queryAll();
+
+        $this->renderPartial('ajaxLoad/viewMyAttendance', array('attendanceData' => $attendanceData));
+    }
+
     public function actionBasic(){
         $this->renderPartial('ajaxLoad/profile/basic');
     }
 
-    public function actionLeave(){
+    public function actionViewLeave(){
         $this->renderPartial('ajaxLoad/profile/leave');
     }
 
     public function actionLeaveDate(){
         $this->renderPartial('ajaxLoad/profile/leave/leaveDate');
     }
+
 }

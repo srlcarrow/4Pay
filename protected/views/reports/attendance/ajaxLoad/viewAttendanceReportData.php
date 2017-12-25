@@ -14,9 +14,9 @@
                                 <thead>
                                 <tr>
                                     <?php
-                                    foreach ($headers as $header) {
+                                    foreach ($headersLabels as $headersLabel) {
                                         ?>
-                                        <th><?php echo $header; ?></th>
+                                        <th><?php echo $headersLabel; ?></th>
                                         <?php
                                     }
                                     ?>

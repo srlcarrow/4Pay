@@ -71,7 +71,7 @@ class Controller extends CController {
         $returnQuery = $askedQuery[0] . $join . ' WHERE ' . $where . $askedWhere . ' ' . $orderBy . $sqlLimit;
         $returnQueryCount = $askedQuery[0] . $join . ' WHERE ' . $where . $askedWhere . ' ';
 
-      
+
         $result = yii::app()->db->createCommand($returnQuery)->setFetchMode(PDO::FETCH_OBJ)->queryAll();
         $count = count(yii::app()->db->createCommand($returnQueryCount)->setFetchMode(PDO::FETCH_OBJ)->queryAll());
 
@@ -154,6 +154,12 @@ class Controller extends CController {
         $password2 = substr(str_shuffle($chars2), 0, 1);
         $passwordNew = str_shuffle($password . $password1 . $password2);
         return $passwordNew;
+    }
+
+    public static function getEmpIdOfLoggedUser() {
+        $userId = Yii::app()->user->getId();
+        $userData = User::model()->findByPk($userId);
+        return $userData->ref_emp_id;
     }
 
 }
