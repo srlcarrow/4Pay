@@ -334,7 +334,6 @@ class employeeController extends Controller {
         }
     }
 
-
     public function actionViewProfile() {
         $empId = Controller::getEmpIdOfLoggedUser();
         $empBasicData = Empbasic::model()->findByPk($empId);
@@ -345,13 +344,21 @@ class employeeController extends Controller {
     }
 
     public function actionViewProfileData() {
-        $this->renderPartial('ajaxLoad/viewMyProfile');
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $empBasicData = Empbasic::model()->findByPk($empId);
+        $empContactsData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
+        $empEmploymentData = Employment::model()->findByAttributes(array('ref_emp_id' => $empId));
+
+        $empBasicData = count($empBasicData) == 0 ? new Empbasic() : $empBasicData;
+        $empContactsData = count($empContactsData) == 0 ? new EmpContacts() : $empContactsData;
+        $empEmploymentData = count($empEmploymentData) == 0 ? new Employment() : $empEmploymentData;
+        $this->renderPartial('ajaxLoad/viewMyProfile', array('empId' => $empId, 'empBasicData' => $empBasicData, 'empContactsData' => $empContactsData, 'empEmploymentData' => $empEmploymentData));
     }
 
     public function actionViewMyAttendance() {
         if (count($_REQUEST) == 0) {
-            $dateFrom = "2017-08-01";
-            $dateTo = "2017-08-31";
+            $dateFrom = date('Y-m-d', strtotime(date('Y-m-d')) - (30 * 24 * 3600));
+            $dateTo = date('Y-m-d');
         } else {
             $dateFrom = $_REQUEST["dateFrom"];
             $dateTo = $_REQUEST["dateTo"];
@@ -360,19 +367,38 @@ class employeeController extends Controller {
         $empId = Controller::getEmpIdOfLoggedUser();
         $attendanceData = Yii::app()->db->createCommand('SELECT * FROM att_attendance aa WHERE aa.ref_emp_id=' . $empId . ' AND aa.day BETWEEN "' . $dateFrom . '" AND "' . $dateTo . '" ORDER BY aa.day DESC')->queryAll();
 
-        $this->renderPartial('ajaxLoad/viewMyAttendance', array('attendanceData' => $attendanceData));
+        $this->renderPartial('ajaxLoad/viewMyAttendance', array('attendanceData' => $attendanceData, 'dateFrom' => $dateFrom, 'dateTo' => $dateTo));
     }
 
-    public function actionBasic(){
+    public function actionBasic() {
         $this->renderPartial('ajaxLoad/profile/basic');
     }
 
-    public function actionViewLeave(){
+    public function actionViewLeave() {
         $this->renderPartial('ajaxLoad/profile/leave');
     }
 
-    public function actionLeaveDate(){
+    public function actionLeaveDate() {
         $this->renderPartial('ajaxLoad/profile/leave/leaveDate');
+    }
+
+    public function actionResetPassword() {
+        $userId = Yii::app()->user->getId();
+        $userData = User::model()->findByPk($userId);
+
+        if ($userData->user_password != md5(md5($_POST['oldPw'] . $_POST['oldPw']))) {
+            $this->msgHandler(400, "Enter Correct Current Password...");
+            exit;
+        }
+
+        if ($_POST['pw'] != $_POST['rePw']) {
+            $this->msgHandler(400, "Not Maching...");
+            exit;
+        }
+
+        $userData->user_password = md5(md5($_POST['pw'] . $_POST['pw']));
+        $userData->save(false);
+        $this->msgHandler(200, "Password Changed...");
     }
 
 }
