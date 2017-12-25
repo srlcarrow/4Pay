@@ -9,13 +9,14 @@
                     <div class="col-md-4 ">
                         <div class="form-group">
                             <label>From</label>
-                            <input type="text" name="dateFrom" value="2017-08-01" class="input-datepicker form-control">
+                            <input type="text" name="dateFrom" value="2017-08-01"
+                                   class="input-datepicker2 form-control">
                         </div>
                     </div>
                     <div class="col-md-4 ">
                         <div class="form-group">
                             <label>To</label>
-                            <input type="text" name="dateTo" value="2017-08-31" class="input-datepicker form-control">
+                            <input type="text" name="dateTo" value="2017-08-31" class="input-datepicker2 form-control">
                         </div>
                     </div>
                     <div class="item width-5">
@@ -28,29 +29,29 @@
             <div class="col-md-12" ajaxAttLoad>
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th>Day</th>
-                            <th>Date In</th>
-                            <th>Punch In</th>
-                            <th>Date Out</th>
-                            <th>Punch Out</th>                           
-                        </tr>
+                    <tr>
+                        <th>Day</th>
+                        <th>Date In</th>
+                        <th>Punch In</th>
+                        <th>Date Out</th>
+                        <th>Punch Out</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        <?php
-                        foreach ($attendanceData as $attendance) {
-                            ?>
-                            <tr>
-                                <td><?php echo $attendance['day']; ?></td>
-                                <td><?php echo $attendance['date_in']; ?></td>
-                                <td><?php echo $attendance['punch_in']; ?></td>
-                                <td><?php echo $attendance['date_out']; ?></td>
-                                <td><?php echo $attendance['punch_out']; ?></td>
-                            </tr>
-                            <?php
-                        }
+                    <?php
+                    foreach ($attendanceData as $attendance) {
                         ?>
+                        <tr>
+                            <td><?php echo $attendance['day']; ?></td>
+                            <td><?php echo $attendance['date_in']; ?></td>
+                            <td><?php echo $attendance['punch_in']; ?></td>
+                            <td><?php echo $attendance['date_out']; ?></td>
+                            <td><?php echo $attendance['punch_out']; ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -82,5 +83,7 @@
             }
         });
     }
+
+    datePicker({ele: '.input-datepicker2'});
 
 </script>
