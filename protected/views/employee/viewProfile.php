@@ -67,7 +67,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
     function leave() {
         $.ajax({
             type: 'POST',
-            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewProfileData'; ?>",
+            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewLeave'; ?>",
             data: "",
             success: function (responce) {
                 $("#ajaxLoad").html(responce);

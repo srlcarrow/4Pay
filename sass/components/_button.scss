@@ -1,0 +1,62 @@
+.btn {
+  text-transform: uppercase;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+
+  &:not(.btn-sm) {
+    padding: 10px 30px;
+    line-height: 14px;
+  }
+
+}
+
+.btn-primary {
+  background: $primaryBtnBgColor;
+  color: $white;
+
+  &:active,
+  &:hover {
+    background: rgba($primaryBtnBgColor, $lighten);
+    color: $white;
+    border: 1px solid $primaryBtnBgColor;
+  }
+}
+
+.btn-danger {
+  background: $dangerBtnBgColor;
+  color: $white;
+
+  &:active,
+  &:hover {
+    background: rgba($dangerBtnBgColor, $lighten);
+    color: $white;
+    border: 1px solid $dangerBtnBgColor;
+  }
+}
+
+.btn-add {
+  text-transform: uppercase;
+  background: #e09d0d;
+  color: $white;
+
+  &:active,
+  &:hover {
+    background: rgba(224, 157, 13, 0.86);
+    color: $white;
+  }
+}
+
+.btn-download {
+  background: #620631;
+  color: $white;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+
+  &:active,
+  &:hover {
+    background: rgba(98, 6, 49, 0.86);
+    color: $white;
+  }
+}

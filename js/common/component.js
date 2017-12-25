@@ -52,28 +52,6 @@
         $this.addClass('is-active');
     });
 
-    // Accordion
-    $(function () {
-        $(document).find('.cm-accordion').each(function () {
-            var $this = $(this);
-
-            $this.find('.cm-accordion-row:first').addClass('is-open');
-            $this.find('.cm-accordion-row:first').find('.cm-accordion-content').slideDown('fast');
-
-            $this.find('.cm-accordion-row').on('click.cm-accordion-header', '.cm-accordion-header', function () {
-                var _this = $(this),
-                    $parent = _this.parent();
-
-                if (!$parent.hasClass('is-open')) {
-                    $this.find('.cm-accordion-row').removeClass('is-open');
-                    $parent.addClass('is-open');
-
-                    $this.find('.cm-accordion-content').slideUp('fast');
-                    $parent.find('.cm-accordion-content').slideDown('fast')
-                }
-            })
-        });
-    });
 
     $(function () {
 
@@ -102,3 +80,28 @@
     })
 
 })();
+
+
+//Date picker
+function datePicker(_option, calback) {
+
+    var _defOption = {
+        ele: null,
+        minDate: null,
+        startDate: new Date()
+    };
+
+    var option = $.extend(_defOption, _option);
+
+    $(option.ele).datepicker({
+        language: 'en',
+        minDate: _defOption.minDate,
+        startDate: _defOption.startDate,
+        dateFormat: 'yyyy-m-dd',
+        autoClose: true,
+        position: 'top left',
+        onSelect: function (fdate, date) {
+            calback(fdate, date)
+        }
+    });
+}

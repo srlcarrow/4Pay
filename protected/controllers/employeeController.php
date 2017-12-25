@@ -334,6 +334,7 @@ class employeeController extends Controller {
         }
     }
 
+
     public function actionViewProfile() {
         $empId = Controller::getEmpIdOfLoggedUser();
         $empBasicData = Empbasic::model()->findByPk($empId);
@@ -360,6 +361,18 @@ class employeeController extends Controller {
         $attendanceData = Yii::app()->db->createCommand('SELECT * FROM att_attendance aa WHERE aa.ref_emp_id=' . $empId . ' AND aa.day BETWEEN "' . $dateFrom . '" AND "' . $dateTo . '" ORDER BY aa.day DESC')->queryAll();
 
         $this->renderPartial('ajaxLoad/viewMyAttendance', array('attendanceData' => $attendanceData));
+    }
+
+    public function actionBasic(){
+        $this->renderPartial('ajaxLoad/profile/basic');
+    }
+
+    public function actionViewLeave(){
+        $this->renderPartial('ajaxLoad/profile/leave');
+    }
+
+    public function actionLeaveDate(){
+        $this->renderPartial('ajaxLoad/profile/leave/leaveDate');
     }
 
 }

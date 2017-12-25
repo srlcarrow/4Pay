@@ -51,6 +51,29 @@
     </div>
 </div>
 
+<div class="row mb-30">
+    <div class="col-md-12">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h1>Button</h1>
+            </div>
+
+            <div class="card-content">
+                <div class="row">
+                    <button type="button" class="btn btn-default">Default</button>
+                    <button type="button" class="btn btn-danger">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-sm btn-add">Add New</button>
+                    <button type="button" class="btn btn-sm btn-download">Download</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
 <!--Form-->
 <div class="row mb-30">
@@ -341,7 +364,7 @@
     $(function () {
         $(".scroll-table").mCustomScrollbar({
             theme: "dark-3",
-            axis:"x"
+            axis: "x"
         });
     });
 
