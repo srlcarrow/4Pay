@@ -1,11 +1,6 @@
 <div class="row mb-30">
     <div class="col-md-12">
         <div class="card">
-            
-            <div class="col s12">
-                <button class="cm-btn add right addNewCompany" type="button" onclick="addEmployee()">Add New
-                </button>
-            </div>
 
             <div class="card-header">
                 <h1>Employees </h1>
@@ -13,6 +8,12 @@
 
             <div class="card-content">
                 <div class="row">
+
+                    <div class="col-md-12 text-right mb-30">
+                        <button class="btn btn-sm btn-add addNewCompany" type="button" onclick="addEmployee()">Add New
+                        </button>
+                    </div>
+
                     <div class="col-md-12">
                         <table class="table table-bordered">
                             <thead>

@@ -410,7 +410,7 @@ ul {
 .alert {
   padding: 0;
   margin-bottom: 0; }
-  .alert[class^="alert-"] {
+  .alert[class^="alert-"], .alert[class*=" alert-"] {
     padding: 15px;
     margin-bottom: 20px; }
 
@@ -525,7 +525,8 @@ ul.cm-tab li {
 /*table*/
 td.tb-action,
 th.tb-action {
-  width: 122px; }
+  width: 1px;
+  white-space: nowrap; }
 
 table.table {
   margin-bottom: 0; }
@@ -565,6 +566,49 @@ table.cm-table th, table.cm-table td {
   .search-advance .content {
     padding: 30px 0; }
 
+.btn {
+  text-transform: uppercase;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px; }
+  .btn:not(.btn-sm) {
+    padding: 10px 30px;
+    line-height: 14px; }
+
+.btn-primary {
+  background: #0288d1;
+  color: #fff; }
+  .btn-primary:active, .btn-primary:hover {
+    background: rgba(2, 136, 209, 0.86);
+    color: #fff;
+    border: 1px solid #0288d1; }
+
+.btn-danger {
+  background: #ff023b;
+  color: #fff; }
+  .btn-danger:active, .btn-danger:hover {
+    background: rgba(255, 2, 59, 0.86);
+    color: #fff;
+    border: 1px solid #ff023b; }
+
+.btn-add {
+  text-transform: uppercase;
+  background: #e09d0d;
+  color: #fff; }
+  .btn-add:active, .btn-add:hover {
+    background: rgba(224, 157, 13, 0.86);
+    color: #fff; }
+
+.btn-download {
+  background: #620631;
+  color: #fff;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px; }
+  .btn-download:active, .btn-download:hover {
+    background: rgba(98, 6, 49, 0.86);
+    color: #fff; }
+
 .form-group {
   margin-bottom: 0; }
 
@@ -581,6 +625,14 @@ table.cm-table th, table.cm-table td {
 
 .container {
   margin-top: 80px; }
+
+label {
+  font-weight: 400; }
+
+.form-control {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px; }
 
 .mb-30 {
   margin-bottom: 30px !important; }
