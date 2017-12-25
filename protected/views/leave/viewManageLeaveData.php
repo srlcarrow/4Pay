@@ -21,8 +21,8 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                     <th>EPF No</th>
                                     <th>EMP No</th>
                                     <th>Name</th>
-                                    <th>Apply Leave</th>
-                                    <th>Apply S-Leave</th>
+                                    <th class="tb-action">Apply Leave</th>
+                                    <th class="tb-action">Apply S-Leave</th>
 
                                 </tr>
                             </thead>

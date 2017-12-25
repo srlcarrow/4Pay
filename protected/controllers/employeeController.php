@@ -344,4 +344,16 @@ class employeeController extends Controller
         }
     }
 
+
+    public function actionBasic(){
+        $this->renderPartial('ajaxLoad/profile/basic');
+    }
+
+    public function actionLeave(){
+        $this->renderPartial('ajaxLoad/profile/leave');
+    }
+
+    public function actionLeaveDate(){
+        $this->renderPartial('ajaxLoad/profile/leave/leaveDate');
+    }
 }

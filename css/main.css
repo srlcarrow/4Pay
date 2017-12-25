@@ -381,8 +381,10 @@ ul {
   user-select: none; }
 
 .paginations {
-  float: right;
-  margin-top: 10px; }
+  float: right; }
+  .paginations > .paginations {
+    margin-top: 0;
+    margin-bottom: 15px; }
   .paginations a {
     display: block;
     float: left;
@@ -404,6 +406,13 @@ ul {
     .paginations a.current {
       background: #0288d1;
       color: white; }
+
+.alert {
+  padding: 0;
+  margin-bottom: 0; }
+  .alert[class^="alert-"] {
+    padding: 15px;
+    margin-bottom: 20px; }
 
 /*Card*/
 .card {

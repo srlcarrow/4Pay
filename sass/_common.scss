@@ -58,7 +58,11 @@
 //paginations
 .paginations {
   float: right;
-  margin-top: 10px;
+
+  & > .paginations {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
 
   a {
     display: block;
@@ -86,7 +90,17 @@
 
     &.current {
       background: rgba($secondaryFontColor, 1);
-      color:rgba($white,1);
+      color: rgba($white, 1);
     }
+  }
+}
+
+.alert {
+  padding: 0;
+  margin-bottom: 0;
+
+  &[class^="alert-"] {
+    padding: 15px;
+    margin-bottom: 20px;
   }
 }
