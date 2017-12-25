@@ -51,6 +51,29 @@
     </div>
 </div>
 
+<div class="row mb-30">
+    <div class="col-md-12">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h1>Button</h1>
+            </div>
+
+            <div class="card-content">
+                <div class="row">
+                    <button type="button" class="btn btn-default">Default</button>
+                    <button type="button" class="btn btn-danger">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-sm btn-add">Add New</button>
+                    <button type="button" class="btn btn-sm btn-download">Download</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
 <!--Form-->
 <div class="row mb-30">
@@ -125,7 +148,15 @@
                             <div class="col-md-4 ">
                                 <div class="form-group">
                                     <label>Date Picker</label>
-                                    <input type="text" class="input-datepicker form-control">
+                                    <input type="text" class="input-datepicker2 form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 ">
+
+                                <div class="form-group">
+                                    <label>Time Picker</label>
+                                    <input type="text" class="input-timepicker form-control">
                                 </div>
                             </div>
 
@@ -266,6 +297,50 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="row">
+                    <h4>Scroll Table</h4>
+                    <div class="col-md-12">
+                        <div class="table-scroll-x scroll-table">
+                            <table class="table table-bordered cm-table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Name</th>
+                                    <th>Name</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Email</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th class="tb-action">Action</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Natasha Guanwardana</td>
+                                    <td>Natasha Guanwardana</td>
+                                    <td>Natasha Guanwardana</td>
+                                    <td>Natasha Guanwardana</td>
+                                    <td>natasha@gmail.com</td>
+                                    <td>078 123 2312</td>
+                                    <td>078 123 2312</td>
+                                    <td>078 123 2312</td>
+                                    <td class="tb-action text-right">
+                                        <button type="button" class="btn btn-sm btn-warning">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -273,6 +348,10 @@
 </div>
 
 <script>
+
+    //Common Date picker function
+    datePicker({ele: '.input-datepicker2'});
+
     // This function when call datepicker date is selected
     $(document).on('onDateSelect', function (e, date, fdate) {
         console.log('Date ', date);
@@ -285,4 +364,17 @@
         console.log('Input ', input);
     });
 
+    //Scrollbar
+    $(function () {
+        $(".scroll-table").mCustomScrollbar({
+            theme: "dark-3",
+            axis: "x"
+        });
+    });
+
+    $(function () {
+        $(".scroll-y").mCustomScrollbar({
+            theme: "dark-3",
+        });
+    })
 </script>

@@ -1,6 +1,17 @@
 /*table*/
 td.tb-action,
 th.tb-action {
-  width: 122px;
+  width: 1px;
+  white-space: nowrap;
+}
 
+table.table {
+  margin-bottom: 0;
+}
+
+table.cm-table {
+
+  th, td {
+    white-space: nowrap;
+  }
 }

@@ -1,4 +1,3 @@
-var EVENT = {};
 (function () {
 
 
@@ -53,27 +52,58 @@ var EVENT = {};
         $this.addClass('is-active');
     });
 
-    // Accordion
+
     $(function () {
-        $(document).find('.cm-accordion').each(function () {
+
+        $(document).on('click.dropdown_list', '.dropdown_list input[type="text"]', function (e) {
             var $this = $(this);
+            var $dropDownList = $this.parents('.dropdown_list');
+            var $dropUl = $dropDownList.find('ul');
 
-            $this.find('.cm-accordion-row:first').addClass('is-open');
-            $this.find('.cm-accordion-row:first').find('.cm-accordion-content').slideDown('fast');
+            $dropDownList.addClass('is-open');
 
-            $this.find('.cm-accordion-row').on('click.cm-accordion-header', '.cm-accordion-header', function () {
-                var _this = $(this),
-                    $parent = _this.parent();
-
-                if (!$parent.hasClass('is-open')) {
-                    $this.find('.cm-accordion-row').removeClass('is-open');
-                    $parent.addClass('is-open');
-
-                    $this.find('.cm-accordion-content').slideUp('fast');
-                    $parent.find('.cm-accordion-content').slideDown('fast')
-                }
+            $dropUl.find('li').on('click', function () {
+                var $li = $(this);
+                $this.val($li.find('h5').text());
+                $this.trigger('onDropItemClick', [$li.attr('data-id'), $li]);
+                $('.dropdown_list').removeClass('is-open');
             })
+
         });
+
+        $(document).on('click.dropdown_list', function (e) {
+            if ($(e.target).closest('.dropdown_list').length === 0) {
+                $('.dropdown_list').removeClass('is-open');
+            }
+        })
+
     })
 
 })();
+
+
+//Date picker
+function datePicker(_option, calback) {
+
+    var _defOption = {
+        ele: null,
+        minDate: null,
+        startDate: new Date()
+    };
+
+    var option = $.extend(_defOption, _option);
+
+    $(option.ele).datepicker({
+        language: 'en',
+        minDate: _defOption.minDate,
+        startDate: _defOption.startDate,
+        dateFormat: 'yyyy-m-dd',
+        autoClose: true,
+        position: 'top left',
+        onSelect: function (fdate, date) {
+            if (typeof calback === "function") {
+                calback(fdate, date)
+            }
+        }
+    });
+}

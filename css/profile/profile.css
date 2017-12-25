@@ -1,11 +1,15 @@
-.f-left, .top-bar, .tab-bar, .content-bar {
+.f-left, .top-bar, .tab-bar, .content-bar, .leave-block, .leave-block .leave-month-day, .leave-block .leave-date-block, .leave-block .leave-date-block .lv-type {
   float: left;
   width: 100%;
   min-height: 1px; }
 
 body > .container {
   width: 100% !important;
-  padding: 0; }
+  padding: 0;
+  margin-top: 52px; }
+
+.container {
+  margin-top: 0; }
 
 .top-bar {
   min-height: 230px;
@@ -29,3 +33,42 @@ body > .container {
   height: 60px;
   background: #fff;
   border-bottom: 2px solid #f2f2f2; }
+
+.leave-block:not(:last-child) {
+  margin-bottom: 10px; }
+
+.leave-block .leave-month-day {
+  width: 25%;
+  padding: 10px 0; }
+  .leave-block .leave-month-day h5 {
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.86); }
+
+.leave-block .leave-date-block {
+  width: 75%;
+  border-width: 1px 0 1px 1px;
+  border-style: solid;
+  border-color: #e5e5e5; }
+  .leave-block .leave-date-block .lv-type {
+    width: 33.33%;
+    border-right: 1px solid #e5e5e5;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.86);
+    cursor: pointer; }
+    .leave-block .leave-date-block .lv-type.is-disabled {
+      cursor: context-menu;
+      background: #b2b2b2;
+      color: #fff; }
+    .leave-block .leave-date-block .lv-type.is-selected {
+      background: #0288d1;
+      color: #fff; }
+    .leave-block .leave-date-block .lv-type.is-leaved {
+      cursor: context-menu;
+      background: rgba(209, 156, 10, 0.72);
+      color: #fff; }

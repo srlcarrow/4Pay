@@ -67,23 +67,35 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                         </table>
                     </div>
                 </div>
-                <button type="button" class="btn btn-sm btn-warning" onclick="save()">Save</button>
             </div>
-            <div class="col-md-12">
-                <div class="alert "></div>
+
+            <div class="card-footer">
+               <div class="row">
+
+                   <div class="col-md-12">
+                       <div class="alert "></div>
+                   </div>
+
+                   <div class="col-md-12">
+                       <div class="col-md-12 mt-15 mb-15" id="pagination">
+                           <?php
+                           Paginations::setLimit($pageSize);
+                           Paginations::setPage($page);
+                           Paginations::setJSCallback("searchData");
+                           Paginations::setTotalPages($count);
+                           Paginations::makePagination();
+                           Paginations::drawPagination();
+                           ?>
+                       </div>
+                   </div>
+
+                   <div class="col-md-12 text-right">
+                       <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+                   </div>
+
+               </div>
             </div>
-            <div class="col-md-12">
-                <div class="col-md-12 mt-15 mb-15" id="pagination">
-                    <?php
-                    Paginations::setLimit($pageSize);
-                    Paginations::setPage($page);
-                    Paginations::setJSCallback("viewSearchData");
-                    Paginations::setTotalPages($count);
-                    Paginations::makePagination();
-                    Paginations::drawPagination();
-                    ?>
-                </div>
-            </div>
+
 
         </div>
     </div>   

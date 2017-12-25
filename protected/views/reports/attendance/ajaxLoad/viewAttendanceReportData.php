@@ -9,40 +9,52 @@
             <div class="card-content">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <thead>
+                        <div class="table-scroll-x scroll-table">
+                            <table class="table table-bordered">
+                                <thead>
                                 <tr>
-                                    <th>EPF No</th>
-                                    <th>EMP No</th>
-                                    <th>Name</th>
-                                    <th>Day</th>
-                                    <th>Date In</th>
-                                    <th>Punch In</th>
-                                    <th>Date Out</th>
-                                    <th>Punch Out</th>
-                                    <th>In OT</th>
-                                    <th>Late</th>
-                                    <th>Early Leave</th>
-                                    <th>Over Time</th>
+                                    <?php
+                                    foreach ($headersLabels as $headersLabel) {
+                                        ?>
+                                        <th><?php echo $headersLabel; ?></th>
+                                        <?php
+                                    }
+                                    ?>
                                 </tr>
-                            </thead>
+                                </thead>
 
-                            <tbody>
+                                <tbody>
                                 <?php
-                                foreach ($employeeData as $employee) {
+                                foreach ($attendanceData as $attendance) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $employee->epf_no;  ?></td>
-                                        <td><?php echo $employee->empno;  ?></td>
-                                        <td><?php echo $employee->emp_name_with_initials;  ?></td>
-                                        <td><?php echo "Email";  ?></td>
-                                        <td><?php echo "Contact";  ?></td>
+                                        <?php
+                                        foreach ($attendance as $att) {
+                                            ?>
+                                            <td><?php echo $att; ?></td>
+                                            <?php
+                                        }
+                                        ?>
                                     </tr>
                                     <?php
                                 }
                                 ?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mt-15 mb-15" id="pagination">
+                        <?php
+                        Paginations::setLimit($pageSize);
+                        Paginations::setPage($page);
+                        Paginations::setJSCallback("searchData");
+                        Paginations::setTotalPages($count);
+                        Paginations::makePagination();
+                        Paginations::drawPagination();
+                        ?>
                     </div>
                 </div>
             </div>
@@ -50,3 +62,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $(".scroll-table").mCustomScrollbar({
+            theme: "dark-3",
+            axis: "x"
+        });
+    });
+</script>
