@@ -101,7 +101,9 @@ function datePicker(_option, calback) {
         autoClose: true,
         position: 'top left',
         onSelect: function (fdate, date) {
-            calback(fdate, date)
+            if (typeof calback === "function") {
+                calback(fdate, date)
+            }
         }
     });
 }

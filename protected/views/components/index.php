@@ -148,7 +148,7 @@
                             <div class="col-md-4 ">
                                 <div class="form-group">
                                     <label>Date Picker</label>
-                                    <input type="text" class="input-datepicker form-control">
+                                    <input type="text" class="input-datepicker2 form-control">
                                 </div>
                             </div>
 
@@ -348,6 +348,10 @@
 </div>
 
 <script>
+
+    //Common Date picker function
+    datePicker({ele: '.input-datepicker2'});
+
     // This function when call datepicker date is selected
     $(document).on('onDateSelect', function (e, date, fdate) {
         console.log('Date ', date);
