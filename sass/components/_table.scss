@@ -1,4 +1,17 @@
 /*table*/
+table.table > thead {
+	background: $secondaryFontColor;
+	color: $white;	
+}
+table.table tbody tr:nth-child(even) {
+	background : $Gray;
+}
+.table-bordered > thead > tr > th {
+    border-bottom: none;
+}
+.table-bordered > tbody > tr > td {
+    border-color: $white;
+}
 td.tb-action,
 th.tb-action {
   width: 1px;

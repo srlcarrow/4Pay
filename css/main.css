@@ -523,6 +523,19 @@ ul.cm-tab li {
     display: block; }
 
 /*table*/
+table.table > thead {
+  background: #0288d1;
+  color: #fff; }
+
+table.table tbody tr:nth-child(even) {
+  background: #F7F7F7; }
+
+.table-bordered > thead > tr > th {
+  border-bottom: none; }
+
+.table-bordered > tbody > tr > td {
+  border-color: #fff; }
+
 td.tb-action,
 th.tb-action {
   width: 1px;

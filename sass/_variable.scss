@@ -1,5 +1,7 @@
 $primaryFontColor: #000;
 $secondaryFontColor: #0288d1;
+$white: #fff;
+$Gray : #F7F7F7;
 //---------------
 // Typography
 //---------------
@@ -25,7 +27,7 @@ $lighten: 0.86;
 $lighten-x: 0.56;
 $lighten-xx: 0.30;
 
-$white: #fff;
+
 $white-lighten: rgba($white, $lighten);
 $white-lighten-x: rgba($white, $lighten-x);
 
