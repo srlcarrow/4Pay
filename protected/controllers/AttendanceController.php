@@ -43,6 +43,27 @@ class AttendanceController extends Controller {
         $headers = explode(',', $selectedItems);
         $headersLabels = explode(',', $selectedLabels);
         $this->renderPartial('/reports/attendance/ajaxLoad/viewAttendanceReportData', array('attendanceData' => $attendanceData, 'headers' => $headers, 'headersLabels' => $headersLabels, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
-    } 
+    }
+
+    public function actionHolidayCalendar() {
+        $calendars = ConfigHolidayCalanders::model()->findAll();
+        $isEnableMultipleCalendars = Payroll::getPayrollSetting('DEMC');
+        $this->render('viewHoliday', array('calendars' => $calendars, 'isEnableMultipleCalendars' => $isEnableMultipleCalendars));
+    }
+
+    public function actionHolidayCalendarData() {
+        if (!isset($_POST['year']) || !isset($_POST['year'])) {
+            $reqYear = date('Y');
+            $reqMonth = date('m');
+        } else {
+            $reqYear = $_POST['year'];
+            $reqMonth = $_POST['month'];
+        }
+
+        $calendarId = $_POST['ConfigHolidayCalanders']['cal_id'];
+
+        $days = Controller::getDatesForCalendar($reqYear, $reqMonth);
+        $this->renderPartial('ajaxLoad/holidayData', array('days' => $days, 'reqYear' => $reqYear, 'reqMonth' => $reqMonth, 'calendarId' => $calendarId));
+    }
 
 }

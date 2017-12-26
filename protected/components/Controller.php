@@ -162,4 +162,21 @@ class Controller extends CController {
         return $userData->ref_emp_id;
     }
 
+    public static function getDatesForCalendar($year, $month) {
+        $numOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $startDate = $year . '-' . $month . '-01';
+        $endDate = $year . '-' . $month . '-' . $numOfDays;
+
+        $startDayNumberOfWeek = date('w', strtotime($startDate)) + 1;
+
+        $previouseMonth = Date('Y-m-d', strtotime($startDate . " last month"));
+        $nextMonth = Date('Y-m-d', strtotime($startDate . " next month"));
+
+        $showDateLastMonth = date('Y-m-d', strtotime('-' . date('w', strtotime($startDate)) . ' days', strtotime($startDate)));
+        $showDateNextMonth = date('Y-m-d', strtotime('+' . (6 - date('w', strtotime($endDate))) . ' days', strtotime($endDate)));
+
+        $days = Attendance::returnDates($showDateLastMonth, $showDateNextMonth);
+        return $days;
+    }
+
 }
