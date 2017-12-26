@@ -40,7 +40,7 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                             <button type="button" class="btn btn-sm btn-warning">Apply</button>                                           
                                         </td>
                                         <td class="tb-action text-right">
-                                            <button type="button" class="btn btn-sm btn-danger">Apply</button>                                         
+                                            <button type="button" onclick="applyShortLeave('<?php echo $employee->emp_id; ?>')" class="btn btn-sm btn-danger">Apply</button>                                         
                                         </td>
                                         <?php
                                     }
@@ -49,7 +49,7 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                         </table>
                     </div>
                 </div>
-                
+
             </div>
             <div class="col-md-12">
                 <div class="alert "></div>
@@ -95,4 +95,9 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
             }
         });
     }
+
+    function applyShortLeave(id) {
+        window.location.href = '<?php echo Yii::app()->baseUrl . '/ShortLeave/ViewShortLeaveApplyPanel/id/'; ?>' + id;
+    }
+    
 </script>
