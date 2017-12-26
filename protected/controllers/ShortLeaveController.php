@@ -76,7 +76,6 @@ class ShortLeaveController extends Controller {
         if ($shortLeaveSetting->is_dual_approvers == 0) {
             $shortLeave->final_status = 1;
         }
-
         if ($shortLeave->save(false)) {
             $this->msgHandler(200, "Successfully Saved...");
         }
@@ -105,13 +104,12 @@ class ShortLeaveController extends Controller {
         $shortLeave = ShortLeave::model()->findByPk($shortLeaveId);
         $shortLeave->second_approver_status = 1;
         $shortLeave->final_status = 1;
-
         if ($shortLeave->save(false)) {
             $this->msgHandler(200, "Successfully Saved...");
         }
     }
 
-    public function actionRejectShortLeaveSecondApprover() { 
+    public function actionRejectShortLeaveSecondApprover() {   
         $shortLeaveId = $_POST['shortLeaveId'];
         $shortLeave = ShortLeave::model()->findByPk($shortLeaveId);
         $shortLeave->second_approver_reject_reason = $_POST['reason'];
