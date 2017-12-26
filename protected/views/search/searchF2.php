@@ -81,7 +81,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                     <div class="col-md-2 ">
                         <div class="checkbox">
                             <label>
-                                <input data-label="<?php echo $reqBasicField; ?>" <?php echo $ischecked; ?> name="<?php echo $key; ?>" value="1"
+                                <input data-label="<?php echo $reqBasicField; ?>" <?php echo $ischecked; ?>
+                                       name="<?php echo $key; ?>" value="1"
                                        type="checkbox"><?php echo $reqBasicField; ?>
                             </label>
                         </div>
@@ -107,7 +108,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                     <div class="col-md-2 ">
                         <div class="checkbox">
                             <label>
-                                <input data-label="<?php echo $reqAttendanceField; ?>" <?php echo $ischecked; ?> name="<?php echo $key; ?>" value="1"
+                                <input data-label="<?php echo $reqAttendanceField; ?>" <?php echo $ischecked; ?>
+                                       name="<?php echo $key; ?>" value="1"
                                        type="checkbox"><?php echo $reqAttendanceField; ?>
                             </label>
                         </div>
@@ -135,23 +137,33 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
     var result = [];
     var arrayLabel = [];
 
+    function findCheckedItem(ele) {
+        var $this = $(ele),
+            name = $this.attr('name'),
+            label = $this.data('label');
+
+        if ($this.is(':checked')) {
+            result.push(name);
+            arrayLabel.push(label);
+        } else {
+            result.splice(result.indexOf(name), 1);
+            arrayLabel.splice(arrayLabel.indexOf(label), 1);
+        }
+
+        $('.checkedInput').val(JSON.stringify(result));
+        $('.checkedLabel').val(JSON.stringify(arrayLabel));
+    }
+
     $(function () {
 
         $('input[type="checkbox"]').on('change', function () {
-            var $this = $(this),
-                    name = $this.attr('name'),
-                    label = $this.data('label');
+            var $this = $(this);
+            findCheckedItem($this);
+        });
 
-            if ($this.is(':checked')) {
-                result.push(name);
-                arrayLabel.push(label);
-            } else {
-                result.splice(result.indexOf(name), 1);
-                arrayLabel.splice(arrayLabel.indexOf(label), 1);
-            }
-
-            $('.checkedInput').val(JSON.stringify(result));
-            $('.checkedLabel').val(JSON.stringify(arrayLabel));
+        $('input[type="checkbox"]:checked').each(function () {
+            var $this = $(this);
+            findCheckedItem($this);
         });
     });
 
