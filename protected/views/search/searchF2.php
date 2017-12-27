@@ -6,14 +6,14 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
         <div class="card">
             <div class="card-content">
                 <div class="search-box">
-                    <div class="item width-80">
+                    <div class="item width-84">
                         <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search"
                                onkeyup="searchData(1)">
                     </div>
                     <div class="item width-5">
                         <button type="button" onclick="searchData(1)" class="btn btn-search">Search</button>
                     </div>
-                    <div class="item width-10">
+                    <div class="item width-1">
                         <button type="button" class="btn btn-advance">Advance</button>
                     </div>
 

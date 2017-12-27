@@ -1,7 +1,13 @@
-$primaryFontColor: #000;
-$secondaryFontColor: #0288d1;
+
+$primaryColor:#0288d1;
+
 $white: #fff;
 $Gray : #F7F7F7;
+$black : #000;
+
+$primaryFontColor: $black;
+$secondaryFontColor: $primaryColor;
+
 //---------------
 // Typography
 //---------------

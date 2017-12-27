@@ -1,21 +1,30 @@
 /*table*/
 table.table > thead {
-	background: $secondaryFontColor;
-	color: $white;	
+  background: $secondaryFontColor;
+  color: $white;
 }
+
 table.table tbody tr:nth-child(even) {
-	background : $Gray;
+  background: $Gray;
 }
+
 .table-bordered > thead > tr > th {
-    border-bottom: none;
+  border-bottom: none;
+  font-weight: $font-weight-regular;
 }
+
 .table-bordered > tbody > tr > td {
-    border-color: $white;
+  border-color: $white;
 }
+
 td.tb-action,
 th.tb-action {
   width: 1px;
   white-space: nowrap;
+}
+
+td.tb-action {
+  text-align: center;
 }
 
 table.table {

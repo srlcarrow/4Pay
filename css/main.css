@@ -435,6 +435,10 @@ ul {
     margin-bottom: 30px !important; }
   .card .card-header {
     margin-bottom: 40px; }
+    .card .card-header h1 {
+      color: rgba(0, 0, 0, 0.86);
+      font-size: 24px;
+      text-transform: uppercase; }
   .card .card-footer {
     /*position: absolute;*/
     /*left: 0;*/
@@ -535,7 +539,8 @@ table.table tbody tr:nth-child(even) {
   background: #F7F7F7; }
 
 .table-bordered > thead > tr > th {
-  border-bottom: none; }
+  border-bottom: none;
+  font-weight: 400; }
 
 .table-bordered > tbody > tr > td {
   border-color: #fff; }
@@ -544,6 +549,9 @@ td.tb-action,
 th.tb-action {
   width: 1px;
   white-space: nowrap; }
+
+td.tb-action {
+  text-align: center; }
 
 table.table {
   margin-bottom: 0; }
@@ -561,7 +569,8 @@ table.cm-table th, table.cm-table td {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    height: 34px;
+    height: 36px;
+    background: #F7F7F7;
     padding-left: 15px; }
   .search-box .item .btn-advance, .search-box .item .btn-search {
     -webkit-border-radius: 0;
@@ -569,14 +578,22 @@ table.cm-table th, table.cm-table td {
     border-radius: 0;
     width: 100%;
     outline: 0;
-    background: rgba(0, 0, 0, 0.04); }
+    background: transparent;
+    padding: 10px 0 10px 10px;
+    color: rgba(0, 0, 0, 0.86); }
     .search-box .item .btn-advance:active, .search-box .item .btn-search:active {
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
-      box-shadow: none; }
+      box-shadow: none;
+      color: rgba(0, 0, 0, 0.56); }
+    .search-box .item .btn-advance:hover, .search-box .item .btn-search:hover {
+      opacity: 0.86; }
   .search-box .item .btn-search {
-    background: #ea3939;
-    color: #fff; }
+    padding: 10px 30px;
+    background: #0288d1;
+    color: #fff;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px; }
 
 .search-advance {
   display: none; }
@@ -626,6 +643,31 @@ table.cm-table th, table.cm-table td {
     background: rgba(98, 6, 49, 0.86);
     color: #fff; }
 
+.ic {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: transparent; }
+  .ic.ic_20 {
+    width: 20px;
+    height: 20px;
+    background-image: url("./../images/icon/button/20/ic_20.png");
+    background-repeat: no-repeat; }
+    .ic.ic_20.ic_edit {
+      background-position: 0 0; }
+      .ic.ic_20.ic_edit:hover {
+        background-position: -21px 0; }
+    .ic.ic_20.ic_delete {
+      background-position: 0 21px; }
+      .ic.ic_20.ic_delete:hover {
+        background-position: -21px 21px; }
+    .ic.ic_20.ic_view {
+      background-position: 0 42px; }
+      .ic.ic_20.ic_view:hover {
+        background-position: -21px 42px; }
+
 .form-group {
   margin-bottom: 0; }
 
@@ -636,9 +678,14 @@ table.cm-table th, table.cm-table td {
   z-index: 99;
   top: 0;
   left: 0;
+  background-color: #fff;
+  border: none;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
-  border-radius: 0; }
+  border-radius: 0;
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.15); }
 
 .container {
   margin-top: 80px; }
@@ -649,7 +696,36 @@ label {
 .form-control {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
-  border-radius: 2px; }
+  border-radius: 2px;
+  border-color: #cdcdcd; }
+
+.dropdown-menu {
+  position: fixed;
+  max-width: 470px;
+  width: 100%;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: none;
+  top: 51px; }
+  .dropdown-menu > li > a {
+    padding: 8px 30px;
+    color: rgba(0, 0, 0, 0.86); }
+    .dropdown-menu > li > a:hover {
+      color: #0288d1; }
+
+.nav .open > a {
+  background: transparent;
+  border-color: transparent; }
+  .nav .open > a:focus, .nav .open > a:hover {
+    background: transparent;
+    border-color: transparent; }
+
+.navbar-default .navbar-nav > .open > a {
+  color: rgba(0, 0, 0, 0.86); }
+  .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    background-color: transparent;
+    color: #0288d1; }
 
 .mb-30 {
   margin-bottom: 30px !important; }
