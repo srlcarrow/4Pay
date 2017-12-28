@@ -1,0 +1,67 @@
+
+.datepicker {
+  border: none;
+
+  .datepicker--nav {
+    background: $primaryColor;
+    border-bottom: 1px solid $primaryColor;
+
+    .datepicker--nav-action {
+
+      path {
+        stroke: rgba($white, $lighten-x);
+
+        &:hover {
+          background: transparent;
+          stroke: rgba($white, $lighten);
+        }
+
+      }
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    .datepicker--nav-title {
+      color: rgba($white, $lighten);
+      i {
+        color: rgba($white, $lighten);
+      }
+      &:hover {
+        background: transparent;
+      }
+    }
+
+  }
+
+  .datepicker--day-name {
+    color: $primaryColor;
+  }
+
+  .datepicker--cell {
+
+    &.-current- {
+      color: $primaryColor;
+
+      &.-focus- {
+        background: transparent;
+      }
+    }
+
+    &.-focus- {
+      background: transparent;
+    }
+
+    &.-selected- {
+      background: $primaryColor;
+      color: $white;
+
+      &.-current- {
+        @extend .-selected-;
+      }
+    }
+
+  }
+
+}

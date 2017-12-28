@@ -668,6 +668,36 @@ table.cm-table th, table.cm-table td {
       .ic.ic_20.ic_view:hover {
         background-position: -21px 42px; }
 
+.datepicker {
+  border: none; }
+  .datepicker .datepicker--nav {
+    background: #0288d1;
+    border-bottom: 1px solid #0288d1; }
+    .datepicker .datepicker--nav .datepicker--nav-action path {
+      stroke: rgba(255, 255, 255, 0.56); }
+      .datepicker .datepicker--nav .datepicker--nav-action path:hover {
+        background: transparent;
+        stroke: rgba(255, 255, 255, 0.86); }
+    .datepicker .datepicker--nav .datepicker--nav-action:hover {
+      background: transparent; }
+    .datepicker .datepicker--nav .datepicker--nav-title {
+      color: rgba(255, 255, 255, 0.86); }
+      .datepicker .datepicker--nav .datepicker--nav-title i {
+        color: rgba(255, 255, 255, 0.86); }
+      .datepicker .datepicker--nav .datepicker--nav-title:hover {
+        background: transparent; }
+  .datepicker .datepicker--day-name {
+    color: #0288d1; }
+  .datepicker .datepicker--cell.-current- {
+    color: #0288d1; }
+    .datepicker .datepicker--cell.-current-.-focus- {
+      background: transparent; }
+  .datepicker .datepicker--cell.-focus- {
+    background: transparent; }
+  .datepicker .datepicker--cell.-selected-, .datepicker .datepicker--cell.-selected-.-current- {
+    background: #0288d1;
+    color: #fff; }
+
 .form-group {
   margin-bottom: 0; }
 
