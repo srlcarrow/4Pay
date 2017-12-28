@@ -7,7 +7,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
             <div class="card-content">
                 <div class="search-box">
                     <div class="item width-84">
-                        <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search" onkeyup="searchData(1)">
+                        <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search"
+                               onkeyup="searchData(1)">
                     </div>
                     <div class="item width-5">
                         <button type="button" onclick="searchData(1)" class="btn btn-search">Search</button>
@@ -71,15 +72,14 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
 
 
 <script>
-    var loaderHtml = "<div align='center' class='absolute' id='loadingmessage'><img src='<?php echo Yii::app()->baseUrl; ?>/images/loader/Radio.gif'/></div>";
 
     $(document).ready(function (e) {
         searchData(1);
     });
 
     function searchData(page) {
-        $(".ajaxLoad").html(loaderHtml);
-        $.ajax({
+        fetch({
+            appendTo: '.ajaxLoad',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/' . $controller . '/' . $action; ?>",
             data: $('#searchF1').serialize() + "&page=" + page,

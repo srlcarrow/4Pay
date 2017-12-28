@@ -15,66 +15,47 @@
             <div class="day">Saturday</div>
         </div>
 
-        <input type="hidden" id="calId" name="calId" value="<?php echo $calendarId; ?>">
+        <input type="hidden" id="calId" name="calId" value="<?php // echo $calendarId; ?>">
 
         <!--disable-->
-        <div class="date-container">    
+        <div class="date-container">
             <?php
-            $isEnableMultipleCalendars = Payroll::getPayrollSetting('DEMC');
             foreach ($days as $key => $day) {
-                if ($isEnableMultipleCalendars == 1) {
-                    $holidaySummary = ConfigHolidays::model()->find('holiday_date="' . $day . '" AND ref_cal_id="' . $calendarId . '"');
-                } else {
-                    $holidaySummary = ConfigHolidays::model()->find('holiday_date="' . $day . '"');
-                }
-
-                $holydayTypeData = ConfigHolidayOrShiftData::model()->findByAttributes(array('ref_holiday_type_id' => $holidaySummary->ref_holiday_type_id, 'hchsd_is_general_shift' => 1));
-//                $isHalfDayHoliday = $holydayTypeData->hchsd_is_half_day;
-//                $half = $holydayTypeData->hchsd_halfday_half;
-
-                if (count($holidaySummary) > 0) {
-                    $class = 'holiday';
-                } else {
-                    $class = '';
-                }
-
-                $class = date('m', strtotime($day)) != $reqMonth ? 'disable' : $class;
                 ?>
 
-                <div class="date <?php echo $class; ?>"> 
+                <!--
+                classes :-
+                    holiday
+                    half-morning-holiday
+                    half-evening-holiday
+                -->
+
+                <div class="date <?php // echo $class;  ?>">
                     <input type="hidden" id="day" name="day" value="<?php echo $day; ?>">
                     <div class="header ">
                         <span class="num"><?php echo date('d', strtotime($day)); ?></span>
                     </div>
-                    <?php
-                    if (count($holidaySummary) > 0) {
-                        ?>
-                        <div class="content ">
-                            <h6 class="mt-5 lb-holiday-type"><?php echo $holidaySummary->holiday_name; ?></h6>
-                        </div>
-                        <?php
-                    }
-                    ?>
+
+                    <div class="content ">
+                        <h6 class="mt-5 lb-holiday-type"><?php // echo $holidaySummary->holiday_name;  ?></h6>
+                    </div>
+
                 </div>
                 <?php
             }
-            ?>   
+            ?>
         </div>
     </div>
 </div>
 
-<!-- ===========================================================================
-        Plugin Script
-============================================================================ -->
+
 <script>
     //Holiday scroll bar
     $(".holiday-scroll").mCustomScrollbar({
         theme: 'dark-3',
 //        scrollbarPosition: 'outside'
     });</script>
-<!-- ===========================================================================
-        Custom Script
-============================================================================ -->
+
 <script>
 
     $('.date-container .date').on('click', function () {
@@ -97,16 +78,14 @@
         }
 
 
-
-        //popup show here       
+        //popup show here
         $('#cln_modal').find('.selectedDay').html(dayArr[selectDay]).attr('data-week-day', selectDay);
         var calId = $('#calId').val();
         var $modal = $('#cln_modal');
         $modal.load('<?php echo Yii::app()->request->baseUrl; ?>/attendance/addHolidays', {date: date, calId: calId},
-                function () {
-                    $modal.modal('show');
-                    form.reset();
-                });
+            function () {
+                $modal.modal('show');
+            });
         $('#cln_modal').find('#reqDate').text(date);
         $('#reqDate').text(date);
     });

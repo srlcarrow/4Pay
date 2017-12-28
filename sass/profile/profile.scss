@@ -24,11 +24,9 @@ body {
 
 .top-bar {
   @extend .f-left;
-  min-height: 230px;
-  max-height: 230px;
-  height: 230px;
+  height: 138px;
   background: $topBarColor;
-  padding: 60px 15px;
+  padding: 30px 15px;
 
   h1 {
     font-size: 48px;

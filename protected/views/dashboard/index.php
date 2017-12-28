@@ -5,7 +5,7 @@
 // mScroll Bar
 //Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '', 'screen');
 // Owl
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/owl_carousel/owl.carousel.css', 'screen');
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/js/plugins/owl_carousel/owl.carousel.css', 'screen');
 
 
 //==============================================================================
@@ -24,9 +24,6 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/dashboard/
 //Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/jquery-3.2.0.min.js', CClientScript::POS_HEAD);
 //Loadash
 Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/lib/lodash.js', CClientScript::POS_HEAD);
-
-// mScroll Bar
-Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/plugins/mScrollbar/jquery.mCustomScrollbar.concat.min.js', CClientScript::POS_HEAD);
 // Owl
 Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/plugins/owl_carousel/owl.carousel.min.js', CClientScript::POS_HEAD);
 //d3
@@ -1262,15 +1259,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
 </script>
 
 
-<script>
-
-    $('.cm-pop').PopupSelector({
-        select: function (val, text) {
-            console.log(val, text);
-        }
-    });
-
-</script>
 
 <!-- ===========================================================================
         Backend Script

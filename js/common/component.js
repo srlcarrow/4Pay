@@ -107,3 +107,78 @@ function datePicker(_option, calback) {
         }
     });
 }
+
+function fetch(_option) {
+
+    function loader() {
+        var loaderHtml = "" +
+            "<div align='center' class='absolute' id='loadingmessage'>" +
+            "<img style='width:90px' src='" + BASE_URL + "/images/loader/Ripple.gif''/>" +
+            "</div>";
+        return loaderHtml;
+    }
+
+    var ele = _option.appendTo !== 'undefined' ? _option.appendTo : '';
+
+    $(ele).html(loader());
+
+    var defOption = {
+        type: 'GET',
+        url: null,
+        dataType: 'html',
+        data: null,
+        beforeSend: function () {
+        },
+        success: function () {
+        },
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        complete: function () {
+        }
+    };
+
+    var option = $.extend(defOption, _option);
+
+    return $.ajax({
+        type: option.type,
+        url: option.url,
+        data: option.data,
+        dataType: option.dataType,
+        beforeSend: option.beforeSend,
+        success: option.success,
+        error: option.error,
+        contentType: option.contentType,
+        complete: option.complete
+    });
+}
+
+function insert(_option) {
+
+    var defOption = {
+        appendTo: '',
+        type: 'POST',
+        url: null,
+        dataType: 'html',
+        data: null,
+        beforeSend: function () {
+        },
+        success: function () {
+        },
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        complete: function () {
+        }
+    };
+
+    var option = $.extend(defOption, _option);
+
+    return $.ajax({
+        type: option.type,
+        url: option.url,
+        data: option.data,
+        dataType: option.dataType,
+        beforeSend: option.beforeSend,
+        success: option.success,
+        error: option.error,
+        contentType: option.contentType,
+        complete: option.complete
+    });
+}

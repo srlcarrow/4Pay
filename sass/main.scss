@@ -13,6 +13,9 @@
 @import "components/button";
 @import "components/icon";
 
+//Plugins Overwrite style
+@import "plugin/datepicker";
+
 //Overwrite
 @import "states";
 @import "margin-padding";

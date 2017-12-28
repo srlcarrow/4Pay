@@ -1,0 +1,165 @@
+
+.blue-box {
+    background: #168ca8;
+}
+
+.title-month,
+.title-year {
+    color: #fff;
+}
+
+.title-month {
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 36px;
+}
+
+.title-year {
+    line-height: 18px;
+}
+
+.select-blue {
+    font-size: 20px;
+    color: #168ca8;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: url("../../images/system/icon/form/14/ic_14_arrow-down.png") no-repeat center right;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.select-blue:focus {
+    background: url("../../images/system/icon/form/14/ic_14_arrow-down.png") no-repeat center right;
+    border-bottom: 1px solid rgba(22, 142, 170, 1);
+}
+
+.textarea-60 {
+    height: 60px;
+}
+
+/*--------------------------
+    Overwrite Calendar CSS
+----------------------------*/
+.h-300 {
+    height: 300px;
+}
+
+.max-h-300 {
+    max-height: 300px;
+}
+
+.date-container .date {
+    overflow: visible;
+}
+
+.date-container .date .content {
+    height: auto;
+}
+
+.em-list {
+    padding: 0;
+    margin: 0;
+}
+
+.em-list li {
+    float: left;
+    width: 100%;
+    list-style: none;
+}
+
+.em-list li:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+span.count {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 2px 0;
+    text-align: center;
+    font-size: 10px;
+    color: #fff;
+    vertical-align: middle;
+}
+
+span.count.approved {
+    background: #4fdb9b;
+}
+
+span.count.rejected {
+    background: #f26b55;
+}
+
+span.count.pending {
+    background: #f9d452;
+}
+
+.date.holiday {
+    background: #F9D452;
+}
+
+.date-container .date {
+    padding: 0;
+}
+
+.date-container .date.holiday .header {
+    background: transparent;
+}
+
+.date-container .date .header {
+    padding: 10px;
+}
+
+.date-container .date .content {
+    padding: 0 10px 10px;
+}
+
+.date .header span.num,
+.date .header span.h_day-type {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.date .header span.num {
+    width: 30px;
+}
+
+.emp-list-action {
+    float: right;
+}
+
+.date-container .date {
+    cursor: auto;
+}
+
+.date-container .has-more {
+    cursor: pointer;
+}
+
+.half-morning-holiday {
+    /*/ Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9d452+0,f9d452+47,ffffff+47,ffffff+100 /*/
+    background: #f9d452;
+    background: -moz-linear-gradient(-45deg, #f9d452 0%, #f9d452 47%, #ffffff 47%, #ffffff 100%);
+    background: -webkit-linear-gradient(-45deg, #f9d452 0%, #f9d452 47%, #ffffff 47%, #ffffff 100%);
+}
+.half-evening-holiday {
+    /*/ Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9d452+0,f9d452+47,ffffff+47,ffffff+100 /*/
+    background: #f9d452;
+    background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff  47%, #f9d452 47%,#f9d452  100%);
+    background: -webkit-linear-gradient(-45deg, #ffffff 0%, #ffffff  47%, #f9d452 47%,#f9d452  100%);
+}
+.date.holiday .header span.num,
+.date-container .half-holiday .header span.num {
+    color: rgba(67, 72, 73, 1);
+}
+
+.half-morning-holiday .lb-holiday-type ,
+.half-evening-holiday .lb-holiday-type ,
+.date-container .holiday .lb-holiday-type {
+    color: rgba(67, 72, 73, 0.56);
+}
+
+.disable .lb-holiday-type {
+    color: #dbdbdb;
+}

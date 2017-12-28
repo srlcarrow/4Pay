@@ -138,7 +138,7 @@
 </script>
 <script>
     function saveEmpShifts() {
-        $.ajax({
+        insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/employee/SaveShiftsOfGSEmployees'; ?>",
             data: $('#shiftAllocate').serialize(),

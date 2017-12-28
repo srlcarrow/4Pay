@@ -12,11 +12,9 @@ body > .container {
   margin-top: 0; }
 
 .top-bar {
-  min-height: 230px;
-  max-height: 230px;
-  height: 230px;
+  height: 138px;
   background: #0288d1;
-  padding: 60px 15px; }
+  padding: 30px 15px; }
   .top-bar h1 {
     font-size: 48px;
     font-weight: 300;

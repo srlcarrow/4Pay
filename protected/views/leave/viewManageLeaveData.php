@@ -83,7 +83,7 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
 </script>
 <script>
     function save() {
-        $.ajax({
+        insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Leave/SaveLeaveAllocationData'; ?>",
             data: $('#manageLeave').serialize(),

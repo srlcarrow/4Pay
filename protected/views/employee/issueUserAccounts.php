@@ -92,7 +92,7 @@
 </script>
 <script>
     function issueAccounts() {
-        $.ajax({
+        insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/employee/IssueAccounts'; ?>",
             data: $('#accountIssue').serialize(),
