@@ -1,11 +1,11 @@
 
 /.idea/
-assets/*
-!assets/.gitignore
-protected/runtime/*
-!protected/runtime/.gitignore
-protected/data/*.db
-protected/config/database.php
+/assets/*
+!/assets/.gitignore
+/protected/runtime/*
+!/protected/runtime/.gitignore
+/protected/data/*.db
+/protected/config/database.php
 
 
 /protected/runtime/application.log
