@@ -42,3 +42,28 @@
     }
   }
 }
+
+//Text color class
+@mixin text-color($color,$className) {
+  $opacity: (100,86, 56, 30);
+
+  &.text-#{$className} {
+    color: $color;
+  }
+
+  &.hover:hover {
+    color: rgba($color, 0.56);
+  }
+
+  &.text-#{$className} {
+    @for $i from 1 through length($opacity) {
+
+      $opt: nth($opacity,$i) /100;
+
+      &.lighten-#{$i} {
+        color: rgba($color, $opt);
+      }
+    }
+
+  }
+}

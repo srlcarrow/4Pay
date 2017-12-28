@@ -1,3 +1,5 @@
+@import "common_mix";
+
 
 .f-left {
   float: left;
@@ -35,6 +37,8 @@
     width: $i * 1% !important;
   }
 }
+
+@include text-color($black,'black');
 
 .text-info {
   font-size: 16px;

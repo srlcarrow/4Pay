@@ -42,105 +42,12 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
 
 <div class="row mt-30">
 
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-content">
-                <h5 class="details mb-15">Leave</h5>
-                <div class="leave-slider">
-                    <div class="levs-wrp">
-                        <div>
-                            <div class="lev-cal">
-                                <span>18</span>
-                                <span>-</span>
-                                <span>10</span>
-                                <span>=</span>
-                            </div>
-                            <h6 class="title">Annual Leave</h6>
-                        </div>
-                        <div class="pl-15">
-                            <span class="lev-bal">8</span>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="slide-action"></div>
-
-                <button class="but new btn-add-new" type="button"><span></span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-content">
-                <h5 class="details mb-15">Male / Female Ratio</h5>
-
-                <div class="ds-table-block icon-wrap">
-                    <div class="cell">
-                        <span class="ic-25 ic-male"></span>
-                        <span class="val">60%</span>
-                    </div>
-                    <div class="cell text-right">
-                        <span class="ic-25 ic-female"></span>
-                        <span class="val">40%</span>
-                    </div>
-                </div>
-
-                <div class="ds-table-block">
-                    <div class="cm-progress-wrap">
-                        <div class="cm-progress-bar">
-                            <span class="blue" style="width: 60%"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ds-table-block mt-5">
-                    <div class="cell cell-50">
-                        <h5 class="f-16 f-medium txt-dark-light">129</h5>
-                    </div>
-                    <div class="cell cell-50 text-right">
-                        <h5 class="f-16 f-medium txt-dark-light">89</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-content">
-                <h5 class="details mb-15">Attendance Count</h5>
-
-                <div class="ds-table-block">
-                    <div class="cm-pr-values">
-                        <span class="total-emp">50000</span>
-                        <span class="leave-absence text-right">(50&nbsp;+&nbsp;21)</span>
-                    </div>
-                    <div class="cm-progress-wrap mt-5">
-                        <div class="cm-progress-bar blue">
-                            <span class="red" style="width: 40%"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ds-table-block mt-5">
-                    <div class="cell cell-50">
-                        <h6 class="title">No of Employees</h6>
-                    </div>
-                    <div class="cell cell-50 text-right">
-                        <h6 class="title">( Leave 5% + Absence 1% )</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-md-12">
+    <div class="col-md-12 mb-30">
         <div class="card">
             <div class="card-content">
                 <div class="row">
                     <div class="col-md-12">
-                        <h5 class="details mb-15">Attendance</h5>
+                        <h5 class=" mb-15">Attendance</h5>
                     </div>
                     <div class="col-md-12">
                         <div id="attendance"></div>
@@ -150,124 +57,99 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-content">
-                <div class="col-md-12 line_tab_wrp dashboard-tab singleTab">
-                    <ul class="line_tab half tab-capitalize">
-                        <li class="active"><a class="f-14" href="#employment" data-callback-fn="pieEmpType">Employment
-                                Type</a></li>
-                        <li><a class="f-14" href="#employment" data-callback-fn="pieEmpCategory">Employment
-                                Category</a></li>
-                    </ul>
-                    <div class="line_tab_content pt-20">
-                        <div class="tab-items active" id="employment">
-                            <div id="pieEmployment"></div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
+    <div class="col-md-4 mb-30">
         <div class="card">
             <div class="card-content">
                 <div class="row">
-                    <div class="col-md-12 line_tab_wrp dashboard-tab singleTab">
-                        <ul class="line_tab half tab-capitalize">
-                            <li class="active"><a class="f-14" href="#epf_etf" data-callback-fn="pieETF">ETF
-                                    Contribution</a></li>
-                            <li><a class="f-14" href="#epf_etf" data-callback-fn="pieEPF">EPF Contribution</a></li>
-                        </ul>
-                        <div class="line_tab_content pt-20">
-                            <div class="tab-items active" id="epf_etf">
-                                <div class="pieChartWrp">
-
-                                    <div class="innerCircle">
-                                        <div class="text-wrapper">
-                                            <h3>
-                                                <span class="currency">Rs.</span>
-                                                <span>1.3 M</span>
-                                            </h3>
-                                            <h6 class="total">Total</h6>
-                                        </div>
-                                    </div>
-
-                                    <div id="pieEPF_ETF"></div>
-
-                                    <div class="summery">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h4 class="text-blue f-18 f-medium">Rs. 1,560,000</h4>
-                                                <h6 class="title mt-2">Employer 12%</h6>
-                                            </div>
-                                            <div class="col-md-6 pl-30">
-                                                <h4 class="text-green pl-20 f-18 f-medium">Rs. 56,000</h4>
-                                                <h6 class="title pl-20 mt-2">Employee 8%</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-content">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="details mb-15">Payroll</h5>
-                    </div>
-                    <div class="col-md-4 col-md-offset-2">
-                        <select name="" id="" class="sm-select">
-                            <option value="1">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row mt-20">
-                    <div class="col-md-12 mb-10">
-                        <div class="table-block rounded-50 bg-blue cell-width-100">
-                            <div class="cell zero-width space-7">
-                                <span class="user-icon"></span>
-                            </div>
-                            <div class="cell pl-10">
-                                <h4 class="f-20 f-white mb-5">1684</h4>
-                                <h6 class="f-12 f-white-56">No of persons</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 mt-30 mb-30">
-                        <h4 class="f-24 txt-dark up ">
-                            <span>Rs.&nbsp;</span>
-                            <span>1,560,000</span>
-                            <span class="up-down"><i></i>20%</span>
-                        </h4>
-                        <h6 class="title mt-2">Net payroll value</h6>
-                    </div>
-
                     <div class="col-md-12">
-                        <h4 class="f-24 txt-dark down">
-                            <span>Rs.&nbsp;</span>
-                            <span>156,000</span>
-                            <span class="up-down"><i></i>20%</span>
-                        </h4>
-                        <h6 class="title mt-2">Total OT pay</h6>
+                        <h5 class=" mb-15">Leave</h5>
                     </div>
+                    <div class="col-md-12">
+                        <div id="pieEmployment"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4 class="text-black">123</h4>
+                                <h6 class="text-black lighten-3">Leave</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <h4 class="text-black">12</h4>
+                                <h6 class="text-black lighten-3">Absent</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <h4 class="text-black">50</h4>
+                                <h6 class="text-black lighten-3">Short Leave</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class=" mb-15">Employee</h5>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pieChartWrp">
+
+                            <div class="innerCircle">
+                                <div class="text-wrapper">
+                                    <h3>
+                                        <span>225</span>
+                                    </h3>
+                                    <h6 class="total">Total</h6>
+                                </div>
+                            </div>
+
+                            <div id="pieEPF_ETF"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-10">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-black">123</h4>
+                                <h6 class="text-black lighten-3">Male</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="text-black">102</h4>
+                                <h6 class="text-black lighten-3">Female</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class=" mb-15">Lorem ipsum</h5>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <div id="ot-hours"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-black">180</h4>
+                                <h6 class="text-black lighten-3">Late Amount</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="text-black">50</h4>
+                                <h6 class="text-black lighten-3">Early Leave</h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -323,7 +205,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
 //            owl.trigger('next.owl.carousel');
 //        })
     }
-
 
 
     function loadScrollForTurnover() {
@@ -410,7 +291,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
 
         return new d3pie(ele, {
             "size": {
-                "canvasHeight": 190,
+                "canvasHeight": 220,
                 "canvasWidth": 300,
                 "pieInnerRadius": "75%",
                 "pieOuterRadius": "100%"
@@ -455,7 +336,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
 
     //Attendance Chart
     function attendanceChart() {
-        alert('as')
+
         var restData = [
             ['Borella', 100, 67],
             ['Colombo', 100, 30],
@@ -484,8 +365,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
                     easing: 'out',
                     startup: true
                 },
-                width: 700,
-                height: 250,
+                width: '100%',
+                height: 350,
                 colors: ['#168ca8', '#4fdb9b'],
                 chartArea: {width: '90%', height: '84%'},
                 theme: 'material',
@@ -624,16 +505,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
     }
 
 
-
     //Pie Chart for Emp Type
     function pieEmpType() {
 
         var data = [
-            {label: 'Permenent 18%', value: 50, color: '#6ecce0'},
-            {label: 'Casual 12%', value: 120, color: '#168ca8'},
-            {label: "Contract six month 50%", value: 60, color: '#f9d452'},
-            {label: 'Casual 25%', value: 90, color: '#f26b55'},
-            {label: 'Contract 5%', value: 30, color: '#434849'}
+            {label: 'Leave 18%', value: 120, color: '#6ecce0'},
+            {label: 'Absent 12%', value: 12, color: '#168ca8'},
+            {label: "Short Leave 50%", value: 50, color: '#f9d452'}
         ];
         pieEmployment = createPieChartEmp('pieEmployment', data);
     }
@@ -652,20 +530,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
     }
 
     //Pie Chart for EPF
-    function pieEPF() {
-
-        var data = [
-            {label: 'Permenent 18%', value: 120, color: '#4fdb9b'},
-            {label: 'Casual 12%', value: 80, color: '#49b3cc'}
-        ];
-        pieEpfEtp = createPieChartEPFAndETF('pieEPF_ETF', data);
-    }
-
     function pieETF() {
 
         var data = [
-            {label: 'Permenent 18%', value: 120, color: '#4fdb9b'},
-            {label: 'Casual 12%', value: 80, color: '#49b3cc'}
+            {label: 'Male 58%', value: 123, color: '#4fdb9b'},
+            {label: 'Female 42%', value: 102, color: '#49b3cc'}
         ];
         pieEpfEtp = createPieChartEPFAndETF('pieEPF_ETF', data);
     }
@@ -673,30 +542,20 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
     function OTHours() {
         var data = [
             {
-                "label": "1256 Hrs",
-                "value": 100,
+                "label": "Early Leave",
+                "value": 50,
                 "color": "#168ca8"
             },
             {
-                "label": "569 Hrs",
-                "value": 80,
+                "label": "Late Amount",
+                "value": 180,
                 "color": "#4fdb9b"
-            },
-            {
-                "label": "2569 Hrs",
-                "value": 120,
-                "color": "#49b3cc"
-            },
-            {
-                "label": "869 Hrs",
-                "value": 160,
-                "color": "#f9d452"
             }
         ];
 
         new d3pie('ot-hours', {
             "size": {
-                "canvasHeight": 250,
+                "canvasHeight": 230,
                 "canvasWidth": 215,
                 "pieOuterRadius": "100%"
             },

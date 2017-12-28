@@ -428,8 +428,8 @@ ul.ot-hours-status li:not(:last-child) {
 }
 
 .innerCircle {
-    width: 133px;
-    height: 133px;
+    width: 154px;
+    height: 154px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -437,14 +437,13 @@ ul.ot-hours-status li:not(:last-child) {
     position: absolute;
     padding: 50px 0;
     text-align: center;
-    top: 31px;
-    left: 83px;
-    z-index: -1;
+    top: 35px;
+    left: 73px;
 }
 
 .text-wrapper h3 {
     color: #fff;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .text-wrapper h3 span.currency {

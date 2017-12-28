@@ -31,7 +31,7 @@ a:focus,
 a:hover {
   text-decoration: none; }
 
-a, div, p, span {
+a, div, p {
   font-size: 14px; }
 
 body {
@@ -369,6 +369,24 @@ ul {
 
 .width-100 {
   width: 100% !important; }
+
+.text-black {
+  color: #000; }
+
+.hover:hover {
+  color: rgba(0, 0, 0, 0.56); }
+
+.text-black.lighten-1 {
+  color: black; }
+
+.text-black.lighten-2 {
+  color: rgba(0, 0, 0, 0.86); }
+
+.text-black.lighten-3 {
+  color: rgba(0, 0, 0, 0.56); }
+
+.text-black.lighten-4 {
+  color: rgba(0, 0, 0, 0.3); }
 
 .text-info {
   font-size: 16px;
