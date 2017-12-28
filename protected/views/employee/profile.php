@@ -46,7 +46,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
 <script>
 
     function getLayout(path, callback) {
-        $.ajax({
+        fetch({
             type: 'GET',
             url: "<?php echo Yii::app()->baseUrl?>/" + path,
             success: function (res) {

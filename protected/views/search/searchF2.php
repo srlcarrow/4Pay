@@ -167,18 +167,18 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
         });
     });
 
-    var loaderHtml = "<div align='center' class='absolute' id='loadingmessage'><img src='<?php echo Yii::app()->baseUrl; ?>/images/loader/Radio.gif'/></div>";
-    $(document).ready(function (e) {
+      $(document).ready(function (e) {
         searchData(1);
     });
 
 
     function searchData(page) {
-        $(".ajaxLoad").html(loaderHtml);
+
         var checkedItemString = $('.checkedInput').val();
         var checkedLabelString = $('.checkedLabel').val();
 
-        $.ajax({
+        fetch({
+            appendTo:'.ajaxLoad',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/' . $controller . '/' . $action; ?>",
             data: $('#searchF2').serialize() + "&selected=" + checkedItemString + "&selectedLabels=" + checkedLabelString + "&page=" + page,

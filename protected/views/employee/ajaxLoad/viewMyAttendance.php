@@ -16,7 +16,8 @@
                     <div class="col-md-4 ">
                         <div class="form-group">
                             <label>To</label>
-                            <input type="text" name="dateTo" value="<?php echo $dateTo; ?>" class="input-datepicker2 form-control">
+                            <input type="text" name="dateTo" value="<?php echo $dateTo; ?>"
+                                   class="input-datepicker2 form-control">
                         </div>
                     </div>
                     <div class="item width-5">
@@ -29,29 +30,29 @@
             <div class="col-md-12" ajaxAttLoad>
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th>Day</th>
-                            <th>Date In</th>
-                            <th>Punch In</th>
-                            <th>Date Out</th>
-                            <th>Punch Out</th>
-                        </tr>
+                    <tr>
+                        <th>Day</th>
+                        <th>Date In</th>
+                        <th>Punch In</th>
+                        <th>Date Out</th>
+                        <th>Punch Out</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        <?php
-                        foreach ($attendanceData as $attendance) {
-                            ?>
-                            <tr>
-                                <td><?php echo $attendance['day']; ?></td>
-                                <td><?php echo $attendance['date_in']; ?></td>
-                                <td><?php echo $attendance['punch_in']; ?></td>
-                                <td><?php echo $attendance['date_out']; ?></td>
-                                <td><?php echo $attendance['punch_out']; ?></td>
-                            </tr>
-                            <?php
-                        }
+                    <?php
+                    foreach ($attendanceData as $attendance) {
                         ?>
+                        <tr>
+                            <td><?php echo $attendance['day']; ?></td>
+                            <td><?php echo $attendance['date_in']; ?></td>
+                            <td><?php echo $attendance['punch_in']; ?></td>
+                            <td><?php echo $attendance['date_out']; ?></td>
+                            <td><?php echo $attendance['punch_out']; ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -61,25 +62,23 @@
 </div>
 
 <script>
-    $(document).on('onDateSelect', function (e, date, fdate) {
-        console.log('Date ', date);
-        console.log('Formatted Date ', fdate);
-    });
 
-    var loaderHtml = "<div align='center' class='absolute' id='loadingmessage'><img src='<?php echo Yii::app()->baseUrl; ?>/images/loader/Radio.gif'/></div>";
     $(document).ready(function (e) {
         searchAttendanceData(1);
     });
 
     function searchAttendanceData(page) {
-        $(".ajaxAttLoad").html(loaderHtml);
-        $.ajax({
+
+        fetch({
+            appendTo: '.ajaxAttLoad',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewMyAttendance'; ?>",
             data: $('#attSearch').serialize() + "&page=" + page,
             success: function (responce) {
-                $(".ajaxAttLoad").html('');
-                $(".ajaxAttLoad").html(responce);
+
+                $(".ajaxAttLoad")
+                    .html('')
+                    .html(responce);
             }
         });
     }

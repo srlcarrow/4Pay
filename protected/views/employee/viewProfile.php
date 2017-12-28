@@ -43,7 +43,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
     });
 
     function profile() {
-        $.ajax({
+        fetch({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewProfileData'; ?>",
             data: "",
@@ -54,7 +54,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
     }
 
     function myAttendance() {
-        $.ajax({
+        fetch({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewMyAttendance'; ?>",
             data: "",
@@ -65,7 +65,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
     }
 
     function leave() {
-        $.ajax({
+        fetch({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewLeave'; ?>",
             data: "",
@@ -76,7 +76,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
     }
 
     function shortLeave() {
-        $.ajax({
+        fetch({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewProfileData'; ?>",
             data: "",

@@ -3,3 +3,42 @@
   width: 100%;
   min-height: 1px;
 }
+
+//Margin
+@mixin margin {
+  $class-margin: m !default;
+  $class-margin-cag: ('t', 'b', 'r', 'l');
+  $margin-map: (
+          't':'top',
+          'b':'bottom',
+          'l':'left',
+          'r':'right'
+  );
+
+  @for $i from 0 through 100 {
+    @each $ctg in $class-margin-cag {
+      .m#{$ctg}-#{$i} {
+        margin-#{map-get($margin-map, $ctg)}: 0px + $i !important;
+      }
+    }
+  }
+}
+
+//Padding
+@mixin padding {
+  $class-margin-cag: ('t', 'b', 'r', 'l');
+  $margin-map: (
+          't':'top',
+          'b':'bottom',
+          'l':'left',
+          'r':'right'
+  );
+
+  @for $i from 0 through 100 {
+    @each $ctg in $class-margin-cag {
+      .p#{$ctg}-#{$i} {
+        padding-#{map-get($margin-map, $ctg)}: 0px + $i !important;
+      }
+    }
+  }
+}

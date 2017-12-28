@@ -1,116 +1,92 @@
 <?php
-//==============================================================================
-//      Plugins CSS
-//==============================================================================
-// mScroll Bar
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/mScrollbar/jquery.mCustomScrollbar.min.css', 'screen');
-// Time picker
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/clockpicker/bootstrap-clockpicker.css', 'screen');
-
-
-//==============================================================================
-//      CSS
-//==============================================================================
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/custom/form.css', 'screen');
-//popup
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/custom/popup.css', 'screen');
-// Recruitment Common
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calendar/calendar.css', 'screen');
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calendar/holiday-cnd.css', 'screen');
-
-
-//==============================================================================
-//      JS
-//==============================================================================
-// form
-Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/custom/form.js', CClientScript::POS_HEAD);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/plugins/validate/jquery.validate.js', CClientScript::POS_HEAD);
-
-//==============================================================================
-//      Plugins JS
-//==============================================================================
-// mScroll Bar
-Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/plugins/mScrollbar/jquery.mCustomScrollbar.concat.min.js', CClientScript::POS_HEAD);
-// Time picker
-Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/plugins/clockpicker/bootstrap-clockpicker.min.js', CClientScript::POS_HEAD);
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/holiday/calendar.css', 'screen');
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/holiday/holiday-cnd.css', 'screen');
 ?>
 
+<div class="modal fade ajaxAddCalender" id="addNewModal" tabindex="-1" role="dialog"></div>
 
-<!--Breadcrumb-->
-<div class="bread-crumb-wrp">
-    <a href="#">Payroll</a>
-    <a>Holiday Calender</a>
-</div>
+<div class="row">
 
-<div class="contert-wrapper mb-30 pb-30">
-
-    <div class="col-md-12 header-with-mn">
-        <h1 class="title">
-            Holiday Calender
-        </h1>
-    </div>
-    <div></div>
-
-    <div class="modal fade ajaxAddCalender" id="addNewModal" tabindex="-1" role="dialog">
-
-
-    </div>
     <div class="col-md-12">
+        <div class="card">
 
-        <div class="col-md-12">
+            <div class="card-header">
+                <h1>Holiday Calender</h1>
+            </div>
 
-            <div class="row">
-                <?php $form = $this->beginWidget('CActiveForm', array('id' => 'search-form')); ?>
-                <div class="col-md-12 mb-30">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="row">                                
-                                <div class="col-md-4">
-                                    <select class="big-select" name="year" id="" onchange="loadCalenderData()">
-                                        <?php
-                                        $years = $this->viewYearArry();
-                                        foreach ($years as $year) {
-                                            $selected = ($year == date('Y') ? 'selected' : '');
-                                            ?>
-                                            <option value="<?php echo $year; ?>" <?php echo $selected; ?> ><?php echo $year; ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
+            <div class="card-content">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <?php $form = $this->beginWidget('CActiveForm', array('id' => 'search-form')); ?>
+                            <div class="col-md-12 mb-30">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">Year</label>
+
+                                                    <select class="form-control" name="year" id=""
+                                                            onchange="loadCalenderData()">
+                                                        <?php
+                                                        $years = $this->viewYearArry();
+                                                        foreach ($years as $year) {
+                                                            $selected = ($year == date('Y') ? 'selected' : '');
+                                                            ?>
+                                                            <option value="<?php echo $year; ?>" <?php echo $selected; ?> ><?php echo $year; ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">Month</label>
+
+                                                    <select class="form-control" name="month" id=""
+                                                            onchange="loadCalenderData()">
+                                                        <?php
+                                                        $months = $this->getMonthList();
+                                                        foreach ($months as $key => $month) {
+                                                            $selected = ($key == date('m') ? 'selected' : '');
+                                                            ?>
+                                                            <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $month; ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 text-right">
+                                        <button class="btn btn-primary addNewPopup" type="button">Add New</button>
+                                    </div>
+
                                 </div>
 
-                                <div class="col-md-4">
-                                    <select class="big-select" name="month" id="" onchange="loadCalenderData()">
-                                        <?php
-                                        $months = $this->getMonthList();
-                                        foreach ($months as $key => $month) {
-                                            $selected = ($key == date('m') ? 'selected' : '');
-                                            ?>
-                                            <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $month; ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
                             </div>
-                        </div> 
+                            <?php $this->endWidget(); ?>
+                            <div id="ajaxLoad">
 
-                        <div class="col-md-4">
-                            <button class="but new m-0 addNewPopup" type="button" ><span></span>Add New</button>
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
-                <?php $this->endWidget(); ?>
-                <div id="ajaxLoad">
-
-                </div>
-
             </div>
 
         </div>
-
     </div>
 
 </div>
@@ -146,6 +122,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
             }
         });
     }
+
     function my() {
         document.getElementById("DisplayData").innerHTML = ajaxAddCalenderShow();
     }
@@ -178,7 +155,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
         document.getElementById("id").value = "0";
         document.getElementById("calType").value = "";
     }
-</script> 
+</script>
 
 <script>
 

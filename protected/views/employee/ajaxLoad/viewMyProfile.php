@@ -44,7 +44,6 @@
                         </div>
 
 
-
                     </div>
                 </div>
 
@@ -131,7 +130,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input name="oldPw"  type="password" class="form-control">
+                                    <input name="oldPw" type="password" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -184,7 +183,7 @@
 
             $this.find('.cm-accordion-row').on('click.cm-accordion-header', '.cm-accordion-header', function () {
                 var _this = $(this),
-                        $parent = _this.parent();
+                    $parent = _this.parent();
 
                 if (!$parent.hasClass('is-open')) {
                     $this.find('.cm-accordion-row').removeClass('is-open');
@@ -198,7 +197,7 @@
     });
 
     function save() {
-        $.ajax({
+        insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ResetPassword'; ?>",
             data: $('#passReset').serialize(),

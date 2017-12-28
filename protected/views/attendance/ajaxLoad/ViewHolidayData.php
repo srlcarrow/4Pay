@@ -18,46 +18,44 @@
         <input type="hidden" id="calId" name="calId" value="<?php // echo $calendarId; ?>">
 
         <!--disable-->
-        <div class="date-container">    
+        <div class="date-container">
             <?php
             foreach ($days as $key => $day) {
                 ?>
 
-                <div class="date <?php // echo $class;  ?>"> 
+                <!--
+                classes :-
+                    holiday
+                    half-morning-holiday
+                    half-evening-holiday
+                -->
+
+                <div class="date <?php // echo $class;  ?>">
                     <input type="hidden" id="day" name="day" value="<?php echo $day; ?>">
                     <div class="header ">
                         <span class="num"><?php echo date('d', strtotime($day)); ?></span>
                     </div>
-                    <?php
-                    echo $day;
-//                    if (count($holidaySummary) > 0) {
-                    ?>
+
                     <div class="content ">
                         <h6 class="mt-5 lb-holiday-type"><?php // echo $holidaySummary->holiday_name;  ?></h6>
                     </div>
-                    <?php
-//                    }
-                    ?>
+
                 </div>
                 <?php
             }
-            ?>   
+            ?>
         </div>
     </div>
 </div>
 
-<!-- ===========================================================================
-        Plugin Script
-============================================================================ -->
+
 <script>
     //Holiday scroll bar
     $(".holiday-scroll").mCustomScrollbar({
         theme: 'dark-3',
 //        scrollbarPosition: 'outside'
     });</script>
-<!-- ===========================================================================
-        Custom Script
-============================================================================ -->
+
 <script>
 
     $('.date-container .date').on('click', function () {
@@ -80,16 +78,14 @@
         }
 
 
-
-        //popup show here       
+        //popup show here
         $('#cln_modal').find('.selectedDay').html(dayArr[selectDay]).attr('data-week-day', selectDay);
         var calId = $('#calId').val();
         var $modal = $('#cln_modal');
         $modal.load('<?php echo Yii::app()->request->baseUrl; ?>/attendance/addHolidays', {date: date, calId: calId},
-                function () {
-                    $modal.modal('show');
-                    form.reset();
-                });
+            function () {
+                $modal.modal('show');
+            });
         $('#cln_modal').find('#reqDate').text(date);
         $('#reqDate').text(date);
     });
