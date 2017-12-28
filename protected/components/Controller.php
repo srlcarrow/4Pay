@@ -175,8 +175,28 @@ class Controller extends CController {
         $showDateLastMonth = date('Y-m-d', strtotime('-' . date('w', strtotime($startDate)) . ' days', strtotime($startDate)));
         $showDateNextMonth = date('Y-m-d', strtotime('+' . (6 - date('w', strtotime($endDate))) . ' days', strtotime($endDate)));
 
-        $days = Attendance::returnDates($showDateLastMonth, $showDateNextMonth);
+        $days = Controller::returnDates($showDateLastMonth, $showDateNextMonth);
         return $days;
+    }
+
+    public static function returnDates($startDate, $endDate) {
+        $startStamp = strtotime($startDate);
+        $endStamp = strtotime($endDate);
+
+        while ($endStamp >= $startStamp) {
+            $dateArr[] = date('Y-m-d', $startStamp);
+            $startStamp = strtotime(' +1 day ', $startStamp);
+        }
+        return $dateArr;
+    }
+
+    public function viewYearArry() {
+        return array(gmdate('Y', strtotime('-1 year')) => gmdate('Y', strtotime('-1 year')), gmdate('Y') => gmdate('Y'), gmdate('Y', strtotime('+1 year')) => gmdate('Y', strtotime('+1 year')));
+    }
+
+    public static function getMonthList() {
+        $months = array(1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December');
+        return $months;
     }
 
 }
