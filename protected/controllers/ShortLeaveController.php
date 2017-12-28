@@ -5,9 +5,15 @@ class ShortLeaveController extends Controller {
     public function actionViewShortLeaveApplyPanel() {
         $empId = $_REQUEST['id'];
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
-        $this->render('/shortLeave/viewShortLeaveApplyPanel', array('empId' => $empId, 'shortLeaveSetting' => $shortLeaveSetting));
+        $this->render('/shortLeave/viewShortLeaveApplyPanel', array('empId' => $empId, 'applierType' => 'hr', 'shortLeaveSetting' => $shortLeaveSetting));
     }
-
+    
+    public function actionViewShortLeaveApplyPanelSelf() {
+        $empId = Yii::app()->user->getId();
+        $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
+        $this->render('/shortLeave/viewShortLeaveApplyPanel', array('empId' => $empId,'applierType' => 'self', 'shortLeaveSetting' => $shortLeaveSetting));
+    }
+    
     public function actionGetShortLeaveEndTime() {
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
         $shtLvDate = $_POST['shtLvDate'];
