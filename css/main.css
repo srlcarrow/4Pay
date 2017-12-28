@@ -70,6 +70,9 @@ ul {
     vertical-align: middle;
     width: 100%; }
 
+.no-wrap {
+  white-space: nowrap; }
+
 .width-1 {
   width: 1% !important; }
 
@@ -676,19 +679,20 @@ table.cm-table th, table.cm-table td {
     width: 20px;
     height: 20px;
     background-image: url("./../images/icon/button/20/ic_20.png");
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    margin-left: 5px; }
     .ic.ic_20.ic_edit {
       background-position: 0 0; }
       .ic.ic_20.ic_edit:hover {
         background-position: -21px 0; }
     .ic.ic_20.ic_delete {
-      background-position: 0 21px; }
+      background-position: 0 -21px; }
       .ic.ic_20.ic_delete:hover {
-        background-position: -21px 21px; }
+        background-position: -21px -21px; }
     .ic.ic_20.ic_view {
-      background-position: 0 42px; }
+      background-position: 0 -42px; }
       .ic.ic_20.ic_view:hover {
-        background-position: -21px 42px; }
+        background-position: -42px -42px; }
 
 .datepicker {
   border: none; }

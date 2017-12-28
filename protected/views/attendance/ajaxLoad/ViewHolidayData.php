@@ -5,6 +5,8 @@
 
 <div class="col-md-12">
     <div class="calender-container">
+        <input type="hidden" id="calId" name="calId" value="<?php // echo $calendarId; ?>">
+
         <div class="day-container">
             <div class="day">Sunday</div>
             <div class="day">Monday</div>
@@ -15,7 +17,6 @@
             <div class="day">Saturday</div>
         </div>
 
-        <input type="hidden" id="calId" name="calId" value="<?php // echo $calendarId; ?>">
 
         <!--disable-->
         <div class="date-container">
@@ -25,9 +26,9 @@
 
                 <!--
                 classes :-
-                    holiday
-                    half-morning-holiday
-                    half-evening-holiday
+                    is-holiday
+                    is-morning-holiday
+                    is-evening-holiday
                 -->
 
                 <div class="date <?php // echo $class;  ?>">
@@ -37,7 +38,7 @@
                     </div>
 
                     <div class="content ">
-                        <h6 class="mt-5 lb-holiday-type"><?php // echo $holidaySummary->holiday_name;  ?></h6>
+                        <h6 class="holiday-text"><?php // echo $holidaySummary->holiday_name;  ?></h6>
                     </div>
 
                 </div>

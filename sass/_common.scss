@@ -1,6 +1,5 @@
 @import "common_mix";
 
-
 .f-left {
   float: left;
   width: 100%;
@@ -32,13 +31,17 @@
   }
 }
 
+.no-wrap {
+  white-space: nowrap;
+}
+
 @for $i from 1 through 100 {
   .width-#{$i} {
     width: $i * 1% !important;
   }
 }
 
-@include text-color($black,'black');
+@include text-color($black, 'black');
 
 .text-info {
   font-size: 16px;
@@ -103,7 +106,7 @@
   padding: 0;
   margin-bottom: 0;
 
-  &[class^="alert-"] ,
+  &[class^="alert-"],
   &[class*=" alert-"] {
     padding: 15px;
     margin-bottom: 20px;

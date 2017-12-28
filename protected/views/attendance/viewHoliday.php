@@ -1,11 +1,11 @@
 <?php
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/holiday/calendar.css', 'screen');
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/holiday/holiday-cnd.css', 'screen');
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/holiday.css', 'screen');
+
 ?>
 
 <div class="modal fade ajaxAddCalender" id="addNewModal" tabindex="-1" role="dialog"></div>
 
-<div class="row">
+<div class="row mb-30">
 
     <div class="col-md-12">
         <div class="card">
@@ -17,70 +17,110 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/holiday/ho
             <div class="card-content">
                 <div class="row">
 
-                    <div class="col-md-12">
+                    <div class="col-md-3">
 
                         <div class="row">
-                            <?php $form = $this->beginWidget('CActiveForm', array('id' => 'search-form')); ?>
-                            <div class="col-md-12 mb-30">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="">Year</label>
+                            <div class="col-md-12">
+                                <?php $form = $this->beginWidget('CActiveForm', array('id' => 'search-form')); ?>
 
-                                                    <select class="form-control" name="year" id=""
-                                                            onchange="loadCalenderData()">
-                                                        <?php
-                                                        $years = $this->viewYearArry();
-                                                        foreach ($years as $year) {
-                                                            $selected = ($year == date('Y') ? 'selected' : '');
-                                                            ?>
-                                                            <option value="<?php echo $year; ?>" <?php echo $selected; ?> ><?php echo $year; ?></option>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
+                                <div class="row form-wrapper">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Year</label>
 
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="">Month</label>
-
-                                                    <select class="form-control" name="month" id=""
-                                                            onchange="loadCalenderData()">
-                                                        <?php
-                                                        $months = $this->getMonthList();
-                                                        foreach ($months as $key => $month) {
-                                                            $selected = ($key == date('m') ? 'selected' : '');
-                                                            ?>
-                                                            <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $month; ?></option>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-
-                                            </div>
+                                            <select class="form-control" name="year" id=""
+                                                    onchange="loadCalenderData()">
+                                                <?php
+                                                $years = $this->viewYearArry();
+                                                foreach ($years as $year) {
+                                                    $selected = ($year == date('Y') ? 'selected' : '');
+                                                    ?>
+                                                    <option value="<?php echo $year; ?>" <?php echo $selected; ?> ><?php echo $year; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-4 text-right">
-                                        <button class="btn btn-primary addNewPopup" type="button">Add New</button>
                                     </div>
-
                                 </div>
 
-                            </div>
-                            <?php $this->endWidget(); ?>
-                            <div id="ajaxLoad">
+                                <div class="row form-wrapper">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Month</label>
 
+                                            <select class="form-control" name="month" id=""
+                                                    onchange="loadCalenderData()">
+                                                <?php
+                                                $months = $this->getMonthList();
+                                                foreach ($months as $key => $month) {
+                                                    $selected = ($key == date('m') ? 'selected' : '');
+                                                    ?>
+                                                    <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $month; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row form-wrapper">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Holiday Type</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row form-wrapper">
+                                    <div class="col-md-12 text-right">
+                                        <button class="btn btn-primary addNewPopup" type="button">Add New</button>
+                                    </div>
+                                </div>
+
+                                <?php $this->endWidget(); ?>
+                            </div>
+
+                            <div class="col-md-12 mt-30">
+                                <ul class="scroll">
+                                    <li>
+                                        <div class="ds-table-block mb-15">
+                                            <div class="cell">
+                                                <h5>Sunday</h5>
+                                            </div>
+                                            <div class="cell width-1 no-wrap">
+                                                <button type="button" class="ic ic_20 ic_edit"></button>
+                                                <button type="button" class="ic ic_20 ic_delete"></button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="ds-table-block mb-15">
+                                            <div class="cell">
+                                                <h5>Poya Day</h5>
+                                            </div>
+                                            <div class="cell width-1 no-wrap">
+                                                <button type="button" class="ic ic_20 ic_edit"></button>
+                                                <button type="button" class="ic ic_20 ic_delete"></button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
 
                         </div>
 
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="row" id="ajaxLoad">
+
+                        </div>
                     </div>
 
                 </div>
