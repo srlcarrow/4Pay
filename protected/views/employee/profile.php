@@ -32,7 +32,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
         <div class="row">
             <div class="col-md-12">
 
-                <div class="card flat p-tb-50 p-lr-100 mt-30">
+                <div class="card flat mt-30">
                     <div class="card-content loadAjax">
 
                     </div>

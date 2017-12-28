@@ -1,102 +1,97 @@
-<div class="col-md-12">
-    <div class="card flat p-tb-50 p-lr-100 mt-30">
-        <div class="card-content">
-            <div class="row">
-                <div class="col-md-4">
+<div class="card flat mt-30">
+    <div class="card-content">
+        <div class="row">
+            <div class="col-md-4">
 
-                    <div class="row form-wrapper">
+                <div class="row form-wrapper">
 
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Leave Type</label>
-                                <select id="type" class="form-control">
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                </select>
-                            </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Leave Type</label>
+                            <select id="type" class="form-control">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
                         </div>
-
                     </div>
 
-                    <div class="row form-wrapper">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Cover Up</label>
-                                <div class="dropdown_list">
+                </div>
 
-                                    <div class="search-area">
-                                        <input id="coverUp" type="text" class="drop-input-search form-control">
-                                    </div>
+                <div class="row form-wrapper">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Cover Up</label>
+                            <div class="dropdown_list">
 
-                                    <ul class="drop-result">
-                                        <li data-id="42">
-                                            <h5>Saman Kumara</h5>
-                                            <h6>UI Design</h6>
-                                        </li>
-                                        <li data-id="45">
-                                            <h5>Kasun Bandara</h5>
-                                            <h6>UI Design</h6>
-                                        </li>
-                                    </ul>
+                                <div class="search-area">
+                                    <input id="coverUp" type="text" class="drop-input-search form-control">
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row form-wrapper">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Attachment</label>
-                                <input type="file" id="">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-                    <div class="row form-wrapper">
-                        <div class="col-md-12 form-group">
-                            <label for="">Purpose</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row form-wrapper">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Start Date</label>
-                                <input readonly="readonly" type="text" class="start-date form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row form-wrapper">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>End Date</label>
-                                <input readonly="readonly" type="text" class="end-date form-control">
+                                <ul class="drop-result">
+                                    <li data-id="42">
+                                        <h5>Saman Kumara</h5>
+                                        <h6>UI Design</h6>
+                                    </li>
+                                    <li data-id="45">
+                                        <h5>Kasun Bandara</h5>
+                                        <h6>UI Design</h6>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 no-select loadAjaxDate">
-
-                </div>
-
-                <div class="col-md-12 text-right">
-                    <button class="btn btn-primary btnSave">Save</button>
+                <div class="row form-wrapper">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Attachment</label>
+                            <input type="file" id="">
+                        </div>
+                    </div>
                 </div>
 
             </div>
+
+            <div class="col-md-4">
+                <div class="row form-wrapper">
+                    <div class="col-md-12 form-group">
+                        <label for="">Purpose</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="row form-wrapper">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input readonly="readonly" type="text" class="start-date form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-wrapper">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input readonly="readonly" type="text" class="end-date form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 no-select loadAjaxDate">
+
+            </div>
+
+            <div class="col-md-12 text-right">
+                <button class="btn btn-primary btnSave">Save</button>
+            </div>
+
         </div>
     </div>
 </div>
-
-
-
 
 
 <script>

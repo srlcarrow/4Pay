@@ -32,7 +32,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
 <section class="content-bar">
     <div class="container">
         <div class="row">
-            <div id="ajaxLoad"></div>
+            <div class="col-md-12">
+                <div id="ajaxLoad"></div>
+            </div>
         </div>
     </div>
 </section>

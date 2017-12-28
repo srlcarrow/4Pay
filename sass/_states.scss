@@ -80,6 +80,8 @@ label {
 
     .open > a {
       color: rgba($primaryFontColor, $lighten);
+      background-color: transparent;
+
 
       &:focus,
       &:hover {

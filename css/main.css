@@ -482,19 +482,22 @@ ul.cm-tab li {
   margin-bottom: 30px; }
 
 .cm-accordion .cm-accordion-row .cm-accordion-header {
-  border-bottom: 1px solid #000;
-  padding: 10px 0;
+  background: #F7F7F7;
+  padding: 15px 50px;
   cursor: pointer;
-  position: relative; }
+  position: relative;
+  margin-bottom: 10px; }
   .cm-accordion .cm-accordion-row .cm-accordion-header::before {
-    width: 13px;
-    height: 7px;
+    width: 16px;
+    height: 16px;
     position: absolute;
     display: block;
     content: '';
-    right: 0;
-    top: 17px;
-    background: url("./../images/icon/accordion/ic_arrow.png"); }
+    left: 15px;
+    top: 15px;
+    background-image: url("./../images/icon/all-icon-300x150.png");
+    background-position: 0 0;
+    background-repeat: no-repeat; }
   .cm-accordion .cm-accordion-row .cm-accordion-header h5 {
     font-size: 16px;
     line-height: 16px;
@@ -506,16 +509,17 @@ ul.cm-tab li {
   display: none; }
 
 .cm-accordion .cm-accordion-row.is-open .cm-accordion-header {
-  border-color: #0288d1;
+  background: #0288d1;
   -webkit-transition: all ease-in 0.3s;
   -moz-transition: all ease-in 0.3s;
   -ms-transition: all ease-in 0.3s;
   -o-transition: all ease-in 0.3s;
   transition: all ease-in 0.3s; }
   .cm-accordion .cm-accordion-row.is-open .cm-accordion-header::before {
-    background: url("./../images/icon/accordion/ic_arrow_active.png"); }
+    background-position: 0 -17px;
+    top: 21px; }
   .cm-accordion .cm-accordion-row.is-open .cm-accordion-header h5 {
-    color: #0288d1; }
+    color: #fff; }
 
 .f-left, .card, .card .card-header, .card .card-content, .card .card-footer, ul.cm-tab, .cm-accordion, .cm-accordion .cm-accordion-row, .cm-accordion .cm-accordion-row .cm-accordion-header, .cm-accordion .cm-accordion-row .cm-accordion-content, .dropdown_list, .dropdown_list .search-area, .search-advance, .search-advance .content, .search-advance .footer {
   float: left;
@@ -770,7 +774,8 @@ label {
     border-color: transparent; }
 
 .navbar-default .navbar-nav > .open > a {
-  color: rgba(0, 0, 0, 0.86); }
+  color: rgba(0, 0, 0, 0.86);
+  background-color: transparent; }
   .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
     background-color: transparent;
     color: #0288d1; }

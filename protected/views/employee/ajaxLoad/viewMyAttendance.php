@@ -1,32 +1,31 @@
-<div class="col-md-12">
-    <div class="card flat p-tb-50 p-lr-100 mt-30">
-        <div class="card-content">
-            <?php
-            $form = $this->beginWidget('CActiveForm', array('id' => 'attSearch'));
-            ?>
-            <div class="row form-wrapper">
-                <div class="search-box">
-                    <div class="col-md-4 ">
-                        <div class="form-group">
-                            <label>From</label>
-                            <input type="text" name="dateFrom" value="<?php echo $dateFrom; ?>"
-                                   class="input-datepicker2 form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="form-group">
-                            <label>To</label>
-                            <input type="text" name="dateTo" value="<?php echo $dateTo; ?>"
-                                   class="input-datepicker2 form-control">
-                        </div>
-                    </div>
-                    <div class="item width-5">
-                        <button type="button" onclick="searchAttendanceData(1)" class="btn btn-search">Search</button>
-                    </div>
-                </div>
-            </div>
-            <?php $this->endWidget(); ?>
 
+<!--Advance Search-->
+<div class="card mt-30">
+    <div class="card-content">
+        <?php
+        $form = $this->beginWidget('CActiveForm', array('id' => 'attSearch'));
+        ?>
+        <div class="search-box">
+            <div class="item width-42">
+                <input type="text" name="dateFrom" value="<?php echo $dateFrom; ?>"
+                       class="input-datepicker2 form-control">
+            </div>
+            <div class="item width-42">
+                <input type="text" name="dateTo" value="<?php echo $dateTo; ?>"
+                       class="input-datepicker2 form-control">
+            </div>
+            <div class="item width-6">
+                <button type="button" class="btn btn-search" onclick="searchAttendanceData(1)">Search</button>
+            </div>
+        </div>
+        <?php $this->endWidget(); ?>
+    </div>
+</div>
+
+<div class="card flat ">
+    <div class="card-content">
+
+        <div class="row">
             <div class="col-md-12" ajaxAttLoad>
                 <table class="table table-bordered">
                     <thead>
@@ -56,10 +55,11 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
+
     </div>
 </div>
+
 
 <script>
 
