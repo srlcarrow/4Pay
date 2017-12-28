@@ -64,19 +64,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
                 <div class="col-md-12 mb-30">
                     <div class="row">
                         <div class="col-md-8">
-                            <div class="row">
-                                <?php                             
-                                if ($isEnableMultipleCalendars == 1) {
-                                    ?>
-                                    <div class="col-md-4">
-                                        <?php
-                                        $cal = new ConfigHolidayCalanders();
-                                        echo $form->dropdownlist($cal, 'cal_id', CHtml::listData($calendars, 'cal_id', 'cal_name'), array('class' => 'big-select', 'onchange' => "loadCalenderData()"));
-                                        ?>
-                                    </div>
-                                    <?php
-                                }
-                                ?>
+                            <div class="row">                                
                                 <div class="col-md-4">
                                     <select class="big-select" name="year" id="" onchange="loadCalenderData()">
                                         <?php
@@ -115,7 +103,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
 
                 </div>
                 <?php $this->endWidget(); ?>
-                <div class="ajax_load_here" id="ajax_load_here">
+                <div id="ajaxLoad">
 
                 </div>
 
@@ -149,29 +137,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
     });
 
     function loadCalenderData() {
-        displayLoader("#ajax_load_here");
-        var extraData = "";
-        sendData('search-form', extraData, 'attendance/HolidayCalendarData', function (res) {
-            $("#ajax_load_here").html(res);
-        });
-    }
-
-    function saveCalendar() {
-        showInfoMessage();
-        sendData('addCalendar', '', 'attendance/SaveCalendar', function (res) {
-            var obj = jQuery.parseJSON(res);
-            if (obj.code == 200) {
-                showSuccessMessage(obj.msg.msg);
-                setInterval(function () {
-                    my();
-                });
-
-            } else {
-                showErrorMessage(obj.msg.msg);
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/Attendance/HolidayCalendarData'; ?>",
+            data: "",
+            success: function (responce) {
+                $("#ajaxLoad").html(responce);
             }
         });
     }
-
     function my() {
         document.getElementById("DisplayData").innerHTML = ajaxAddCalenderShow();
     }
