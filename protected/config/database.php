@@ -7,7 +7,7 @@ return array(
 	// uncomment the following lines to use a MySQL database
 
 	
-	'connectionString' => 'mysql:host=localhost;dbname=tts',
+	'connectionString' => 'mysql:host=localhost:3307;dbname=p1_new2',
 	'username' => 'root',
 	'password' => 'chathu123',
 	'charset' => 'utf8',
