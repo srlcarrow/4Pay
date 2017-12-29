@@ -8,20 +8,23 @@
 
     .cm-accordion-header {
       @extend .f-left;
-      border-bottom: 1px solid $accordionBorderColor;
-      padding: 10px 0;
+      background: $Gray;
+      padding: 15px 50px;
       cursor: pointer;
       position: relative;
+      margin-bottom: 10px;
 
       &::before {
-        width: 13px;
-        height: 7px;
+        width: 16px;
+        height: 16px;
         position: absolute;
         display: block;
         content: '';
-        right: 0;
-        top:17px;
-        background: url("./../images/icon/accordion/ic_arrow.png");
+        left: 15px;
+        top: 15px;
+        background-image: url("./../images/icon/all-icon-300x150.png");
+        background-position: 0 0;
+        background-repeat: no-repeat;
       }
 
       h5 {
@@ -41,7 +44,7 @@
 
     &.is-open {
       .cm-accordion-header {
-        border-color: $accordionActiveBorderColor;
+        background: $accordionActiveBgColor;
         -webkit-transition: all ease-in 0.3s;
         -moz-transition: all ease-in 0.3s;
         -ms-transition: all ease-in 0.3s;
@@ -49,7 +52,8 @@
         transition: all ease-in 0.3s;
 
         &::before {
-          background: url("./../images/icon/accordion/ic_arrow_active.png");
+          background-position: 0 -17px;
+          top: 21px;
         }
 
         h5 {

@@ -19,11 +19,14 @@ class AttendanceController extends Controller {
 
         $reqBasicFields = $this->empBasicFields();
         $reqAttendanceFields = $this->attendanceFields();
-        $this->render('/search/searchF2', array('controller' => $controller, 'action' => $action, 'reqBasicFields' => $reqBasicFields, 'reqAttendanceFields' => $reqAttendanceFields));
+        $defaultChecked = array('emp.empno' => 'EMP No', 'emp.epf_no' => 'EPF No', 'emp.emp_name_with_initials' => 'Name With Initials', 'aa.day' => 'Day', 'aa.date_in' => 'Date In', 'aa.punch_in' => 'Punch In', 'aa.date_out' => 'Date Out', 'aa.punch_out' => 'Punch Out');
+        $this->render('/search/searchF2', array('controller' => $controller, 'action' => $action, 'reqBasicFields' => $reqBasicFields, 'reqAttendanceFields' => $reqAttendanceFields, 'defaultChecked' => $defaultChecked));
     }
 
     public function actionViewAttendanceDataReport() {
         $selectedItems = implode(',', json_decode($_POST["selected"], true));
+        $selectedLabels = implode(',', json_decode($_POST["selectedLabels"], true));
+
         $sql = Yii::app()->db->createCommand()
                 ->select($selectedItems)
                 ->from('att_attendance aa')
@@ -38,7 +41,28 @@ class AttendanceController extends Controller {
         $currentPage = Yii::app()->request->getPost('page');
 
         $headers = explode(',', $selectedItems);
-        $this->renderPartial('/reports/attendance/ajaxLoad/viewAttendanceReportData', array('attendanceData' => $attendanceData, 'headers' => $headers, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
+        $headersLabels = explode(',', $selectedLabels);
+        $this->renderPartial('/reports/attendance/ajaxLoad/viewAttendanceReportData', array('attendanceData' => $attendanceData, 'headers' => $headers, 'headersLabels' => $headersLabels, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
+    }
+
+    public function actionViewHolidayCalendar() {
+//        $calendars = ConfigHolidayCalanders::model()->findAll();
+//        $isEnableMultipleCalendars = Payroll::getPayrollSetting('DEMC');
+        $this->render('viewHoliday');
+    }
+
+    public function actionHolidayCalendarData() {       
+        if (!isset($_POST['year']) || !isset($_POST['year'])) {
+            $reqYear = date('Y');
+            $reqMonth = date('m');
+        } else {
+            $reqYear = $_POST['year'];
+            $reqMonth = $_POST['month'];
+        }
+
+        $days = Controller::getDatesForCalendar($reqYear, $reqMonth);
+        
+        $this->renderPartial('ajaxLoad/ViewHolidayData', array('days' => $days, 'reqYear' => $reqYear, 'reqMonth' => $reqMonth));
     }
 
 }

@@ -1,29 +1,6 @@
-.mb-30 {
-  margin-bottom: 30px !important;
-}
-
-.mt-10 {
-  margin-top: 10px !important;
-}
-
-.mt-30 {
-  margin-top: 30px !important;
-}
-
-.mb-10 {
-  margin-bottom: 10px !important;
-}
 
 .mb-not-last-25:not(:last-child) {
   margin-bottom: 25px;
-}
-
-.p-0 {
-  padding: 0 !important;
-}
-
-.p-30 {
-  padding: 30px !important;
 }
 
 .p-tb-50 {
@@ -35,3 +12,9 @@
   padding-left: 100px !important;
   padding-right: 100px !important;
 }
+
+@include margin;
+
+//Padding
+@include padding;
+

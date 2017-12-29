@@ -1,21 +1,18 @@
 <?php
 
-class employeeController extends Controller
-{
+class employeeController extends Controller {
 
-    public function actionViewEmployee()
-    {
+    public function actionViewEmployee() {
         $controller = "employee";
         $action = "ViewEmployeeData";
         $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
     }
 
-    public function actionViewEmployeeData()
-    {
+    public function actionViewEmployeeData() {
         $sql = Yii::app()->db->createCommand()
-            ->select('*')
-            ->from('emp_basic emp')
-            ->getText();
+                ->select('*')
+                ->from('emp_basic emp')
+                ->getText();
 
         $limit = 5;
         $data = Controller::createSearchForEmployee($sql, 'emp.emp_id', Yii::app()->request->getPost('page'), $limit, 'emp.epf_no');
@@ -132,12 +129,11 @@ class employeeController extends Controller
         $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
     }
 
-    public function actionViewIssueUserAccountsData()
-    {
+    public function actionViewIssueUserAccountsData() {
         $sql = Yii::app()->db->createCommand()
-            ->select('*')
-            ->from('emp_basic emp')
-            ->getText();
+                ->select('*')
+                ->from('emp_basic emp')
+                ->getText();
 
 
         $limit = $_REQUEST["noOfData"];
@@ -150,8 +146,7 @@ class employeeController extends Controller
         $this->renderPartial('issueUserAccounts', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
-    public function actionIssueAccounts()
-    {
+    public function actionIssueAccounts() {
         $selectedEmployees = $_POST['selectedIds'];
         $userId = Yii::app()->user->getId();
 
@@ -233,11 +228,6 @@ class employeeController extends Controller
                 $user->save(false);
             }
         }
-    }
-
-    public function actionProfile()
-    {
-        $this->render('profile');
     }
 
     public function actionViewShiftAllocator() {
@@ -342,6 +332,73 @@ class employeeController extends Controller
             $sun->ref_shift_id = $_POST['sun_' . $empId];
             $sun->save(false);
         }
+    }
+
+    public function actionViewProfile() {
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $empBasicData = Empbasic::model()->findByPk($empId);
+        $empContactsData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
+        $empEmploymentData = Employment::model()->findByAttributes(array('ref_emp_id' => $empId));
+
+        $this->render('viewProfile', array('empId' => $empId, 'empBasicData' => $empBasicData, 'empContactsData' => $empContactsData, 'empEmploymentData' => $empEmploymentData));
+    }
+
+    public function actionViewProfileData() {
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $empBasicData = Empbasic::model()->findByPk($empId);
+        $empContactsData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
+        $empEmploymentData = Employment::model()->findByAttributes(array('ref_emp_id' => $empId));
+
+        $empBasicData = count($empBasicData) == 0 ? new Empbasic() : $empBasicData;
+        $empContactsData = count($empContactsData) == 0 ? new EmpContacts() : $empContactsData;
+        $empEmploymentData = count($empEmploymentData) == 0 ? new Employment() : $empEmploymentData;
+        $this->renderPartial('ajaxLoad/viewMyProfile', array('empId' => $empId, 'empBasicData' => $empBasicData, 'empContactsData' => $empContactsData, 'empEmploymentData' => $empEmploymentData));
+    }
+
+    public function actionViewMyAttendance() {
+        if (count($_REQUEST) == 0) {
+            $dateFrom = date('Y-m-d', strtotime(date('Y-m-d')) - (30 * 24 * 3600));
+            $dateTo = date('Y-m-d');
+        } else {
+            $dateFrom = $_REQUEST["dateFrom"];
+            $dateTo = $_REQUEST["dateTo"];
+        }
+
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $attendanceData = Yii::app()->db->createCommand('SELECT * FROM att_attendance aa WHERE aa.ref_emp_id=' . $empId . ' AND aa.day BETWEEN "' . $dateFrom . '" AND "' . $dateTo . '" ORDER BY aa.day DESC')->queryAll();
+
+        $this->renderPartial('ajaxLoad/viewMyAttendance', array('attendanceData' => $attendanceData, 'dateFrom' => $dateFrom, 'dateTo' => $dateTo));
+    }
+
+    public function actionBasic() {
+        $this->renderPartial('ajaxLoad/profile/basic');
+    }
+
+    public function actionViewLeave() {
+        $this->renderPartial('ajaxLoad/profile/leave');
+    }
+
+    public function actionLeaveDate() {
+        $this->renderPartial('ajaxLoad/profile/leave/leaveDate');
+    }
+
+    public function actionResetPassword() {
+        $userId = Yii::app()->user->getId();
+        $userData = User::model()->findByPk($userId);
+
+        if ($userData->user_password != md5(md5($_POST['oldPw'] . $_POST['oldPw']))) {
+            $this->msgHandler(400, "Enter Correct Current Password...");
+            exit;
+        }
+
+        if ($_POST['pw'] != $_POST['rePw']) {
+            $this->msgHandler(400, "Not Maching...");
+            exit;
+        }
+
+        $userData->user_password = md5(md5($_POST['pw'] . $_POST['pw']));
+        $userData->save(false);
+        $this->msgHandler(200, "Password Changed...");
     }
 
 }

@@ -21,8 +21,8 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                     <th>EPF No</th>
                                     <th>EMP No</th>
                                     <th>Name</th>
-                                    <th>Apply Leave</th>
-                                    <th>Apply S-Leave</th>
+                                    <th class="tb-action">Apply Leave</th>
+                                    <th class="tb-action">Apply S-Leave</th>
 
                                 </tr>
                             </thead>
@@ -83,7 +83,7 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
 </script>
 <script>
     function save() {
-        $.ajax({
+        insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Leave/SaveLeaveAllocationData'; ?>",
             data: $('#manageLeave').serialize(),

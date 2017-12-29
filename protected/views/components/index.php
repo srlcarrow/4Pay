@@ -51,6 +51,29 @@
     </div>
 </div>
 
+<div class="row mb-30">
+    <div class="col-md-12">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h1>Button</h1>
+            </div>
+
+            <div class="card-content">
+                <div class="row">
+                    <button type="button" class="btn btn-default">Default</button>
+                    <button type="button" class="btn btn-danger">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-sm btn-add">Add New</button>
+                    <button type="button" class="btn btn-sm btn-download">Download</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
 <!--Form-->
 <div class="row mb-30">
@@ -125,7 +148,7 @@
                             <div class="col-md-4 ">
                                 <div class="form-group">
                                     <label>Date Picker</label>
-                                    <input type="text" class="input-datepicker form-control">
+                                    <input type="text" class="input-datepicker2 form-control">
                                 </div>
                             </div>
 
@@ -184,10 +207,13 @@
         <div class="card">
             <div class="card-content">
                 <div class="search-box">
-                    <div class="item width-90">
+                    <div class="item width-84">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
-                    <div class="item width-10">
+                    <div class="item width-5">
+                        <button type="button" class="btn btn-search">Search</button>
+                    </div>
+                    <div class="item width-1">
                         <button type="button" class="btn btn-advance">Advance</button>
                     </div>
                 </div>
@@ -325,6 +351,10 @@
 </div>
 
 <script>
+
+    //Common Date picker function
+    datePicker({ele: '.input-datepicker2'});
+
     // This function when call datepicker date is selected
     $(document).on('onDateSelect', function (e, date, fdate) {
         console.log('Date ', date);
@@ -341,7 +371,7 @@
     $(function () {
         $(".scroll-table").mCustomScrollbar({
             theme: "dark-3",
-            axis:"x"
+            axis: "x"
         });
     });
 

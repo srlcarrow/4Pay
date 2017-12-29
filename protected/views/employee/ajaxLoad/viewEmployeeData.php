@@ -1,32 +1,43 @@
 <div class="row mb-30">
     <div class="col-md-12">
         <div class="card">
+<!-- <<<<<<< ShortLeave
 
             <div class="col s12">
                 <button class="cm-btn add right addNewCompany" type="button" onclick="addEmployee()">Add New
                 </button>
             </div>
+======= -->
+
 
             <div class="card-header">
-                <h1>Employees </h1>
+                <div class="ds-table-block">
+                    <h1 class="cell width-100">Employees </h1>
+                    <div class="cell width-2 text-right">
+                        <button class="btn btn-primary addNewCompany" type="button" onclick="addEmployee()">Add New
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="card-content">
                 <div class="row">
+
                     <div class="col-md-12">
                         <table class="table table-bordered">
                             <thead>
-                                <tr>
-                                    <th>EPF No</th>
-                                    <th>EMP No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th class="tb-action">Action</th>
-                                </tr>
+                            <tr>
+                                <th>EPF No</th>
+                                <th>EMP No</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th class="tb-action">Action</th>
+                            </tr>
                             </thead>
 
                             <tbody>
+
                                 <?php
                                 foreach ($employeeData as $employee) {
                                     $empContacts = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $employee->emp_id));
@@ -52,7 +63,7 @@
                                     </tr>
                                     <?php
                                 }
-                                ?>
+?>
                             </tbody>
                         </table>
                     </div>

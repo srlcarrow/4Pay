@@ -1,0 +1,90 @@
+@import "../variable";
+
+.f-left {
+  float: left;
+  width: 100%;
+  min-width: 1px;
+}
+
+.day-date {
+  float: left;
+  width: 14.28%;
+  font-size: $base-font-size;
+  padding: 16px 20px 0 20px;
+}
+
+.calender-container {
+  @extend .f-left;
+
+  .day-container {
+    @extend .f-left;
+
+    .day {
+      @extend .day-date;
+      text-transform: uppercase;
+      color: $secondaryFontColor;
+    }
+  }
+
+  .date-container {
+    @extend .f-left;
+
+    .date {
+      @extend .day-date;
+      border-left: 1px solid $Gray;
+      position: relative;
+      height: 100px;
+
+      .header {
+        span {
+          font-size: 24px;
+          color: $black;
+          font-weight: $font-weight-regular;
+        }
+      }
+
+      .content {
+        .holiday-text {
+          color: $holidayFontColor;
+          margin-top: 8px;
+        }
+      }
+
+      &::before,
+      &::after {
+        position: absolute;
+        width: 10px;
+        height: 50%;
+        content: '';
+        left: 0;
+      }
+
+      &::before {
+        top: 0;
+
+      }
+      &::after {
+        top: 50%;
+      }
+
+      &.is-holiday {
+        &::before,
+        &::after {
+          background: $holidayColor;
+        }
+      }
+
+      &.is-morning-holiday {
+        &::before {
+          background: $holidayColor;
+        }
+      }
+
+      &.is-evening-holiday {
+        &::after {
+          background: $holidayColor;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.f-left, .calender-container, .calender-container .day-container, .calender-container .date-container {
+  float: left;
+  width: 100%;
+  min-width: 1px; }
+
+.day-date, .calender-container .day-container .day, .calender-container .date-container .date {
+  float: left;
+  width: 14.28%;
+  font-size: 14px;
+  padding: 16px 20px 0 20px; }
+
+.calender-container .day-container .day {
+  text-transform: uppercase;
+  color: #0288d1; }
+
+.calender-container .date-container .date {
+  border-left: 1px solid #F7F7F7;
+  position: relative;
+  height: 100px; }
+  .calender-container .date-container .date .header span {
+    font-size: 24px;
+    color: #000;
+    font-weight: 400; }
+  .calender-container .date-container .date .content .holiday-text {
+    color: #fabb05;
+    margin-top: 8px; }
+  .calender-container .date-container .date::before, .calender-container .date-container .date::after {
+    position: absolute;
+    width: 10px;
+    height: 50%;
+    content: '';
+    left: 0; }
+  .calender-container .date-container .date::before {
+    top: 0; }
+  .calender-container .date-container .date::after {
+    top: 50%; }
+  .calender-container .date-container .date.is-holiday::before, .calender-container .date-container .date.is-holiday::after {
+    background: #fabb05; }
+  .calender-container .date-container .date.is-morning-holiday::before {
+    background: #fabb05; }
+  .calender-container .date-container .date.is-evening-holiday::after {
+    background: #fabb05; }

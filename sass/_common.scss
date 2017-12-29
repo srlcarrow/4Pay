@@ -1,3 +1,4 @@
+@import "common_mix";
 
 .f-left {
   float: left;
@@ -30,18 +31,23 @@
   }
 }
 
+.no-wrap {
+  white-space: nowrap;
+}
+
 @for $i from 1 through 100 {
   .width-#{$i} {
     width: $i * 1% !important;
   }
 }
 
+@include text-color($black, 'black');
+
 .text-info {
   font-size: 16px;
   line-height: 16px;
   color: rgba($primaryFontColor, $lighten);
 }
-
 
 .table-scroll-x {
   width: 1080px;
@@ -56,4 +62,53 @@
   }
 }
 
+//paginations
+.paginations {
+  float: right;
 
+  & > .paginations {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  a {
+    display: block;
+    float: left;
+    width: 35px;
+    height: 35px;
+    color: rgba($primaryFontColor, $lighten-x);
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    padding: 10px 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-left: 10px;
+
+    &:first-child,
+    &:last-child {
+      width: auto;
+    }
+
+    &.disabled {
+      color: rgba($primaryFontColor, $lighten-xx);
+    }
+
+    &.current {
+      background: rgba($secondaryFontColor, 1);
+      color: rgba($white, 1);
+    }
+  }
+}
+
+.alert {
+  padding: 0;
+  margin-bottom: 0;
+
+  &[class^="alert-"],
+  &[class*=" alert-"] {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+}

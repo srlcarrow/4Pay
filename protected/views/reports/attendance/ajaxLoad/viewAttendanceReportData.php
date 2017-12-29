@@ -9,20 +9,21 @@
             <div class="card-content">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <thead>
+                        <div class="table-scroll-x scroll-table">
+                            <table class="table table-bordered">
+                                <thead>
                                 <tr>
                                     <?php
-                                    foreach ($headers as $header) {
+                                    foreach ($headersLabels as $headersLabel) {
                                         ?>
-                                        <th><?php echo $header; ?></th>
+                                        <th><?php echo $headersLabel; ?></th>
                                         <?php
                                     }
                                     ?>
                                 </tr>
-                            </thead>
+                                </thead>
 
-                            <tbody>
+                                <tbody>
                                 <?php
                                 foreach ($attendanceData as $attendance) {
                                     ?>
@@ -38,25 +39,35 @@
                                     <?php
                                 }
                                 ?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-12">
-                <div class="col-md-12 mt-15 mb-15" id="pagination">
-                    <?php
-                    Paginations::setLimit($pageSize);
-                    Paginations::setPage($page);
-                    Paginations::setJSCallback("searchData");
-                    Paginations::setTotalPages($count);
-                    Paginations::makePagination();
-                    Paginations::drawPagination();
-                    ?>
+                <div class="row">
+                    <div class="col-md-12 mt-15 mb-15" id="pagination">
+                        <?php
+                        Paginations::setLimit($pageSize);
+                        Paginations::setPage($page);
+                        Paginations::setJSCallback("searchData");
+                        Paginations::setTotalPages($count);
+                        Paginations::makePagination();
+                        Paginations::drawPagination();
+                        ?>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $(".scroll-table").mCustomScrollbar({
+            theme: "dark-3",
+            axis: "x"
+        });
+    });
+</script>

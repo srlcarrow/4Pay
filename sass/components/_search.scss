@@ -15,8 +15,9 @@
       -moz-border-radius: 0;
       border-radius: 0;
       //border: 1px solid rgba(0, 0, 0, 0.15);
-      height: 34px;
+      height: 36px;
       //outline: 0;
+      background: $Gray;
       padding-left: 15px;
     }
 
@@ -26,20 +27,30 @@
       border-radius: 0;
       width: 100%;
       outline: 0;
-      background: rgba(0, 0, 0, 0.04);
+      background: transparent;
+      padding: 10px 0 10px 10px;
+      color: rgba($primaryFontColor, $lighten);
 
       &:active {
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
+        color: rgba($primaryFontColor, $lighten-x);
+      }
+
+      &:hover {
+        opacity: 0.86;
       }
 
     }
 
     .btn-search {
       @extend .btn-advance;
-      background: #ea3939;
-      color: #fff;
+      padding: 10px 30px;
+      background: $primaryColor;
+      color: $white;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
     }
   }
 }

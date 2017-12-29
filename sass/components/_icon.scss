@@ -1,0 +1,41 @@
+
+.ic {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: transparent;
+
+  &.ic_20 {
+    width: 20px;
+    height: 20px;
+    background-image: url("./../images/icon/button/20/ic_20.png");
+    background-repeat: no-repeat;
+    margin-left: 5px;
+
+    &.ic_edit {
+      background-position: 0 0;
+
+      &:hover {
+        background-position: -21px 0;
+      }
+    }
+
+    &.ic_delete {
+      background-position: 0 -21px;
+
+      &:hover {
+        background-position: -21px -21px;
+      }
+    }
+
+    &.ic_view {
+      background-position: 0 -42px;
+
+      &:hover {
+        background-position: -42px -42px;
+      }
+    }
+  }
+}
