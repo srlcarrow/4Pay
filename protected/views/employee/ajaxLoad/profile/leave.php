@@ -9,9 +9,10 @@
                         <div class="form-group">
                             <label for="">Leave Type</label>
                             <select id="type" class="form-control">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                                <option>Annual Leave</option>
+                                <option>Casual Leave</option>
+                                <option>Medical Leave</option>
+                                <option>Medical Leave</option>
                             </select>
                         </div>
                     </div>
