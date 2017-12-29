@@ -59,6 +59,8 @@ class EmpBasic extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'rel_empcontact' => array(self::HAS_ONE, 'EmpContacts', 'ref_emp_id'),
+                    'rel_employment' => array(self::HAS_ONE, 'Employment', 'ref_emp_id'),
 		);
 	}
 

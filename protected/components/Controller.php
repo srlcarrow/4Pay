@@ -130,7 +130,13 @@ class Controller extends CController {
         $timezone = 5.5 * 3600;
         return $timezone;
     }
-
+    
+    public static function getCountryDate() {
+        $zone = 3600 * +5.5;
+        $date = gmdate("Y-m-d", time() + $zone);
+        return $date;
+    }
+    
     public static function empBasicFields() {
         $reqBasicFields = array('emp.empno' => 'EMP No', 'emp.epf_no' => 'EPF No', 'emp.attendance_no' => 'Attendance No', 'emp.emp_title' => 'Title', 'emp.emp_display_name' => 'Display Name', 'emp.emp_full_name' => 'Full Name', 'emp.emp_name_with_initials' => 'Name With Initials', 'emp.emp_gender' => 'Gender');
         return $reqBasicFields;
