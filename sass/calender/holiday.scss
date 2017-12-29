@@ -50,6 +50,16 @@
         }
       }
 
+      &.is-disabled {
+        //background: $Gray;
+
+        .header {
+          span {
+            color: rgba($black, $lighten-xx);
+          }
+        }
+      }
+
       &::before,
       &::after {
         position: absolute;
@@ -85,6 +95,7 @@
           background: $holidayColor;
         }
       }
+
     }
   }
 }
