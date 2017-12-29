@@ -12,7 +12,6 @@
                                 <option>Annual Leave</option>
                                 <option>Casual Leave</option>
                                 <option>Medical Leave</option>
-                                <option>Medical Leave</option>
                             </select>
                         </div>
                     </div>
