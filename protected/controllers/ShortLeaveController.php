@@ -7,13 +7,13 @@ class ShortLeaveController extends Controller {
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
         $this->render('/shortLeave/viewShortLeaveApplyPanel', array('empId' => $empId, 'applierType' => 'hr', 'shortLeaveSetting' => $shortLeaveSetting));
     }
-    
+
     public function actionViewShortLeaveApplyPanelSelf() {
-        $empId = Yii::app()->user->getId();
+        $empId = Controller::getEmpIdOfLoggedUser();
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
-        $this->render('/shortLeave/viewShortLeaveApplyPanel', array('empId' => $empId,'applierType' => 'self', 'shortLeaveSetting' => $shortLeaveSetting));
+        $this->render('/shortLeave/viewShortLeaveApplyPanel', array('empId' => $empId, 'applierType' => 'self', 'shortLeaveSetting' => $shortLeaveSetting));
     }
-    
+
     public function actionGetShortLeaveEndTime() {
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
         $shtLvDate = $_POST['shtLvDate'];
@@ -115,7 +115,7 @@ class ShortLeaveController extends Controller {
         }
     }
 
-    public function actionRejectShortLeaveSecondApprover() {   
+    public function actionRejectShortLeaveSecondApprover() {
         $shortLeaveId = $_POST['shortLeaveId'];
         $shortLeave = ShortLeave::model()->findByPk($shortLeaveId);
         $shortLeave->second_approver_reject_reason = $_POST['reason'];

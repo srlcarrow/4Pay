@@ -1,6 +1,6 @@
 <?php
 
-class employeeController extends Controller {
+class EmployeeController extends Controller {
 
     public function actionViewEmployee() {
         $controller = "employee";
@@ -14,14 +14,14 @@ class employeeController extends Controller {
                 ->from('emp_basic emp')
                 ->getText();
 
-        $limit = 5;
+        $limit = $_REQUEST["noOfData"];
         $data = Controller::createSearchForEmployee($sql, 'emp.emp_id', Yii::app()->request->getPost('page'), $limit, 'emp.epf_no');
 
         $employeeData = $data['result'];
         $pageCount = $data['count'];
         $currentPage = Yii::app()->request->getPost('page');
 
-        $this->renderPartial('ajaxLoad/viewEmployeeData', array('employeeData' => $employeeData));
+        $this->renderPartial('ajaxLoad/viewEmployeeData', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
     public function actionAddEmployee() {
@@ -183,6 +183,7 @@ class employeeController extends Controller {
                 $user->save(false);
             }
 
+            $this->msgHandler(200, "Successfully Issued...");
 //            $msg = EmailGenerator::setEmailMessageBodyUser('user_created', '2', $jsId, $jsBasicTemp->jsbt_email, $password, false);
 //            $subjct = "User Account Details";
 //            $to = $_POST['email'];
@@ -228,6 +229,8 @@ class employeeController extends Controller {
                 $user->save(false);
             }
         }
+
+        $this->msgHandler(200, "Successfully Updated...");
     }
 
     public function actionViewShiftAllocator() {
@@ -332,6 +335,7 @@ class employeeController extends Controller {
             $sun->ref_shift_id = $_POST['sun_' . $empId];
             $sun->save(false);
         }
+        $this->msgHandler(200, "Successfully Saved...");
     }
 
     public function actionViewProfile() {
