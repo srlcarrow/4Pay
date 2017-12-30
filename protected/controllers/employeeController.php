@@ -14,14 +14,14 @@ class EmployeeController extends Controller {
                 ->from('emp_basic emp')
                 ->getText();
 
-        $limit = 5;
+        $limit = $_REQUEST["noOfData"];
         $data = Controller::createSearchForEmployee($sql, 'emp.emp_id', Yii::app()->request->getPost('page'), $limit, 'emp.epf_no');
 
         $employeeData = $data['result'];
         $pageCount = $data['count'];
         $currentPage = Yii::app()->request->getPost('page');
 
-        $this->renderPartial('ajaxLoad/viewEmployeeData', array('employeeData' => $employeeData));
+        $this->renderPartial('ajaxLoad/viewEmployeeData', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
     public function actionAddEmployee() {
@@ -151,7 +151,7 @@ class EmployeeController extends Controller {
         $userId = Yii::app()->user->getId();
 
         foreach ($selectedEmployees as $empId) {
-            $empBasicData = Empbasic::model()->findByPk($empId);
+            $empBasicData = EmpBasic::model()->findByPk($empId);
             $empContactData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
             $user = User::model()->findByAttributes(array('ref_emp_id' => $empId));
             $password = Controller::randomPassword();
@@ -196,7 +196,7 @@ class EmployeeController extends Controller {
         $userId = Yii::app()->user->getId();
 
         foreach ($selectedEmployees as $empId) {
-            $empBasicData = Empbasic::model()->findByPk($empId);
+            $empBasicData = EmpBasic::model()->findByPk($empId);
             $empContactData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
             $user = User::model()->findByAttributes(array('ref_emp_id' => $empId));
             $password = Controller::randomPassword();
@@ -381,10 +381,6 @@ class EmployeeController extends Controller {
 
     public function actionViewLeave() {
         $this->renderPartial('ajaxLoad/profile/leave');
-    }
-    
-    public function actionViewShortLeave() {
-        $this->renderPartial('ajaxLoad/profile/shortLeave');
     }
 
     public function actionViewShortLeave() {

@@ -26,14 +26,14 @@
                     <div class="col-md-12">
                         <table class="table table-bordered">
                             <thead>
-                            <tr>
-                                <th>EPF No</th>
-                                <th>EMP No</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th class="tb-action">Action</th>
-                            </tr>
+                                <tr>
+                                    <th>EPF No</th>
+                                    <th>EMP No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th class="tb-action">Action</th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -63,13 +63,24 @@
                                     </tr>
                                     <?php
                                 }
-?>
+                                ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-md-12 mt-15 mb-15" id="pagination">
+                    <?php
+                    Paginations::setLimit($pageSize);
+                    Paginations::setPage($page);
+                    Paginations::setJSCallback("searchData");
+                    Paginations::setTotalPages($count);
+                    Paginations::makePagination();
+                    Paginations::drawPagination();
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
