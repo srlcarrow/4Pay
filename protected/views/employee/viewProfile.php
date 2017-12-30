@@ -77,10 +77,10 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
         });
     }
 
-    function shortLeave() {
+    function shortLeave() { 
         fetch({
             type: 'POST',
-            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewProfileData'; ?>",
+            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewShortLeave'; ?>",
             data: "",
             success: function (responce) {
                 $("#ajaxLoad").html(responce);

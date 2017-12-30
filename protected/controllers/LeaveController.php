@@ -43,10 +43,10 @@ class LeaveController extends Controller {
                 $leaveAllocation->save(false);
             }
 
-            $empData = Empbasic::model()->findByPk($empId);
-            $firstSup = Empbasic::model()->findByAttributes(array('empno' => $_POST['firstSup_' . $empId]));
-            $secondSup = Empbasic::model()->findByAttributes(array('empno' => $_POST['secSup_' . $empId]));
-            $coverup = Empbasic::model()->findByAttributes(array('empno' => $_POST['coverup_' . $empId]));
+            $empData = EmpBasic::model()->findByPk($empId);
+            $firstSup = EmpBasic::model()->findByAttributes(array('empno' => $_POST['firstSup_' . $empId]));
+            $secondSup = EmpBasic::model()->findByAttributes(array('empno' => $_POST['secSup_' . $empId]));
+            $coverup = EmpBasic::model()->findByAttributes(array('empno' => $_POST['coverup_' . $empId]));
 
             $empData->emp_sup_one = count($firstSup) > 0 ? $firstSup->emp_id : 0;
             $empData->emp_sup_two = count($secondSup) > 0 ? $secondSup->emp_id : 0;
