@@ -24,6 +24,8 @@
   .calender-container .date-container .date .content .holiday-text {
     color: #fabb05;
     margin-top: 8px; }
+  .calender-container .date-container .date.is-disabled .header span {
+    color: rgba(0, 0, 0, 0.3); }
   .calender-container .date-container .date::before, .calender-container .date-container .date::after {
     position: absolute;
     width: 10px;

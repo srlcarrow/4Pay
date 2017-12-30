@@ -382,6 +382,10 @@ class EmployeeController extends Controller {
     public function actionViewLeave() {
         $this->renderPartial('ajaxLoad/profile/leave');
     }
+    
+    public function actionViewShortLeave() {
+        $this->renderPartial('ajaxLoad/profile/shortLeave');
+    }
 
     public function actionViewShortLeave() {
         $this->renderPartial('ajaxLoad/profile/shortLeave');
