@@ -50,9 +50,9 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                 <?php
                                 foreach ($leaveTypes as $leaveType) {
                                     $leaveAllocation = LeaveAllocation::model()->findByAttributes(array('ref_emp_id' => $employee->emp_id, 'ref_lv_type_id' => $leaveType->lt_id));
-                                    $firstSup = Empbasic::model()->findByPk($employee->emp_sup_one);
-                                    $secondSup = Empbasic::model()->findByPk($employee->emp_sup_two);
-                                    $coverup = Empbasic::model()->findByPk($employee->emp_coverup);
+                                    $firstSup = EmpBasic::model()->findByPk($employee->emp_sup_one);
+                                    $secondSup = EmpBasic::model()->findByPk($employee->emp_sup_two);
+                                    $coverup = EmpBasic::model()->findByPk($employee->emp_coverup);
                                     ?>
                                     <td>
                                         <input type="text"
