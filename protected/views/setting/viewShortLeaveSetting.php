@@ -10,29 +10,29 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Duration (minutes)</label>
-                        <input type="text" name="purpose" value="" class="form-control" required>
+                        <input type="text" name="short_lv_duration" value="<?php echo $shortLeaveSetting->short_lv_duration ?>" class="form-control number" required>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Max. Per Day</label>
-                        <input type="text" name="purpose" value="" class="form-control" required>
+                        <label>Max. Number of Short Leave Per Day</label>
+                        <input type="text" name="max_leaves_per_day" value="<?php echo $shortLeaveSetting->max_leaves_per_day ?>" class="form-control number" required>  
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Max. Per Month</label>
-                        <input type="text" name="purpose" value="" class="form-control" required>
+                        <label>Max. Number of Short Leave Per Month</label>
+                        <input type="text" name="max_leaves_per_month" value="<?php echo $shortLeaveSetting->max_leaves_per_month ?>" class="form-control number" required>
                     </div>
                 </div>
             </div>
             <div class="row form-wrapper">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Max. Per Year</label>
-                        <input type="text" name="purpose" value="" class="form-control" required>
+                        <label>Max. Number of Short Leave Per Year</label>
+                        <input type="text" name="max_leaves_per_year" value="<?php echo $shortLeaveSetting->max_leaves_per_year ?>" class="form-control number" required>
                     </div>
                 </div>
             </div>
@@ -55,5 +55,20 @@
 </div>
 
 <script>
+    $("#shortLeaveForm").validate({
+        submitHandler: function () {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo Yii::app()->baseUrl . '/Setting/UpdateShortLeaveSetting'; ?>", 
+                data: $('#shortLeaveForm').serialize(),
+                dataType: 'json',
+                success: function (responce) {
+                    if (responce.code == 200) {
+                        $('.alert').addClass('alert-success').html(responce.msg);
+                    }
+                }
+            });
+        }
+    });
 
 </script>

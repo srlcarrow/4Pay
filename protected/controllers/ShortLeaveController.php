@@ -116,7 +116,7 @@ class ShortLeaveController extends Controller {
     }
 
     public function actionRejectShortLeaveSecondApprover() {   
-        $shortLeaveId = $_POST['shortLeaveId'];
+        $shortLeaveId = $_POST['shortLeaveId']; 
         $shortLeave = ShortLeave::model()->findByPk($shortLeaveId);
         $shortLeave->second_approver_reject_reason = $_POST['reason'];
         $shortLeave->second_approver_status = 2;

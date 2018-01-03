@@ -384,7 +384,9 @@ class EmployeeController extends Controller {
     }
 
     public function actionViewShortLeave() {
-        $this->renderPartial('ajaxLoad/profile/shortLeave');
+        $empId = Yii::app()->user->getId();
+        $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
+        $this->render('ajaxLoad/profile/shortLeave', array('empId' => $empId,'applierType' => 'self', 'shortLeaveSetting' => $shortLeaveSetting));
     }
 
     public function actionLeaveDate() {
