@@ -1,6 +1,6 @@
 <?php
 
-class employeeController extends Controller {
+class EmployeeController extends Controller {
 
     public function actionViewEmployee() {
         $controller = "employee";
@@ -14,14 +14,14 @@ class employeeController extends Controller {
                 ->from('emp_basic emp')
                 ->getText();
 
-        $limit = 5;
+        $limit = $_REQUEST["noOfData"];
         $data = Controller::createSearchForEmployee($sql, 'emp.emp_id', Yii::app()->request->getPost('page'), $limit, 'emp.epf_no');
 
         $employeeData = $data['result'];
         $pageCount = $data['count'];
         $currentPage = Yii::app()->request->getPost('page');
 
-        $this->renderPartial('ajaxLoad/viewEmployeeData', array('employeeData' => $employeeData));
+        $this->renderPartial('ajaxLoad/viewEmployeeData', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
     public function actionAddEmployee() {
@@ -151,7 +151,7 @@ class employeeController extends Controller {
         $userId = Yii::app()->user->getId();
 
         foreach ($selectedEmployees as $empId) {
-            $empBasicData = Empbasic::model()->findByPk($empId);
+            $empBasicData = EmpBasic::model()->findByPk($empId);
             $empContactData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
             $user = User::model()->findByAttributes(array('ref_emp_id' => $empId));
             $password = Controller::randomPassword();
@@ -196,7 +196,7 @@ class employeeController extends Controller {
         $userId = Yii::app()->user->getId();
 
         foreach ($selectedEmployees as $empId) {
-            $empBasicData = Empbasic::model()->findByPk($empId);
+            $empBasicData = EmpBasic::model()->findByPk($empId);
             $empContactData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
             $user = User::model()->findByAttributes(array('ref_emp_id' => $empId));
             $password = Controller::randomPassword();
@@ -336,7 +336,8 @@ class employeeController extends Controller {
 
     public function actionViewProfile() {
         $empId = Controller::getEmpIdOfLoggedUser();
-        $empBasicData = Empbasic::model()->findByPk($empId);
+        $empBasicData = EmpBasic::model()->findByPk($empId);
+
         $empContactsData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
         $empEmploymentData = Employment::model()->findByAttributes(array('ref_emp_id' => $empId));
 
@@ -345,24 +346,28 @@ class employeeController extends Controller {
 
     public function actionViewProfileData() {
         $empId = Controller::getEmpIdOfLoggedUser();
-        $empBasicData = Empbasic::model()->findByPk($empId);
+        $empBasicData = EmpBasic::model()->findByPk($empId);
         $empContactsData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
         $empEmploymentData = Employment::model()->findByAttributes(array('ref_emp_id' => $empId));
 
-        $empBasicData = count($empBasicData) == 0 ? new Empbasic() : $empBasicData;
+        $empBasicData = count($empBasicData) == 0 ? new EmpBasic() : $empBasicData;
         $empContactsData = count($empContactsData) == 0 ? new EmpContacts() : $empContactsData;
         $empEmploymentData = count($empEmploymentData) == 0 ? new Employment() : $empEmploymentData;
         $this->renderPartial('ajaxLoad/viewMyProfile', array('empId' => $empId, 'empBasicData' => $empBasicData, 'empContactsData' => $empContactsData, 'empEmploymentData' => $empEmploymentData));
     }
 
     public function actionViewMyAttendance() {
-        if (count($_REQUEST) == 0) {
-            $dateFrom = date('Y-m-d', strtotime(date('Y-m-d')) - (30 * 24 * 3600));
-            $dateTo = date('Y-m-d');
-        } else {
-            $dateFrom = $_REQUEST["dateFrom"];
-            $dateTo = $_REQUEST["dateTo"];
-        }
+
+//        if (count($_REQUEST) == 0) {
+//            $dateFrom = date('Y-m-d', strtotime(date('Y-m-d')) - (30 * 24 * 3600));
+//            $dateTo = date('Y-m-d');
+//        } else {
+//            $dateFrom = $_REQUEST["dateFrom"];
+//            $dateTo = $_REQUEST["dateTo"];
+//        }
+
+        $dateFrom = "2017-08-01";
+        $dateTo = "2017-08-31";
 
         $empId = Controller::getEmpIdOfLoggedUser();
         $attendanceData = Yii::app()->db->createCommand('SELECT * FROM att_attendance aa WHERE aa.ref_emp_id=' . $empId . ' AND aa.day BETWEEN "' . $dateFrom . '" AND "' . $dateTo . '" ORDER BY aa.day DESC')->queryAll();
@@ -377,7 +382,7 @@ class employeeController extends Controller {
     public function actionViewLeave() {
         $this->renderPartial('ajaxLoad/profile/leave');
     }
-    
+
     public function actionViewShortLeave() {
         $this->renderPartial('ajaxLoad/profile/shortLeave');
     }

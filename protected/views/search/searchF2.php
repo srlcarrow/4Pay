@@ -80,21 +80,17 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                     ?>
                     <div class="col-md-2 ">
                         <div class="checkbox">
-                            <label>
                                 <input data-label="<?php echo $reqBasicField; ?>" <?php echo $ischecked; ?>
                                        name="<?php echo $key; ?>" value="1"
-                                       type="checkbox"><?php echo $reqBasicField; ?>
-                            </label>
+                                       id="<?php echo $key; ?>"
+                                       type="checkbox">
+                                <label for="<?php echo $key; ?>"><?php echo $reqBasicField; ?></label>
                         </div>
                     </div>
                     <?php
                 }
             }
             ?>
-
-
-        </div>
-        <div class="card">
             <?php
             if (count($reqAttendanceFields) > 0) {
                 ?>
@@ -107,11 +103,12 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                     ?>
                     <div class="col-md-2 ">
                         <div class="checkbox">
-                            <label>
-                                <input data-label="<?php echo $reqAttendanceField; ?>" <?php echo $ischecked; ?>
-                                       name="<?php echo $key; ?>" value="1"
-                                       type="checkbox"><?php echo $reqAttendanceField; ?>
-                            </label>
+
+                            <input data-label="<?php echo $reqAttendanceField; ?>" <?php echo $ischecked; ?>
+                                   name="<?php echo $key; ?>" value="1"
+                                   id="<?php echo $key; ?>"
+                                   type="checkbox">
+                            <label for="<?php echo $key; ?>"><?php echo $reqAttendanceField; ?></label>
                         </div>
                     </div>
                     <?php
