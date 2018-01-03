@@ -7,13 +7,11 @@ return array(
 	// uncomment the following lines to use a MySQL database
 
 	
-<<<<<<< HEAD
-	'connectionString' => 'mysql:host=localhost:3307;dbname=p1',
-=======
-	'connectionString' => 'mysql:host=localhost:3307;dbname=p1_new2',
->>>>>>> 6aa65a1484ff804153ca7a5178eca39bb6d02b98
+
+	'connectionString' => 'mysql:host=localhost;dbname=tts',
+
 	'username' => 'root',
-	'password' => 'chathu123',
+	'password' => '',
 	'charset' => 'utf8',
 
 );

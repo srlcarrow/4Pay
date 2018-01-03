@@ -557,7 +557,7 @@ ul.cm-tab li {
 
 /*table*/
 table.table > thead {
-  background: #0288d1;
+  background: #014c75;
   color: #fff; }
 
 table.table tbody tr:nth-child(even) {
@@ -583,6 +583,9 @@ table.table {
 
 table.cm-table th, table.cm-table td {
   white-space: nowrap; }
+
+.table-bordered {
+  border: 1px solid #fff; }
 
 .search-box {
   -webkit-border-radius: 2px;
