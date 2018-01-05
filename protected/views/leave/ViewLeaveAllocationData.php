@@ -17,7 +17,13 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" class="select-All"></th>
+                                <th class="th-checkbox">
+
+                                    <div class="checkbox mt-0 mb-0">
+                                        <input type="checkbox" id="id_all" class="select-All">
+                                        <label for="id_all"></label>
+                                    </div>
+                                </th>
                                 <th>EPF No</th>
                                 <th>EMP No</th>
                                 <th>Name</th>
@@ -42,8 +48,13 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                             as $employee) {
                             ?>
                             <tr class="ch_bx">
-                                <td><input type="checkbox" class="check_sc" name="selectedIds[]"
-                                           value="<?php echo $employee->emp_id; ?>"></td>
+                                <td>
+                                    <div class="checkbox mt-0 mb-0">
+                                        <input id="id_<?php echo $employee->emp_id; ?>" type="checkbox" class="check_sc" name="selectedIds[]"
+                                               value="<?php echo $employee->emp_id; ?>">
+                                        <label for="id_<?php echo $employee->emp_id; ?>"></label>
+                                    </div>
+                                </td>
                                 <td><?php echo $employee->epf_no; ?></td>
                                 <td><?php echo $employee->empno; ?></td>
                                 <td><?php echo $employee->emp_name_with_initials; ?></td>

@@ -258,12 +258,12 @@
                                 <?php echo $form->dropdownlist($employment, 'empl_employment_status', $activeStatus, array('empty' => '', 'class' => 'form-control required')); ?>
                             </div>
                         </div>
-                        <div class="col-md-4 ">
-                            <div class="form-group">
+                        <div class="col-md-4 mt-15">
+                            <div class="checkbox mb-0">
                                 <?php
                                 echo $form->checkBox($employment, 'is_generalshift_emp', array('class' => 'form-control-txtbx'), array('value' => '', 'uncheckValue' => 0));
                                 ?>
-                                <span class="chkbox-lbl">Is general shift</span>
+                                <label for="Employment_is_generalshift_emp">Is general shift</label>
                             </div>
                         </div>
                     </div>
