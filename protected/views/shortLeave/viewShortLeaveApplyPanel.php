@@ -91,8 +91,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/sw
     function getShortLeaveEndTime() {
         var noOfLeaves = $('#noOfLeaves').val();
         if (noOfLeaves == 0) {
-            //alert('tete');
-            sweetAlert('Can Not Apply a Short Leave!', 'Please enter the purpose of the leave.');
+            alert('tete');
+            //sweetAlert('Can Not Apply a Short Leave!', 'Please enter the purpose of the leave.');
         } else {
             $.ajax({
                 url: '<?php echo $this->createUrl('ShortLeave/GetShortLeaveEndTime'); ?>',
@@ -118,6 +118,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/sw
                 if (responce.code == 200) {
                     $('.alert').addClass('alert-success').html(responce.msg);
                     $("#shortLeaveForm")[0].reset();
+                }else{
+                    $('.alert').addClass('alert-danger').html(responce.msg);
                 }
             }
         });

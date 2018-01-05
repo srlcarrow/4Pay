@@ -35,6 +35,22 @@
                         <input type="text" name="max_leaves_per_year" value="<?php echo $shortLeaveSetting->max_leaves_per_year ?>" class="form-control number" required>
                     </div>
                 </div>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <?php
+                        echo $form->checkBox($shortLeaveSetting, 'is_halfday_on_sameday', array('class' => 'form-control-txtbx'), array('value' => '', 'uncheckValue' => 0));
+                        ?>
+                        <span class="chkbox-lbl">Can Apply Halfday Leave on same date</span>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <?php
+                        echo $form->checkBox($shortLeaveSetting, 'is_dual_approvers', array('class' => 'form-control-txtbx'), array('value' => '', 'uncheckValue' => 0));
+                        ?>
+                        <span class="chkbox-lbl">Dual Approvers</span>
+                    </div>
+                </div>
             </div>
             <div class="footer">
                 <div class="row">
@@ -59,7 +75,7 @@
         submitHandler: function () {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo Yii::app()->baseUrl . '/Setting/UpdateShortLeaveSetting'; ?>", 
+                url: "<?php echo Yii::app()->baseUrl . '/Setting/UpdateShortLeaveSetting'; ?>",
                 data: $('#shortLeaveForm').serialize(),
                 dataType: 'json',
                 success: function (responce) {
@@ -70,5 +86,4 @@
             });
         }
     });
-
 </script>

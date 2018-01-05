@@ -85,8 +85,9 @@
     }
 
     function getShortLeaveEndTime() {
-        var timeCategoryStatus = $('#timeCategoryStatus').val();
-        if (leavePurpose == '') {
+        var noOfLeaves = $('#noOfLeaves').val();
+        if (noOfLeaves == 0) {
+            //alert('tete');
             //sweetAlert('Can Not Apply a Short Leave!', 'Please enter the purpose of the leave.');
         } else {
             $.ajax({
@@ -117,5 +118,9 @@
             }
         });
     }
-
+    
+    $('.time_picker').on('change', function () {
+        getShortLeaveEndTime();
+    });
+    
 </script>
