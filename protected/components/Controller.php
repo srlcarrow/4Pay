@@ -85,6 +85,7 @@ class Controller extends CController {
                 ->leftJoin('adm_branch br', 'empl.ref_branch_id=br.br_id')
                 ->leftJoin('adm_designation desig', 'empl.ref_designation=desig.desig_id')
                 ->leftJoin('adm_department dept', 'empl.ref_department_id=dept.dept_id')
+                ->leftJoin('adm_section as1', 'empl.ref_section_id=as1.section_id')
                 ->getText();
 
         $joinCriteria = explode("SELECT *", $joinCriteria, 2);
@@ -130,20 +131,21 @@ class Controller extends CController {
         $timezone = 5.5 * 3600;
         return $timezone;
     }
-    
+
     public static function getCountryDate() {
         $zone = 3600 * +5.5;
         $date = gmdate("Y-m-d", time() + $zone);
         return $date;
     }
-    
+
     public static function empBasicFields() {
         $reqBasicFields = array('emp.empno' => 'EMP No', 'emp.epf_no' => 'EPF No', 'emp.attendance_no' => 'Attendance No', 'emp.emp_title' => 'Title', 'emp.emp_display_name' => 'Display Name', 'emp.emp_full_name' => 'Full Name', 'emp.emp_name_with_initials' => 'Name With Initials', 'emp.emp_gender' => 'Gender');
         return $reqBasicFields;
     }
 
     public static function empEmploymentFields() {
-        
+        $reqEmploymentFields = array('br.br_name' => 'Branch', 'dept.dept_name' => 'Department', 'as1.section_name' => 'Section', 'desig.designation' => 'Designation');
+        return $reqEmploymentFields;
     }
 
     public static function attendanceFields() {

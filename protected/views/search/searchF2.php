@@ -115,6 +115,30 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                 }
             }
             ?>
+            <?php
+            if (count($reqEmploymentFields) > 0) {
+                ?>
+                <?php
+                foreach ($reqEmploymentFields as $key => $reqEmploymentField) {
+                    $ischecked = "";
+                    if (in_array($reqEmploymentField, $defaultChecked)) {
+                        $ischecked = "checked = checked";
+                    }
+                    ?>
+                    <div class="col-md-2 ">
+                        <div class="checkbox">
+
+                            <input data-label="<?php echo $reqEmploymentField; ?>" <?php echo $ischecked; ?>
+                                   name="<?php echo $key; ?>" value="1"
+                                   id="<?php echo $key; ?>"
+                                   type="checkbox">
+                            <label for="<?php echo $key; ?>"><?php echo $reqEmploymentField; ?></label>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
 
         </div>
     </div>
