@@ -841,12 +841,44 @@ label {
     background: transparent;
     border-color: transparent; }
 
+.navbar-default .navbar-brand {
+  padding: 5px 15px; }
+  .navbar-default .navbar-brand img {
+    width: 60px; }
+
 .navbar-default .navbar-nav > .open > a {
   color: rgba(0, 0, 0, 0.86);
   background-color: transparent; }
   .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
     background-color: transparent;
     color: #0288d1; }
+
+.navbar-default .dropdown.notification > a {
+  position: relative;
+  padding: 10px 5px; }
+  .navbar-default .dropdown.notification > a .bell {
+    width: 20px;
+    height: 20px;
+    display: block;
+    opcity: 0.8;
+    background: url("./../images/icon/button/20/ic_20.png") no-repeat 0 -63px; }
+  .navbar-default .dropdown.notification > a .n-count {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    line-height: 8px;
+    top: 7px;
+    right: -4px;
+    text-align: center;
+    padding: 5px 0;
+    border: 1px solid #fff;
+    display: block;
+    position: absolute;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    color: #fff;
+    background: #0288d1; }
 
 .mb-not-last-25:not(:last-child) {
   margin-bottom: 25px; }
