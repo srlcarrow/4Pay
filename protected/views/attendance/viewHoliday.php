@@ -1,6 +1,5 @@
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/holiday.css', 'screen');
-
 ?>
 
 <div class="modal fade ajaxAddCalender" id="addNewModal" tabindex="-1" role="dialog"></div>
@@ -30,11 +29,11 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
 
                                             <select class="form-control" name="year" id=""
                                                     onchange="loadCalenderData()">
-                                                <?php
-                                                $years = $this->viewYearArry();
-                                                foreach ($years as $year) {
-                                                    $selected = ($year == date('Y') ? 'selected' : '');
-                                                    ?>
+                                                        <?php
+                                                        $years = $this->viewYearArry();
+                                                        foreach ($years as $year) {
+                                                            $selected = ($year == date('Y') ? 'selected' : '');
+                                                            ?>
                                                     <option value="<?php echo $year; ?>" <?php echo $selected; ?> ><?php echo $year; ?></option>
                                                     <?php
                                                 }
@@ -52,11 +51,11 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
 
                                             <select class="form-control" name="month" id=""
                                                     onchange="loadCalenderData()">
-                                                <?php
-                                                $months = $this->getMonthList();
-                                                foreach ($months as $key => $month) {
-                                                    $selected = ($key == date('m') ? 'selected' : '');
-                                                    ?>
+                                                        <?php
+                                                        $months = $this->getMonthList();
+                                                        foreach ($months as $key => $month) {
+                                                            $selected = ($key == date('m') ? 'selected' : '');
+                                                            ?>
                                                     <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $month; ?></option>
                                                     <?php
                                                 }
@@ -71,7 +70,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Holiday Type</label>
-                                            <input type="text" class="form-control">
+                                            <input type="hidden" id="holidayTypeHiddenId" name="holidayTypeHidden" value="0">
+                                            <input type="text" id="holidayTypeId" name="holidayType" class="form-control">
+
                                         </div>
 
                                     </div>
@@ -79,7 +80,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
 
                                 <div class="row form-wrapper">
                                     <div class="col-md-12 text-right">
-                                        <button class="btn btn-primary addNewPopup" type="button">Add New</button>
+                                        <button id="btnSaveHoliType" class="btn btn-primary addNewPopup"  onclick="saveHolidayType()" type="button">Add New</button>
+                                        <button class="btn btn-primary addNewPopup"  onclick="resetHolidayType()" type="button">Reset</button>
                                     </div>
                                 </div>
 
@@ -88,28 +90,23 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
 
                             <div class="col-md-12 mt-30">
                                 <ul class="scroll">
-                                    <li>
-                                        <div class="ds-table-block mb-15">
-                                            <div class="cell">
-                                                <h5>Sunday</h5>
+                                    <?php
+                                    foreach ($holidayTypes as $type) {
+                                        ?>
+                                        <li>
+                                            <div class="ds-table-block mb-15">
+                                                <div class="cell">
+                                                    <h5><?php echo $type->holiday_type_name; ?></h5>
+                                                </div>
+                                                <div class="cell width-1 no-wrap">
+                                                    <button id="<?php echo $type->holiday_type_id; ?>" name="<?php echo $type->holiday_type_name; ?>" onclick="edit(this.id, this.name)" type="button" class="ic ic_20 ic_edit"></button>
+                                                    <button id="<?php echo $type->holiday_type_id; ?>" onclick="deleteHolidayType(this.id)" type="button" class="ic ic_20 ic_delete"></button>
+                                                </div>
                                             </div>
-                                            <div class="cell width-1 no-wrap">
-                                                <button type="button" class="ic ic_20 ic_edit"></button>
-                                                <button type="button" class="ic ic_20 ic_delete"></button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="ds-table-block mb-15">
-                                            <div class="cell">
-                                                <h5>Poya Day</h5>
-                                            </div>
-                                            <div class="cell width-1 no-wrap">
-                                                <button type="button" class="ic ic_20 ic_edit"></button>
-                                                <button type="button" class="ic ic_20 ic_delete"></button>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
                                 </ul>
                             </div>
 
@@ -156,7 +153,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
         $.ajax({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Attendance/HolidayCalendarData'; ?>",
-            data: "",
+            data: $('#search-form').serialize(),
             success: function (responce) {
                 $("#ajaxLoad").html(responce);
             }
@@ -195,20 +192,42 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
         document.getElementById("id").value = "0";
         document.getElementById("calType").value = "";
     }
-</script>
 
-<script>
+    function saveHolidayType() {
+        insert({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/Attendance/SaveHolidayTypes'; ?>",
+            data: $('#search-form').serialize(),
+            dataType: 'json',
+            success: function (responce) {
+                if (responce.code == 200) {
 
-    function ajaxAddCalenderShow() {
-        displayLoader(".ajaxAddCalender");
-        var extraData = "";
-        sendData('', extraData, 'Attendance/CalenderPopupView', function (res) {
-            $('.ajaxAddCalender').html(res);
+                }
+            }
         });
     }
 
+    function edit(id, name) {
+        document.getElementById("holidayTypeHiddenId").value = id;
+        document.getElementById("holidayTypeId").value = name;
+    }
 
-    function refeshData() {
-        location.reload();
+    function resetHolidayType() {
+        document.getElementById("holidayTypeHiddenId").value = 0;
+        document.getElementById("holidayTypeId").value = "";
+    }
+
+    function deleteHolidayType(id) {
+        insert({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/Attendance/DeleteHolidayTypes'; ?>",
+            data: {id: id},
+            dataType: 'json',
+            success: function (responce) {
+                if (responce.code == 200) {
+
+                }
+            }
+        });
     }
 </script>

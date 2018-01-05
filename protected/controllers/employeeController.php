@@ -2,6 +2,10 @@
 
 class EmployeeController extends Controller {
 
+    public function init() {
+        $this->redirectionToLogin();
+    }
+
     public function actionViewEmployee() {
         $controller = "employee";
         $action = "ViewEmployeeData";

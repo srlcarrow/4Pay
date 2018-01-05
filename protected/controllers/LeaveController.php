@@ -2,6 +2,10 @@
 
 class LeaveController extends Controller {
 
+    public function init() {
+        $this->redirectionToLogin();
+    }
+
     public function actionViewLeaveAllocation() {
         $controller = "Leave";
         $action = "ViewLeaveAllocationData";
