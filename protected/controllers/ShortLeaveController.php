@@ -41,13 +41,13 @@ class ShortLeaveController extends Controller {
         $startTime = $_POST['startTime'];
         $empId = $_POST['id'];
         $startDateTime = date('Y-m-d H:i:s', strtotime("$shtLvDate $startTime"));
-        $endDateTime = $_POST['endDateTime']; 
+        $endDateTime = $_POST['endDateTime'];
         $firstDayLeavemonth = date('Y-m-01', strtotime($shtLvDate));
         $lastDayLeavemonth = date('Y-m-t', strtotime($shtLvDate));
         $firstDayYear = date('Y-01-01', strtotime($shtLvDate));
         $lastDayYear = date('Y-12-t', strtotime($shtLvDate));
-        
-        
+
+
         $empBasic = Empbasic::model()->findByPk($empId);
         $userId = Yii::app()->user->getId();
 
@@ -55,41 +55,41 @@ class ShortLeaveController extends Controller {
         $maxLeavesPerDay = $shortLeaveSetting->max_leaves_per_day;
         $maxLvsPerMonth = $shortLeaveSetting->max_leaves_per_month;
         $MaxLeavesPerYear = $shortLeaveSetting->max_leaves_per_year;
-        
-        
+
+
         $savedSLeavesRequestedDay = Yii::app()->db->createCommand("SELECT SUM(no_of_short_leaves) as sumSLDay FROM short_leave WHERE ref_emp_id ='" . $empId . "' and final_status !=2 and short_leave_date ='" . $shtLvDate . "'")->queryAll();
         $savedSLeavesRequestedDayTime = Yii::app()->db->createCommand("SELECT * FROM short_leave WHERE ref_emp_id ='" . $empId . "' and final_status !=2 and short_leave_date ='" . $shtLvDate . "' and ((start_time<='" . $startDateTime . "' and start_time>='" . $endDateTime . "') OR (end_time<='" . $endDateTime . "' and end_time>='" . $startDateTime . "') OR (start_time='" . $startDateTime . "' and end_time='" . $endDateTime . "')) ")->queryAll();
         $savedSLeavesMonth = Yii::app()->db->createCommand("SELECT * FROM short_leave WHERE ref_emp_id ='" . $empId . "' and final_status !=2 and short_leave_date between '" . $firstDayLeavemonth . "' and '" . $lastDayLeavemonth . "'")->queryAll();
-        $savedSLeavesYear = Yii::app()->db->createCommand("SELECT * FROM short_leave WHERE ref_emp_id ='" . $empId . "' and final_status !=2 and short_leave_date between '" . $firstDayYear . "' and '" . $lastDayYear . "'")->queryAll();    
-               
+        $savedSLeavesYear = Yii::app()->db->createCommand("SELECT * FROM short_leave WHERE ref_emp_id ='" . $empId . "' and final_status !=2 and short_leave_date between '" . $firstDayYear . "' and '" . $lastDayYear . "'")->queryAll();
+
         $savedSLeavesRequestedDayCount = 0;
         if (count($savedSLeavesRequestedDay) > 0) {
             $savedSLeavesRequestedDayCount = $savedSLeavesRequestedDay[0]['sumSLDay'];
         }
-        
+
         $noOfSavedLeavesMonth = 0;
         foreach ($savedSLeavesMonth as $SvdShrtLvs) {
-            $noOfSavedLeavesMonth = $noOfSavedLeavesMonth + $SvdShrtLvs['no_of_short_leaves']; 
+            $noOfSavedLeavesMonth = $noOfSavedLeavesMonth + $SvdShrtLvs['no_of_short_leaves'];
         }
-        
+
         $noOfSavedLeavesYear = 0;
         foreach ($savedSLeavesYear as $SvdShrtLvsYR) {
             $noOfSavedLeavesYear = $noOfSavedLeavesYear + $SvdShrtLvsYR['no_of_short_leaves'];
         }
-        
+
         $errorTag = 0;
         if (count($savedSLeavesRequestedDayTime) > 0) {
             $errorTag = 1;
             $returnMsg = "You have alreday applied a short leave for the same date and time!";
-        }elseif (($savedSLeavesRequestedDayCount + $_POST['noOfLeaves']) > $maxLeavesPerDay) {
+        } elseif (($savedSLeavesRequestedDayCount + $_POST['noOfLeaves']) > $maxLeavesPerDay) {
             $errorTag = 1;
             $returnMsg = "There are no enough short leaves to apply for the selected day!";
-        }elseif (($noOfSavedLeavesMonth + $_POST['noOfLeaves']) > $maxLvsPerMonth) {
+        } elseif (($noOfSavedLeavesMonth + $_POST['noOfLeaves']) > $maxLvsPerMonth) {
             $errorTag = 1;
-            $returnMsg = "There are no enough short leaves to apply for selected month!"; 
-        }elseif (($noOfSavedLeavesYear + $_POST['noOfLeaves']) > $MaxLeavesPerYear) {
+            $returnMsg = "There are no enough short leaves to apply for selected month!";
+        } elseif (($noOfSavedLeavesYear + $_POST['noOfLeaves']) > $MaxLeavesPerYear) {
             $errorTag = 1;
-            $returnMsg = "Your Short Leave allocation is not enough for the request!";     
+            $returnMsg = "Your Short Leave allocation is not enough for the request!";
         }
 
         if ($errorTag == 0) {
@@ -176,6 +176,12 @@ class ShortLeaveController extends Controller {
         if ($shortLeave->save(false)) {
             $this->msgHandler(200, "Successfully Saved...");
         }
+    }
+
+    public function actionViewEmpShortLeaveHistory() {
+        $empId = $_POST['empId'];
+        $shortLeavesHistroy = ShortLeave::model()->findAllByAttributes(array('ref_emp_id' => $empId));
+        $this->renderPartial('ajaxLoad/viewEmpShortLeaveHistory', array('shortLeavesHistroy' => $shortLeavesHistroy));
     }
 
 }

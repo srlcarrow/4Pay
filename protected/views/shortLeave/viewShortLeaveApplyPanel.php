@@ -67,7 +67,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/sw
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button type="button" class="btn btn-default btn-close">Close</button>
+                        <button type="button" onclick="colseShortLeave()" class="btn btn-default btn-close">Close</button>
                         <button type="submit" class="btn btn-primary">Apply</button>
                     </div>
                 </div>
@@ -77,7 +77,17 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/sw
     </div>
 </div>
 
+<div id="ajaxLoad" class="col s12 ajaxLoad">
+
+</div>
+
+
 <script>
+
+    $(document).ready(function (e) {
+        empShortLeaveHistory(<?php echo $empId; ?>);
+    });
+
     $("#shortLeaveForm").validate({
         submitHandler: function () {
             requestShortLeave();
@@ -118,11 +128,27 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/sw
                 if (responce.code == 200) {
                     $('.alert').addClass('alert-success').html(responce.msg);
                     $("#shortLeaveForm")[0].reset();
-                }else{
+                    empShortLeaveHistory(<?php echo $empId; ?>);
+                } else {
                     $('.alert').addClass('alert-danger').html(responce.msg);
                 }
             }
         });
+    }
+
+    function empShortLeaveHistory(id) {
+        fetch({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/ShortLeave/ViewEmpShortLeaveHistory'; ?>",
+            data: {empId: <?php echo $empId; ?>},
+            success: function (responce) {
+                $("#ajaxLoad").html(responce);
+            }
+        });
+    }
+
+    function colseShortLeave() {
+        window.location.href = '<?php echo Yii::app()->baseUrl . '/Leave/viewManageLeave'; ?>';
     }
 
     $('.time_picker').on('change', function () {
