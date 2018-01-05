@@ -1,6 +1,6 @@
 /*table*/
 table.table > thead {
-  background: $secondaryFontColor;
+  background: $primaryDark;
   color: $white;
 }
 
@@ -36,4 +36,7 @@ table.cm-table {
   th, td {
     white-space: nowrap;
   }
+}
+.table-bordered {
+	border : 1px solid #fff;
 }

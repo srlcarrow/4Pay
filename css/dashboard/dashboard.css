@@ -428,12 +428,12 @@ ul.ot-hours-status li:not(:last-child) {
 }
 
 .innerCircle {
-    width: 154px;
-    height: 154px;
+    width: 140px;
+    height: 140px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    background: #168ca8;
+    /*background: #fff;*/
     position: absolute;
     padding: 50px 0;
     text-align: center;
@@ -442,7 +442,7 @@ ul.ot-hours-status li:not(:last-child) {
 }
 
 .text-wrapper h3 {
-    color: #fff;
+    /*color: #fff;*/
     font-size: 30px;
 }
 
@@ -454,7 +454,7 @@ ul.ot-hours-status li:not(:last-child) {
 .text-wrapper h6.total {
     margin-top: 5px;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.56);
+    /*color: rgba(255, 255, 255, 0.56);*/
 }
 
 #turnover {

@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
                         <button type="button" onclick="searchData(1)" class="btn btn-search">Search</button>
                     </div>
                     <div class="item width-1">
-                        <button type="button" class="btn btn-advance">Advance</button>
+                        <button type="button" class="btn btn-advance">Advanced</button>
                     </div>
                 </div>
 

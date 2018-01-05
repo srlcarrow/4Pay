@@ -8,3 +8,4 @@ return array (
   'buildRelations' => '1',
   'commentsAsLabels' => '0',
 );
+

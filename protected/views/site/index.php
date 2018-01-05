@@ -367,7 +367,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
                 },
                 width: '100%',
                 height: 350,
-                colors: ['#168ca8', '#4fdb9b'],
+                colors: ['#0288d1', '#0F9D58'],
                 chartArea: {width: '90%', height: '84%'},
                 theme: 'material',
                 legend: {
@@ -533,8 +533,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
     function pieETF() {
 
         var data = [
-            {label: 'Male 58%', value: 123, color: '#4fdb9b'},
-            {label: 'Female 42%', value: 102, color: '#49b3cc'}
+            {label: 'Male 58%', value: 123, color: '#37BBC8'},
+            {label: 'Female 42%', value: 102, color: '#F5B1C6'}
         ];
         pieEpfEtp = createPieChartEPFAndETF('pieEPF_ETF', data);
     }
@@ -544,12 +544,12 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
             {
                 "label": "Early Leave",
                 "value": 50,
-                "color": "#168ca8"
+                "color": "#ff5b2c"
             },
             {
                 "label": "Late Amount",
                 "value": 180,
-                "color": "#4fdb9b"
+                "color": "#ffc62c"
             }
         ];
 
