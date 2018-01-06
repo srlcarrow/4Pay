@@ -85,6 +85,10 @@
             <?php echo $content; ?>
         </div>
 
+        <div class="cm-alert">
+            <div class="message">Save Successfuly</div>
+        </div>
+
         <!--##### Scrollbar #####-->
         <script src="<?php echo Yii::app()->baseUrl . '/js/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js'; ?>"></script>
 

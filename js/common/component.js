@@ -77,7 +77,8 @@
             }
         })
 
-    })
+    });
+
 
 })();
 
@@ -184,3 +185,59 @@ function insert(_option) {
         complete: option.complete
     });
 }
+
+function Alert() {
+
+    var alert = $('.cm-alert'),
+        message = alert.find('.message');
+
+    function getCenter() {
+        var w = message.innerWidth();
+        var wnW = $(window)[0].innerWidth;
+
+        alert.find('.message').css('left', ((wnW / 2 ) - (w / 2)) + 'px');
+    }
+
+    function close() {
+        setTimeout(function () {
+            alert.find('.message').fadeOut('fast', function () {
+                alert.hide();
+            });
+        }, 4000);
+    }
+
+    function show() {
+        alert.show();
+        alert.find('.message').show();
+    }
+
+    return {
+        success: function (msg) {
+            message.text(msg);
+            message.attr('class', 'message success');
+            show();
+            getCenter();
+            close();
+        },
+        error: function (msg) {
+            message.text(msg);
+            message.attr('class', 'message error');
+            show();
+            getCenter();
+            close();
+        },
+        info: function (msg) {
+            message.text(msg);
+            message.attr('class', 'message info');
+            show();
+            getCenter();
+            close();
+        }
+    };
+
+    // Alert().success('sacve Successfuly !');
+    // Alert().error('Something was wrong!');
+    // Alert().info('Something was wrong!');
+
+}
+

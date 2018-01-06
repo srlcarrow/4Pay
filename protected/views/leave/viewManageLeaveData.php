@@ -16,35 +16,53 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                     <div class="col-md-12">
                         <table class="table table-bordered">
                             <thead>
-                                <tr>
-                                    <th><input type="checkbox" class="select-All"></th>
-                                    <th>EPF No</th>
-                                    <th>EMP No</th>
-                                    <th>Name</th>
-                                    <th class="tb-action">Apply Leave</th>
-                                    <th class="tb-action">Apply S-Leave</th>
+                            <tr>
+                                <th class="th-checkbox">
 
-                                </tr>
+                                    <div class="checkbox mt-0 mb-0">
+                                        <input id="id_all" type="checkbox" class="select-All">
+                                        <label for="id_all"></label>
+                                    </div>
+                                </th>
+                                <th>EPF No</th>
+                                <th>EMP No</th>
+                                <th>Name</th>
+                                <th class="tb-action">Leave</th>
+                                <th class="tb-action">Short Leave</th>
+
+                            </tr>
                             </thead>
 
                             <tbody>
+                            <?php
+                            foreach ($employeeData
+
+                            as $employee) {
+                            ?>
+                            <tr class="ch_bx">
+                                <td>
+                                    <div class="checkbox mt-0 mb-0">
+                                        <input type="checkbox" id="id_<?php echo $employee->emp_id; ?>" class="check_sc"
+                                               name="selectedIds[]" value="<?php echo $employee->emp_id; ?>">
+
+                                        <label for="id_<?php echo $employee->emp_id; ?>"></label>
+                                    </div>
+
+                                </td>
+                                <td><?php echo $employee->epf_no; ?></td>
+                                <td><?php echo $employee->empno; ?></td>
+                                <td><?php echo $employee->emp_name_with_initials; ?></td>
+                                <td class="tb-action text-right">
+                                    <button type="button" class="btn btn-sm btn-primary">Apply</button>
+                                </td>
+                                <td class="tb-action text-right">
+                                    <button type="button" onclick="applyShortLeave('<?php echo $employee->emp_id; ?>')"
+                                            class="btn btn-sm btn-primary">Apply
+                                    </button>
+                                </td>
                                 <?php
-                                foreach ($employeeData as $employee) {
-                                    ?>
-                                    <tr class="ch_bx">
-                                        <td><input type="checkbox"  class="check_sc" name="selectedIds[]" value="<?php echo $employee->emp_id; ?>"></td>
-                                        <td><?php echo $employee->epf_no; ?></td>
-                                        <td><?php echo $employee->empno; ?></td>
-                                        <td><?php echo $employee->emp_name_with_initials; ?></td>
-                                        <td class="tb-action text-right">
-                                            <button type="button" class="btn btn-sm btn-warning">Apply</button>                                           
-                                        </td>
-                                        <td class="tb-action text-right">
-                                            <button type="button" onclick="applyShortLeave('<?php echo $employee->emp_id; ?>')" class="btn btn-sm btn-danger">Apply</button>                                         
-                                        </td>
-                                        <?php
-                                    }
-                                    ?>
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -68,7 +86,7 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
             </div>
 
         </div>
-    </div>   
+    </div>
 </div>
 <?php $this->endWidget(); ?>
 
@@ -99,5 +117,5 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
     function applyShortLeave(id) {
         window.location.href = '<?php echo Yii::app()->baseUrl . '/ShortLeave/ViewShortLeaveApplyPanel/id/'; ?>' + id;
     }
-    
+
 </script>
