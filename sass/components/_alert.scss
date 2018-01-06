@@ -1,0 +1,28 @@
+
+.cm-alert {
+
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba($black, 0.10);
+  z-index: 99;
+
+  .message {
+    top: calc(40%);
+    position: absolute;
+    font-size: $base-font-size;
+    color: $white;
+    padding: 10px 80px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background: $success;
+
+    &.error {
+      background: $error;
+    }
+  }
+}

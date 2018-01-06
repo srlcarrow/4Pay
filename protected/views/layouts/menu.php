@@ -45,7 +45,10 @@ $mainLinks = AdmLinks::model()->findAllByAttributes(array('lnk_parent_id' => 0, 
             <li class="dropdown user">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="false">
-                    <i></i>
+
+                    <div class="avatar ">
+                        <img src="<?php echo Yii::app()->baseUrl?>/images/avatar/30/avatar.png" alt="">
+                    </div>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">

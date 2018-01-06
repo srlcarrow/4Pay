@@ -338,7 +338,7 @@
             success: function (responce) {
                 if (responce.code == 200) {
                     //Message.success(responce.msg);
-                    $('.alert').addClass('alert-success').html(responce.msg);
+                    Alert().success(responce.msg);
                     $("#formEmployee")[0].reset();
                 }
             }
