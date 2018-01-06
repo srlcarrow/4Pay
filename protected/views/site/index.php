@@ -133,7 +133,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
             <div class="card-content">
                 <div class="row">
                     <div class="col-md-12">
-                        <h5 class=" mb-15">Lorem ipsum</h5>
+                        <h5 class=" mb-15">Leave Amounts</h5>
                     </div>
                     <div class="col-md-12 text-center">
                         <div id="ot-hours"></div>
