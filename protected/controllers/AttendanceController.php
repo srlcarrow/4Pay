@@ -47,9 +47,8 @@ class AttendanceController extends Controller {
     }
 
     public function actionViewHolidayCalendar() {
-//        $calendars = ConfigHolidayCalanders::model()->findAll();
-//        $isEnableMultipleCalendars = Payroll::getPayrollSetting('DEMC');
-        $this->render('viewHoliday');
+        $holidayTypes = AdmConfigHolidayType::model()->findAll();
+        $this->render('viewHoliday', array('holidayTypes' => $holidayTypes));
     }
 
     public function actionHolidayCalendarData() {
@@ -64,6 +63,21 @@ class AttendanceController extends Controller {
         $days = Controller::getDatesForCalendar($reqYear, $reqMonth);
 
         $this->renderPartial('ajaxLoad/ViewHolidayData', array('days' => $days, 'reqYear' => $reqYear, 'reqMonth' => $reqMonth));
+    }
+
+    public function actionSaveHolidayTypes() {
+        $holiType = new AdmConfigHolidayType();
+        $holiType->holiday_type_name = $_POST['holidayType'];
+        if ($holiType->save(false)) {
+            $this->msgHandler(200, "Save Successfull...");
+        }
+    }
+
+    public function actionDeleteHolidayTypes() {
+        AdmConfigHolidayType::model()->deleteByPk($_POST['id']);
+        if ($holiType->save(false)) {
+            $this->msgHandler(200, "Delete Successfull...");
+        }
     }
 
 }

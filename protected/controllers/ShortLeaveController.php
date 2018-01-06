@@ -2,6 +2,10 @@
 
 class ShortLeaveController extends Controller {
 
+    public function init() {
+        $this->redirectionToLogin();
+    }
+
     public function actionViewShortLeaveApplyPanel() {
         $empId = $_REQUEST['id'];
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
