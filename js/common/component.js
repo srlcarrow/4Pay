@@ -77,7 +77,20 @@
             }
         })
 
-    })
+    });
+
+
+    setInterval(function () {
+        console.log('yes')
+        // $(document).find('.alert').each(function () {
+        //     var $this = $(this);
+        //
+        //     if($this.hasClass('alert-danger')) {
+        //         console.log('yes')
+        //     }
+        // });
+
+    },100);
 
 })();
 
@@ -182,3 +195,4 @@ function insert(_option) {
         complete: option.complete
     });
 }
+

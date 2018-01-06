@@ -112,3 +112,10 @@
     margin-bottom: 20px;
   }
 }
+
+span.error-val {
+  color: $warnColor;
+  font-size: 12px;
+  font-weight: $font-weight-regular;
+  padding: 4px 0;
+}

@@ -41,7 +41,19 @@ $mainLinks = AdmLinks::model()->findAllByAttributes(array('lnk_parent_id' => 0, 
                     <li><a href="#">Lorem ipsum.</a></li>
                 </ul>
             </li>
-            <li><a href="<?php echo Yii::app()->request->baseUrl . '/Site/Logout' ?>">Logout</a></li>
+
+            <li class="dropdown user">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">
+                    <i></i>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="<?php echo Yii::app()->request->baseUrl . '/Site/Logout' ?>">Logout</a></li>
+                </ul>
+            </li>
+
+
         </ul>
 
     </div><!-- /.container-fluid -->

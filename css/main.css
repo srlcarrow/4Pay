@@ -439,6 +439,12 @@ ul {
     padding: 15px;
     margin-bottom: 20px; }
 
+span.error-val {
+  color: #eb5b03;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 4px 0; }
+
 /*Card*/
 .card {
   position: relative;
@@ -892,6 +898,20 @@ label {
     border-radius: 10px;
     color: #fff;
     background: #0288d1; }
+
+.navbar-default .dropdown.user > a {
+  position: relative;
+  padding: 12px 20px; }
+  .navbar-default .dropdown.user > a i {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    opacity: 0.7;
+    background: url("./../images/icon/all-icon-300x150.png") no-repeat -16px 0; }
+
+.navbar-default .dropdown.user .dropdown-menu {
+  max-width: 0; }
 
 .mb-not-last-25:not(:last-child) {
   margin-bottom: 25px; }
