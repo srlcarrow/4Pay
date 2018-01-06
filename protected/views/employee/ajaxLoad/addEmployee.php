@@ -3,7 +3,7 @@
         <div class="card">
 
             <div class="card-header">
-                <h1>Add Employees </h1>
+                <h1>Add Employees</h1>
             </div>
 
             <div class="card-content">
@@ -294,7 +294,10 @@
 </div>
 
 <script>
-
+    $(document).ready(function () {
+        loadSections();
+    });
+    
     $("#formEmployee").validate({
         submitHandler: function () {
             saveEmployee();
@@ -322,6 +325,7 @@
                         );
                     }
                     setTimeout(function () {
+                        $("#section > [value=" + '<?php echo $employment->ref_section_id; ?>' + "]").attr("selected", "true");
                         Select.init();
                     }, 200)
                 }
@@ -337,7 +341,6 @@
             dataType: 'json',
             success: function (responce) {
                 if (responce.code == 200) {
-                    //Message.success(responce.msg);
                     $('.alert').addClass('alert-success').html(responce.msg);
                     $("#formEmployee")[0].reset();
                 }

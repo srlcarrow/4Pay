@@ -18,9 +18,10 @@ class AttendanceController extends Controller {
         $action = "ViewAttendanceDataReport";
 
         $reqBasicFields = $this->empBasicFields();
+        $reqEmploymentFields = $this->empEmploymentFields();
         $reqAttendanceFields = $this->attendanceFields();
         $defaultChecked = array('emp.empno' => 'EMP No', 'emp.epf_no' => 'EPF No', 'emp.emp_name_with_initials' => 'Name With Initials', 'aa.day' => 'Day', 'aa.date_in' => 'Date In', 'aa.punch_in' => 'Punch In', 'aa.date_out' => 'Date Out', 'aa.punch_out' => 'Punch Out');
-        $this->render('/search/searchF2', array('controller' => $controller, 'action' => $action, 'reqBasicFields' => $reqBasicFields, 'reqAttendanceFields' => $reqAttendanceFields, 'defaultChecked' => $defaultChecked));
+        $this->render('/search/searchF2', array('controller' => $controller, 'action' => $action, 'reqBasicFields' => $reqBasicFields, 'reqAttendanceFields' => $reqAttendanceFields, 'reqEmploymentFields' => $reqEmploymentFields, 'defaultChecked' => $defaultChecked));
     }
 
     public function actionViewAttendanceDataReport() {
@@ -60,6 +61,7 @@ class AttendanceController extends Controller {
         }
 
         $days = Controller::getDatesForCalendar($reqYear, $reqMonth);
+
         $this->renderPartial('ajaxLoad/ViewHolidayData', array('days' => $days, 'reqYear' => $reqYear, 'reqMonth' => $reqMonth));
     }
 

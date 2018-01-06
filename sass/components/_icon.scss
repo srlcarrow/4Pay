@@ -7,14 +7,14 @@
   border: none;
   background-color: transparent;
 
-  &.ic_20 {
+  &.ic-20 {
     width: 20px;
     height: 20px;
     background-image: url("./../images/icon/button/20/ic_20.png");
     background-repeat: no-repeat;
     margin-left: 5px;
 
-    &.ic_edit {
+    &.ic-edit {
       background-position: 0 0;
 
       &:hover {
@@ -22,7 +22,7 @@
       }
     }
 
-    &.ic_delete {
+    &.ic-delete {
       background-position: 0 -21px;
 
       &:hover {
@@ -30,7 +30,7 @@
       }
     }
 
-    &.ic_view {
+    &.ic-view {
       background-position: 0 -42px;
 
       &:hover {

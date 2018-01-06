@@ -1,8 +1,14 @@
 <div class="card flat mt-30">
     <div class="card-content">
         <div class="row">
-
-
+            <?php $form = $this->beginWidget('CActiveForm', array('id' => 'shortLeaveForm')); ?>
+            <?php
+            $shtlvDuration = $shortLeaveSetting->short_lv_duration;
+            $maxLeavsPerDay = $shortLeaveSetting->max_leaves_per_day;
+            ?> 
+            <div class="card-header">
+                <h1>Short Leave Requisition</h1>
+            </div>
             <div class="row form-wrapper">
                 <div class="col-md-8">
                     <div class="form-group">
@@ -25,11 +31,10 @@
                     <div class="form-group">
                         <label>Duration</label>                               
                         <select name="noOfLeaves" id="noOfLeaves" onchange="selectNoLeaves()" class="form-control required" required>
-                            <option value=""></option> 
-                            <option value="">30 mins</option> 
-                            <option value="">60 mins</option> 
-                            <option value="">90 mins</option> 
-                            <option value="">120 mins</option> 
+                            <option value="0">Select Duration</option>
+                            <?php for ($x = 1; $x <= $maxLeavsPerDay; $x++) { ?>
+                                <option value="<?php echo $x; ?>"><?php echo ($x * $shtlvDuration) . ' mins'; ?></option>
+                            <?php } ?>    
                         </select>
                     </div>                  
                 </div>
@@ -37,7 +42,7 @@
                 <div class="col-md-4 ">
                     <div class="form-group">
                         <label>Start Time</label>
-                        <input type="text" name="startTime" id="startTime" value="" class="input-timepicker  form-control required">                            
+                        <input type="text" name="startTime" id="startTime" value="" class="input-timepicker time_picker form-control" required>                            
                     </div>
                 </div>
 
@@ -49,16 +54,90 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 no-select loadAjaxDate">
-
+            <div class="footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert "></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button type="button" class="btn btn-default btn-close">Close</button>
+                        <button type="submit" class="btn btn-primary">Apply</button>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-12 text-right">
-                <button class="btn btn-primary btnSave">Apply</button>
-            </div>
+            <?php $this->endWidget(); ?>
 
         </div>
     </div>
 </div>
 
+<div id="ajaxLoad-sl" class="col s12 ajaxLoad-sl"></div>
 
+<script>
+    $(document).ready(function (e) {
+        empShortLeaveHistory(<?php echo $empId; ?>);
+    });
+    
+    $("#shortLeaveForm").validate({
+        submitHandler: function () {
+            requestShortLeave();
+        }
+    });
+
+    function selectNoLeaves() {
+        getShortLeaveEndTime();
+    }
+
+    function getShortLeaveEndTime() {
+        var noOfLeaves = $('#noOfLeaves').val();
+        if (noOfLeaves == 0) {
+            //alert('tete');
+            //sweetAlert('Can Not Apply a Short Leave!', 'Please enter the purpose of the leave.');
+        } else {
+            $.ajax({
+                url: '<?php echo $this->createUrl('ShortLeave/GetShortLeaveEndTime'); ?>',
+                data: $('#shortLeaveForm').serialize() + "&id=" + <?php echo $empId; ?>,
+                type: 'POST',
+                dataType: 'json',
+                success: function (responce) {
+                    $("#endTime").val(responce.shortLvEndTime);
+                    $("#endDateTime").val(responce.shortLvEndDateTime);
+
+                }
+            });
+        }
+    }
+
+    function requestShortLeave() {
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/ShortLeave/RequestShortLeave'; ?>",
+            data: $('#shortLeaveForm').serialize() + '&id=<?php echo $empId; ?>',
+            dataType: 'json',
+            success: function (responce) {
+                if (responce.code == 200) {
+                    $('.alert').addClass('alert-success').html(responce.msg);
+                    $("#shortLeaveForm")[0].reset();
+                }
+            }
+        });
+    }
+    
+    function empShortLeaveHistory(id) {
+        fetch({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/ShortLeave/ViewEmpShortLeaveHistory'; ?>",
+            data: {empId: <?php echo $empId; ?>},
+            success: function (responce) {
+                $("#ajaxLoad-sl").html(responce);
+            }
+        });
+    }
+    
+    $('.time_picker').on('change', function () {
+        getShortLeaveEndTime();
+    });
+    
+</script>

@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label>Duration</label>                               
                         <select name="noOfLeaves" id="noOfLeaves" onchange="selectNoLeaves()" class="form-control required" required>
-                            <option value=""></option>
+                            <option value="">Select Duration</option>
                             <?php for ($x = 1; $x <= $maxLeavsPerDay; $x++) { ?>
                                 <option value="<?php echo $x; ?>"><?php echo ($x * $shtlvDuration) . ' mins'; ?></option>
                             <?php } ?>    
@@ -42,7 +42,7 @@
                 <div class="col-md-4 ">
                     <div class="form-group">
                         <label>Start Time</label>
-                        <input type="text" name="startTime" id="startTime" value="" class="input-timepicker  form-control required">                            
+                        <input type="text" name="startTime" id="startTime" value="" class="input-timepicker time_picker form-control" required>                            
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button type="button" class="btn btn-default btn-close">Close</button>
+                        <button type="button" onclick="colseShortLeave()" class="btn btn-default btn-close">Close</button>
                         <button type="submit" class="btn btn-primary">Apply</button>
                     </div>
                 </div>
@@ -72,44 +72,79 @@
     </div>
 </div>
 
+<div id="ajaxLoad" class="col s12 ajaxLoad"></div>
+
+
 <script>
+    $(document).ready(function (e) {
+        empShortLeaveHistory(<?php echo $empId; ?>);
+    });
+
     $("#shortLeaveForm").validate({
         submitHandler: function () {
             requestShortLeave();
         }
     });
-    
+
     function selectNoLeaves() {
         getShortLeaveEndTime();
     }
 
     function getShortLeaveEndTime() {
-        $.ajax({
-            url: '<?php echo $this->createUrl('ShortLeave/GetShortLeaveEndTime'); ?>',
-            data: $('#shortLeaveForm').serialize() + "&id=" + <?php echo $empId; ?>,
-            type: 'POST',
-            dataType: 'json',
-            success: function (responce) {
-                $("#endTime").val(responce.shortLvEndTime);
-                $("#endDateTime").val(responce.shortLvEndDateTime);
+        var noOfLeaves = $('#noOfLeaves').val();
+        if (noOfLeaves == 0) {
+            //alert('tete'); 
+            sweetAlert('Can Not Apply a Short Leave!', 'Please enter the purpose of the leave.');
+        } else {
+            $.ajax({
+                url: '<?php echo $this->createUrl('ShortLeave/GetShortLeaveEndTime'); ?>',
+                data: $('#shortLeaveForm').serialize() + "&id=" + <?php echo $empId; ?>,
+                type: 'POST',
+                dataType: 'json',
+                success: function (responce) {
+                    $("#endTime").val(responce.shortLvEndTime);
+                    $("#endDateTime").val(responce.shortLvEndDateTime);
 
-            }
-        });
+                }
+            });
+        }
     }
-    
+
     function requestShortLeave() {
         $.ajax({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/ShortLeave/RequestShortLeave'; ?>",
             data: $('#shortLeaveForm').serialize() + '&id=<?php echo $empId; ?>',
             dataType: 'json',
-            success: function (responce) { 
+            success: function (responce) {
                 if (responce.code == 200) {
                     $('.alert').addClass('alert-success').html(responce.msg);
                     $("#shortLeaveForm")[0].reset();
+                    empShortLeaveHistory(<?php echo $empId; ?>);
+                } else {
+                    $('.alert').addClass('alert-danger').html(responce.msg);
                 }
             }
         });
     }
-    
+
+    function empShortLeaveHistory(id) {
+        fetch({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/ShortLeave/ViewEmpShortLeaveHistory'; ?>",
+            data: {empId: <?php echo $empId; ?>},
+            success: function (responce) {
+                $("#ajaxLoad").html(responce);
+            }
+        });
+    }
+
+    function colseShortLeave() {
+        window.location.href = '<?php echo Yii::app()->baseUrl . '/Leave/viewManageLeave'; ?>';
+    }
+
+    $('.time_picker').on('change', function () {
+        getShortLeaveEndTime();
+    });
+
 </script>
