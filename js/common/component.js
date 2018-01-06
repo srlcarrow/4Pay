@@ -203,7 +203,7 @@ function Alert() {
             alert.find('.message').fadeOut('fast', function () {
                 alert.hide();
             });
-        }, 4000);
+        }, 2500);
     }
 
     function show() {
@@ -213,25 +213,25 @@ function Alert() {
 
     return {
         success: function (msg) {
-            message.text(msg);
+            message.html(msg);
             message.attr('class', 'message success');
             show();
             getCenter();
             close();
         },
         error: function (msg) {
-            message.text(msg);
+            message.html(msg);
             message.attr('class', 'message error');
             show();
             getCenter();
             close();
         },
-        info: function (msg) {
-            message.text(msg);
+        loading: function () {
+            var loader = "<div><img src='" + BASE_URL + "/images/loader/loading.gif'/><span>Please wait...</span></div>";
+            message.html(loader);
             message.attr('class', 'message info');
             show();
             getCenter();
-            close();
         }
     };
 

@@ -7,7 +7,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba($black, 0.10);
+  background: rgba($black, 0.40);
   z-index: 99;
 
   .message {
@@ -15,11 +15,23 @@
     position: absolute;
     font-size: $base-font-size;
     color: $white;
-    padding: 10px 80px;
+    padding: 12px 80px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     background: $success;
+
+    &.info {
+      background: $white;
+      padding: 10px 60px 10px 15px;
+      color: rgba($primaryFontColor,$lighten);
+      span {
+        margin-left:10px;
+      }
+      img  {
+        width: 30px;
+      }
+    }
 
     &.error {
       background: $error;

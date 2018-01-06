@@ -96,7 +96,8 @@
                             <div class="form-group">
                                 <label>Date of Birth</label>
 
-                                <input type="text" name="emp_dob" value="<?php echo $model->emp_dob; ?>" class="input-datepicker form-control">
+                                <input type="text" name="emp_dob" value="<?php echo $model->emp_dob; ?>"
+                                       class="input-datepicker form-control">
 
                             </div>
                         </div>
@@ -198,7 +199,9 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Date of Joined</label>
-                                <input type="text" name="empl_joined_date" value="<?php echo $employment->empl_joined_date; ?>" class="input-datepicker form-control" required>
+                                <input type="text" name="empl_joined_date"
+                                       value="<?php echo $employment->empl_joined_date; ?>"
+                                       class="input-datepicker form-control" required>
 
                             </div>
                         </div>
@@ -292,7 +295,7 @@
     $(document).ready(function () {
         loadSections();
     });
-    
+
     $("#formEmployee").validate({
         submitHandler: function () {
             saveEmployee();
@@ -329,6 +332,9 @@
     }
 
     function saveEmployee() {
+
+        Alert().loading();
+
         insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/SaveEmployee'; ?>",

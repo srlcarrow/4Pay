@@ -798,18 +798,26 @@ table.cm-table th, table.cm-table td {
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 99; }
   .cm-alert .message {
     top: calc(40%);
     position: absolute;
     font-size: 14px;
     color: #fff;
-    padding: 10px 80px;
+    padding: 12px 80px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     background: #09ff6e; }
+    .cm-alert .message.info {
+      background: #fff;
+      padding: 10px 60px 10px 15px;
+      color: rgba(0, 0, 0, 0.86); }
+      .cm-alert .message.info span {
+        margin-left: 10px; }
+      .cm-alert .message.info img {
+        width: 30px; }
     .cm-alert .message.error {
       background: #ff3820; }
 
