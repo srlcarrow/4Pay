@@ -274,11 +274,6 @@
                         <div class="cm-message message"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert "></div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-12 text-right">
                             <button type="button" onclick="colseEmployee()" class="btn btn-default btn-close">Close
                             </button>
@@ -341,7 +336,7 @@
             dataType: 'json',
             success: function (responce) {
                 if (responce.code == 200) {
-                    $('.alert').addClass('alert-success').html(responce.msg);
+                    Alert().success(responce.msg);
                     $("#formEmployee")[0].reset();
                 }
             }
