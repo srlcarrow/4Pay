@@ -1,0 +1,257 @@
+<?php $form = $this->beginWidget('CActiveForm', array('id' => 'leaveData')); ?>
+<div class="row">
+
+
+    <div class="col-md-4">
+        <div class="row form-wrapper">
+            <div class="col-md-12 form-group">
+                <label for="">Purpose</label>
+                <textarea name="lvPurpose" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+
+        <div class="row form-wrapper">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input id="startDate" name="startDate" readonly="readonly" type="text" class="start-date form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-wrapper">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input id="endDate" name="endDate" readonly="readonly" type="text" class="end-date form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <?php
+        if ($leaveTypeData->is_enable_coverup == 1) {
+            ?>
+            <div class="row form-wrapper">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Cover Up</label>
+                        <div class="dropdown_list">
+
+                            <div class="search-area">
+                                <input id="coverUp" type="text" value="" name="coverUp" onkeyup="coverUpSearch()" class="drop-input-search form-control">
+                            </div>
+
+                            <ul id="empLoad" class="drop-result">
+                                <!--                                <li data-id="42">
+                                                                    <h5>Saman Kumara</h5>
+                                                                    <h6>UI Design</h6>
+                                                                </li>
+                                                                <li data-id="45">
+                                                                    <h5>Kasun Bandara</h5>
+                                                                    <h6>UI Design</h6>
+                                                                </li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+
+        <?php
+        if ($leaveTypeData->rel_leavetype->is_available_attachments == 1) {
+            ?>
+            <div class="row form-wrapper">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">Attachment</label>
+                        <input type="file" id="">
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+    </div>
+
+    <div class="col-md-4 no-select loadAjaxDate">
+
+    </div>
+
+    <div class="col-md-12 text-right">
+        <button class="btn btn-primary btnSave">Save</button>
+    </div>
+
+</div>
+<?php $this->endWidget(); ?>
+
+<script>
+
+    var coverupId = null;
+
+    function loadDates() {
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var selectedLvType = $("#type option:selected").val();
+
+        fetch({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewLeaveDates'; ?>",
+            data: {startDate: startDate, endDate: endDate, selectedLvType: selectedLvType},
+            success: function (responce) {
+                $(".loadAjaxDate").html(responce);
+            }
+        });
+    }
+
+    function coverUpSearch() {
+        var searchCoverUp = "";
+        searchCoverUp = $('#coverUp').val();
+        fetch({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/Employee/SearchCoverUp'; ?>",
+            data: {searchCoverUp: searchCoverUp},
+            dataType: 'json',
+//            beforeSend: function () {
+//                if (currentRequest != null) {
+//                    currentRequest.abort();
+//                }
+//            },
+            success: function (responce) {
+                if (responce.code == 200) {
+                    $('#empLoad').empty();
+                    var employees = responce.data.emloyeeData;
+
+                    for (var i = 0, max = employees.length; i < max; i++) {
+                        $('#empLoad').append($("<li data-id=" + employees[i]['emp_id'] + ">" + employees[i]['epf_no'] + '-' + employees[i]['emp_name'] + "</li>"));
+                    }
+
+                    setClickEvent();
+                }
+            }
+        });
+    }
+
+    function setClickEvent() {
+        $('#empLoad li').on('click', function () {
+            var $li = $(this);
+            var p = $(this).parents('.dropdown_list');
+            var id = $li.attr('data-id');
+
+            p.find('.drop-input-search').val($li.text());
+
+            coverupId = id;
+
+            p.removeClass('is-open');
+        });
+    }
+</script>
+
+<script>
+
+    var pDate = '<?php echo $maxDate; ?>';
+    var startDate = '',
+            minDateStar = new Date('<?php echo $minDate; ?>'),
+            maxDateStar = new Date(pDate),
+            minDateEnd = null,
+            maxDateEnd = null,
+            numOfDay = '<?php echo $dayCount; ?>';
+
+    console.log('Date => ', pDate);
+
+    datePicker({
+        ele: '.start-date',
+        minDate: minDateStar,
+        maxDate: maxDateStar
+    }, function (fdate, date) {
+
+        endDatePicker();
+
+        if ($('.end-date').val().length < 0) {
+            $('.end-date').val(fdate);
+        }
+        var eDate = $('.end-date').val();
+
+        if (eDate.length === 0) {
+            $('.end-date').val(fdate);
+        }
+
+        var _fDate = new Date(fdate);
+        var _eDate = new Date(eDate);
+
+
+//        if () {
+//            $('.end-date').val(fdate);
+//        }
+
+        if (_fDate.getTime() <= _eDate.getTime()) {
+            loadDates();
+        } else {
+            $('.end-date').val(fdate);
+            loadDates();
+        }
+
+    });
+
+    function endDatePicker() {
+        var sDate = $('.start-date').val();
+
+        minDateEnd = new Date(sDate);
+        var m = new Date(sDate);
+        var calMaxDate = new Date(m.setDate(m.getDate() + (numOfDay - 1)));
+        console.log(m, m.getDate())
+
+        datePicker({
+            ele: '.end-date',
+            minDate: minDateEnd,
+            maxDate: calMaxDate
+        }, function (fdate, date) {
+
+            if (sDate.length === 0)
+                return;
+
+            var _fDate = new Date(sDate);
+            var _eDate = new Date(fdate);
+
+
+            if (_fDate.getTime() <= _eDate.getTime()) {
+                loadDates();
+            }
+        });
+    }
+
+    function getLeaveDate() {
+
+        var result = [];
+
+        $('.lv-type').each(function () {
+            var $this = $(this),
+                    $leaveBlock = $this.parents('.leave-block');
+
+            if ($this.hasClass('is-selected')) {
+
+                result.push(
+                        [
+                            $leaveBlock.data('date'),
+                            $this.data('value')
+                        ]
+                        );
+            }
+
+        });
+
+        return JSON.stringify(result);
+    }
+
+    $('.btnSave').on('click', function () {
+
+        var leaveDates = getLeaveDate();
+
+        console.log(leaveDates)
+    })
+
+
+</script>

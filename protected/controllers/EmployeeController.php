@@ -384,17 +384,51 @@ class EmployeeController extends Controller {
     }
 
     public function actionViewLeave() {
-        $this->renderPartial('ajaxLoad/profile/leave');
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $leaveAllocation = LeaveAllocation::model()->findAllByAttributes(array('ref_emp_id' => $empId, 'is_available_leave_type' => 1));
+
+        $this->renderPartial('ajaxLoad/profile/viewLeave', array('leaveAllocation' => $leaveAllocation));
+    }
+
+    public function actionViewLeaveData() {
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $leaveTypeData = AdmLeavetypes::model()->findByPk($_POST["selectedLvType"]);
+
+        $minDate = "2018-01-06";
+        $maxDate = "2018-12-31";
+        $dayCount = 14;
+        $leaveTypeData = LeaveAllocation::model()->findByAttributes(array('ref_emp_id' => $empId, 'ref_lv_type_id' => $_POST["selectedLvType"], 'is_available_leave_type' => 1));
+
+        $this->renderPartial('ajaxLoad/profile/leave/viewLeaveData', array('leaveTypeData' => $leaveTypeData, 'minDate' => $minDate, 'maxDate' => $maxDate, 'dayCount' => $dayCount));
+    }
+
+    public function actionViewLeaveDates() {
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $leaveBalance = Leave::validateLeave($empId, $_POST["selectedLvType"], $_POST["startDate"], $_POST["endDate"]);
+
+        $leaveDays = Controller::returnDates($_POST["startDate"], $_POST["endDate"]);
+        $this->renderPartial('ajaxLoad/profile/leave/leaveDate', array('leaveDays' => $leaveDays));
+    }
+
+    public function actionSearchCoverUp() {
+        $searchText = $_POST["searchCoverUp"];
+        $employees = yii::app()->db->createCommand("SELECT eb.emp_id,eb.emp_display_name,eb.epf_no FROM emp_basic eb WHERE (eb.emp_full_name LIKE '%" . $searchText . "%') OR (eb.epf_no LIKE '%" . $searchText . "%') OR (eb.emp_display_name LIKE '%" . $searchText . "%');")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+        $emloyeeData = array();
+
+        foreach ($employees as $employee) {
+            $emp["emp_id"] = $employee->emp_id;
+            $emp["emp_name"] = $employee->emp_display_name;
+            $emp["epf_no"] = $employee->epf_no;
+            array_push($emloyeeData, $emp);
+        }
+
+        $this->msgHandler(200, "Data Transfer", array('emloyeeData' => $emloyeeData));
     }
 
     public function actionViewShortLeave() {
         $empId = Yii::app()->user->getId();
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
-        $this->renderPartial('ajaxLoad/profile/shortLeave', array('empId' => $empId,'applierType' => 'self', 'shortLeaveSetting' => $shortLeaveSetting));
-    }
-
-    public function actionLeaveDate() {
-        $this->renderPartial('ajaxLoad/profile/leave/leaveDate');
+        $this->renderPartial('ajaxLoad/profile/shortLeave', array('empId' => $empId, 'applierType' => 'self', 'shortLeaveSetting' => $shortLeaveSetting));
     }
 
     public function actionResetPassword() {
