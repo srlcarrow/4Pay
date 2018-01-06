@@ -1,5 +1,10 @@
 <?php
+$notificationCount = 0;
+$userId = Controller::getEmpIdOfLoggedUser();
 $mainLinks = AdmLinks::model()->findAllByAttributes(array('lnk_parent_id' => 0, 'lnk_is_module' => 0), array('order' => 'lnk_order ASC'));
+$pendingSLeavesFirstApprover = ShortLeave::model()->findAllByAttributes(array('approver_id' => $userId, 'approver_status' => 0, 'final_status' => 0));
+$pendingSLeavesSecondApprover = ShortLeave::model()->findAllByAttributes(array('second_approver_id' => $userId, 'approver_status' => 1, 'second_approver_status' => 0, 'final_status' => 0));
+$notificationCount = count($pendingSLeavesFirstApprover) + count($pendingSLeavesSecondApprover);
 ?>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -34,11 +39,15 @@ $mainLinks = AdmLinks::model()->findAllByAttributes(array('lnk_parent_id' => 0, 
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="false">
                     <i class="bell"></i>
-                    <span class="n-count">12</span>
+                    <span class="n-count"><?php echo $notificationCount; ?></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Leave</a></li>
-                    <li><a href="#">Lorem ipsum.</a></li>
+                    <?php if (count($pendingSLeavesFirstApprover) > 0) { ?>
+                        <li><a href="<?php echo Yii::app()->baseUrl; ?>/ShortLeave/ViewPendingShortLeave">Approve Short Leave(<?php echo count($pendingSLeavesFirstApprover) ?>)</a></li>
+                    <?php } ?>
+                    <?php if (count($pendingSLeavesSecondApprover) > 0) { ?>
+                        <li><a href="<?php echo Yii::app()->baseUrl; ?>/ShortLeave/ViewPendingShortLeaveSecondApprover">Approve Short Leave - Second Approver(<?php echo count($pendingSLeavesSecondApprover) ?>)</a></li>
+                    <?php } ?>    
                 </ul>
             </li>
 
@@ -47,7 +56,7 @@ $mainLinks = AdmLinks::model()->findAllByAttributes(array('lnk_parent_id' => 0, 
                    aria-expanded="false">
 
                     <div class="avatar ">
-                        <img src="<?php echo Yii::app()->baseUrl?>/images/avatar/30/avatar.png" alt="">
+                        <img src="<?php echo Yii::app()->baseUrl ?>/images/avatar/30/avatar.png" alt="">
                     </div>
                     <span class="caret"></span>
                 </a>
