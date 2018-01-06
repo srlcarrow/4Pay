@@ -7,6 +7,7 @@ return array(
 	'connectionString' => 'mysql:host=localhost;dbname=4you_hris_new',
 	'username' => 'root',
 	'password' => '1234',
+
 	'charset' => 'utf8',
 );
 
