@@ -47,6 +47,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
 
     function getLayout(path, callback) {
         fetch({
+            appendTo:'.loadAjax',
             type: 'GET',
             url: "<?php echo Yii::app()->baseUrl?>/" + path,
             success: function (res) {

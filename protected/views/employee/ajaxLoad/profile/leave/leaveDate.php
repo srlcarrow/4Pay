@@ -1,15 +1,22 @@
-<div class="leave-block " data-date="2017-1-3">
-    <div class="leave-month-day">
-        <h5 class="">Jan 03</h5>
+<?php
+foreach ($leaveDays as $leaveDay) {
+//    $isHoliday=
+    
+    ?>
+    <div class="leave-block " data-date="2017-1-3">
+        <div class="leave-month-day">
+            <h5 class=""><?php echo date('M d',strtotime($leaveDay)) ?></h5>
+        </div>
+        <div class="leave-date-block">
+            <div data-value="0" class="lv-type">Full Day</div>
+            <div data-value="1" class="lv-type">Morning</div>
+            <div data-value="2" class="lv-type is-leaved">Evening</div>
+        </div>
     </div>
-    <div class="leave-date-block">
-        <div data-value="0" class="lv-type">Full Day</div>
-        <div data-value="1" class="lv-type">Morning</div>
-        <div data-value="2" class="lv-type is-leaved">Evening</div>
-    </div>
-</div>
-
-<div class="leave-block" data-date="2017-1-4">
+    <?php
+}
+?>
+<!--<div class="leave-block" data-date="2017-1-4">
     <div class="leave-month-day">
         <h5 class="">Jan 04</h5>
     </div>
@@ -29,7 +36,7 @@
         <div data-value="1" class="lv-type">Morning</div>
         <div data-value="2" class="lv-type">Evening</div>
     </div>
-</div>
+</div>-->
 
 
 <script>
@@ -49,7 +56,7 @@
 
         $(document).on('click.leave-block', '.leave-block .lv-type', function () {
             var $this = $(this),
-                $parent = $this.parents('.leave-block');
+                    $parent = $this.parents('.leave-block');
 
             if ($this.hasClass('is-leaved') || $this.hasClass('is-disabled'))
                 return;

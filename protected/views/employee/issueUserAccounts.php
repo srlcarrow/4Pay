@@ -57,9 +57,9 @@
                                     <td><?php echo count($userData) > 0 && $userData->is_acc_issued == 1 ? "Issued" : ""; ?></td>
                                     <td><?php echo count($userData) > 0 && $userData->is_acc_issued == 1 ? date('Y-m-d', strtotime($userData->user_acc_issued_date)) : ""; ?></td>
                                 </tr>
-                                <?php
-                            }
-                            ?>
+                                    <?php
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>

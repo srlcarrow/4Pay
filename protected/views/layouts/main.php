@@ -29,12 +29,17 @@
               href="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/scrollbar/jquery.mCustomScrollbar.min.css">
         <!--CSS | Main-->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
+        
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/plugins/sweetalert/sweetalert.css">
+        
+      
 
         <!--========================================================
             Javascript
         =========================================================-->
         <?php
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/validate/jquery.validate.js', CClientScript::POS_HEAD);
+        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/plugins/sweetalert/sweetalert.min.js', CClientScript::POS_HEAD);
         ?>
 
 

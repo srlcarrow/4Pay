@@ -30,7 +30,7 @@ class Attendance {
 
         $timezone = Controller::getTimeZone();
         $punchdate = gmdate('Y-m-d', strtotime($punch) + $timezone);
-        $employeedata = Empbasic::model()->findByAttributes(array('attendance_no' => $empno));
+        $employeedata = EmpBasic::model()->findByAttributes(array('attendance_no' => $empno));
 
         $isavailabledailyattendance = $model->findByAttributes(array('ref_emp_id' => $employeedata->emp_id, 'day' => $punchdate)); //there will be a condition of date_out also.
 
