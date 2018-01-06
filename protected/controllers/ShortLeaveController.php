@@ -184,4 +184,11 @@ class ShortLeaveController extends Controller {
         $this->renderPartial('ajaxLoad/viewEmpShortLeaveHistory', array('shortLeavesHistroy' => $shortLeavesHistroy));
     }
 
+    //Report
+    public function actionViewEmployee() {
+        $controller = "ShortLeave";
+        $action = "ViewShortLeaveReportData";
+        $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
+    }
+    
 }

@@ -1,8 +1,3 @@
-<?php
-//Sweetalert
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/sweetalert/sweetalert.css', 'screen');
-?>
-
 <div class="row mb-30">
     <div class="col-md-12">
         <div class="card">
@@ -77,13 +72,10 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/sw
     </div>
 </div>
 
-<div id="ajaxLoad" class="col s12 ajaxLoad">
-
-</div>
+<div id="ajaxLoad" class="col s12 ajaxLoad"></div>
 
 
 <script>
-
     $(document).ready(function (e) {
         empShortLeaveHistory(<?php echo $empId; ?>);
     });
@@ -101,8 +93,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/plugins/sw
     function getShortLeaveEndTime() {
         var noOfLeaves = $('#noOfLeaves').val();
         if (noOfLeaves == 0) {
-            alert('tete');
-            //sweetAlert('Can Not Apply a Short Leave!', 'Please enter the purpose of the leave.');
+            //alert('tete'); 
+            sweetAlert('Can Not Apply a Short Leave!', 'Please enter the purpose of the leave.');
         } else {
             $.ajax({
                 url: '<?php echo $this->createUrl('ShortLeave/GetShortLeaveEndTime'); ?>',

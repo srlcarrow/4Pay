@@ -73,7 +73,13 @@
     </div>
 </div>
 
+<div id="ajaxLoad-sl" class="col s12 ajaxLoad-sl"></div>
+
 <script>
+    $(document).ready(function (e) {
+        empShortLeaveHistory(<?php echo $empId; ?>);
+    });
+    
     $("#shortLeaveForm").validate({
         submitHandler: function () {
             requestShortLeave();
@@ -115,6 +121,17 @@
                     $('.alert').addClass('alert-success').html(responce.msg);
                     $("#shortLeaveForm")[0].reset();
                 }
+            }
+        });
+    }
+    
+    function empShortLeaveHistory(id) {
+        fetch({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/ShortLeave/ViewEmpShortLeaveHistory'; ?>",
+            data: {empId: <?php echo $empId; ?>},
+            success: function (responce) {
+                $("#ajaxLoad-sl").html(responce);
             }
         });
     }
