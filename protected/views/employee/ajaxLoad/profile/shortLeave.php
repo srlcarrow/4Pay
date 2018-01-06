@@ -13,7 +13,7 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label>Purpose</label>
-                        <input type="text" name="purpose" value="" class="form-control" required>
+                        <input type="text" id="purpose" name="purpose" value="" class="form-control" required>
                     </div>
                 </div>
 
@@ -62,7 +62,6 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button type="button" class="btn btn-default btn-close">Close</button>
                         <button type="submit" class="btn btn-primary">Apply</button>
                     </div>
                 </div>
@@ -91,10 +90,10 @@
     }
 
     function getShortLeaveEndTime() {
+        var purpose = $('#purpose').val();
         var noOfLeaves = $('#noOfLeaves').val();
         if (noOfLeaves == 0) {
-            //alert('tete');
-            //sweetAlert('Can Not Apply a Short Leave!', 'Please enter the purpose of the leave.');
+            sweetAlert('Can Not Apply a Short Leave!', 'Please enter the duration of the Short Leave.');
         } else {
             $.ajax({
                 url: '<?php echo $this->createUrl('ShortLeave/GetShortLeaveEndTime'); ?>',
@@ -120,6 +119,9 @@
                 if (responce.code == 200) {
                     $('.alert').addClass('alert-success').html(responce.msg);
                     $("#shortLeaveForm")[0].reset();
+                    empShortLeaveHistory(<?php echo $empId; ?>);
+                }else {
+                    $('.alert').addClass('alert-danger').html(responce.msg);
                 }
             }
         });
@@ -139,5 +141,39 @@
     $('.time_picker').on('change', function () {
         getShortLeaveEndTime();
     });
+    
+    function deleteShortLeave(id) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not have this data anymore!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "<?php echo Yii::app()->createUrl('ShortLeave/deleteShortLeave'); ?>",
+                            data: "deleteId=" + id,
+                            success: function (res) { 
+                                if (res) {
+                                    setTimeout(function () {
+                                        empShortLeaveHistory(<?php echo $empId; ?>);
+                                    }, 500);
+                                } else {
+                                    swal("Cancelled", "You are not allowed to delete today's short leaves.", "error");
+                                }
+                            }
+                        });
+                    }
+                }
+        );
+
+    }
     
 </script>

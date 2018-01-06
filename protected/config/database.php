@@ -4,9 +4,9 @@
 return array(
 	'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 	// uncomment the following lines to use a MySQL database
-	'connectionString' => 'mysql:host=localhost:3307;dbname=p1',
+	'connectionString' => 'mysql:host=localhost;dbname=4you_hris',
 	'username' => 'root',
-	'password' => '',
+	'password' => '1234',
 	'charset' => 'utf8',
 );
 
