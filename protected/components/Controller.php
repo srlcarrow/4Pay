@@ -196,7 +196,7 @@ class Controller extends CController {
             $startStamp = strtotime(' +1 day ', $startStamp);
         }
         return $dateArr;
-    }
+    }    
 
     public function viewYearArry() {
         return array(gmdate('Y', strtotime('-1 year')) => gmdate('Y', strtotime('-1 year')), gmdate('Y') => gmdate('Y'), gmdate('Y', strtotime('+1 year')) => gmdate('Y', strtotime('+1 year')));
