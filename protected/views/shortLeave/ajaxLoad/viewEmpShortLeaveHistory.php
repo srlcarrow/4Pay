@@ -37,7 +37,7 @@
                                         <td><?php echo $shortLeaves->approver_status == 1 ? "Approved" : $shortLeaves->approver_status == 2 ? "Rejected" : "Pending"; ?></td>
                                         <td><?php echo $shortLeaves->approver_status == 1 ? "Approved" : $shortLeaves->second_approver_status == 2 ? "Rejected" : "Pending"; ?></td>
                                         <td class="tb-action text-right">
-                                            <button type="button" onclick="deleteShortLeave('<?php echo $shortLeaves->short_lv_id; ?>')"  class="btn btn-sm btn-danger">Delete</button>
+                                            <button type="button" onclick="deleteShortLeave('<?php echo $shortLeaves->short_lv_id; ?>')"  class="ic ic-20 ic-delete" title="Delete"></button>
                                         </td>
                                     </tr>
                                     <?php

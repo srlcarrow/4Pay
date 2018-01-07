@@ -35,7 +35,7 @@
                                         <td><?php echo date("H:i", strtotime($pendingSLeaves->end_time)); ?></td>
                                         <td><input type="text" name="rejectReason_<?php echo $pendingSLeaves->short_lv_id; ?>" id="rejectReason_<?php echo $pendingSLeaves->short_lv_id; ?>" class="form-control" value="" placeholder="Reject Reason" /></td>
                                         <td class="tb-action text-right">
-                                            <button type="button" onclick="approveShortLeave('<?php echo $pendingSLeaves->short_lv_id; ?>')" class="btn btn-sm btn-warning">App</button> 
+                                            <button type="button" onclick="approveShortLeave('<?php echo $pendingSLeaves->short_lv_id; ?>')" class="btn btn-sm btn-primary">Approve</button>
                                             <button type="button" onclick="rejectShortLeave('<?php echo $pendingSLeaves->short_lv_id; ?>')"  class="btn btn-sm btn-danger">Reject</button>
                                         </td>
                                     </tr>
@@ -68,7 +68,7 @@
         },
                 function (isConfirm) {
                     if (isConfirm) {
-                        $.ajax({
+                        insert({
                             type: 'POST',
                             url: "<?php echo Yii::app()->baseUrl . '/ShortLeave/ApproveShortLeave'; ?>",
                             data: {shortLeaveId: id},
@@ -105,7 +105,7 @@
             },
                     function (isConfirm) {
                         if (isConfirm) {
-                            $.ajax({
+                            insert({
                                 type: 'POST',
                                 url: "<?php echo Yii::app()->baseUrl . '/ShortLeave/RejectShortLeave'; ?>",
                                 data: {shortLeaveId: id, reason: reason},

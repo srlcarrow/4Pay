@@ -10,21 +10,27 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Duration (minutes)</label>
-                        <input type="text" name="short_lv_duration" value="<?php echo $shortLeaveSetting->short_lv_duration ?>" class="form-control number" required>
+                        <input type="text" name="short_lv_duration"
+                               value="<?php echo $shortLeaveSetting->short_lv_duration ?>" class="form-control number"
+                               required>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Max. Number of Short Leave Per Day</label>
-                        <input type="text" name="max_leaves_per_day" value="<?php echo $shortLeaveSetting->max_leaves_per_day ?>" class="form-control number" required>  
+                        <input type="text" name="max_leaves_per_day"
+                               value="<?php echo $shortLeaveSetting->max_leaves_per_day ?>" class="form-control number"
+                               required>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Max. Number of Short Leave Per Month</label>
-                        <input type="text" name="max_leaves_per_month" value="<?php echo $shortLeaveSetting->max_leaves_per_month ?>" class="form-control number" required>
+                        <input type="text" name="max_leaves_per_month"
+                               value="<?php echo $shortLeaveSetting->max_leaves_per_month ?>"
+                               class="form-control number" required>
                     </div>
                 </div>
             </div>
@@ -32,23 +38,26 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Max. Number of Short Leave Per Year</label>
-                        <input type="text" name="max_leaves_per_year" value="<?php echo $shortLeaveSetting->max_leaves_per_year ?>" class="form-control number" required>
+                        <input type="text" name="max_leaves_per_year"
+                               value="<?php echo $shortLeaveSetting->max_leaves_per_year ?>" class="form-control number"
+                               required>
                     </div>
                 </div>
                 <div class="col-md-4 ">
-                    <div class="form-group">
+                    <div class="checkbox mb-0 mt-25">
                         <?php
                         echo $form->checkBox($shortLeaveSetting, 'is_halfday_on_sameday', array('class' => 'form-control-txtbx'), array('value' => '', 'uncheckValue' => 0));
                         ?>
-                        <span class="chkbox-lbl">Can Apply Halfday Leave on same date</span>
+                        <label for="AdmShortLeaveSettings_is_halfday_on_sameday">Can Apply Halfday Leave on same
+                            date</label>
                     </div>
                 </div>
                 <div class="col-md-4 ">
-                    <div class="form-group">
+                    <div class="checkbox mb-0 mt-25">
                         <?php
                         echo $form->checkBox($shortLeaveSetting, 'is_dual_approvers', array('class' => 'form-control-txtbx'), array('value' => '', 'uncheckValue' => 0));
                         ?>
-                        <span class="chkbox-lbl">Dual Approvers</span>
+                        <label for="AdmShortLeaveSettings_is_dual_approvers">Dual Approvers</label>
                     </div>
                 </div>
             </div>
@@ -73,14 +82,18 @@
 <script>
     $("#shortLeaveForm").validate({
         submitHandler: function () {
-            $.ajax({
+
+            Alert().loading();
+
+            fetch({
                 type: 'POST',
                 url: "<?php echo Yii::app()->baseUrl . '/Setting/UpdateShortLeaveSetting'; ?>",
                 data: $('#shortLeaveForm').serialize(),
                 dataType: 'json',
                 success: function (responce) {
+
                     if (responce.code == 200) {
-                        $('.alert').addClass('alert-success').html(responce.msg);
+                        Alert().success(responce.msg);
                     }
                 }
             });

@@ -155,15 +155,22 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
 </script>
 <script>
     function save() {
+
+        Alert().loading();
+
         insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Leave/SaveLeaveAllocationData'; ?>",
             data: $('#leaveAllocation').serialize(),
             dataType: 'json',
             success: function (responce) {
+
                 if (responce.code == 200) {
-                    $('.alert').addClass('alert-success').html('Successfully Saved....');
+                    Alert().success('Successfully Saved....');
                 }
+            },
+            error:function (request, status, error) {
+                Alert().error(error);
             }
         });
     }
