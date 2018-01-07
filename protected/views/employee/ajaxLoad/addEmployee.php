@@ -14,48 +14,42 @@
                         <h4>Basic Details</h4>
                     </div>
                     <div class="row form-wrapper">
-                        <div class="col-md-4 ">
-                            <div class="form-group">
-                                <label>Emp No.</label>
-                                <input type="text" name="empno" value="<?php echo $model->empno; ?>"
-                                       class="form-control" required>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label>Emp No.</label>
+                                        <input type="text" name="empno" value="<?php echo $model->empno; ?>"
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label>EPF No.</label>
+                                        <input type="text" name="epf_no" value="<?php echo $model->epf_no; ?>"
+                                               class="form-control">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-md-4 ">
-                            <div class="form-group">
-                                <label>EPF No.</label>
-                                <input type="text" name="epf_no" value="<?php echo $model->epf_no; ?>"
-                                       class="form-control">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label>Attendance Machine No.</label>
+                                        <input type="text" name="attendance_no" value="<?php echo $model->attendance_no; ?>"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <?php $title = $this->viewTitleArry() ?>
+                                        <label>Title</label>
+                                        <?php echo $form->dropdownlist($model, 'emp_title', $title, array('class' => 'form-control required')); ?>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-4 ">
-                            <div class="form-group">
-                                <label>Attendance No.</label>
-                                <input type="text" name="attendance_no" value="<?php echo $model->attendance_no; ?>"
-                                       class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row form-wrapper">
-                        <div class="col-md-4 ">
-                            <div class="form-group">
-                                <?php $title = $this->viewTitleArry() ?>
-                                <label>Title</label>
-                                <?php echo $form->dropdownlist($model, 'emp_title', $title, array('class' => 'form-control required')); ?>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 ">
-                            <div class="form-group">
-                                <label>Full Name</label>
-                                <input type="text" name="emp_full_name" value="<?php echo $model->emp_full_name; ?>"
-                                       class="form-control" required>
-                            </div>
-                        </div>
-
+                        </div> 
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Name with Initials</label>
@@ -64,8 +58,16 @@
                             </div>
                         </div>
                     </div>
+                    
 
                     <div class="row form-wrapper">
+                        <div class="col-md-8 ">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="emp_full_name" value="<?php echo $model->emp_full_name; ?>"
+                                       class="form-control" required>
+                            </div>
+                        </div>
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Display Name</label>
@@ -73,7 +75,9 @@
                                        value="<?php echo $model->emp_display_name; ?>" class="form-control">
                             </div>
                         </div>
+                    </div>
 
+                    <div class="row form-wrapper">
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <?php $status = $this->viewStatusArry() ?>
@@ -81,34 +85,14 @@
                                 <?php echo $form->dropdownlist($model, 'emp_gender', $status, array('empty' => '', 'class' => 'form-control required')); ?>
                             </div>
                         </div>
-
-                        <div class="col-md-4 ">
-                            <div class="form-group">
-                                <?php $civilstatus = $this->viewCivilstatusArry() ?>
-                                <label>Civil Status</label>
-                                <?php echo $form->dropdownlist($model, 'emp_civil_status', $civilstatus, array('empty' => '', 'class' => 'form-control required')); ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row form-wrapper">
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Date of Birth</label>
 
                                 <input type="text" name="emp_dob" value="<?php echo $model->emp_dob; ?>"
                                        class="input-datepicker form-control">
-
                             </div>
-                        </div>
-
-                        <div class="col-lg-4 input-layout">
-                            <div class="form-group">
-                                <label>Race</label>
-                                <?php echo $form->dropdownlist($model, 'ref_race', CHtml::listData(AdmRace::model()->findAll(array('order' => 'race ASC')), 'race_id', 'race'), array('empty' => '', 'class' => 'form-control')); ?>
-                            </div>
-                        </div>
-
+                        </div>                        
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>NIC</label>
@@ -119,20 +103,37 @@
                     </div>
 
                     <div class="row form-wrapper">
+                        
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <?php $civilstatus = $this->viewCivilstatusArry() ?>
+                                <label>Civil Status</label>
+                                <?php echo $form->dropdownlist($model, 'emp_civil_status', $civilstatus, array('empty' => '', 'class' => 'form-control required')); ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 input-layout">
+                            <div class="form-group">
+                                <label>Race</label>
+                                <?php echo $form->dropdownlist($model, 'ref_race', CHtml::listData(AdmRace::model()->findAll(array('order' => 'race ASC')), 'race_id', 'race'), array('empty' => '', 'class' => 'form-control')); ?>
+                            </div>
+                        </div>
                         <div class="col-lg-4 input-layout">
                             <div class="form-group">
                                 <label>Religion</label>
                                 <?php echo $form->dropdownlist($model, 'ref_religion', CHtml::listData(AdmReligion::model()->findAll(array('order' => 'religion ASC')), 'rel_id', 'religion'), array('empty' => '', 'class' => 'form-control')); ?>
                             </div>
                         </div>
+                        
                     </div>
+
+                    
 
                     <div class="card-header">
                         <h4>Contact Details</h4>
                     </div>
 
                     <div class="row form-wrapper">
-                        <div class="col-md-6 ">
+                        <div class="col-md-8 ">
                             <div class="form-group">
                                 <label>Permanent Address</label>
                                 <input type="text" name="con_permenant_add"
@@ -140,9 +141,9 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 ">
+                        <div class="col-md-4 ">
                             <div class="form-group">
-                                <label>Temporary Address</label>
+                                <label>Correspondence Address</label>
                                 <input type="text" name="con_temp_add" value="<?php echo $contact->con_temp_add; ?>"
                                        class="form-control">
                             </div>
@@ -152,7 +153,7 @@
                     <div class="row form-wrapper">
                         <div class="col-md-4 ">
                             <div class="form-group">
-                                <label>Office Email</label>
+                                <label>Email (Office)</label>
                                 <input type="text" name="con_office_email"
                                        value="<?php echo $contact->con_office_email; ?>" class="form-control email"
                                        required>
@@ -160,14 +161,14 @@
                         </div>
                         <div class="col-md-4 ">
                             <div class="form-group">
-                                <label>Personal Email</label>
+                                <label>Email (Personal)</label>
                                 <input type="text" name="con_personal_email"
                                        value="<?php echo $contact->con_personal_email; ?>" class="form-control email">
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="form-group">
-                                <label>Home Contact Number</label>
+                                <label>Contact Number (Home)</label>
                                 <input type="text" name="con_home_tel" value="<?php echo $contact->con_home_tel; ?>"
                                        class="form-control number">
                             </div>
@@ -198,7 +199,7 @@
                     <div class="row form-wrapper">
                         <div class="col-md-4 ">
                             <div class="form-group">
-                                <label>Date of Joined</label>
+                                <label>Date of Join</label>
                                 <input type="text" name="empl_joined_date"
                                        value="<?php echo $employment->empl_joined_date; ?>"
                                        class="input-datepicker form-control" required>

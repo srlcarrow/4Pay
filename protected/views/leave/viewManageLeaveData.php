@@ -8,7 +8,7 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
         <div class="card">
 
             <div class="card-header">
-                <h1>Manage Leave / Short Leave</h1>
+                <h1>Manage Leave & Short Leave</h1>
             </div>
 
             <div class="card-content">
@@ -24,8 +24,8 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                         <label for="id_all"></label>
                                     </div>
                                 </th>
-                                <th>EPF No</th>
-                                <th>EMP No</th>
+                                <th>EPF</th>
+                                <th>EMP</th>
                                 <th>Name</th>
                                 <th class="tb-action">Leave</th>
                                 <th class="tb-action">Short Leave</th>

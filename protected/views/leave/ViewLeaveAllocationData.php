@@ -24,8 +24,8 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                         <label for="id_all"></label>
                                     </div>
                                 </th>
-                                <th>EPF No</th>
-                                <th>EMP No</th>
+                                <th>EPF</th>
+                                <th>EMP</th>
                                 <th>Name</th>
                                     <?php
                                     foreach ($leaveTypes as $leaveType) {
@@ -35,11 +35,11 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                     }
                                     ?>
 
-                                    <th>First Superior</th>
-                                    <th>Second Superior</th>
-                                    <th>Need First Approver</th>
-                                    <th>Need Second Approver</th>
-                                    <th>Need Cover up</th>
+                                    <th>1<sup>st</sup>&nbsp;Superior</th>
+                                    <th>2<sup>nd</sup>&nbsp;Superior</th>
+                                    <th>1<sup>st</sup>&nbsp;Approver</th>
+                                    <th>2<sup>nd</sup>&nbsp;Approver</th>
+                                    <th>Cover&nbsp;up</th>
                                 </tr>
                             </thead>
 
