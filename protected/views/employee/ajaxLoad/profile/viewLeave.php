@@ -1,4 +1,3 @@
-<?php // $form = $this->beginWidget('CActiveForm', array('id' => 'leave')); ?>
 <div class="card flat mt-30">
     <div class="card-content">      
         <div class="row form-wrapper">
@@ -24,15 +23,17 @@
 
                 </div>
             </div>
-        </div>
-        <?php // $this->endWidget(); ?>
+        </div>   
         <div id="ajaxLoadData"></div>
     </div>
 </div>
 
+<div id="ajaxLoadLeaveHistory"></div>
+
 <script>
     $(document).ready(function (e) {
         loadLeaveData();
+        loadLeaveHistory();
     });
 
     function loadLeaveData() {
@@ -48,5 +49,15 @@
         });
     }
 
+    function loadLeaveHistory() {
+        fetch({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewSelfLeaveHistory'; ?>",
+            data: "",
+            success: function (responce) {
+                $("#ajaxLoadLeaveHistory").html(responce);
+            }
+        });
+    }
 </script>
 

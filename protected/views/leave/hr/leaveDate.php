@@ -77,7 +77,7 @@ foreach ($leaveDays as $leaveDay) {
             if (fullDay.hasClass('is-leaved') || fullDay.hasClass('is-disabled'))
                 return;
 
-            //fullDay.addClass('is-selected');
+            fullDay.addClass('is-selected');
         });
 
         $(document).on('click.leave-block', '.leave-block .lv-type', function () {

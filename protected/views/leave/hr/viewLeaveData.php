@@ -44,7 +44,7 @@
                             </div>
 
                             <ul id="empLoad" class="drop-result">
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
 
         fetch({
             type: 'POST',
-            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewLeaveDates'; ?>",
+            url: "<?php echo Yii::app()->baseUrl . '/Leave/ViewLeaveDates'; ?>",
             data: {startDate: startDate, endDate: endDate, selectedLvType: selectedLvType},
             success: function (responce) {
                 $(".loadAjaxDate").html(responce);
@@ -146,7 +146,7 @@
         var leaveDates = getLeaveDate();
         fetch({
             type: 'POST',
-            url: "<?php echo Yii::app()->baseUrl . '/Leave/SaveLeave'; ?>",
+            url: "<?php echo Yii::app()->baseUrl . '/Leave/SaveLeaveHR'; ?>",
             data: $('#leaveData').serialize() + "&empId=" + '<?php echo $empId; ?>' + "&coverupId=" + coverupId + "&leaveDates=" + leaveDates + "&leaveTypeId=" + '<?php echo $leaveTypeId; ?>',
             dataType: 'json',
             success: function (responce) {

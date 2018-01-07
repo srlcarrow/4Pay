@@ -96,7 +96,7 @@ class SiteController extends Controller {
 
     public function actionSignIn() {
         $model = new LoginForm('login');
-        
+
         $model->username = $_POST['username'];
         $model->password = $_POST['password'];
 
@@ -117,6 +117,22 @@ class SiteController extends Controller {
     public function actionLogout() {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
+    }
+
+    public function actionGetDashboardAttendanceData() {
+        $array = array();
+        $branches = AdmBranch::model()->findAll();
+//        foreach ($branches as $branch) {
+//            $b = [
+//                'a' => [
+//                    array($branch->br_name, 50, 40),
+//                ]
+//            ];
+//            array_push($array, $b);
+//        }
+
+        var_dump($array);exit;
+        $this->msgHandler(200, "Login Successfull...", $array);
     }
 
 }
