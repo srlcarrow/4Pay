@@ -138,8 +138,11 @@ class DailyAttendance extends CActiveRecord {
         $isgeneralshift_emp = Employment::model()->findByAttributes(array('ref_emp_id' => $ref_emp_id));
 
         if ($isgeneralshift_emp->is_generalshift_emp == 1) {
-            $shiftData = ShiftsForGeneralShiftEmployees::model()->findByAttributes(array('ref_emp_id' => $ref_emp_id, 'day' => date('l', strtotime($date))));
-            $shiftIdFor = $shiftData->rel_generalshift->shift_id;
+            $shiftForGenShiftEmp = new ShiftsForGeneralShiftEmployees();
+            $shiftData = $shiftForGenShiftEmp->findByAttributes(array('ref_emp_id' => $ref_emp_id, 'day' => date('l', strtotime($date))));
+            if ($shiftData != NULL && $shiftData->ref_shift_id != 0) {
+                $shiftIdFor = $shiftData->rel_generalshift->shift_id;
+            }
         } else {
             $roster_rows = Roster::model()->findByAttributes(array('ref_emp_id' => $ref_emp_id, 'roster_date' => $date));
             $shiftIdFor = $roster_rows->rel_rostershift->shift_id;
@@ -148,27 +151,41 @@ class DailyAttendance extends CActiveRecord {
         if ($isgeneralshift_emp->is_generalshift_emp == 1) {
             //General Shift Employees
             if (count($isgeneralshift_emp) > 0) {
-                $shiftId = $shiftData->rel_generalshift->shift_id;
-                $shift_start = $date . " " . $shiftData->rel_generalshift->start_time;
-                $shift_end = $date . " " . $shiftData->rel_generalshift->end_time;
-                $isnightshift = $shiftData->rel_generalshift->is_night_shift;
-                $halfDaySeconds = $shiftData->rel_generalshift->halfday_secs;
-                $shiftName = $shiftData->rel_generalshift->shift_title;
-                $shift_in_till = $shiftData->rel_generalshift->is_shiftintill_nextday == 1 ? date('Y-m-d H:i:s', strtotime($date . " " . $shiftData->rel_generalshift->shift_in_till . "+1 days")) : $date . " " . $shiftData->rel_generalshift->shift_in_till;
-                $shiftInUpto = $date . " " . $shiftData->rel_generalshift->shift_in_upto;
-                $shiftOutUpto = $shiftData->rel_generalshift->is_shift_out_upto_nextday == 1 ? date('Y-m-d H:i:s', strtotime($date . " " . $shiftData->rel_generalshift->shft_out_upto . "+1 days")) : $date . " " . $shiftData->rel_generalshift->shft_out_upto;
-                $shiftCode = $shiftData->rel_generalshift->shift_code;
+                $shiftId = 0;
+                if ($shiftData != NULL && $shiftData->ref_shift_id != 0) {
+                    $shiftId = $shiftData->rel_generalshift->shift_id;
+                    $shift_start = $date . " " . $shiftData->rel_generalshift->start_time;
+                    $shift_end = $date . " " . $shiftData->rel_generalshift->end_time;
+                    $isnightshift = $shiftData->rel_generalshift->is_night_shift;
+                    $halfDaySeconds = $shiftData->rel_generalshift->halfday_secs;
+                    $shiftName = $shiftData->rel_generalshift->shift_title;
+                    $shift_in_till = $shiftData->rel_generalshift->is_shiftintill_nextday == 1 ? date('Y-m-d H:i:s', strtotime($date . " " . $shiftData->rel_generalshift->shift_in_till . "+1 days")) : $date . " " . $shiftData->rel_generalshift->shift_in_till;
+                    $shiftInUpto = $date . " " . $shiftData->rel_generalshift->shift_in_upto;
+                    $shiftOutUpto = $shiftData->rel_generalshift->is_shift_out_upto_nextday == 1 ? date('Y-m-d H:i:s', strtotime($date . " " . $shiftData->rel_generalshift->shft_out_upto . "+1 days")) : $date . " " . $shiftData->rel_generalshift->shft_out_upto;
+                    $shiftCode = $shiftData->rel_generalshift->shift_code;
 
-                $arr[0] = $shift_start;
-                $arr[1] = $shift_end;
-                $arr[2] = $isnightshift;
-                $arr[7] = $shift_in_till;
-                $arr[8] = $shiftId;
-                $arr[9] = $shiftCode;
-                $arr[13] = $halfDaySeconds;
-                $arr[15] = $shiftName;
-                $arr[17] = $shiftInUpto;
-                $arr[18] = $shiftOutUpto;
+                    $arr[0] = $shift_start;
+                    $arr[1] = $shift_end;
+                    $arr[2] = $isnightshift;
+                    $arr[7] = $shift_in_till;
+                    $arr[8] = $shiftId;
+                    $arr[9] = $shiftCode;
+                    $arr[13] = $halfDaySeconds;
+                    $arr[15] = $shiftName;
+                    $arr[17] = $shiftInUpto;
+                    $arr[18] = $shiftOutUpto;
+                } else {
+                    $arr[0] = "";
+                    $arr[1] = "";
+                    $arr[2] = 0;
+                    $arr[7] = "";
+                    $arr[8] = 0;
+                    $arr[9] = "";
+                    $arr[13] = 0;
+                    $arr[15] = "";
+                    $arr[17] = "";
+                    $arr[18] = "";
+                }
 
                 return $arr;
             } else {
