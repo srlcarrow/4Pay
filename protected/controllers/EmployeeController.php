@@ -151,46 +151,51 @@ class EmployeeController extends Controller {
     }
 
     public function actionIssueAccounts() {
-        $selectedEmployees = $_POST['selectedIds'];
-        $userId = Yii::app()->user->getId();
+        try {
+            $selectedEmployees = $_POST['selectedIds'];
+            $userId = Yii::app()->user->getId();
 
-        foreach ($selectedEmployees as $empId) {
-            $empBasicData = EmpBasic::model()->findByPk($empId);
-            $empContactData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
-            $user = User::model()->findByAttributes(array('ref_emp_id' => $empId));
-            $password = Controller::randomPassword();
+            foreach ($selectedEmployees as $empId) {
+                $empBasicData = EmpBasic::model()->findByPk($empId);
+                $empContactData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
+                $user = User::model()->findByAttributes(array('ref_emp_id' => $empId));
+                $password = Controller::randomPassword();
 
-            if (count($user) > 0) {
-                $user->ref_emp_id = $empId;
-                $user->user_name = $user->user_name;
-                $user->user_password = md5(md5($password . $password));
-                $user->ref_user_type_id = $_POST['userType_' . $empId];
-                $user->is_acc_issued = 1;
-                $user->user_acc_issued_date = $user->user_acc_issued_date;
-                $user->created_date = date('Y-m-d H:i:s');
-                $user->created_by = $userId;
-                $user->updated_date = date('Y-m-d H:i:s');
-                $user->updated_by = $userId;
-                $user->save(false);
-            } else {
-                $user = new User();
-                $user->ref_emp_id = $empId;
-                $user->user_name = $empBasicData->empno;
-                $user->user_password = md5(md5($password . $password));
-                $user->ref_user_type_id = $_POST['userType_' . $empId];
-                $user->is_acc_issued = 1;
-                $user->user_acc_issued_date = date('Y-m-d H:i:s');
-                $user->created_date = date('Y-m-d H:i:s');
-                $user->created_by = $userId;
-                $user->updated_date = date('Y-m-d H:i:s');
-                $user->updated_by = $userId;
-                $user->save(false);
+                if (count($user) > 0) {
+                    $user->ref_emp_id = $empId;
+                    $user->user_name = $user->user_name;
+                    $user->user_password = md5(md5($password . $password));
+                    $user->ref_user_type_id = $_POST['userType_' . $empId];
+                    $user->is_acc_issued = 1;
+                    $user->user_acc_issued_date = $user->user_acc_issued_date;
+                    $user->created_date = date('Y-m-d H:i:s');
+                    $user->created_by = $userId;
+                    $user->updated_date = date('Y-m-d H:i:s');
+                    $user->updated_by = $userId;
+                    $user->save(false);
+                } else {
+                    $user = new User();
+                    $user->ref_emp_id = $empId;
+                    $user->user_name = $empBasicData->empno;
+                    $user->user_password = md5(md5($password . $password));
+                    $user->ref_user_type_id = $_POST['userType_' . $empId];
+                    $user->is_acc_issued = 1;
+                    $user->user_acc_issued_date = date('Y-m-d H:i:s');
+                    $user->created_date = date('Y-m-d H:i:s');
+                    $user->created_by = $userId;
+                    $user->updated_date = date('Y-m-d H:i:s');
+                    $user->updated_by = $userId;
+                    $user->save(false);
+                }
+
+                $msg = EmailGenerator::setEmailMessageBodyUser('user_created', '2', $empId, $user->user_name, $password);
+                $subjct = "User Account Details";
+                $to = count($empContactData) > 0 ? $empContactData->con_office_email : "";
+                EmailGenerator::SendEmail($msg, $to, $subjct);
             }
-
-//            $msg = EmailGenerator::setEmailMessageBodyUser('user_created', '2', $jsId, $jsBasicTemp->jsbt_email, $password, false);
-//            $subjct = "User Account Details";
-//            $to = $_POST['email'];
-//            EmailGenerator::SendEmail($msg, $to, $subjct);
+            $this->msgHandler(200, "Issued Successfully...");
+        } catch (Exception $exc) {
+            $this->msgHandler(400, "Error Successfully...");
         }
     }
 
@@ -232,6 +237,7 @@ class EmployeeController extends Controller {
                 $user->save(false);
             }
         }
+        $this->msgHandler(200, "Saved Successfully...");
     }
 
     public function actionViewShiftAllocator() {
@@ -335,6 +341,8 @@ class EmployeeController extends Controller {
             $sun->day = "Sunday";
             $sun->ref_shift_id = $_POST['sun_' . $empId];
             $sun->save(false);
+
+            $this->msgHandler(200, "Saved Successfully...");
         }
     }
 
