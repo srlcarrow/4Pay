@@ -168,6 +168,9 @@ function insert(_option) {
         },
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         complete: function () {
+        },
+        error: function (request, status, error) {
+
         }
     };
 
@@ -182,7 +185,8 @@ function insert(_option) {
         success: option.success,
         error: option.error,
         contentType: option.contentType,
-        complete: option.complete
+        complete: option.complete,
+        error:option.error
     });
 }
 
@@ -203,7 +207,7 @@ function Alert() {
             alert.find('.message').fadeOut('fast', function () {
                 alert.hide();
             });
-        }, 2500);
+        }, 3000);
     }
 
     function show() {
