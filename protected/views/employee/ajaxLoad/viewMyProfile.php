@@ -195,17 +195,24 @@
     });
 
     function save() {
+
+        Alert().loading();
+
         insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ResetPassword'; ?>",
             data: $('#passReset').serialize(),
             dataType: 'json',
             success: function (responce) {
+
                 if (responce.code == 200) {
-                    $('.alert').addClass('alert-success').html(responce.msg);
+                    Alert().success(responce.msg);
                 } else {
-                    $('.alert').addClass('alert-danger').html(responce.msg);
+                    Alert().error(responce.msg);
                 }
+            },
+            error: function (request, status, error) {
+                Alert().error(error);
             }
         });
     }

@@ -148,6 +148,9 @@
 </script>
 <script>
     function saveEmpShifts() {
+
+        Alert().loading();
+
         insert({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/employee/SaveShiftsOfGSEmployees'; ?>",
@@ -155,8 +158,11 @@
             dataType: 'json',
             success: function (responce) {
                 if (responce.code == 200) {
-
+                    Alert().success('Successfully Saved....');
                 }
+            },
+            error:function (request, status, error) {
+                Alert().error(error);
             }
         });
     }

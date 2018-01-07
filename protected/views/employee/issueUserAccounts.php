@@ -122,6 +122,7 @@
             data: $('#accountIssue').serialize(),
             dataType: 'json',
             success: function (responce) {
+
                 if (responce.code == 200) {
 
                 }
