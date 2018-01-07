@@ -184,4 +184,8 @@
 
     }
 
+    datePicker({
+        ele:'.input-datepicker'
+    })
+
 </script>
