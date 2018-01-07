@@ -77,7 +77,8 @@
             }
         })
 
-    })
+    });
+
 
 })();
 
@@ -167,6 +168,9 @@ function insert(_option) {
         },
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         complete: function () {
+        },
+        error: function (request, status, error) {
+
         }
     };
 
@@ -181,6 +185,63 @@ function insert(_option) {
         success: option.success,
         error: option.error,
         contentType: option.contentType,
-        complete: option.complete
+        complete: option.complete,
+        error:option.error
     });
 }
+
+function Alert() {
+
+    var alert = $('.cm-alert'),
+        message = alert.find('.message');
+
+    function getCenter() {
+        var w = message.innerWidth();
+        var wnW = $(window)[0].innerWidth;
+
+        alert.find('.message').css('left', ((wnW / 2 ) - (w / 2)) + 'px');
+    }
+
+    function close() {
+        setTimeout(function () {
+            alert.find('.message').fadeOut('fast', function () {
+                alert.hide();
+            });
+        }, 3000);
+    }
+
+    function show() {
+        alert.show();
+        alert.find('.message').show();
+    }
+
+    return {
+        success: function (msg) {
+            message.html(msg);
+            message.attr('class', 'message success');
+            show();
+            getCenter();
+            close();
+        },
+        error: function (msg) {
+            message.html(msg);
+            message.attr('class', 'message error');
+            show();
+            getCenter();
+            close();
+        },
+        loading: function () {
+            var loader = "<div><img src='" + BASE_URL + "/images/loader/loading.gif'/><span>Please wait...</span></div>";
+            message.html(loader);
+            message.attr('class', 'message info');
+            show();
+            getCenter();
+        }
+    };
+
+    // Alert().success('sacve Successfuly !');
+    // Alert().error('Something was wrong!');
+    // Alert().info('Something was wrong!');
+
+}
+

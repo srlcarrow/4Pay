@@ -57,7 +57,7 @@
                                             }
                                             ?></td>
                                         <td class="tb-action text-right">
-                                            <button type="button" onclick="editEmployee('<?php echo $employee->emp_id; ?>')"  class="btn btn-sm btn-warning">Edit</button>
+                                            <button  title="Edit" type="button" onclick="editEmployee('<?php echo $employee->emp_id; ?>')"  class="ic ic-20 ic-edit"></button>
                                             <!--<button type="button" class="btn btn-sm btn-danger">Delete</button>-->
                                         </td>
                                     </tr>
