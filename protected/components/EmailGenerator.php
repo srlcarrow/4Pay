@@ -60,10 +60,11 @@ class EmailGenerator {
         $content = AdmEmailContent::model()->find("recognize_text='" . $recognize . "'");
         $format = AdmEmailFormat::model()->find('email_type="' . $type . '"');
 
+    
         $msg = $content->email_content;
         $subject = $content->email_subject;
-        $top = $format->email_format;
-
+        $top = ($format == NULL ? "" : $format->email_format);
+ 
         $replacearrBody = array(
             '[empName]' => $empData->emp_display_name,
             '[username]' => $userName,
