@@ -74,13 +74,13 @@
   a {
     display: block;
     float: left;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     color: rgba($primaryFontColor, $lighten-x);
     font-size: 14px;
     line-height: 14px;
     text-align: center;
-    padding: 10px 0;
+    padding: 8px 0;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -111,4 +111,11 @@
     padding: 15px;
     margin-bottom: 20px;
   }
+}
+
+span.error-val {
+  color: $warnColor;
+  font-size: 12px;
+  font-weight: $font-weight-regular;
+  padding: 4px 0;
 }

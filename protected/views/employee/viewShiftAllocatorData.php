@@ -13,7 +13,12 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" class="select-All"></th>
+                                <th class="th-checkbox">
+                                    <div class="checkbox mt-0 mb-0">
+                                        <input id="id_all" type="checkbox" class="select-All">
+                                        <label for="id_all"></label>
+                                    </div>
+                                </th>
                                 <th>EPF No</th>
                                 <th>EMP No</th>
                                 <th>Name</th>
@@ -33,8 +38,13 @@
                                 $userData = User::model()->findByAttributes(array('ref_emp_id' => $employee->emp_id));
                                 ?>
                                 <tr class="ch_bx">
-                                    <td><input type="checkbox" class="check_sc" name="selectedIds[]"
-                                               value="<?php echo $employee->emp_id; ?>"></td>
+                                    <td>
+                                        <div class="checkbox mt-0 mb-0">
+                                            <input id="id_<?php echo $employee->emp_id; ?>" type="checkbox" class="check_sc" name="selectedIds[]"
+                                                   value="<?php echo $employee->emp_id; ?>">
+                                            <label for="<?php echo $employee->emp_id; ?>"></label>
+                                        </div>
+                                    </td>
                                     <td><?php echo $employee->epf_no; ?></td>
                                     <td><?php echo $employee->empno; ?></td>
                                     <td><?php echo $employee->emp_name_with_initials; ?></td>

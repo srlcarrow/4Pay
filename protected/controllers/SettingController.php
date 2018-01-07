@@ -1,6 +1,11 @@
 <?php
 
 class SettingController extends Controller {
+
+    public function init() {
+        $this->redirectionToLogin();
+    }
+
     public function actionShortLeaveSettings() {
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
         $this->render('/setting/viewShortLeaveSetting', array('shortLeaveSetting' => $shortLeaveSetting));
@@ -19,4 +24,5 @@ class SettingController extends Controller {
             $this->msgHandler(200, "Successfully Saved...");
         }
     }
+
 }

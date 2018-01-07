@@ -2,6 +2,10 @@
 
 class ShortLeaveController extends Controller {
 
+    public function init() {
+        $this->redirectionToLogin();
+    }
+
     public function actionViewShortLeaveApplyPanel() {
         $empId = $_REQUEST['id'];
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
@@ -9,7 +13,7 @@ class ShortLeaveController extends Controller {
     }
 
     public function actionViewShortLeaveApplyPanelSelf() {
-        $empId = Yii::app()->user->getId();
+        $empId = Controller::getEmpIdOfLoggedUser();
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
         $this->render('/shortLeave/viewShortLeaveApplyPanel', array('empId' => $empId, 'applierType' => 'self', 'shortLeaveSetting' => $shortLeaveSetting));
     }
@@ -117,7 +121,7 @@ class ShortLeaveController extends Controller {
     }
 
     public function actionViewPendingShortLeave() {
-        $userId = Yii::app()->user->getId();
+        $userId = Controller::getEmpIdOfLoggedUser();
         $criteria = new CDbCriteria();
         $criteria->compare('approver_id', $userId);
         $criteria->compare('approver_status', '0');
@@ -151,7 +155,7 @@ class ShortLeaveController extends Controller {
     }
 
     public function actionViewPendingShortLeaveSecondApprover() {
-        $userId = Yii::app()->user->getId();
+        $userId = Controller::getEmpIdOfLoggedUser();
         $pendingShortLeaves = ShortLeave::model()->findAllByAttributes(array('second_approver_id' => $userId, 'second_approver_status' => 0, 'final_status' => 0));
         $this->render('/shortLeave/pendingShortLeaveSecondApprover', array('pendingShortLeaves' => $pendingShortLeaves));
     }
@@ -183,9 +187,23 @@ class ShortLeaveController extends Controller {
         $shortLeavesHistroy = ShortLeave::model()->findAllByAttributes(array('ref_emp_id' => $empId));
         $this->renderPartial('ajaxLoad/viewEmpShortLeaveHistory', array('shortLeavesHistroy' => $shortLeavesHistroy));
     }
+    
+    public function actiondeleteShortLeave() {
+        $ShortLeave = ShortLeave::model()->findByPK($_POST['deleteId']);
+        $now = strtotime(Controller::getCountryDate());
+        $leave_date = strtotime($ShortLeave->short_leave_date);
+        $datediff = $leave_date - $now;
+        $dates = round($datediff / 86400);
+        if ($dates > 0) {
+            ShortLeave::model()->deleteAll("short_lv_id ='" . $_POST['deleteId'] . "'");
+            echo true;
+        } else {
+            echo false;
+        }
+    }
 
     //Report
-    public function actionViewEmployee() {
+    public function actionViewEmployee() {  
         $controller = "ShortLeave";
         $action = "ViewShortLeaveReportData";
         $this->render('/search/searchF1', array('controller' => $controller, 'action' => $action));
