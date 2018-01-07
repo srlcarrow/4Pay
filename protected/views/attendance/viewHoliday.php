@@ -10,7 +10,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
         <div class="card">
 
             <div class="card-header">
-                <h1>Holiday Calender</h1>
+                <h1>Holiday Calendar</h1>
             </div>
 
             <div class="card-content">

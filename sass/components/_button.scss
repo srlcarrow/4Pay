@@ -16,10 +16,19 @@
   color: $white;
 
   &:active,
+  &:focus,
   &:hover {
     background: rgba($primaryBtnBgColor, $lighten);
     color: $white;
     border: 1px solid $primaryBtnBgColor;
+  }
+
+  &:active {
+    &:hover {
+      background: rgba($primaryBtnBgColor, $lighten);
+      color: $white;
+      border: 1px solid $primaryBtnBgColor;
+    }
   }
 }
 
@@ -28,11 +37,44 @@
   color: $white;
 
   &:active,
+  &:focus,
   &:hover {
     background: rgba($dangerBtnBgColor, $lighten);
     color: $white;
     border: 1px solid $dangerBtnBgColor;
   }
+
+  &:active {
+    &:hover {
+      background: rgba($dangerBtnBgColor, $lighten);
+      color: $white;
+      border: 1px solid $dangerBtnBgColor;
+    }
+  }
+}
+
+.btn-default {
+  color: rgba($black,$lighten);
+  background: $defaultBtnBgColor;
+  border: 1px solid $defaultBtnBgColor;
+
+  @mixin ho {
+    background: darken($defaultBtnBgColor, 5%);
+    border: 1px solid darken($defaultBtnBgColor, 5%);
+  };
+
+  &:active,
+  &:focus,
+  &:hover {
+   @include ho;
+  }
+
+  &:active {
+    &:hover {
+      @include ho;
+    }
+  }
+
 }
 
 .btn-add {
@@ -41,22 +83,31 @@
   color: $white;
 
   &:active,
+  &:focus,
   &:hover {
     background: rgba(224, 157, 13, 0.86);
     color: $white;
   }
-}
 
-.btn-download {
-  background: #620631;
-  color: $white;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  border-radius: 30px;
+  &:active {
+    &:hover {
+      background: rgba(224, 157, 13, 0.86);
+      color: $white;
+    }
+  }
 
-  &:active,
-  &:hover {
-    background: rgba(98, 6, 49, 0.86);
+  .btn-download {
+    background: #620631;
     color: $white;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background: rgba(98, 6, 49, 0.86);
+      color: $white;
+    }
   }
 }

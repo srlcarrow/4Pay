@@ -6,7 +6,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'manageLeave'));
         <div class="card">
 
             <div class="card-header">
-                <h1>Manage Leave / Short Leave</h1>
+                <h1>Manage Leave & Short Leave</h1>
             </div>
 
             <div class="card-content">
@@ -16,7 +16,6 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'manageLeave'));
                             <thead>
                                 <tr>
                                     <th class="th-checkbox">
-
                                         <div class="checkbox mt-0 mb-0">
                                             <input id="id_all" type="checkbox" class="select-All">
                                             <label for="id_all"></label>
@@ -27,7 +26,6 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'manageLeave'));
                                     <th>Name</th>
                                     <th class="tb-action">Leave</th>
                                     <th class="tb-action">Short Leave</th>
-
                                 </tr>
                             </thead>
 

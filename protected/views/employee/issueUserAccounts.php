@@ -4,7 +4,7 @@
         <div class="card">
 
             <div class="card-header">
-                <h1>Issue User Accounts</h1>
+                <h1>User Accounts & Type</h1>
             </div>
 
             <div class="card-content">
@@ -19,8 +19,8 @@
                                         <label for="id_all"></label>
                                     </div>
                                 </th>
-                                <th>EPF No</th>
-                                <th>EMP No</th>
+                                <th>EPF</th>
+                                <th>EMP</th>
                                 <th>Name</th>
                                 <th>User Name</th>
                                 <th>Email</th>

@@ -19,8 +19,8 @@
                                         <label for="id_all"></label>
                                     </div>
                                 </th>
-                                <th>EPF No</th>
-                                <th>EMP No</th>
+                                <th>EPF</th>
+                                <th>EMP</th>
                                 <th>Name</th>
                                 <th>Monday</th>
                                 <th>Tuesday</th>
@@ -125,9 +125,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button type="button" class="btn btn-primary" onclick="saveEmpShifts()">Save Employee
-                            Shifts
-                        </button>
+                        <button type="button" class="btn btn-primary" onclick="saveEmpShifts()">Save</button>
                     </div>
                 </div>
             </div>

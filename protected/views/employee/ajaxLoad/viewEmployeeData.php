@@ -27,8 +27,8 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>EPF No</th>
-                                    <th>EMP No</th>
+                                    <th>EPF</th>
+                                    <th>EMP</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
