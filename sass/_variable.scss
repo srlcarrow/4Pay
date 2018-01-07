@@ -1,12 +1,12 @@
 $primaryColor: #0288d1;
 $primaryDark: #014c75;
-$warnColor: #eb5b03;
+$warnColor: #d14836;
 $white: #fff;
 $Gray: #F7F7F7;
 $black: #000;
 
 $success: #09ff6e;
-$error: #ff3820;
+$error: $warnColor;
 $info: #25fcff;
 
 $primaryFontColor: $black;
@@ -60,4 +60,5 @@ $leaveFontColor: #fff;
 
 //Button
 $primaryBtnBgColor: #0288d1;
-$dangerBtnBgColor: #ff023b;
+$dangerBtnBgColor: #d14836;
+$defaultBtnBgColor: #ebebeb;

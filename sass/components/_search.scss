@@ -47,10 +47,14 @@
     .btn-search {
       @extend .btn-advance;
       padding: 10px 30px;
-      background: $primaryColor;
       color: $white;
+      background: $dangerBtnBgColor;
       border-top-right-radius: 2px;
       border-bottom-right-radius: 2px;
+
+      &:active {
+        color: $white;
+      }
     }
   }
 }

@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                         <button type="button" onclick="searchData(1)" class="btn btn-search">Search</button>
                     </div>
                     <div class="item width-1">
-                        <button type="button" class="btn btn-advance">Advanced</button>
+                        <button type="button" class="btn btn-danger btn-advance">Advanced</button>
                     </div>
 
                 </div>
@@ -57,7 +57,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                         <div class="row">
                             <div class="col-md-12 text-right">
                                 <button type="button" class="btn btn-default btn-close">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="searchData(1)">Search</button>
+                                <button type="button" class="btn btn-danger" onclick="searchData(1)">Search</button>
                             </div>
                         </div>
                     </div>
