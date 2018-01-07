@@ -1,6 +1,6 @@
-<?php $form = $this->beginWidget('CActiveForm', array('id' => 'leave')); ?>
+<?php // $form = $this->beginWidget('CActiveForm', array('id' => 'leave')); ?>
 <div class="card flat mt-30">
-    <div class="card-content">
+    <div class="card-content">      
         <div class="row form-wrapper">
             <div class="col-md-4">
                 <div class="row form-wrapper">
@@ -25,11 +25,11 @@
                 </div>
             </div>
         </div>
-
+        <?php // $this->endWidget(); ?>
         <div id="ajaxLoadData"></div>
     </div>
 </div>
-<?php $this->endWidget(); ?>
+
 <script>
     $(document).ready(function (e) {
         loadLeaveData();
@@ -47,6 +47,6 @@
             }
         });
     }
-   
+
 </script>
 

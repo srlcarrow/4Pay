@@ -83,4 +83,53 @@ class LeaveController extends Controller {
         $this->renderPartial('viewManageLeaveData', array('employeeData' => $employeeData, 'pageSize' => $limit, 'page' => $currentPage, 'count' => $pageCount));
     }
 
+    public function actionSaveLeave() {
+        $leaveApplyDates = json_decode(stripslashes($_POST["leaveDates"]));
+        $status = Leave::validateLeave($_POST['empId'], $_POST["leaveTypeId"], $_POST["startDate"], $_POST["endDate"], $leaveApplyDates);
+     
+        if ($status['status'] == 1) {
+            $leaveApply = new LeaveApply();
+            $leaveApply->lv_apply_date = date('Y-m-d');
+            $leaveApply->ref_emp_id = $_POST['empId'];
+            $leaveApply->ref_lv_type_id = $_POST["leaveTypeId"];
+            $leaveApply->lv_from = $_POST["startDate"];
+            $leaveApply->lv_to = $_POST["endDate"];
+
+            $leaveApply->lv_no_of_leaves = 0;
+
+            $leaveApply->lv_coverup_id = $_POST["coverupId"];
+            $leaveApply->lv_first_sup_id = 0;
+            $leaveApply->lv_sec_sup_id = 0;
+
+            $leaveApply->lv_coverup_approved = 0;
+            $leaveApply->lv_first_sup_approved = 0;
+            $leaveApply->lv_sec_sup_approved = 0;
+            $leaveApply->lv_approved_final_status = 0;
+
+            $leaveApply->lv_coverup_approved_date = "0000-00-00";
+            $leaveApply->lv_first_sup_approved_date = "0000-00-00";
+            $leaveApply->lv_sec_sup_approved_date = "0000-00-00";
+
+            $leaveApply->lv_created_date = date('Y-m-d H:i:s');
+            $leaveApply->lv_created_by = Yii::app()->user->getId();
+            if ($leaveApply->save(false)) {
+                $leaveApplyId = $leaveApply->getPrimaryKey();
+
+                foreach ($leaveApplyDates as $leave) {
+                    $leaveApplyData = new LeaveApplyData();
+                    $leaveApplyData->ref_lv_id = $leaveApplyId;
+                    $leaveApplyData->lvd_day = $leave[0];
+                    $leaveApplyData->lvd_is_halfday = $leave[1] == 0 ? 0 : 1;
+                    $leaveApplyData->lvd_halfday_half = $leave[1];
+                    $leaveApplyData->lvd_count = $leave[1] == 0 ? 1 : 0.5;
+                    $leaveApplyData->save(false);
+                }
+            }
+
+            $this->msgHandler(200, "Applied Successfully...");
+        } else {
+            $this->msgHandler(400, $status['msg']);
+        }
+    }
+
 }

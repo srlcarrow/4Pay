@@ -399,15 +399,15 @@ class EmployeeController extends Controller {
         $dayCount = 14;
         $leaveTypeData = LeaveAllocation::model()->findByAttributes(array('ref_emp_id' => $empId, 'ref_lv_type_id' => $_POST["selectedLvType"], 'is_available_leave_type' => 1));
 
-        $this->renderPartial('ajaxLoad/profile/leave/viewLeaveData', array('leaveTypeData' => $leaveTypeData, 'minDate' => $minDate, 'maxDate' => $maxDate, 'dayCount' => $dayCount));
+        $this->renderPartial('ajaxLoad/profile/leave/viewLeaveData', array('leaveTypeData' => $leaveTypeData, 'minDate' => $minDate, 'maxDate' => $maxDate, 'dayCount' => $dayCount, 'leaveTypeId' => $_POST["selectedLvType"], 'empId' => $empId));
     }
 
     public function actionViewLeaveDates() {
         $empId = Controller::getEmpIdOfLoggedUser();
-        $leaveBalance = Leave::validateLeave($empId, $_POST["selectedLvType"], $_POST["startDate"], $_POST["endDate"]);
+//        $leaveBalance = Leave::validateLeave($empId, $_POST["selectedLvType"], $_POST["startDate"], $_POST["endDate"]);
 
         $leaveDays = Controller::returnDates($_POST["startDate"], $_POST["endDate"]);
-        $this->renderPartial('ajaxLoad/profile/leave/leaveDate', array('leaveDays' => $leaveDays));
+        $this->renderPartial('ajaxLoad/profile/leave/leaveDate', array('leaveDays' => $leaveDays, 'empId' => $empId, 'leaveTypeId' => $_POST["selectedLvType"]));
     }
 
     public function actionSearchCoverUp() {

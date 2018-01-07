@@ -82,7 +82,7 @@
     </div>
 
     <div class="col-md-12 text-right">
-        <button class="btn btn-primary btnSave">Save</button>
+        <button type="button" class="btn btn-primary" onclick="applyLeave()">Save</button>        
     </div>
 
 </div>
@@ -147,6 +147,25 @@
 
             p.removeClass('is-open');
         });
+    }
+
+    function applyLeave() {
+        var leaveDates = getLeaveDate();
+        fetch({
+            type: 'POST',
+            url: "<?php echo Yii::app()->baseUrl . '/Leave/SaveLeave'; ?>",
+            data: $('#leaveData').serialize() + "&empId=" + '<?php echo $empId; ?>' + "&coverupId=" + coverupId + "&leaveDates=" + leaveDates + "&leaveTypeId=" + '<?php echo $leaveTypeId; ?>',
+            dataType: 'json',
+            success: function (responce) {
+                if (responce.code == 200) {
+
+                } else {
+                    sweetAlert('Can Not Apply Leave!', responce.msg);
+                }
+            }
+
+        })
+
     }
 </script>
 
@@ -245,13 +264,5 @@
 
         return JSON.stringify(result);
     }
-
-    $('.btnSave').on('click', function () {
-
-        var leaveDates = getLeaveDate();
-
-        console.log(leaveDates)
-    })
-
 
 </script>
