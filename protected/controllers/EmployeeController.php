@@ -187,10 +187,10 @@ class EmployeeController extends Controller {
                 $user->save(false);
             }
 
-//            $msg = EmailGenerator::setEmailMessageBodyUser('user_created', '2', $jsId, $jsBasicTemp->jsbt_email, $password, false);
-//            $subjct = "User Account Details";
-//            $to = $_POST['email'];
-//            EmailGenerator::SendEmail($msg, $to, $subjct);
+            $msg = EmailGenerator::setEmailMessageBodyUser('user_created', '2', $empId, $user->user_name, $password, false);
+            $subjct = "User Account Details";
+            $to = $empContactData->con_office_email;
+            EmailGenerator::SendEmail($msg, $to, $subjct);
         }
     }
 
