@@ -7,12 +7,13 @@ $mainLinks = AdmLinks::model()->findAllByAttributes(array('lnk_parent_id' => 0, 
 $pendingSLeavesFirstApprover = ShortLeave::model()->findAllByAttributes(array('approver_id' => $empId, 'approver_status' => 0, 'final_status' => 0));
 $pendingSLeavesSecondApprover = ShortLeave::model()->findAllByAttributes(array('second_approver_id' => $empId, 'approver_status' => 1, 'second_approver_status' => 0, 'final_status' => 0));
 $notificationCount = count($pendingSLeavesFirstApprover) + count($pendingSLeavesSecondApprover);
+$comLogo = AdmCompany::model()->find()->com_logo;
 ?>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?php echo Yii::app()->baseUrl; ?>">
-                <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/company/logo/logo.png" alt="Logo">
+                <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/company/logo/<?php echo $comLogo; ?>" alt="Logo">
             </a>
         </div>
         <ul class="nav navbar-nav navbar-right">

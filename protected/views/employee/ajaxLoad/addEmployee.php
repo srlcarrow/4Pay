@@ -232,14 +232,14 @@
 
                         <div class="col-md-4 ">
                             <div class="form-group">
-                                <label>Section</label>
+                                <label>Department</label>
                                 <?php echo $form->dropdownlist($employment, 'ref_department_id', CHtml::listData(AdmDepartment::model()->findAll(), 'dept_id', 'dept_name'), array('empty' => '', 'onChange' => 'loadSections()', 'class' => 'form-control')); ?>
                             </div>
                         </div>
 
                         <div class="col-md-4 ">
                             <div class="form-group">
-                                <label>Department</label>
+                                <label>Section</label>
 
                                 <select id="section" name="section" class="form-control">
                                     <option value="0">Select</option>
