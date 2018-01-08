@@ -8,5 +8,6 @@ return array(
 	'username' => 'root',
 	'password' => '1234',
 	'charset' => 'utf8',
+
 );
 

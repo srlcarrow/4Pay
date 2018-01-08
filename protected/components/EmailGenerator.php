@@ -29,28 +29,10 @@ class EmailGenerator {
             // Mailer
             $message = Swift_Message::newInstance();
 
-
-//            $headers .= "Reply-To: info@4you.lk \r\n";
-//            $headers .= "Return-Path: info@4you.lk  \r\n";
-//            $headers .= "From: \"Sender Name\" <info@4you.lk> \r\n";
-//            $headers .= "Organization: 4You.lk\r\n";
-//            $headers .= "MIME-Version: 1.0\r\n";
-//            $headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
-//            $headers .= "Content-Transfer-Encoding: binary";
-//            $headers .= "X-Priority: 3\r\n";
-//            $headers .= "X-Mailer: PHP" . phpversion() . "\r\n";
-
-
-
-        
             $message->setTo($to);
             $message->setSubject($subject);
             $message->setFrom(array($emailconfig->smtp_user => $emailconfig->email_sender_name));
             $message->setBody($msg, 'text/html');
-
-
-
-
 
             if ($attach != "") {
                 $message->attach(Swift_Attachment::fromPath($attach));
@@ -72,19 +54,21 @@ class EmailGenerator {
         $content = EmailContent::model()->find("recognize_text='" . $recognize . "'");
         return $content->email_subject;
     }
-    
-     static function setEmailMessageBodyUser($recognize, $type, $empId, $user_name, $pwd) {
-        $basicTemp = JsBasicTemp::model()->findByPk($jsId);
+
+    static function setEmailMessageBodyUser($recognize, $type, $empId, $userName, $pwd) {
+        $empData = EmpBasic::model()->findByPk($empId);
         $content = AdmEmailContent::model()->find("recognize_text='" . $recognize . "'");
         $format = AdmEmailFormat::model()->find('email_type="' . $type . '"');
 
+    
         $msg = $content->email_content;
         $subject = $content->email_subject;
-        $top = $format->email_format;
-
+        $top = ($format == NULL ? "" : $format->email_format);
+ 
         $replacearrBody = array(
-            '[url]' => self::jobSeekerVerificationUrl($basicTemp->jsbt_encrypted_id),
-            '[name]' => $basicTemp->jsbt_fname,
+            '[empName]' => $empData->emp_display_name,
+            '[username]' => $userName,
+            '[password]' => $pwd,
         );
         $new_msg = self::str_replace_assoc($replacearrBody, $msg);
 
@@ -108,7 +92,6 @@ class EmailGenerator {
 //    public static function employerVerificationUrl($encryptedId) {
 //        return Yii::app()->getBaseUrl(true) . "/Employer/EmployerRegister/id/" . $encryptedId;
 //    }
-
 }
 
 ?>
