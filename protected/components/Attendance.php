@@ -32,11 +32,10 @@ class Attendance {
         $punchdate = gmdate('Y-m-d', strtotime($punch) + $timezone);
         $employeedata = EmpBasic::model()->findByAttributes(array('attendance_no' => $empno));
 
-        $isavailabledailyattendance = $model->findByAttributes(array('ref_emp_id' => $employeedata->emp_id, 'day' => $punchdate)); //there will be a condition of date_out also.
-
         if (count($employeedata) == 0) {
             return;
         }
+        $isavailabledailyattendance = $model->findByAttributes(array('ref_emp_id' => $employeedata->emp_id, 'day' => $punchdate)); //there will be a condition of date_out also.
         $shift = $model->getEmpWorkshift($employeedata->emp_id, $punchdate);
 
         $shiftstarttime = $shift[0];
@@ -390,6 +389,7 @@ class Attendance {
         $model->punch_out_status = ($inOrOut == 2 && ($model->punch_out_status == 0 || $model->punch_out_status == NULL)) ? $punchBy : $model->punch_out_status;
         $model->update_at = date("Y-m-d H:i:s");
         if ($model->save(false)) {
+            
         }
     }
 
