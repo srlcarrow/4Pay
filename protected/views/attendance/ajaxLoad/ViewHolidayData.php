@@ -5,7 +5,7 @@
 
 <div class="col-md-12">
     <div class="calender-container">
-        <input type="hidden" id="calId" name="calId" value="<?php // echo $calendarId;            ?>">
+        <input type="hidden" id="calId" name="calId" value="<?php // echo $calendarId;                   ?>">
 
         <div class="day-container">
             <div class="day">Sunday</div>
@@ -25,6 +25,12 @@
                 $class = "";
                 $class = date('Y-m', strtotime($day)) != date('Y-m', strtotime($reqYear . '-' . $reqMonth . '-01')) ? "is-disabled" : "";
 
+                $holiday = AdmConfigHolidays::model()->findByAttributes(array('holiday_date' => $day));
+                $holidayName = "";
+                if (count($holiday) > 0) {
+                    $class = " is-holiday";
+                    $holidayName = $holiday->holiday_name;
+                }
 //                is-holiday
                 ?>
                 <!--
@@ -37,12 +43,12 @@
                 <div class="date <?php echo $class; ?>">
                     <input type="hidden" id="day" name="day" value="<?php echo $day; ?>">
                     <div class="header ">
-                        <span class="num"><?php echo date('d',strtotime($day)); ?></span>
+                        <span class="num"><?php echo date('d', strtotime($day)); ?></span>
                     </div>
 
                     <div class="content ">
                         <h6 class="holiday-text">
-                            <?php // echo $holidaySummary->holiday_name;  ?></h6>
+                            <?php echo $holidayName; ?></h6>
                     </div>
 
                 </div>

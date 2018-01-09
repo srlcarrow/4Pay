@@ -151,46 +151,51 @@ class EmployeeController extends Controller {
     }
 
     public function actionIssueAccounts() {
-        $selectedEmployees = $_POST['selectedIds'];
-        $userId = Yii::app()->user->getId();
+        try {
+            $selectedEmployees = $_POST['selectedIds'];
+            $userId = Yii::app()->user->getId();
 
-        foreach ($selectedEmployees as $empId) {
-            $empBasicData = EmpBasic::model()->findByPk($empId);
-            $empContactData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
-            $user = User::model()->findByAttributes(array('ref_emp_id' => $empId));
-            $password = Controller::randomPassword();
+            foreach ($selectedEmployees as $empId) {
+                $empBasicData = EmpBasic::model()->findByPk($empId);
+                $empContactData = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $empId));
+                $user = User::model()->findByAttributes(array('ref_emp_id' => $empId));
+                $password = Controller::randomPassword();
 
-            if (count($user) > 0) {
-                $user->ref_emp_id = $empId;
-                $user->user_name = $user->user_name;
-                $user->user_password = md5(md5($password . $password));
-                $user->ref_user_type_id = $_POST['userType_' . $empId];
-                $user->is_acc_issued = 1;
-                $user->user_acc_issued_date = $user->user_acc_issued_date;
-                $user->created_date = date('Y-m-d H:i:s');
-                $user->created_by = $userId;
-                $user->updated_date = date('Y-m-d H:i:s');
-                $user->updated_by = $userId;
-                $user->save(false);
-            } else {
-                $user = new User();
-                $user->ref_emp_id = $empId;
-                $user->user_name = $empBasicData->empno;
-                $user->user_password = md5(md5($password . $password));
-                $user->ref_user_type_id = $_POST['userType_' . $empId];
-                $user->is_acc_issued = 1;
-                $user->user_acc_issued_date = date('Y-m-d H:i:s');
-                $user->created_date = date('Y-m-d H:i:s');
-                $user->created_by = $userId;
-                $user->updated_date = date('Y-m-d H:i:s');
-                $user->updated_by = $userId;
-                $user->save(false);
+                if (count($user) > 0) {
+                    $user->ref_emp_id = $empId;
+                    $user->user_name = $user->user_name;
+                    $user->user_password = md5(md5($password . $password));
+                    $user->ref_user_type_id = $_POST['userType_' . $empId];
+                    $user->is_acc_issued = 1;
+                    $user->user_acc_issued_date = $user->user_acc_issued_date;
+                    $user->created_date = date('Y-m-d H:i:s');
+                    $user->created_by = $userId;
+                    $user->updated_date = date('Y-m-d H:i:s');
+                    $user->updated_by = $userId;
+                    $user->save(false);
+                } else {
+                    $user = new User();
+                    $user->ref_emp_id = $empId;
+                    $user->user_name = $empBasicData->empno;
+                    $user->user_password = md5(md5($password . $password));
+                    $user->ref_user_type_id = $_POST['userType_' . $empId];
+                    $user->is_acc_issued = 1;
+                    $user->user_acc_issued_date = date('Y-m-d H:i:s');
+                    $user->created_date = date('Y-m-d H:i:s');
+                    $user->created_by = $userId;
+                    $user->updated_date = date('Y-m-d H:i:s');
+                    $user->updated_by = $userId;
+                    $user->save(false);
+                }
+
+                $msg = EmailGenerator::setEmailMessageBodyUser('user_created', '2', $empId, $user->user_name, $password);
+                $subjct = "User Account Details";
+                $to = count($empContactData) > 0 ? $empContactData->con_office_email : "";
+                EmailGenerator::SendEmail($msg, $to, $subjct);
             }
-
-//            $msg = EmailGenerator::setEmailMessageBodyUser('user_created', '2', $jsId, $jsBasicTemp->jsbt_email, $password, false);
-//            $subjct = "User Account Details";
-//            $to = $_POST['email'];
-//            EmailGenerator::SendEmail($msg, $to, $subjct);
+            $this->msgHandler(200, "Issued Successfully...");
+        } catch (Exception $exc) {
+            $this->msgHandler(400, "Error Successfully...");
         }
     }
 
@@ -232,6 +237,7 @@ class EmployeeController extends Controller {
                 $user->save(false);
             }
         }
+        $this->msgHandler(200, "Saved Successfully...");
     }
 
     public function actionViewShiftAllocator() {
@@ -335,6 +341,8 @@ class EmployeeController extends Controller {
             $sun->day = "Sunday";
             $sun->ref_shift_id = $_POST['sun_' . $empId];
             $sun->save(false);
+
+            $this->msgHandler(200, "Saved Successfully...");
         }
     }
 
@@ -393,10 +401,11 @@ class EmployeeController extends Controller {
     public function actionViewLeaveData() {
         $empId = Controller::getEmpIdOfLoggedUser();
         $leaveTypeData = AdmLeavetypes::model()->findByPk($_POST["selectedLvType"]);
+        $company = AdmCompany::model()->find();
 
-        $minDate = "2018-01-06";
-        $maxDate = "2018-12-31";
-        $dayCount = 14;
+        $minDate = $leaveTypeData->lt_can_apply_after_leave == 1 ? date('Y-m-d', strtotime(date('Y-m-d') . ' - 21 days')) : date('Y-m-d');
+        $maxDate = $company->com_leave_proc_year . "-12-31";
+        $dayCount = $leaveTypeData->lt_max;
         $leaveTypeData = LeaveAllocation::model()->findByAttributes(array('ref_emp_id' => $empId, 'ref_lv_type_id' => $_POST["selectedLvType"], 'is_available_leave_type' => 1));
 
         $this->renderPartial('ajaxLoad/profile/leave/viewLeaveData', array('leaveTypeData' => $leaveTypeData, 'minDate' => $minDate, 'maxDate' => $maxDate, 'dayCount' => $dayCount, 'leaveTypeId' => $_POST["selectedLvType"], 'empId' => $empId));
@@ -416,9 +425,13 @@ class EmployeeController extends Controller {
         $emloyeeData = array();
 
         foreach ($employees as $employee) {
+            $employment = Employment::model()->findByAttributes(array('ref_emp_id' => $employee->emp_id));
+            if (count($employment) > 0 && $employment->ref_designation != 0) {
+                $desig = AdmDesignation::model()->findByPk($employment->ref_designation);
+            }
             $emp["emp_id"] = $employee->emp_id;
             $emp["emp_name"] = $employee->emp_display_name;
-            $emp["epf_no"] = $employee->epf_no;
+            $emp["designation"] = $desig->designation;
             array_push($emloyeeData, $emp);
         }
 
@@ -448,6 +461,16 @@ class EmployeeController extends Controller {
         $userData->user_password = md5(md5($_POST['pw'] . $_POST['pw']));
         $userData->save(false);
         $this->msgHandler(200, "Password Changed...");
+    }
+
+    public function actionViewSelfLeaveHistory() {
+        $empId = Controller::getEmpIdOfLoggedUser();
+        $leaveData = yii::app()->db->createCommand("SELECT la.lv_id,al.lt_name, la.lv_from, la.lv_to,lv_no_of_leaves,la.lv_first_sup_approved, la.lv_sec_sup_approved FROM leave_apply la "
+                        . "LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id "
+                        . "LEFT JOIN adm_leavetypes al ON al.lt_id=la.ref_lv_type_id "
+                        . "WHERE la.ref_emp_id=" . $empId . " ORDER BY la.lv_approved_final_status,la.lv_from")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+        $this->renderPartial('ajaxLoad/profile/leave/viewLeaveHistory', array('empId' => $empId, 'leaveData' => $leaveData));
     }
 
 }
