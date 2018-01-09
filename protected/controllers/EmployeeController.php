@@ -341,9 +341,9 @@ class EmployeeController extends Controller {
             $sun->day = "Sunday";
             $sun->ref_shift_id = $_POST['sun_' . $empId];
             $sun->save(false);
-
-            $this->msgHandler(200, "Saved Successfully...");
         }
+
+        $this->msgHandler(200, "Saved Successfully...");
     }
 
     public function actionViewProfile() {
