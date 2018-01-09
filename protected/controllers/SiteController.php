@@ -28,7 +28,11 @@ class SiteController extends Controller {
         if (Yii::app()->user->isGuest) {
             $this->redirect(array('login'));
         } else {
-            $this->render('index');
+            $totEmployees = yii::app()->db->createCommand("SELECT COUNT(*) AS totEmp FROM emp_basic eb LEFT JOIN emp_employment ee ON eb.emp_id=ee.ref_emp_id WHERE ee.empl_employment_status='active';")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+            $totMale = yii::app()->db->createCommand("SELECT COUNT(*) AS totMale FROM emp_basic eb LEFT JOIN emp_employment ee ON eb.emp_id=ee.ref_emp_id WHERE eb.emp_gender='Male' AND ee.empl_employment_status='active';")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+            $totFemale = yii::app()->db->createCommand("SELECT COUNT(*) AS totFemale FROM emp_basic eb LEFT JOIN emp_employment ee ON eb.emp_id=ee.ref_emp_id WHERE eb.emp_gender='Female' AND ee.empl_employment_status='active';")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+            $this->render('index', array('totEmployees' => $totEmployees[0]->totEmp, 'totMale' => $totMale[0]->totMale, 'totFemale' => $totFemale[0]->totFemale));
         }
     }
 
@@ -75,19 +79,6 @@ class SiteController extends Controller {
             $this->layout = 'login_layout';
             $model = new User();
 
-//            if (isset($_REQUEST['controllerAction'])) {
-//                if (!empty($_REQUEST['request_arr'])) {
-//                    $url_param = '';
-//                    foreach ($_REQUEST['request_arr'] as $key => $val) {
-//                        $url_param .= "$key/$val/";
-//                    }
-//                    $url = $_REQUEST['controllerAction'] . "/" . $url_param;
-//                } else {
-//                    $url = $_REQUEST['controllerAction'];
-//                }
-//            }
-
-
             $this->render('login');
         } else {
             $this->render('index');
@@ -122,16 +113,14 @@ class SiteController extends Controller {
     public function actionGetDashboardAttendanceData() {
         $array = array();
         $branches = AdmBranch::model()->findAll();
-//        foreach ($branches as $branch) {
-//            $b = [
-//                'a' => [
-//                    array($branch->br_name, 50, 40),
-//                ]
-//            ];
-//            array_push($array, $b);
-//        }
 
-        var_dump($array);exit;
+        foreach ($branches as $branch) {
+            $noOfEmployees = yii::app()->db->createCommand("SELECT COUNT(*) AS empCount  FROM emp_basic eb LEFT JOIN emp_employment ee ON eb.emp_id=ee.ref_emp_id WHERE ee.empl_employment_status='active' AND ee.ref_branch_id=" . $branch->br_id . ";")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+            $noOfAttendance = yii::app()->db->createCommand("SELECT COUNT(*) AS noOfAttendance FROM att_attendance aa LEFT JOIN emp_employment ee ON aa.ref_emp_id=ee.ref_emp_id WHERE ee.ref_branch_id=" . $branch->br_id . "; ")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+            array_push($array, array($branch->br_name, (int) $noOfEmployees[0]->empCount, (int) $noOfAttendance[0]->noOfAttendance));
+        }
+
         $this->msgHandler(200, "Login Successfull...", $array);
     }
 
