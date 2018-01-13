@@ -45,6 +45,13 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF1'));
                         </div>
                         <div class="row form-wrapper">
                             <div class="col-md-4 ">
+                                <?php
+                                $activeStatus = $this->getActiveFilter();
+                                echo Chtml::label('Employment Status', "", array('class' => 'control-label'));
+                                echo Chtml::dropdownlist('activeStatus', '', $activeStatus, array('class' => 'form-control'));
+                                ?>
+                            </div>
+                            <div class="col-md-4 ">
                                 <?php echo Chtml::label('Page Size ', ' ', array('class' => 'control-label')); ?>
                                 <?php $dataArray = array('15' => '15', '30' => '30', '50' => '50', '100' => '100', '200' => '200'); ?>
                                 <?php echo Chtml::dropdownlist('noOfData', '', $dataArray, array('class' => 'form-control')); ?>

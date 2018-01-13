@@ -3,7 +3,6 @@
 class AttendanceTransferServiceController extends Controller {
 
     static function getPost() {
-
         $json = json_decode(file_get_contents('php://input'));
         $postArry = AttendanceTransferServiceController::toArray($json);
         return $postArry;
@@ -25,6 +24,21 @@ class AttendanceTransferServiceController extends Controller {
         return $new;
     }
 
+    public function actionTE() {
+        $postData = $this->getPost();
+        $model = new Allattendance;
+        $model->emp_no = 8898;
+        $model->checktime = "2018-01-02 08:13:43";
+        $model->machine_serial_no = "";
+        $model->Branch = "1";
+//   
+//        $postData['USERID'],$postData['CHECKTIME']
+//        if ($model->save(false)) {
+        Attendance::dailyAttendance(8898, "2018-01-02 08:13:43", "1", 1);
+        echo json_encode(array("code" => "200"));
+//        }
+    }
+
     public function actionAttendancePost() {
         $postData = $this->getPost();
         $model = new Allattendance;
@@ -32,27 +46,39 @@ class AttendanceTransferServiceController extends Controller {
         $model->checktime = $postData['CHECKTIME'];
         $model->machine_serial_no = $postData['sn'];
         $model->Branch = $postData['BRANCH'];
+        $model->status = 0;
+        $model->punch_by = 1;
+        $model->update_at = date('Y-m-d H:i:s');
 //   
 //        $postData['USERID'],$postData['CHECKTIME']
         if ($model->save(false)) {
-            Attendance::dailyAttendance($postData['USERID'], $postData['CHECKTIME'],$postData['BRANCH'],1);
+            Attendance::dailyAttendance($postData['USERID'], $postData['CHECKTIME'], $postData['BRANCH'], 1);
             echo json_encode(array("code" => "200"));
         }
     }
 
     //this is for orient finance hysoon machine
     public function actionAttendanceHysoonPost() {
-        $postData = $this->getPost();
-        $model = new Allattendance;
-        $model->emp_no = $postData['USERID'];
-        $model->checktime = $postData['CHECKTIME'];
-        $model->machine_serial_no = $postData['sn'];
-        $model->Branch = $postData['BRANCH'];
+        try {
+            $postData = $this->getPost();
+            $model = new Allattendance;
+            $model->emp_no = $postData['USERID'];
+            $model->checktime = $postData['CHECKTIME'];
+            $model->machine_serial_no = $postData['sn'];
+            $model->Branch = $postData['BRANCH'];
+            $model->status = 0;
+            $model->punch_by = 1;
+            $model->update_at = date('Y-m-d H:i:s');
 
-        if ($model->save(false)) {
-            Attendance::dailyAttendance($postData['USERID'], $postData['CHECKTIME'],$postData['BRANCH'],1);
-            echo json_encode(array("code" => "200"));
+            if ($model->save(false)) {
+                Attendance::dailyAttendance($postData['USERID'], $postData['CHECKTIME'], $postData['BRANCH'], 1);
+                echo json_encode(array("code" => "200"));
+            }
+        } catch (Exception $exc) {
+            echo json_encode(array("code" => $exc->getTraceAsString()));
         }
+
+
 
 
 //    if($model->save(false)){      

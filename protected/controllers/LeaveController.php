@@ -33,6 +33,7 @@ class LeaveController extends Controller {
         $userId = Yii::app()->user->getId();
         $leaveTypes = AdmLeavetypes::model()->findAll();
 
+
         foreach ($selectedEmployees as $empId) {
             foreach ($leaveTypes as $leaveType) {
                 $leaveAllocation = LeaveAllocation::model()->findByAttributes(array('ref_emp_id' => $empId, 'ref_lv_type_id' => $leaveType->lt_id));
@@ -44,17 +45,20 @@ class LeaveController extends Controller {
                 $leaveAllocation->ref_lv_type_id = $leaveType->lt_id;
                 $leaveAllocation->la_allocated_amount = $_POST['leave_' . $leaveType->lt_id . '_' . $empId] == "" ? 0 : $_POST['leave_' . $leaveType->lt_id . '_' . $empId];
                 $leaveAllocation->la_available_amount = count($leaveAllocation) > 0 ? $leaveAllocation->la_available_amount : ($_POST['leave_' . $leaveType->lt_id . '_' . $empId] == "" ? 0 : $_POST['leave_' . $leaveType->lt_id . '_' . $empId]);
+                $leaveAllocation->is_available_leave_type = isset($_POST['ena_' . $leaveType->lt_id . '_' . $empId]) && $_POST['ena_' . $leaveType->lt_id . '_' . $empId] == 1 ? 1 : 0;
                 $leaveAllocation->save(false);
             }
 
             $empData = EmpBasic::model()->findByPk($empId);
             $firstSup = EmpBasic::model()->findByAttributes(array('empno' => $_POST['firstSup_' . $empId]));
             $secondSup = EmpBasic::model()->findByAttributes(array('empno' => $_POST['secSup_' . $empId]));
-            $coverup = EmpBasic::model()->findByAttributes(array('empno' => $_POST['coverup_' . $empId]));
+//            $coverup = EmpBasic::model()->findByAttributes(array('empno' => $_POST['coverup_' . $empId]));
 
             $empData->emp_sup_one = count($firstSup) > 0 ? $firstSup->emp_id : 0;
             $empData->emp_sup_two = count($secondSup) > 0 ? $secondSup->emp_id : 0;
-            $empData->emp_coverup = count($coverup) > 0 ? $coverup->emp_id : 0;
+            $empData->is_enable_emp_sup_one = isset($_POST['firstSupNeed_' . $empId]) && $_POST['firstSupNeed_' . $empId] == 1 ? 1 : 0;
+            $empData->is_enable_emp_sup_two = isset($_POST['secondSupNeed_' . $empId]) && $_POST['secondSupNeed_' . $empId] == 1 ? 1 : 0;
+            $empData->is_enable_coverup = isset($_POST['coverupNeed_' . $empId]) && $_POST['coverupNeed_' . $empId] == 1 ? 1 : 0;
             $empData->save(false);
         }
 

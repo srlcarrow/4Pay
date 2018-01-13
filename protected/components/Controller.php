@@ -95,6 +95,12 @@ class Controller extends CController {
     public static function searchEmployeeWhereCriterias() {
         $str = "emp.emp_id !=0 ";
 
+        if (!empty($_REQUEST['activeStatus']) && ($_REQUEST['activeStatus'] == "inactive")) {
+            $str .= " AND empl.empl_employment_status = 'inactive'";
+        }else{
+              $str .= " AND empl.empl_employment_status = 'active'";
+        }
+        
         if (!empty($_REQUEST['searchEmployeeText']) && $_REQUEST['searchEmployeeText'] != 'undefined') {
             $str .= " AND  ( emp.emp_full_name Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_name_with_initials Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_display_name Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.epf_no Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.empno Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_nic Like '%" . $_REQUEST['searchEmployeeText'] . "%')";
         }
@@ -124,7 +130,16 @@ class Controller extends CController {
     }
 
     public function getActiveFilter() {
-        return array('active' => 'Active', 'inactive' => 'Inactive', 'resign' => 'Resigned', 'discontinue' => 'Discontinue', 'vacate' => 'Vacate');
+        return array('active' => 'Active', 'inactive' => 'Inactive');
+    }
+    
+    public function getShortLeaveFinalStatus() { 
+        $array = array(
+            '0' => 'Pending',
+            '1' => 'Approved',
+            '2' => 'Reject'   
+        );
+        return $array;
     }
 
     public static function getTimeZone() {
@@ -196,7 +211,7 @@ class Controller extends CController {
             $startStamp = strtotime(' +1 day ', $startStamp);
         }
         return $dateArr;
-    }    
+    }
 
     public function viewYearArry() {
         return array(gmdate('Y', strtotime('-1 year')) => gmdate('Y', strtotime('-1 year')), gmdate('Y') => gmdate('Y'), gmdate('Y', strtotime('+1 year')) => gmdate('Y', strtotime('+1 year')));
@@ -206,7 +221,23 @@ class Controller extends CController {
         $months = array(1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December');
         return $months;
     }
-    
-//    public function 
 
+    public static function getFirstSuperior($empId) {
+        $empData = EmpBasic::model()->findByPk($empId);
+
+        if (count($empData) > 0) {
+            if ($empData->is_enable_emp_sup_one == 1) {
+                $firstSup = EmpBasic::model()->findByPk($empData->emp_sup_one);
+
+                $arr['status'] = '';
+                $arr['empId'] = '';
+            }
+        }
+    }
+
+    public static function getSecondSuperior($empId) {
+        
+    }
+
+//    public function 
 }

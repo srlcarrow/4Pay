@@ -26,34 +26,8 @@
     <div class="card-content">
 
         <div class="row">
-            <div class="col-md-12" ajaxAttLoad>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Date In</th>
-                        <th>Punch In</th>
-                        <th>Date Out</th>
-                        <th>Punch Out</th>
-                    </tr>
-                    </thead>
+            <div class="col-md-12" id="ajaxAttLoad">
 
-                    <tbody>
-                    <?php
-                    foreach ($attendanceData as $attendance) {
-                        ?>
-                        <tr>
-                            <td><?php echo $attendance['day']; ?></td>
-                            <td><?php echo $attendance['date_in']; ?></td>
-                            <td><?php echo $attendance['punch_in']; ?></td>
-                            <td><?php echo $attendance['date_out']; ?></td>
-                            <td><?php echo $attendance['punch_out']; ?></td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
-                    </tbody>
-                </table>
             </div>
         </div>
 
@@ -72,13 +46,10 @@
         fetch({
             appendTo: '.ajaxAttLoad',
             type: 'POST',
-            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewMyAttendance'; ?>",
+            url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewMyAttendanceData'; ?>",
             data: $('#attSearch').serialize() + "&page=" + page,
             success: function (responce) {
-
-                $(".ajaxAttLoad")
-                    .html('')
-                    .html(responce);
+                $("#ajaxAttLoad").html(responce);
             }
         });
     }

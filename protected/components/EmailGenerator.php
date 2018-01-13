@@ -60,11 +60,11 @@ class EmailGenerator {
         $content = AdmEmailContent::model()->find("recognize_text='" . $recognize . "'");
         $format = AdmEmailFormat::model()->find('email_type="' . $type . '"');
 
-    
+
         $msg = $content->email_content;
         $subject = $content->email_subject;
         $top = ($format == NULL ? "" : $format->email_format);
- 
+
         $replacearrBody = array(
             '[empName]' => $empData->emp_display_name,
             '[username]' => $userName,
@@ -72,8 +72,10 @@ class EmailGenerator {
         );
         $new_msg = self::str_replace_assoc($replacearrBody, $msg);
 
+      
+//        var_dump(Yii::app()->getBaseUrl(true) . "/uploads/company/logo/logo.png");exit;
         $replacearrFull = array(
-//            '[header_logo]' => Yii::app()->getBaseUrl(true) . "/images/system/email/logo/logo-160.png",
+//            '[header_logo]' => Yii::app()->getBaseUrl(true) . "/uploads/company/logo/logo.png",
             '[email_subject]' => $subject,
             '[email_message_body]' => $new_msg);
         $mailbody = self::str_replace_assoc($replacearrFull, $top);

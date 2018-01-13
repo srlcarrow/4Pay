@@ -6,7 +6,7 @@ class ShortLeaveController extends Controller {
         $this->redirectionToLogin();
     }
 
-    public function actionViewShortLeaveApplyPanel() {
+    public function actionViewShortLeaveApplyPanel() {   
         $empId = $_REQUEST['id'];
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
         $this->render('/shortLeave/viewShortLeaveApplyPanel', array('empId' => $empId, 'applierType' => 'hr', 'shortLeaveSetting' => $shortLeaveSetting));
@@ -52,7 +52,7 @@ class ShortLeaveController extends Controller {
         $lastDayYear = date('Y-12-t', strtotime($shtLvDate));
 
 
-        $empBasic = Empbasic::model()->findByPk($empId);
+        $empBasic = EmpBasic::model()->findByPk($empId);
         $userId = Yii::app()->user->getId();
 
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();

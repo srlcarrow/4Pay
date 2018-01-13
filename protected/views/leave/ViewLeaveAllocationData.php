@@ -16,21 +16,22 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                     <div class="col-md-12">
                         <table class="table table-bordered">
                             <thead>
-                            <tr>
-                                <th class="th-checkbox">
+                                <tr>
+                                    <th class="th-checkbox">
 
-                                    <div class="checkbox mt-0 mb-0">
-                                        <input type="checkbox" id="id_all" class="select-All">
-                                        <label for="id_all"></label>
-                                    </div>
-                                </th>
-                                <th>EPF</th>
-                                <th>EMP</th>
-                                <th>Name</th>
+                                        <div class="checkbox mt-0 mb-0">
+                                            <input type="checkbox" id="id_all" class="select-All">
+                                            <label for="id_all"></label>
+                                        </div>
+                                    </th>
+                                    <th>EPF</th>
+                                    <th>EMP</th>
+                                    <th>Name</th>
                                     <?php
                                     foreach ($leaveTypes as $leaveType) {
                                         ?>
                                         <th><?php echo $leaveType->lt_name; ?></th>
+                                        <th>Is Enable</th>
                                         <?php
                                     }
                                     ?>
@@ -44,31 +45,38 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                             </thead>
 
                             <tbody>
-                            <?php
-                            foreach ($employeeData as $employee) {
-                            ?>
-                            <tr class="ch_bx">
-                                <td>
-                                    <div class="checkbox mt-0 mb-0">
-                                        <input id="id_<?php echo $employee->emp_id; ?>" type="checkbox" class="check_sc" name="selectedIds[]"
-                                               value="<?php echo $employee->emp_id; ?>">
-                                        <label for="id_<?php echo $employee->emp_id; ?>"></label>
-                                    </div>
-                                </td>
-                                <td><?php echo $employee->epf_no; ?></td>
-                                <td><?php echo $employee->empno; ?></td>
-                                <td><?php echo $employee->emp_name_with_initials; ?></td>
+                                <?php
+                                foreach ($employeeData as $employee) {
+                                    ?>
+                                    <tr class="ch_bx">
+                                        <td>
+                                            <div class="checkbox mt-0 mb-0">
+                                                <input id="id_<?php echo $employee->emp_id; ?>" type="checkbox" class="check_sc" name="selectedIds[]"
+                                                       value="<?php echo $employee->emp_id; ?>">
+                                                <label for="id_<?php echo $employee->emp_id; ?>"></label>
+                                            </div>
+                                        </td>
+                                        <td><?php echo $employee->epf_no; ?></td>
+                                        <td><?php echo $employee->empno; ?></td>
+                                        <td><?php echo $employee->emp_name_with_initials; ?></td>
                                         <?php
                                         foreach ($leaveTypes as $leaveType) {
                                             $leaveAllocation = LeaveAllocation::model()->findByAttributes(array('ref_emp_id' => $employee->emp_id, 'ref_lv_type_id' => $leaveType->lt_id));
                                             $firstSup = EmpBasic::model()->findByPk($employee->emp_sup_one);
                                             $secondSup = EmpBasic::model()->findByPk($employee->emp_sup_two);
+                                            $empBasicData = EmpBasic::model()->findByPk($employee->emp_id);
                                             ?>
                                             <td>
                                                 <input type="text"
                                                        name="leave_<?php echo $leaveType->lt_id . '_' . $employee->emp_id; ?>"
                                                        class="form-control"
                                                        value="<?php echo count($leaveAllocation) > 0 ? $leaveAllocation->la_allocated_amount : ''; ?>"/>
+                                            </td>
+                                            <td class="td-checkbox"> 
+                                                <div class="checkbox mb-0 mt-0">
+                                                    <input id="ena_<?php echo $leaveType->lt_id . '_' . $employee->emp_id; ?>" name="ena_<?php echo $leaveType->lt_id . '_' . $employee->emp_id; ?>" type="checkbox" <?php echo count($leaveAllocation) > 0 && $leaveAllocation->is_available_leave_type == 0 ? "" : "checked=checked"; ?> value="1">
+                                                    <label for="ena_<?php echo $leaveType->lt_id . '_' . $employee->emp_id; ?>"></label> 
+                                                </div>
                                             </td>
                                             <?php
                                         }
@@ -83,21 +91,21 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                                    placeholder="EMP No"/></td> 
                                         <td class="td-checkbox">
                                             <div class="checkbox mb-0 mt-0">
-                                                <input id="id1_<?php echo $employee->emp_id; ?>" name="firstSupNeed_<?php echo $employee->emp_id; ?>" type="checkbox">
+                                                <input id="id1_<?php echo $employee->emp_id; ?>" name="firstSupNeed_<?php echo $employee->emp_id; ?>" type="checkbox" <?php echo count($empBasicData) > 0 && $empBasicData->is_enable_emp_sup_one == 0 ? "" : "checked=checked"; ?> value="1">
                                                 <label for="id1_<?php echo $employee->emp_id; ?>"></label>   
                                             </div>
                                         </td>
-                                        
+
                                         <td class="td-checkbox">
                                             <div class="checkbox mb-0 mt-0">
-                                                <input id="id2_<?php echo $employee->emp_id; ?>" name="secondSupNeed_<?php echo $employee->emp_id; ?>" type="checkbox">
+                                                <input id="id2_<?php echo $employee->emp_id; ?>" name="secondSupNeed_<?php echo $employee->emp_id; ?>" type="checkbox" <?php echo count($empBasicData) > 0 && $empBasicData->is_enable_emp_sup_two == 0 ? "" : "checked=checked"; ?> value="1">
                                                 <label for="id2_<?php echo $employee->emp_id; ?>"></label>   
                                             </div>
                                         </td>
-                                        
+
                                         <td class="td-checkbox">
                                             <div class="checkbox mb-0 mt-0">
-                                                <input id="id3_<?php echo $employee->emp_id; ?>" name="coverupNeed_<?php echo $employee->emp_id; ?>" type="checkbox">
+                                                <input id="id3_<?php echo $employee->emp_id; ?>" name="coverupNeed_<?php echo $employee->emp_id; ?>" type="checkbox" <?php echo count($empBasicData) > 0 && $empBasicData->is_enable_coverup == 0 ? "" : "checked=checked"; ?> value="1">
                                                 <label for="id3_<?php echo $employee->emp_id; ?>"></label>   
                                             </div>
                                         </td>
@@ -169,7 +177,7 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                     Alert().success('Successfully Saved....');
                 }
             },
-            error:function (request, status, error) {
+            error: function (request, status, error) {
                 Alert().error(error);
             }
         });

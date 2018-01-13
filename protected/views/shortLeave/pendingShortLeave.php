@@ -25,7 +25,7 @@
                             <tbody>
                                 <?php
                                 foreach ($pendingShortLeaves as $pendingSLeaves) {
-                                    $empBasic = Empbasic::model()->findByPk($pendingSLeaves->ref_emp_id);
+                                    $empBasic = EmpBasic::model()->findByPk($pendingSLeaves->ref_emp_id);
                                     ?>
                                     <tr>
                                         <td><?php echo $empBasic->empno; ?></td>
@@ -57,12 +57,12 @@
     function approveShortLeave(id) {
         swal({
             title: "Are you sure?",
-            text: "You will not have this data anymore!",
+            text: "You want to approve this Short Leave?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel plx!",
+            confirmButtonText: "Yes, Approve it!",
+            cancelButtonText: "No, Cancel it!", 
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -94,12 +94,12 @@
         } else {
             swal({
                 title: "Are you sure?",
-                text: "You will not have this data anymore!",
+                text: "You want to reject this Short Leave?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel plx!",
+                confirmButtonText: "Yes, Reject it!",
+                cancelButtonText: "No, Cancel it!",
                 closeOnConfirm: true,
                 closeOnCancel: true
             },

@@ -26,7 +26,7 @@
                             <tbody>
                                 <?php
                                 foreach ($shortLeavesHistroy as $shortLeaves) {
-                                    $empBasic = Empbasic::model()->findByPk($shortLeaves->ref_emp_id);
+                                    $empBasic = EmpBasic::model()->findByPk($shortLeaves->ref_emp_id);
                                     ?>
                                     <tr>
                                         <td><?php echo $empBasic->empno; ?></td>
@@ -34,8 +34,28 @@
                                         <td><?php echo $shortLeaves->short_leave_date; ?></td>
                                         <td><?php echo date("H:i", strtotime($shortLeaves->start_time)); ?></td>
                                         <td><?php echo date("H:i", strtotime($shortLeaves->end_time)); ?></td>
-                                        <td><?php echo $shortLeaves->approver_status == 1 ? "Approved" : $shortLeaves->approver_status == 2 ? "Rejected" : "Pending"; ?></td>
-                                        <td><?php echo $shortLeaves->approver_status == 1 ? "Approved" : $shortLeaves->second_approver_status == 2 ? "Rejected" : "Pending"; ?></td>
+                                        <td>
+                                            <?php
+                                            if ($shortLeaves->approver_status == 1) {
+                                                echo 'Approved';
+                                            } elseif ($shortLeaves->approver_status == 2) {
+                                                echo 'Rejected';
+                                            } else {
+                                                echo 'Pending';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($shortLeaves->second_approver_status == 1) {
+                                                echo 'Approved';
+                                            } elseif ($shortLeaves->second_approver_status == 2) {
+                                                echo 'Rejected';
+                                            } else {
+                                                echo 'Pending';
+                                            }
+                                            ?>
+                                        </td>
                                         <td class="tb-action text-right">
                                             <button type="button" onclick="deleteShortLeave('<?php echo $shortLeaves->short_lv_id; ?>')"  class="ic ic-20 ic-delete" title="Delete"></button>
                                         </td>

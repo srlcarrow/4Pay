@@ -6,6 +6,20 @@ class AttendanceController extends Controller {
         $this->redirectionToLogin();
     }
 
+    public function actionGenerate() {
+        set_time_limit(30000);
+        $dateFrom = "2018-01-10";
+        $dateTo = "2018-01-12";
+
+        $data = Yii::app()->db->createCommand('SELECT * FROM att_allattendance ha WHERE ha.checktime BETWEEN "' . $dateFrom . '" AND "' . $dateTo . '"')->queryAll();
+
+        foreach ($data as $value) {
+            Attendance::dailyAttendance($value['emp_no'], $value["checktime"], $value["Branch"], 1);
+        }
+
+        exit;
+    }
+
     public function actionAttendanceTest() {
         $allAttendance = Allattendance::model()->findAll();
         foreach ($allAttendance as $value) {

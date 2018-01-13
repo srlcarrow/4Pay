@@ -79,6 +79,19 @@ class SiteController extends Controller {
             $this->layout = 'login_layout';
             $model = new User();
 
+//            if (isset($_REQUEST['controllerAction'])) {
+//                if (!empty($_REQUEST['request_arr'])) {
+//                    $url_param = '';
+//                    foreach ($_REQUEST['request_arr'] as $key => $val) {
+//                        $url_param .= "$key/$val/";
+//                    }
+//                    $url = $_REQUEST['controllerAction'] . "/" . $url_param;
+//                } else {
+//                    $url = $_REQUEST['controllerAction'];
+//                }
+//            }
+
+
             $this->render('login');
         } else {
             $this->render('index');

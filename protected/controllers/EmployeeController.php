@@ -116,7 +116,7 @@ class EmployeeController extends Controller {
             $employment->ref_employment_type = Yii::app()->request->getPost('Employment')['ref_employment_type'];
             $employment->ref_branch_id = Yii::app()->request->getPost('Employment')['ref_branch_id'];
             $employment->ref_department_id = Yii::app()->request->getPost('Employment')['ref_department_id'];
-            $employment->ref_section_id = $_POST['section'];
+            $employment->ref_section_id = Yii::app()->request->getPost('Employment')['ref_section_id'];
             $employment->ref_employment_category = Yii::app()->request->getPost('Employment')['ref_employment_category'];
             $employment->empl_employment_status = Yii::app()->request->getPost('Employment')['empl_employment_status'];
             $employment->is_generalshift_emp = Yii::app()->request->getPost('Employment')['is_generalshift_emp'];
@@ -342,7 +342,6 @@ class EmployeeController extends Controller {
             $sun->ref_shift_id = $_POST['sun_' . $empId];
             $sun->save(false);
         }
-
         $this->msgHandler(200, "Saved Successfully...");
     }
 
@@ -369,22 +368,30 @@ class EmployeeController extends Controller {
     }
 
     public function actionViewMyAttendance() {
+        if (count($_REQUEST) == 0) {
+            $dateFrom = date('Y-m-d', strtotime(date('Y-m-d')) - (30 * 24 * 3600));
+            $dateTo = date('Y-m-d');
+        } else {
+            $dateFrom = $_REQUEST["dateFrom"];
+            $dateTo = $_REQUEST["dateTo"];
+        }
 
-//        if (count($_REQUEST) == 0) {
-//            $dateFrom = date('Y-m-d', strtotime(date('Y-m-d')) - (30 * 24 * 3600));
-//            $dateTo = date('Y-m-d');
-//        } else {
-//            $dateFrom = $_REQUEST["dateFrom"];
-//            $dateTo = $_REQUEST["dateTo"];
-//        }
+        $this->renderPartial('ajaxLoad/viewMyAttendance', array('dateFrom' => $dateFrom, 'dateTo' => $dateTo));
+    }
 
-        $dateFrom = "2017-08-01";
-        $dateTo = "2017-08-31";
+    public function actionViewMyAttendanceData() {
+        if (count($_REQUEST) == 0) {
+            $dateFrom = date('Y-m-d', strtotime(date('Y-m-d')) - (30 * 24 * 3600));
+            $dateTo = date('Y-m-d');
+        } else {
+            $dateFrom = $_REQUEST["dateFrom"];
+            $dateTo = $_REQUEST["dateTo"];
+        }
 
         $empId = Controller::getEmpIdOfLoggedUser();
         $attendanceData = Yii::app()->db->createCommand('SELECT * FROM att_attendance aa WHERE aa.ref_emp_id=' . $empId . ' AND aa.day BETWEEN "' . $dateFrom . '" AND "' . $dateTo . '" ORDER BY aa.day DESC')->queryAll();
 
-        $this->renderPartial('ajaxLoad/viewMyAttendance', array('attendanceData' => $attendanceData, 'dateFrom' => $dateFrom, 'dateTo' => $dateTo));
+        $this->renderPartial('ajaxLoad/viewMyAttendanceData', array('attendanceData' => $attendanceData, 'dateFrom' => $dateFrom, 'dateTo' => $dateTo));
     }
 
     public function actionBasic() {
@@ -439,7 +446,7 @@ class EmployeeController extends Controller {
     }
 
     public function actionViewShortLeave() {
-        $empId = Yii::app()->user->getId();
+        $empId = Controller::getEmpIdOfLoggedUser(); 
         $shortLeaveSetting = AdmShortLeaveSettings::model()->find();
         $this->renderPartial('ajaxLoad/profile/shortLeave', array('empId' => $empId, 'applierType' => 'self', 'shortLeaveSetting' => $shortLeaveSetting));
     }

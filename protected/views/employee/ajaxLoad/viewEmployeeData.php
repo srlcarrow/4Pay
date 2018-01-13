@@ -27,8 +27,8 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>EPF</th>
                                     <th>EMP</th>
+                                    <th>EPF</th>                                   
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -42,9 +42,9 @@
                                 foreach ($employeeData as $employee) {
                                     $empContacts = EmpContacts::model()->findByAttributes(array('ref_emp_id' => $employee->emp_id));
                                     ?>
-                                    <tr>
-                                        <td><?php echo $employee->epf_no; ?></td>
+                                    <tr>                                     
                                         <td><?php echo $employee->empno; ?></td>
+                                        <td><?php echo $employee->epf_no; ?></td>
                                         <td><?php echo $employee->emp_name_with_initials; ?></td>
                                         <td><?php
                                             if (count($empContacts) > 0) {

@@ -122,11 +122,8 @@
                                 <label>Religion</label>
                                 <?php echo $form->dropdownlist($model, 'ref_religion', CHtml::listData(AdmReligion::model()->findAll(array('order' => 'religion ASC')), 'rel_id', 'religion'), array('empty' => '', 'class' => 'form-control')); ?>
                             </div>
-                        </div>
-                        
+                        </div>                      
                     </div>
-
-                    
 
                     <div class="card-header">
                         <h4>Contact Details</h4>
@@ -210,14 +207,14 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Designation</label>
-                                <?php echo $form->dropdownlist($employment, 'ref_designation', CHtml::listData(AdmDesignation::model()->findAll(), 'desig_id', 'designation'), array('empty' => '', 'class' => 'form-control')); ?>
+                                <?php echo $form->dropdownlist($employment, 'ref_designation', CHtml::listData(AdmDesignation::model()->findAll(), 'desig_id', 'designation'), array('empty' => '-- Select --', 'class' => 'form-control')); ?>
                             </div>
                         </div>
 
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Employment Type</label>
-                                <?php echo $form->dropdownlist($employment, 'ref_employment_type', CHtml::listData(AdmEmptype::model()->findAll(), 'etype_id', 'emp_type'), array('empty' => '', 'class' => 'form-control')); ?>
+                                <?php echo $form->dropdownlist($employment, 'ref_employment_type', CHtml::listData(AdmEmptype::model()->findAll(), 'etype_id', 'emp_type'), array('empty' => '-- Select --', 'class' => 'form-control')); ?>
                             </div>
                         </div>
                     </div>
@@ -226,18 +223,33 @@
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Branch</label>
-                                <?php echo $form->dropdownlist($employment, 'ref_branch_id', CHtml::listData(AdmBranch::model()->findAll(), 'br_id', 'br_name'), array('empty' => '', 'class' => 'form-control')); ?>
+                                <?php echo $form->dropdownlist($employment, 'ref_branch_id', CHtml::listData(AdmBranch::model()->findAll(), 'br_id', 'br_name'), array('empty' => '-- Select --', 'class' => 'form-control')); ?>
                             </div>
                         </div>
-
+                        
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Section</label> 
+                                <?php echo $form->dropdownlist($employment, 'ref_section_id', CHtml::listData(AdmSection::model()->findAll(), 'section_id', 'section_name'), array('empty' => '-- Select --', 'onChange' => '', 'class' => 'form-control')); ?>
+                            </div>
+                        </div>
+                        
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Department</label>
-                                <?php echo $form->dropdownlist($employment, 'ref_department_id', CHtml::listData(AdmDepartment::model()->findAll(), 'dept_id', 'dept_name'), array('empty' => '', 'onChange' => 'loadSections()', 'class' => 'form-control')); ?>
+                                <?php echo $form->dropdownlist($employment, 'ref_department_id', CHtml::listData(AdmDepartment::model()->findAll(), 'dept_id', 'dept_name'), array('empty' => '-- Select --', 'onChange' => '', 'class' => 'form-control')); ?>
                             </div>
                         </div>
+                        
 
-                        <div class="col-md-4 ">
+<!--                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Department</label>
+                                <?php //echo $form->dropdownlist($employment, 'ref_department_id', CHtml::listData(AdmDepartment::model()->findAll(), 'dept_id', 'dept_name'), array('empty' => '', 'onChange' => 'loadSections()', 'class' => 'form-control')); ?>
+                            </div>
+                        </div>-->
+
+<!--                        <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Section</label>
 
@@ -245,14 +257,14 @@
                                     <option value="0">Select</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
 
                     <div class="row form-wrapper">
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label>Employment Category</label>
-                                <?php echo $form->dropdownlist($employment, 'ref_employment_category', CHtml::listData(AdmEmpCategory::model()->findAll(), 'empcat_id', 'cat_name'), array('empty' => '', 'class' => 'form-control')); ?>
+                                <?php echo $form->dropdownlist($employment, 'ref_employment_category', CHtml::listData(AdmEmpCategory::model()->findAll(), 'empcat_id', 'cat_name'), array('empty' => '-- Select --', 'class' => 'form-control')); ?>
                             </div>
                         </div>
                         <div class="col-md-4 ">
@@ -294,7 +306,7 @@
 
 <script>
     $(document).ready(function () {
-        loadSections();
+        //loadSections();
     });
 
     $("#formEmployee").validate({

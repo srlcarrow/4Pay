@@ -6,9 +6,23 @@
                 <div class="cm-accordion-header">
                     <h5>Basic Information</h5>
                 </div>
-
-                <div class="cm-accordion-content">
-
+                <div class="cm-accordion-content">                   
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Emp No.</h5>  
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo $empBasicData->empno; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">EPF No.</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo $empBasicData->epf_no; ?></h5>
+                        </div>
+                    </div>
                     <div class="row mb-not-last-25">
                         <div class="col-md-3">
                             <h5 class="text-info">Full Name</h5>
@@ -27,10 +41,32 @@
                     </div>
                     <div class="row mb-not-last-25">
                         <div class="col-md-3">
+                            <h5 class="text-info">Gender</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info">
+                                <?php
+                                $viewStatusArry = Controller::viewStatusArry();
+                                echo $viewStatusArry[$empBasicData->emp_gender];
+                                ?>
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
                             <h5 class="text-info">Date Of Birth</h5>
                         </div>
                         <div class="col-md-9">
                             <h5 class="text-info"><?php echo $empBasicData->emp_dob; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">NIC</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo $empBasicData->emp_nic; ?></h5>
                         </div>
                     </div>
                     <div class="row mb-not-last-25">
@@ -41,12 +77,26 @@
                             <h5 class="text-info"><?php echo $empBasicData->emp_civil_status; ?></h5>
                         </div>
                     </div>
-
-
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Race</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo AdmRace::model()->findByPk($empBasicData->ref_race)->race; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Religion</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo AdmReligion::model()->findByPk($empBasicData->ref_religion)->religion; ?></h5>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!--Contact Infomation-->
+            <!--Contact Information-->
             <div class="cm-accordion-row">
                 <div class="cm-accordion-header">
                     <h5>Contact Information</h5>
@@ -114,6 +164,86 @@
                 </div>
             </div>
 
+            <!--Employment Information-->
+            <div class="cm-accordion-row">
+                <div class="cm-accordion-header">
+                    <h5>Employment Information</h5>
+                </div>
+
+                <div class="cm-accordion-content">
+
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Date of Join</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo $empEmploymentData->empl_joined_date; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Designation</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo AdmDesignation::model()->findByPk($empEmploymentData->ref_designation)->designation; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Employment Type</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo AdmEmptype::model()->findByPk($empEmploymentData->ref_employment_type)->emp_type; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Branch</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php  echo AdmBranch::model()->findByPk($empEmploymentData->ref_branch_id)->br_name; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Section</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo AdmSection::model()->findByPk($empEmploymentData->ref_section_id)->section_name; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Department</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo AdmDepartment::model()->findByPk($empEmploymentData->ref_department_id)->dept_name; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Employment Category</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info"><?php echo AdmEmpCategory::model()->findByPk($empEmploymentData->ref_employment_category)->cat_name; ?></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-not-last-25">
+                        <div class="col-md-3">
+                            <h5 class="text-info">Employment Status</h5> 
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-info">
+                                <?php
+                                $getActiveFilter = Controller::getActiveFilter();
+                                echo $getActiveFilter[$empEmploymentData->empl_employment_status];
+                                ?>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="cm-accordion-row">
                 <div class="cm-accordion-header">
                     <h5>Change Password</h5>
@@ -158,8 +288,8 @@
                     </div>
                     <div class="row mb-not-last-25">
                         <div class="col-md-9 col-md-offset-3">
-                            <button type="button" class="btn btn-primary" onclick="save()">Edit</button>
-                            <button type="button" class="btn btn-default">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="save()">Change Password</button>
+                            <!--<button type="button" class="btn btn-default">Close</button>-->
                         </div>
                     </div>
                     <?php $this->endWidget(); ?>
@@ -181,7 +311,7 @@
 
             $this.find('.cm-accordion-row').on('click.cm-accordion-header', '.cm-accordion-header', function () {
                 var _this = $(this),
-                    $parent = _this.parent();
+                        $parent = _this.parent();
 
                 if (!$parent.hasClass('is-open')) {
                     $this.find('.cm-accordion-row').removeClass('is-open');

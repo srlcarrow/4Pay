@@ -46,6 +46,14 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                         </div>
                         <div class="row form-wrapper">
                             <div class="col-md-4 ">
+                                <?php
+                                $activeStatus = $this->getActiveFilter();
+                                echo Chtml::label('Employment Status', "", array('class' => 'control-label'));
+                                echo Chtml::dropdownlist('activeStatus', '', $activeStatus, array('class' => 'form-control'));
+                                ?>
+                                
+                            </div>
+                            <div class="col-md-4 ">
                                 <?php echo Chtml::label('Page Size ', ' ', array('class' => 'control-label')); ?>
                                 <?php $dataArray = array('15' => '15', '30' => '30', '50' => '50', '100' => '100', '200' => '200'); ?>
                                 <?php echo Chtml::dropdownlist('noOfData', '', $dataArray, array('class' => 'form-control')); ?>
@@ -80,11 +88,11 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
                     ?>
                     <div class="col-md-2 ">
                         <div class="checkbox">
-                                <input data-label="<?php echo $reqBasicField; ?>" <?php echo $ischecked; ?>
-                                       name="<?php echo $key; ?>" value="1"
-                                       id="<?php echo $key; ?>"
-                                       type="checkbox">
-                                <label for="<?php echo $key; ?>"><?php echo $reqBasicField; ?></label>
+                            <input data-label="<?php echo $reqBasicField; ?>" <?php echo $ischecked; ?>
+                                   name="<?php echo $key; ?>" value="1"
+                                   id="<?php echo $key; ?>"
+                                   type="checkbox">
+                            <label for="<?php echo $key; ?>"><?php echo $reqBasicField; ?></label>
                         </div>
                     </div>
                     <?php
@@ -160,8 +168,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 
     function findCheckedItem(ele) {
         var $this = $(ele),
-            name = $this.attr('name'),
-            label = $this.data('label');
+                name = $this.attr('name'),
+                label = $this.data('label');
 
         if ($this.is(':checked')) {
             result.push(name);
@@ -188,7 +196,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
         });
     });
 
-      $(document).ready(function (e) {
+    $(document).ready(function (e) {
         searchData(1);
     });
 
@@ -199,7 +207,7 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
         var checkedLabelString = $('.checkedLabel').val();
 
         fetch({
-            appendTo:'.ajaxLoad',
+            appendTo: '.ajaxLoad',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/' . $controller . '/' . $action; ?>",
             data: $('#searchF2').serialize() + "&selected=" + checkedItemString + "&selectedLabels=" + checkedLabelString + "&page=" + page,

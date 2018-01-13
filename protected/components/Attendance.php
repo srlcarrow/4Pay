@@ -28,13 +28,15 @@ class Attendance {
         $punch_out = '';
         $shifthalf = '';
 
+
         $timezone = Controller::getTimeZone();
         $punchdate = gmdate('Y-m-d', strtotime($punch) + $timezone);
         $employeedata = EmpBasic::model()->findByAttributes(array('attendance_no' => $empno));
 
         if (count($employeedata) == 0) {
-            return;
+            exit;
         }
+
         $isavailabledailyattendance = $model->findByAttributes(array('ref_emp_id' => $employeedata->emp_id, 'day' => $punchdate)); //there will be a condition of date_out also.
         $shift = $model->getEmpWorkshift($employeedata->emp_id, $punchdate);
 
@@ -98,7 +100,7 @@ class Attendance {
     }
 
     public static function actionDayShift($empid, $punch, $punchdate, $timezone, $location, $punchBy, $shift = NULL) {
-        $model = new Dailyattendance;
+        $model = new DailyAttendance;
         $timezone = Controller::getTimeZone();
         if ($shift == NULL) {
             $shift = $model->getEmpWorkshift($empid, $punchdate);
@@ -203,14 +205,13 @@ class Attendance {
     }
 
     public static function actionNightShift($empid, $punch, $punchdate, $timezone, $location, $punchBy) {
-        $model = new Dailyattendance;
+        $model = new DailyAttendance;
         $isavailabledailyattendance = NULL;
         $punchdate = gmdate('Y-m-d', strtotime($punch) + $timezone);
         $shift = $model->getEmpWorkshift($empid, $punchdate);
         $shiftstarttime = $shift[0];
         $shiftendtime = $shift[1];
-        $isnightshift = $shift[2];
-        $issplitshift = $shift[3];
+        $isnightshift = $shift[2];        
         $shiftin_till = $shift[7];
         $shiftInUpto = $shift[17];
         $shiftOutUpto = $shift[18];
@@ -374,8 +375,38 @@ class Attendance {
         }
     }
 
+    public static function actionNoShift($empid, $punch, $punchdate, $timezone, $location, $punchBy, $shift = NULL) {
+        $model = new DailyAttendance;
+        $timezone = Controller::getTimeZone();
+
+        $isAvailableAttendance = $model->findByAttributes(array('ref_emp_id' => $empid, 'day' => $punchdate));
+
+        if (count($isAvailableAttendance) > 0) {
+            $availablePunchIn = $isAvailableAttendance->date . ' ' . $isAvailableAttendance->punch_in;
+            $availablePunchOut = $isAvailableAttendance->date_out . ' ' . $isAvailableAttendance->punch_out;
+
+            if ($isAvailableAttendance->punch_in == "00:00:00" && $isAvailableAttendance->punch_out != "00:00:00" && strtotime($availablePunchOut) > strtotime($punch)) {
+                Attendance::actionUpdateDailyAttendance($empid, $punchdate, gmdate('H:i:s', strtotime($punch) + $timezone), $isAvailableAttendance->date_out, $isAvailableAttendance->punch_out, '', '', '', '', $isAvailableAttendance, $location, $punchBy, 1);
+            } elseif ($isAvailableAttendance->punch_in == "00:00:00" && $isAvailableAttendance->punch_out != "00:00:00" && strtotime($availablePunchOut) < strtotime($punch)) {
+                Attendance::actionUpdateDailyAttendance($empid, $isAvailableAttendance->date, $isAvailableAttendance->punch_in, gmdate('Y-m-d', strtotime($punch) + $timezone), gmdate('H:i:s', strtotime($punch) + $timezone), '', '', '', '', $isAvailableAttendance, $location, $punchBy, 2);
+            } elseif ($isAvailableAttendance->punch_in != "00:00:00" && $isAvailableAttendance->punch_out == "00:00:00" && strtotime($availablePunchIn) < strtotime($punch)) {
+                Attendance::actionUpdateDailyAttendance($empid, $isAvailableAttendance->date, $isAvailableAttendance->punch_in, gmdate('Y-m-d', strtotime($punch) + $timezone), gmdate('H:i:s', strtotime($punch) + $timezone), '', '', '', '', $isAvailableAttendance, $location, $punchBy, 2);
+            } elseif ($isAvailableAttendance->punch_in != "00:00:00" && $isAvailableAttendance->punch_out == "00:00:00" && strtotime($availablePunchIn) > strtotime($punch)) {
+                Attendance::actionUpdateDailyAttendance($empid, gmdate('Y-m-d', strtotime($punch) + $timezone), gmdate('H:i:s', strtotime($punch) + $timezone), $isAvailableAttendance->date_out, $isAvailableAttendance->punch_out, '', '', '', '', $isAvailableAttendance, $location, $punchBy, 1);
+            } elseif ($isAvailableAttendance->punch_in != "00:00:00" && $isAvailableAttendance->punch_out == "00:00:00" && strtotime($availablePunchIn) > strtotime($punch)) {
+                Attendance::actionUpdateDailyAttendance($empid, gmdate('Y-m-d', strtotime($punch) + $timezone), date('H:i:s', strtotime($punch)), $isAvailableAttendance->date, $isAvailableAttendance->punch_in, '', '', '', '', $isAvailableAttendance, $location, $punchBy, 1);
+            } elseif ($isAvailableAttendance->punch_in != "00:00:00" && $isAvailableAttendance->punch_out != "00:00:00" && strtotime($availablePunchIn) > strtotime($punch)) {
+                Attendance::actionUpdateDailyAttendance($empid, gmdate('Y-m-d', strtotime($punch) + $timezone), gmdate('H:i:s', strtotime($punch) + $timezone), $isAvailableAttendance->date_out, $isAvailableAttendance->punch_out, '', '', '', '', $isAvailableAttendance, $location, $punchBy, 1);
+            } elseif ($isAvailableAttendance->punch_in != "00:00:00" && $isAvailableAttendance->punch_out != "00:00:00" && strtotime($availablePunchOut) < strtotime($punch)) {
+                Attendance::actionUpdateDailyAttendance($empid, $isAvailableAttendance->date, $isAvailableAttendance->punch_in, gmdate('Y-m-d', strtotime($punch) + $timezone), gmdate('H:i:s', strtotime($punch) + $timezone), '', '', '', '', $isAvailableAttendance, $location, $punchBy, 2);
+            }
+        } else {
+            Attendance::actionInsertDailyAttendance($empid, gmdate('Y-m-d', strtotime($punch) + $timezone), gmdate('Y-m-d', strtotime($punch) + $timezone), gmdate('H:i:s', strtotime($punch) + $timezone), '0000-00-00', '00:00:00', '', '', '', '', 0, $location, $punchBy, 1);
+        }
+    }
+
     private static function actionInsertDailyAttendance($empid, $day, $indateone, $intimeone, $outdateone, $outtimeone, $indatetwo, $intimetwo, $outdatetwo, $outtimetwo, $shiftId, $location, $punchBy, $inOrOut) {
-        $model = new Dailyattendance;
+        $model = new DailyAttendance;
         $model->ref_emp_id = $empid;
         $model->day = $day;
         $model->date_in = ($indateone == '0000-00-00' || $indateone == '') ? "0000-00-00" : $indateone;
@@ -415,11 +446,11 @@ class Attendance {
     }
 
     public static function getOTIn($dailyAttId) {
-        $DailyAttendance = new Dailyattendance;
+        $DailyAttendance = new DailyAttendance;
         $otindata = Attendance::getGracePeriod('OI');
         $otinrounddata = Attendance::getGracePeriod('OIR');
 
-        $isavailabledailyattendance = Dailyattendance::model()->findByPk($dailyAttId);
+        $isavailabledailyattendance = DailyAttendance::model()->findByPk($dailyAttId);
         $empid = $isavailabledailyattendance->ref_emp_id;
         $date = $isavailabledailyattendance->day;
 
@@ -470,7 +501,7 @@ class Attendance {
     }
 
     public static function getLateIn($dailyAttId) {
-        $DailyAttendance = new Dailyattendance;
+        $DailyAttendance = new DailyAttendance;
         $Indata = Attendance::getGracePeriod('IT');
         $lateRoundData = Attendance::getGracePeriod('LTR');
 
@@ -478,7 +509,7 @@ class Attendance {
         $Inispay = $Indata->con_pp_ispay;
         $lateInRound = $lateRoundData->con_pp_grace_period;
 
-        $isavailabledailyattendance = Dailyattendance::model()->findByPk($dailyAttId);
+        $isavailabledailyattendance = DailyAttendance::model()->findByPk($dailyAttId);
         $empid = $isavailabledailyattendance->ref_emp_id;
         $date = $isavailabledailyattendance->day;
 
@@ -535,7 +566,7 @@ class Attendance {
     }
 
     public static function getEarlyOut($dailyAttId) {
-        $DailyAttendance = new Dailyattendance;
+        $DailyAttendance = new DailyAttendance;
         $Outdata = Attendance::getGracePeriod('LT');
         $EarlyOutData = Attendance::getGracePeriod('EOR');
 
@@ -543,7 +574,7 @@ class Attendance {
         $Outispay = $Outdata->con_pp_ispay;
         $EarlyOutRound = $EarlyOutData->con_pp_grace_period;
 
-        $isavailabledailyattendance = Dailyattendance::model()->findByPk($dailyAttId);
+        $isavailabledailyattendance = DailyAttendance::model()->findByPk($dailyAttId);
         $empid = $isavailabledailyattendance->ref_emp_id;
         $date = $isavailabledailyattendance->day;
         $empshift = $DailyAttendance->getEmpWorkshift($empid, $date);
@@ -551,7 +582,6 @@ class Attendance {
         $shiftstarttime = $empshift[0];
         $shiftendtime = $empshift[1];
         $isnightshift = $empshift[2];
-        $issplitshift = $empshift[3];
 
 //        $avaiableHalfDayLeaves = Yii::app()->db->createCommand('SELECT * FROM hr_leaveapplication hl LEFT JOIN hr_leaveapplication_dates hld ON hl.leave_id=hld.dates_leave_id WHERE hl.ref_emp_id=' . $empid . ' AND hld.dates_leave_date="' . $date . '";')->queryAll();
 //        if (count($avaiableHalfDayLeaves) > 0) {
@@ -568,11 +598,11 @@ class Attendance {
             $shiftendtime = date('Y-m-d H:i:s', (strtotime($shiftendtime) + (24 * 60 * 60)));
         }
 
-        if (strtotime($shiftendtime) != strtotime($empshift[20])) {
-            $shiftendtime = $empshift[20];
-        } else {
-            $shiftendtime = $shiftendtime;
-        }
+//        if (strtotime($shiftendtime) != strtotime($empshift[20])) {
+//            $shiftendtime = $empshift[20];
+//        } else {
+//            $shiftendtime = $shiftendtime;
+//        }
 
         $empin = $isavailabledailyattendance->date_in . " " . $isavailabledailyattendance->punch_in;
         $empout = $isavailabledailyattendance->date_out . " " . $isavailabledailyattendance->punch_out;
@@ -626,7 +656,7 @@ class Attendance {
     }
 
     public static function getOTOut($dailyAttId) {
-        $DailyAttendance = new Dailyattendance;
+        $DailyAttendance = new DailyAttendance;
 //        $holiday = new ConfigHolidays;
         $otoutdata = Attendance::getGracePeriod('OL');
         $otoutrounddata = Attendance::getGracePeriod('OLR');
@@ -635,7 +665,7 @@ class Attendance {
         $otoutispay = $otoutdata->con_pp_ispay;
         $otoutroundgrace = $otoutrounddata->con_pp_grace_period;
 
-        $isavailabledailyattendance = Dailyattendance::model()->findByPk($dailyAttId);
+        $isavailabledailyattendance = DailyAttendance::model()->findByPk($dailyAttId);
         $empid = $isavailabledailyattendance->ref_emp_id;
         $date = $isavailabledailyattendance->day;
         $empshift = $DailyAttendance->getEmpWorkshift($empid, $date);
@@ -643,8 +673,7 @@ class Attendance {
         $shiftstarttime = $empshift[0];
         $shiftendtime = $empshift[1];
         $isnightshift = $empshift[2];
-        $issplitshift = $empshift[3];
-
+     
         if ($isnightshift == 1) {
             $shiftendtime = date('Y-m-d H:i:s', (strtotime($shiftendtime) + (24 * 60 * 60)));
         }
