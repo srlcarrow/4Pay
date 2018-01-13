@@ -23,7 +23,10 @@
     font-weight: 400; }
   .calender-container .date-container .date .content .holiday-text {
     color: #fabb05;
-    margin-top: 8px; }
+    margin-top: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
   .calender-container .date-container .date.is-disabled .header span {
     color: rgba(0, 0, 0, 0.3); }
   .calender-container .date-container .date::before, .calender-container .date-container .date::after {

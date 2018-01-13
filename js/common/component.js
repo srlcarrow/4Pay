@@ -236,6 +236,9 @@ function Alert() {
             message.attr('class', 'message info');
             show();
             getCenter();
+        },
+        close:function () {
+            close();
         }
     };
 

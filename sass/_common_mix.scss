@@ -45,7 +45,7 @@
 
 //Text color class
 @mixin text-color($color,$className) {
-  $opacity: (100,86, 56, 30);
+  $opacity: (100, 86, 56, 30);
 
   &.text-#{$className} {
     color: $color;
@@ -65,5 +65,22 @@
       }
     }
 
+  }
+}
+
+@mixin textWithoutHover($color,$colorClass) {
+
+  .text-#{$colorClass} {
+    color: $color;
+
+    &.lighten-1 {
+      color: rgba($color, 0.86);
+    }
+    &.lighten-2 {
+      color: rgba($color, 0.56);
+    }
+    &.lighten-3 {
+      color: rgba($color, 0.30);
+    }
   }
 }

@@ -10,7 +10,15 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
         <div class="card">
 
             <div class="card-header">
-                <h1>Holiday Calendar</h1>
+               <div class="row">
+                   <h1 class="col-md-3">Holiday Calendar</h1>
+                   <div class="col-md-9 text-right">
+                       <h4 class="text-black lighten-1">
+                           <span class="month mr-8">January</span>
+                           <span class="year">2018</span>
+                       </h4>
+                   </div>
+               </div>
             </div>
 
             <div class="card-content">
@@ -80,8 +88,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
 
                                 <div class="row form-wrapper">
                                     <div class="col-md-12 text-right">
-                                        <button id="btnSaveHoliType" class="btn btn-primary addNewPopup"  onclick="saveHolidayType()" type="button">Add New</button>
-                                        <button class="btn btn-primary addNewPopup"  onclick="resetHolidayType()" type="button">Reset</button>
+                                        <button class="btn btn-default addNewPopup"  onclick="resetHolidayType()" type="button">Reset</button>
+                                        <button id="btnSaveHoliType" class="btn btn-primary addNewPopup"  onclick="saveHolidayType()" type="button">Add</button>
                                     </div>
                                 </div>
 
@@ -89,7 +97,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
                             </div>
 
                             <div class="col-md-12 mt-30">
-                                <ul class="scroll">
+                                <ul class="scroll max-height-210">
                                     <?php
                                     foreach ($holidayTypes as $type) {
                                         ?>
@@ -99,8 +107,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
                                                     <h5><?php echo $type->holiday_type_name; ?></h5>
                                                 </div>
                                                 <div class="cell width-1 no-wrap">
-                                                    <button id="<?php echo $type->holiday_type_id; ?>" name="<?php echo $type->holiday_type_name; ?>" onclick="edit(this.id, this.name)" type="button" class="ic ic_20 ic_edit"></button>
-                                                    <button id="<?php echo $type->holiday_type_id; ?>" onclick="deleteHolidayType(this.id)" type="button" class="ic ic_20 ic_delete"></button>
+                                                    <button id="<?php echo $type->holiday_type_id; ?>" name="<?php echo $type->holiday_type_name; ?>" onclick="edit(this.id, this.name)" type="button" class="ic ic-20 ic-edit"></button>
+                                                    <button id="<?php echo $type->holiday_type_id; ?>" onclick="deleteHolidayType(this.id)" type="button" class="ic ic-20 ic-delete"></button>
                                                 </div>
                                             </div>
                                         </li>
@@ -130,26 +138,46 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
 
 <script>
     $(function () {
-        $('.main-wrapper').removeClass('container').addClass('container-fluid')
+        setMonthAndYear();
+//        $('.main-wrapper').removeClass('container').addClass('container-fluid')
     });
 </script>
 
 <script>
     $('.addNewPopup').on('click', function () {
-        ajaxAddCalenderShow();
-        $addNewModal = $('#addNewModal');
-        $addNewModal.modal('show');
+//        ajaxAddCalenderShow();
+//        $addNewModal = $('#addNewModal');
+//        $addNewModal.modal('show');
     });
 </script>
 <!-- ===========================================================================
         Backend Script
 ============================================================================ -->
 <script>
+
+    function setMonthAndYear() {
+        var $year = $('select[name="year"] option:selected').text();
+        var $month = $('select[name="month"] option:selected').text();
+
+        $('.year').text($year);
+        $('.month').text($month);
+    }
+
+    function loadScroll() {
+        $(".scroll").mCustomScrollbar({
+            theme:"dark"
+        });
+    }
+
     $(document).ready(function (e) {
         loadCalenderData();
+        loadScroll();
     });
 
     function loadCalenderData() {
+
+        setMonthAndYear();
+
         $.ajax({
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Attendance/HolidayCalendarData'; ?>",
@@ -168,7 +196,6 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
         var id = id.split("_");
         document.getElementById("calType").value = document.getElementById('editText_' + id[1]).value;
         document.getElementById("id").value = id[1];
-        form.reset();
     }
 
     function deleteCalendar(id) {
@@ -200,6 +227,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/calender/h
             data: $('#search-form').serialize(),
             dataType: 'json',
             success: function (responce) {
+
+                loadScroll();
+
                 if (responce.code == 200) {
 
                 }
