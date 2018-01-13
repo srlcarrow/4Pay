@@ -126,7 +126,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js
         </div>
     </div>
 
-
     <div class="col-md-4">
         <div class="card">
             <div class="card-content">

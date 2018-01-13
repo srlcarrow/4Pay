@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>oneHRIS</title>s
         <meta charset="UTF-8">
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -29,10 +30,10 @@
               href="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/scrollbar/jquery.mCustomScrollbar.min.css">
         <!--CSS | Main-->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
-        
+
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/plugins/sweetalert/sweetalert.css">
-        
-      
+
+
 
         <!--========================================================
             Javascript
