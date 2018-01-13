@@ -40,7 +40,8 @@ class Leave {
                     $statusArray['msg'] = "Your Leave Balance is not Enough.You have a balance of " . $leaveBalance . ' Day(s).';
                     return $statusArray;
                     exit;
-                } elseif (date('Y-m', strtotime($leave[0])) != date('Y-m', strtotime($joinedDate))) {
+                }
+                if (date('Y-m', strtotime($leave[0])) != date('Y-m', strtotime($joinedDate))) {
                     $noOfMonths = date('m', strtotime($leave[0])) - date('m', strtotime($joinedDate));
 
                     if (date('d', strtotime($joinedDate)) == "01") {
@@ -102,13 +103,12 @@ class Leave {
             exit;
         }
 
-        if ($leaveTypeData->lt_min_no_of_concecutive_leaves_at_once > 0 && $leaveBalance > $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {
-            $days = Controller::returnDates($startDate, $endDate);
+        if ($leaveTypeData->lt_min_no_of_concecutive_leaves_at_once > 0 && $leaveBalance > $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {           
+            $days = Controller::returnDates($askedLeaveDaysArray[0], $askedLeaveDaysArray[count($askedLeaveDaysArray) - 1]);
             $askedLeaveDaysArray = array_column($leaveApplyDates, 0);
 
             $status = 0;
             $noOfConcecDays = 0;
-
 
             foreach ($days as $day) {
                 $availableInArray = array_search($day, $askedLeaveDaysArray) === false ? 0 : 1;
@@ -130,10 +130,12 @@ class Leave {
                         $statusArray['msg'] = "";
                         return $statusArray;
                         exit;
+                    } else {
+                        
                     }
                 }
             }
-          
+
             $statusArray['status'] = 0;
             $statusArray['msg'] = "You have to Apply " . $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once . " concecutive Days.";
             return $statusArray;
