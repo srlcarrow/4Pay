@@ -38,8 +38,7 @@
         <!--========================================================
             Javascript
         =========================================================-->
-        <?php
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/validate/jquery.validate.js', CClientScript::POS_HEAD);
+        <?php        
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/plugins/sweetalert/sweetalert.min.js', CClientScript::POS_HEAD);
         ?>
 
@@ -66,6 +65,9 @@
         <!--##### Time Picker #####-->
         <script src="<?php echo Yii::app()->baseUrl . '/js/plugins/timepicker/jquery-clockpicker.min.js'; ?>"></script>
 
+		<!--JS | Bootstrap -->
+        <script src="<?php echo Yii::app()->baseUrl . '/js/validate/jquery.validate.js'; ?>"></script>
+		
         <!--JS | Component -->
         <script src="<?php echo Yii::app()->baseUrl . '/js/common/component.js'; ?>"></script>
 
