@@ -110,7 +110,8 @@ function datePicker(_option, calback) {
         ele: null,
         minDate: null,
         maxDate: null,
-        startDate: new Date()
+        startDate: new Date(),
+        position: 'top left',
     };
 
     var option = $.extend(_defOption, _option);
@@ -122,7 +123,7 @@ function datePicker(_option, calback) {
         startDate: _defOption.startDate,
         dateFormat: 'yyyy-m-dd',
         autoClose: true,
-        position: 'top left',
+        position: _defOption.position,
         onSelect: function (fdate, date) {
             if (typeof calback === "function") {
                 calback(fdate, date)
