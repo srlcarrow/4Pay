@@ -757,6 +757,17 @@ table.cm-table th, table.cm-table td {
     top: 0;
     left: 0; }
 
+.file-uploader-wrapper span {
+  color: rgba(0, 0, 0, 0.56);
+  font-size: 14px;
+  white-space: nowrap;
+  display: inline-block;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  width: 120px; }
+
 .ic {
   display: inline-block;
   vertical-align: middle;

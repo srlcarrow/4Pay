@@ -4,15 +4,15 @@
     // Advance Search.
     $(document).on('click.btn-advance', '.btn-advance', function (e) {
         var $this = $(this),
-                $parentBox = $this.parents('.search-box'),
-                $advanceBox = $parentBox.next();
+            $parentBox = $this.parents('.search-box'),
+            $advanceBox = $parentBox.next();
 
         $advanceBox.slideToggle('fast');
     });
 
     $(document).on('click.btn-close', '.search-advance .btn-close', function (e) {
         var $this = $(this),
-                $parentBox = $this.parents('.search-advance');
+            $parentBox = $this.parents('.search-advance');
 
         $parentBox.slideUp('fast');
     });
@@ -61,7 +61,7 @@
             var $dropUl = $dropDownList.find('ul');
 
             $dropDownList.addClass('is-open');
-           
+
 //            $dropUl.find('li').on('click', function () {
 //                var $li = $(this);
 //                $this.val($li.find('h5').text());
@@ -82,6 +82,26 @@
 
 })();
 
+//Uploader
+(function () {
+    $.fn.fileUpload = function () {
+        $(this).each(function () {
+            var $this = $(this);
+
+            $this.append('<span></span>');
+
+            $this.find('input[type="file"]').on('change', function () {
+                var _this = $(this),
+                    name = _this[0].files[0].name;
+
+                if ($this.find('span').length > 0) {
+                    $this.find('span').attr('title', name).text(name);
+                }
+            });
+        })
+    };
+})();
+
 
 //Date picker
 function datePicker(_option, calback) {
@@ -89,7 +109,7 @@ function datePicker(_option, calback) {
     var _defOption = {
         ele: null,
         minDate: null,
-        maxDate:null,
+        maxDate: null,
         startDate: new Date()
     };
 
@@ -115,9 +135,9 @@ function fetch(_option) {
 
     function loader() {
         var loaderHtml = "" +
-                "<div align='center' class='absolute' id='loadingmessage'>" +
-                "<img style='width:90px' src='" + BASE_URL + "/images/loader/Ripple.gif''/>" +
-                "</div>";
+            "<div align='center' class='absolute' id='loadingmessage'>" +
+            "<img style='width:90px' src='" + BASE_URL + "/images/loader/Ripple.gif''/>" +
+            "</div>";
         return loaderHtml;
     }
 
@@ -186,7 +206,7 @@ function insert(_option) {
         error: option.error,
         contentType: option.contentType,
         complete: option.complete,
-        error:option.error
+        error: option.error
     });
 }
 
@@ -237,7 +257,7 @@ function Alert() {
             show();
             getCenter();
         },
-        close:function () {
+        close: function () {
             close();
         }
     };

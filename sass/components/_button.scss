@@ -141,3 +141,20 @@
     left: 0;
   }
 }
+
+.file-uploader-wrapper {
+  .file-uploader {
+  }
+
+  span {
+    color: rgba($black, $lighten-x);
+    font-size: 14px;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    width: 120px;
+  }
+}

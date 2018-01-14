@@ -28,7 +28,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
                         <div class="col-md-8 col-md-offset-2 mt-15">
                             <div class="row">
                                 <div class="col-md-10 col-md-offset-1">
-                                    <input min="0" max="1" type="range" value="0" step="0.01" class="cropit-image-zoom-input rangeSlide" data-rangeslider>
+                                    <input min="0" max="1" type="range" value="0" step="0.01"
+                                           class="cropit-image-zoom-input rangeSlide" data-rangeslider>
                                 </div>
                                 <div class="col-md-12 mt-10 text-center">
 
@@ -113,8 +114,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
         $('#image-cropper').cropit({
             imageBackground: false,
             onImageLoaded: function () {
-                $('.dist').css('display', 'none');
-                $('.image-wrp').removeClass('dash-br').addClass('solid-br');
+
             },
             onImageError: function (e) {
                 showErrorMessage(e.message, "Proifle");
@@ -131,13 +131,16 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
 
     // Exporting cropped image
     $('.download-btn').click(function () {
-        var imageData = $('#image-cropper').cropit('export');
+        var imageData = $('#image-cropper').cropit('export', {
+                type: 'image/jpeg',
+            }
+        );
         alert(imageData)
-//        window.open(imageData);
     });
 
     function profile() {
         fetch({
+            appendTo: '#ajaxLoad',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewProfileData'; ?>",
             data: "",
@@ -149,6 +152,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
 
     function myAttendance() {
         fetch({
+            appendTo: '#ajaxLoad',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewMyAttendance'; ?>",
             data: "",
@@ -160,6 +164,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
 
     function leave() {
         fetch({
+            appendTo: '#ajaxLoad',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewLeave'; ?>",
             data: "",
@@ -171,6 +176,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/profile/pr
 
     function shortLeave() {
         fetch({
+            appendTo: '#ajaxLoad',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewShortLeave'; ?>",
             data: "",
