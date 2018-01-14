@@ -40,14 +40,14 @@
                     is-evening-holiday
                 -->
 
-                <div class="date <?php echo $class; ?>">
+                <div class="date <?php echo $class; ?>" title="<?php echo $holidayName; ?>">
                     <input type="hidden" id="day" name="day" value="<?php echo $day; ?>">
                     <div class="header ">
                         <span class="num"><?php echo date('d', strtotime($day)); ?></span>
                     </div>
 
                     <div class="content ">
-                        <h6 class="holiday-text">
+                        <h6 class="holiday-text" >
                             <?php echo $holidayName; ?></h6>
                     </div>
 

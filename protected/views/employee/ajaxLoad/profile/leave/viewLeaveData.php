@@ -14,7 +14,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Start Date</label>
-                    <input id="startDate" name="startDate" readonly="readonly" type="text" class="start-date form-control">
+                    <input id="startDate" name="startDate" readonly="readonly" type="text"
+                           class="start-date form-control">
                 </div>
             </div>
         </div>
@@ -40,11 +41,12 @@
                         <div class="dropdown_list">
 
                             <div class="search-area">
-                                <input id="coverUp" type="text" value="" name="coverUp" onkeyup="coverUpSearch()" class="drop-input-search form-control">
+                                <input id="coverUp" type="text" value="" name="coverUp" onkeyup="coverUpSearch()"
+                                       class="drop-input-search form-control">
                             </div>
 
                             <ul id="empLoad" class="drop-result">
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -75,7 +77,7 @@
     </div>
 
     <div class="col-md-12 text-right">
-        <button type="button" class="btn btn-primary" onclick="applyLeave()">Save</button>        
+        <button type="button" class="btn btn-primary" onclick="applyLeave()">Save</button>
     </div>
 
 </div>
@@ -143,6 +145,7 @@
     }
 
     function applyLeave() {
+        Alert().loading();
         var leaveDates = getLeaveDate();
         fetch({
             type: 'POST',
@@ -151,10 +154,14 @@
             dataType: 'json',
             success: function (responce) {
                 if (responce.code == 200) {
-
+                    Alert().success('Save successfully');
                 } else {
                     sweetAlert('Can Not Apply Leave!', responce.msg);
+                    Alert().close();
                 }
+            },
+            error: function () {
+                Alert().error('Sorry, something was wrong!')
             }
 
         })
@@ -166,11 +173,11 @@
 
     var pDate = '<?php echo $maxDate; ?>';
     var startDate = '',
-            minDateStar = new Date('<?php echo $minDate; ?>'),
-            maxDateStar = new Date(pDate),
-            minDateEnd = null,
-            maxDateEnd = null,
-            numOfDay = '<?php echo $dayCount; ?>';
+        minDateStar = new Date('<?php echo $minDate; ?>'),
+        maxDateStar = new Date(pDate),
+        minDateEnd = null,
+        maxDateEnd = null,
+        numOfDay = '<?php echo $dayCount; ?>';
 
     console.log('Date => ', pDate);
 
@@ -241,16 +248,16 @@
 
         $('.lv-type').each(function () {
             var $this = $(this),
-                    $leaveBlock = $this.parents('.leave-block');
+                $leaveBlock = $this.parents('.leave-block');
 
             if ($this.hasClass('is-selected')) {
 
                 result.push(
-                        [
-                            $leaveBlock.data('date'),
-                            $this.data('value')
-                        ]
-                        );
+                    [
+                        $leaveBlock.data('date'),
+                        $this.data('value')
+                    ]
+                );
             }
 
         });
