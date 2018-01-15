@@ -260,7 +260,12 @@
                             <h5 class="text-info">Employment Category</h5>
                         </div>
                         <div class="col-md-9">
-                            <h5 class="text-info"><?php echo AdmEmpCategory::model()->findByPk($empEmploymentData->ref_employment_category)->cat_name; ?></h5>
+                            <h5 class="text-info">
+                                <?php
+                                $AdmEmpCategory = AdmEmpCategory::model()->findByPk($empEmploymentData->ref_employment_category);
+                                echo '' . (count($AdmEmpCategory) > 0 ? $AdmEmpCategory->cat_name : '-');
+                                ?>
+                            </h5>
                         </div>
                     </div>
                     <div class="row mb-not-last-25">
@@ -271,7 +276,7 @@
                             <h5 class="text-info">
                                 <?php
                                 $getActiveFilter = Controller::getActiveFilter();
-                                echo $getActiveFilter[$empEmploymentData->empl_employment_status];
+                                echo '' . (isset($getActiveFilter[$empEmploymentData->empl_employment_status]) ? $getActiveFilter[$empEmploymentData->empl_employment_status] : '-');
                                 ?>
                             </h5>
                         </div>
