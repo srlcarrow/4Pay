@@ -905,6 +905,19 @@ table.cm-table th, table.cm-table td {
     .cm-alert .message.error {
       background: #d14836; }
 
+.status {
+  display: inline-block;
+  margin-right: 5px;
+  width: 10px;
+  height: 10px;
+  vertical-align: middle; }
+  .status.holiday {
+    background: #fabb05; }
+  .status.leave {
+    background: #fa432b; }
+  .status.disable {
+    background: rgba(18, 75, 78, 0.24); }
+
 .datepicker {
   border: none; }
   .datepicker .datepicker--nav {

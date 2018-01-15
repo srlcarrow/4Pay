@@ -1,3 +1,34 @@
+<div class="ds-table-block width-100 mb-8">
+    <div class="cell width-25"></div>
+    <div class="cell width-75">
+        <div class="ds-table-block width-100 mb-15">
+            <div class="cell">
+                <h6 class="text-black lighten-1 ds-inline-block mr-20">
+                    <span class="status holiday"></span>
+                    Holiday
+                </h6>
+                <h6 class="text-black lighten-1 ds-inline-block mr-20">
+                    <span class="status leave"></span>
+                    Leaved
+                </h6>
+                <h6 class="text-black lighten-1 ds-inline-block mr-20">
+                    <span class="status disable"></span>
+                    Disabled
+                </h6>
+            </div>
+        </div>
+
+        <div class="ds-table-block width-100">
+            <div class="cell width-34">
+                <h6 class="text-black lighten-2">Full Day</h6>
+            </div>
+            <div class="cell width-66">
+                <h6 class="text-black lighten-2">Half Day</h6>
+            </div>
+        </div>
+
+    </div>
+</div>
 <?php
 foreach ($leaveDays as $leaveDay) {
     $fullDayClass = "";
@@ -31,7 +62,10 @@ foreach ($leaveDays as $leaveDay) {
     ?>
     <div class="leave-block " data-date="<?php echo $leaveDay; ?>">
         <div class="leave-month-day">
-            <h5 class=""><?php echo date('M d', strtotime($leaveDay)) ?></h5>
+            <h5 class="">
+                <span><?php echo date('M d', strtotime($leaveDay)) ?></span>
+                <span class="ml-10 text-black lighten-2">Mo</span>
+            </h5>
         </div>
         <div class="leave-date-block">
             <div data-value="0" class="lv-type <?php echo $fullDayClass; ?>">Full Day</div>
@@ -42,6 +76,7 @@ foreach ($leaveDays as $leaveDay) {
     <?php
 }
 ?>
+
 <!--<div class="leave-block" data-date="2017-1-4">
     <div class="leave-month-day">
         <h5 class="">Jan 04</h5>
@@ -82,7 +117,7 @@ foreach ($leaveDays as $leaveDay) {
 
         $(document).on('click.leave-block', '.leave-block .lv-type', function () {
             var $this = $(this),
-                    $parent = $this.parents('.leave-block');
+                $parent = $this.parents('.leave-block');
 
             if ($this.hasClass('is-leaved') || $this.hasClass('is-disabled'))
                 return;

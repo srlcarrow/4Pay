@@ -28,9 +28,7 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-4">
         <?php
         if ($leaveTypeData->is_enable_coverup == 1) {
             ?>
@@ -81,7 +79,7 @@
         ?>
     </div>
 
-    <div class="col-md-4 no-select loadAjaxDate">
+    <div class="col-md-6 no-select loadAjaxDate">
 
     </div>
 
