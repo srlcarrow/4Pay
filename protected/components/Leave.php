@@ -30,17 +30,16 @@ class Leave {
         $firstSup = Controller::getFirstSuperior($empId);
         $secondSup = Controller::getSecondSuperior($empId);
 
-        if ($firstSup[0]['status'] == 2 || $secondSup[0]['status'] == 2) {         
+        if ($firstSup[0]['status'] == 2 || $secondSup[0]['status'] == 2) {
             $statusArray['status'] = 0;
-            $statusArray['msg'] = "Please Contact HR and Setup your Superiors...";           
+            $statusArray['msg'] = "Please Contact HR and Setup your Superiors...";
             return $statusArray;
             exit;
         }
 
         if ($leaveTypeData->is_enable_earnleave_for_joined_year == 1 && $company->com_leave_proc_year == date('Y', strtotime($joinedDate))) {
-            $leaveCount = yii::app()->db->createCommand("SELECT SUM(lad.lvd_count) AS leaveCount FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id "
-                            . "WHERE la.ref_emp_id=" . $empId . " AND la.ref_lv_type_id=" . $leaveTypeId . " AND YEAR(lad.lvd_day)=" . $company->com_leave_proc_year . ";")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
 
+            $totAskedLvAmount = 0;
             foreach ($leaveApplyDates as $leave) {
                 $lastDayOfJoinedNextMonth = date('Y-m', strtotime(date("Y-m-d", strtotime($joinedDate)) . " +1 month")) . '-' . date('t', strtotime(date("Y-m-d", strtotime($joinedDate)) . " +1 month"));
 
@@ -61,18 +60,25 @@ class Leave {
                     }
 
                     $askedLvAmount = $leave[1] == 0 ? 1 : 0.5;
-                    if ($leaveBalance < $askedLvAmount) {
-                        $statusArray['status'] = 0;
-                        $statusArray['msg'] = "Your Leave Balance is not Enough.You have a balance of " . $leaveBalance . ' Day(s).';
-                        return $statusArray;
-                        exit;
-                    } else {
-                        $statusArray['status'] = 1;
-                        $statusArray['msg'] = "";
-                        return $statusArray;
-                        exit;
-                    }
+                    $totAskedLvAmount +=$askedLvAmount;
                 }
+            }
+
+            $leaveCount = yii::app()->db->createCommand("SELECT SUM(lad.lvd_count) AS leaveCount FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id "
+                            . "WHERE la.ref_emp_id=" . $empId . " AND la.ref_lv_type_id=" . $leaveTypeId . " AND YEAR(lad.lvd_day)=" . $company->com_leave_proc_year . ";")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+            if ($leaveTypeData->lt_max_no_leaves_at_once < $totAskedLvAmount) {
+                $statusArray['status'] = 0;
+                $statusArray['msg'] = "You can apply maximum of " . $leaveTypeData->lt_max_no_leaves_at_once . ' Day(s) at once.';
+                return $statusArray;
+                exit;
+            }
+
+            if ($leaveBalance < $totAskedLvAmount) {
+                $statusArray['status'] = 0;
+                $statusArray['msg'] = "Your Leave Balance is not Enough.You have a balance of " . $leaveBalance . ' Day(s).';
+                return $statusArray;
+                exit;
             }
         } else {
             $leaveBalance = Leave::getLeaveBalance($empId, $leaveTypeId, $leaveApplyDates);
@@ -111,8 +117,7 @@ class Leave {
             $appliedLeave = yii::app()->db->createCommand("SELECT * FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id WHERE la.ref_emp_id=" . $empId . " AND lad.lvd_day='" . $day . "'")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
 
             if ($blendStatus == 1 && (count($isHoliday) > 0 || $isShiftAvailable[8] == 0) && count($appliedLeave) == 0) {
-                $blendStatus = 1;
-                break;
+            
             } elseif ($blendStatus == 1 && count($appliedLeave) > 0) {
                 $availableInBlendArray = array_search($appliedLeave[0]->ref_lv_type_id, $blendLeaveTypes) === false ? 0 : 1;
                 if ($availableInBlendArray == 0 && $appliedLeave[0]->ref_lv_type_id != $leaveTypeId) {
@@ -135,8 +140,7 @@ class Leave {
             $appliedLeave = yii::app()->db->createCommand("SELECT * FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id WHERE la.ref_emp_id=" . $empId . " AND lad.lvd_day='" . $day . "'")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
 
             if ($blendStatus == 1 && (count($isHoliday) > 0 || $isShiftAvailable[8] == 0) && count($appliedLeave) == 0) {
-                $blendStatus = 1;
-                break;
+               
             } elseif ($blendStatus == 1 && count($appliedLeave) > 0) {
                 $availableInBlendArray = array_search($appliedLeave[0]['ref_lv_type_id'], $blendLeaveTypes) === false ? 0 : 1;
                 if ($availableInBlendArray == 0) {
@@ -146,8 +150,7 @@ class Leave {
                     return $statusArray;
                     exit;
                 }
-            } elseif ($blendStatus == 1 && count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {
-                $blendStatus = 1;
+            } elseif ($blendStatus == 1 && count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {              
                 break;
             }
         }
@@ -160,8 +163,7 @@ class Leave {
             $appliedLeave = yii::app()->db->createCommand("SELECT * FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id WHERE la.ref_emp_id=" . $empId . " AND lad.lvd_day='" . $day . "'")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
 
             if ($blendStatus == 1 && (count($isHoliday) > 0 || $isShiftAvailable[8] == 0) && count($appliedLeave) == 0) {
-                $blendStatus = 1;
-                break;
+            
             } elseif ($blendStatus == 1 && count($appliedLeave) > 0) {
                 $availableInBlendArray = array_search($appliedLeave[0]->ref_lv_type_id, $blendLeaveTypes) === false ? 0 : 1;
                 if ($availableInBlendArray == 0 && $appliedLeave[0]->ref_lv_type_id != $leaveTypeId) {
@@ -171,8 +173,7 @@ class Leave {
                     return $statusArray;
                     exit;
                 }
-            } elseif ($blendStatus == 1 && count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {
-                $blendStatus = 1;
+            } elseif ($blendStatus == 1 && count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {       
                 break;
             }
         }
