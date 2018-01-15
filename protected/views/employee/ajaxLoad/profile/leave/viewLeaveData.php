@@ -63,7 +63,16 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="">Attachment</label>
-                        <input type="file" id="">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="file-uploader-wrapper show-file-name">
+                                    <div class="file-uploader">
+                                        Upload
+                                        <input type="file" id="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,6 +93,8 @@
 <?php $this->endWidget(); ?>
 
 <script>
+
+    $('.show-file-name').fileUpload();
 
     var coverupId = null;
 
