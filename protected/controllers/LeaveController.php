@@ -95,7 +95,7 @@ class LeaveController extends Controller {
             $firstSup = Controller::getFirstSuperior($_POST['empId']);
             $secondSup = Controller::getSecondSuperior($_POST['empId']);
 
-         
+
             $leaveApply = new LeaveApply();
             $leaveApply->lv_apply_date = date('Y-m-d');
             $leaveApply->ref_emp_id = $_POST['empId'];
@@ -140,22 +140,30 @@ class LeaveController extends Controller {
             $this->msgHandler(400, $status['msg']);
         }
     }
-    
+
     public function actionViewPendingLeaves() {
         $userId = Controller::getEmpIdOfLoggedUser();
         $pendingLeaves = LeaveApply::model()->findAllByAttributes(array('lv_first_sup_id' => $userId, 'lv_first_sup_approved' => 0, 'lv_approved_final_status' => 0));
         $this->render('/leave/pendingLeave', array('pendingLeaves' => $pendingLeaves));
     }
-    
+
     public function actionApproveLeave() {
         $leaveId = $_POST['leaveId'];
-        $leave = LeaveApply::model()->findByPk($leaveId);
+        $empId = LeaveApply::model()->findByPk($leaveId)->ref_emp_id;
+        $firstSup = Controller::getFirstSuperior($empId);
+        $secondSup = Controller::getSecondSuperior($empId);
+
+        $leave = LeaveApply::model()->findByPk($leaveId); 
         $leave->lv_first_sup_approved = 1;
+        if ($secondSup[0]['status'] == 3) {
+            $leave->lv_first_sup_approved = 1;
+            $leave->lv_approved_final_status = 1; 
+        }
         if ($leave->save(false)) {
             $this->msgHandler(200, "Successfully Saved...");
         }
     }
-    
+
     public function actionRejectLeave() {
         $leaveId = $_POST['leaveId'];
         $leave = LeaveApply::model()->findByPk($leaveId);
@@ -166,13 +174,13 @@ class LeaveController extends Controller {
             $this->msgHandler(200, "Successfully Saved...");
         }
     }
-    
+
     public function actionViewPendingLeaveSecondApprover() {
         $userId = Controller::getEmpIdOfLoggedUser();
         $pendingLeaves = LeaveApply::model()->findAllByAttributes(array('lv_sec_sup_id' => $userId, 'lv_first_sup_approved' => 1, 'lv_sec_sup_approved' => 0, 'lv_approved_final_status' => 0));
         $this->render('/leave/pendingLeaveSecondApprover', array('pendingLeaves' => $pendingLeaves));
     }
-    
+
     public function actionApproveLeaveSecondApprover() {
         $leaveId = $_POST['leaveId'];
         $leave = LeaveApply::model()->findByPk($leaveId);
@@ -182,7 +190,7 @@ class LeaveController extends Controller {
             $this->msgHandler(200, "Successfully Saved...");
         }
     }
-    
+
     public function actionRejectLeaveSecondApprover() {
         $leaveId = $_POST['leaveId'];
         $leave = LeaveApply::model()->findByPk($leaveId);
@@ -193,7 +201,7 @@ class LeaveController extends Controller {
             $this->msgHandler(200, "Successfully Saved...");
         }
     }
-    
+
 //*********************************************  LEAVE HR   ********************************************************
     public function actionViewLeave() {
         $empId = $_REQUEST['id'];
