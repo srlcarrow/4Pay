@@ -165,7 +165,9 @@
             dataType: 'json',
             success: function (responce) {
                 if (responce.code == 200) {
-                    Alert().success('Save successfully');
+                    loadLeaveData();
+                    loadLeaveHistory(); 
+                    Alert().success('Successfull Leave Applied...!');
                 } else {
                     sweetAlert('Can Not Apply Leave!', responce.msg);
                     Alert().close();
