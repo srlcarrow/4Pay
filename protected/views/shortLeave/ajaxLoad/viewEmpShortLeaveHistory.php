@@ -36,24 +36,12 @@
                                         <td><?php echo date("H:i", strtotime($shortLeaves->end_time)); ?></td>
                                         <td>
                                             <?php
-                                            if ($shortLeaves->approver_status == 1) {
-                                                echo 'Approved';
-                                            } elseif ($shortLeaves->approver_status == 2) {
-                                                echo 'Rejected';
-                                            } else {
-                                                echo 'Pending';
-                                            }
+                                            echo '' . ($shortLeaves->approver_status == 1 ? 'Approved' : ($shortLeaves->approver_status == 2 ? 'Rejected' : 'Pending'));
                                             ?>
                                         </td>
                                         <td>
                                             <?php
-                                            if ($shortLeaves->second_approver_status == 1) {
-                                                echo 'Approved';
-                                            } elseif ($shortLeaves->second_approver_status == 2) {
-                                                echo 'Rejected';
-                                            } else {
-                                                echo 'Pending';
-                                            }
+                                            echo '' . ($shortLeaves->second_approver_status == 1 ? 'Approved' : ($shortLeaves->second_approver_status == 2 ? 'Rejected' : 'Pending'));
                                             ?>
                                         </td>
                                         <td class="tb-action text-right">
