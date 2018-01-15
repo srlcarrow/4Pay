@@ -47,7 +47,7 @@
                             <h5 class="text-info">
                                 <?php
                                 $viewStatusArry = Controller::viewStatusArry();
-                                echo $viewStatusArry[$empBasicData->emp_gender];
+                                echo '' . (isset($viewStatusArry[$empBasicData->emp_gender]) ? $viewStatusArry[$empBasicData->emp_gender] : '-');
                                 ?>
                             </h5>
                         </div>
@@ -82,7 +82,12 @@
                             <h5 class="text-info">Race</h5>
                         </div>
                         <div class="col-md-9">
-                            <h5 class="text-info"><?php echo AdmRace::model()->findByPk($empBasicData->ref_race)->race; ?></h5>
+                            <h5 class="text-info">
+                                <?php
+                                $AdmRace = AdmRace::model()->findByPk($empBasicData->ref_race);
+                                echo '' . (count($AdmRace) > 0 ? $AdmRace->race : '-');
+                                ?>
+                            </h5>
                         </div>
                     </div>
                     <div class="row mb-not-last-25">
@@ -90,7 +95,12 @@
                             <h5 class="text-info">Religion</h5>
                         </div>
                         <div class="col-md-9">
-                            <h5 class="text-info"><?php echo AdmReligion::model()->findByPk($empBasicData->ref_religion)->religion; ?></h5>
+                            <h5 class="text-info">
+                                <?php
+                                $AdmReligion = AdmReligion::model()->findByPk($empBasicData->ref_religion);
+                                echo '' . (count($AdmReligion) > 0 ? $AdmReligion->religion : '-');
+                                ?>
+                            </h5>
                         </div>
                     </div>
                 </div>
@@ -185,7 +195,12 @@
                             <h5 class="text-info">Designation</h5>
                         </div>
                         <div class="col-md-9">
-                            <h5 class="text-info"><?php echo AdmDesignation::model()->findByPk($empEmploymentData->ref_designation)->designation; ?></h5>
+                            <h5 class="text-info">
+                                <?php
+                                $AdmDesignation = AdmDesignation::model()->findByPk($empEmploymentData->ref_designation);
+                                echo '' . (count($AdmDesignation) > 0 ? $AdmDesignation->designation : '-');
+                                ?>
+                            </h5>
                         </div>
                     </div>
                     <div class="row mb-not-last-25">
@@ -193,7 +208,12 @@
                             <h5 class="text-info">Employment Type</h5>
                         </div>
                         <div class="col-md-9">
-                            <h5 class="text-info"><?php echo AdmEmptype::model()->findByPk($empEmploymentData->ref_employment_type)->emp_type; ?></h5>
+                            <h5 class="text-info">
+                                <?php
+                                $AdmEmptype = AdmEmptype::model()->findByPk($empEmploymentData->ref_employment_type);
+                                echo '' . (count($AdmEmptype) > 0 ? $AdmEmptype->emp_type : '-');
+                                ?>
+                            </h5>
                         </div>
                     </div>
                     <div class="row mb-not-last-25">
@@ -201,7 +221,12 @@
                             <h5 class="text-info">Branch</h5>
                         </div>
                         <div class="col-md-9">
-                            <h5 class="text-info"><?php  echo AdmBranch::model()->findByPk($empEmploymentData->ref_branch_id)->br_name; ?></h5>
+                            <h5 class="text-info">
+                                <?php
+                                $AdmBranch = AdmBranch::model()->findByPk($empEmploymentData->ref_branch_id);
+                                echo '' . (count($AdmBranch) > 0 ? $AdmBranch->br_name : '-');
+                                ?>
+                            </h5>
                         </div>
                     </div>
                     <div class="row mb-not-last-25">
@@ -209,7 +234,12 @@
                             <h5 class="text-info">Section</h5>
                         </div>
                         <div class="col-md-9">
-                            <h5 class="text-info"><?php echo AdmSection::model()->findByPk($empEmploymentData->ref_section_id)->section_name; ?></h5>
+                            <h5 class="text-info">
+                                <?php
+                                $AdmSection = AdmSection::model()->findByPk($empEmploymentData->ref_section_id);
+                                echo '' . (count($AdmSection) > 0 ? $AdmSection->section_name : '-');
+                                ?>
+                            </h5>
                         </div>
                     </div>
                     <div class="row mb-not-last-25">
@@ -217,7 +247,12 @@
                             <h5 class="text-info">Department</h5>
                         </div>
                         <div class="col-md-9">
-                            <h5 class="text-info"><?php echo AdmDepartment::model()->findByPk($empEmploymentData->ref_department_id)->dept_name; ?></h5>
+                            <h5 class="text-info">
+                                <?php
+                                $AdmDepartment = AdmDepartment::model()->findByPk($empEmploymentData->ref_department_id);
+                                echo '' . (count($AdmDepartment) > 0 ? $AdmDepartment->dept_name : '-');
+                                ?>
+                            </h5>
                         </div>
                     </div>
                     <div class="row mb-not-last-25">
