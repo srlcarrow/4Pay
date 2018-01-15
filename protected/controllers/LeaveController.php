@@ -140,7 +140,60 @@ class LeaveController extends Controller {
             $this->msgHandler(400, $status['msg']);
         }
     }
-
+    
+    public function actionViewPendingLeaves() {
+        $userId = Controller::getEmpIdOfLoggedUser();
+        $pendingLeaves = LeaveApply::model()->findAllByAttributes(array('lv_first_sup_id' => $userId, 'lv_first_sup_approved' => 0, 'lv_approved_final_status' => 0));
+        $this->render('/leave/pendingLeave', array('pendingLeaves' => $pendingLeaves));
+    }
+    
+    public function actionApproveLeave() {
+        $leaveId = $_POST['leaveId'];
+        $leave = LeaveApply::model()->findByPk($leaveId);
+        $leave->lv_first_sup_approved = 1;
+        if ($leave->save(false)) {
+            $this->msgHandler(200, "Successfully Saved...");
+        }
+    }
+    
+    public function actionRejectLeave() {
+        $leaveId = $_POST['leaveId'];
+        $leave = LeaveApply::model()->findByPk($leaveId);
+        $leave->lv_first_sup_reject_reason = $_POST['reason'];
+        $leave->lv_first_sup_approved = 2;
+        $leave->lv_approved_final_status = 2;
+        if ($leave->save(false)) {
+            $this->msgHandler(200, "Successfully Saved...");
+        }
+    }
+    
+    public function actionViewPendingLeaveSecondApprover() {
+        $userId = Controller::getEmpIdOfLoggedUser();
+        $pendingLeaves = LeaveApply::model()->findAllByAttributes(array('lv_sec_sup_id' => $userId, 'lv_first_sup_approved' => 1, 'lv_sec_sup_approved' => 0, 'lv_approved_final_status' => 0));
+        $this->render('/leave/pendingLeaveSecondApprover', array('pendingLeaves' => $pendingLeaves));
+    }
+    
+    public function actionApproveLeaveSecondApprover() {
+        $leaveId = $_POST['leaveId'];
+        $leave = LeaveApply::model()->findByPk($leaveId);
+        $leave->lv_sec_sup_approved = 1;
+        $leave->lv_approved_final_status = 1;
+        if ($leave->save(false)) {
+            $this->msgHandler(200, "Successfully Saved...");
+        }
+    }
+    
+    public function actionRejectLeaveSecondApprover() {
+        $leaveId = $_POST['leaveId'];
+        $leave = LeaveApply::model()->findByPk($leaveId);
+        $leave->lv_sec_sup_reject_reason = $_POST['reason'];
+        $leave->lv_sec_sup_approved = 2;
+        $leave->lv_approved_final_status = 2;
+        if ($leave->save(false)) {
+            $this->msgHandler(200, "Successfully Saved...");
+        }
+    }
+    
 //*********************************************  LEAVE HR   ********************************************************
     public function actionViewLeave() {
         $empId = $_REQUEST['id'];

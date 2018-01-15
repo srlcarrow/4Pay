@@ -4,9 +4,16 @@ $userId = Yii::app()->user->getId();
 $userTypeId = User::model()->findByPk($userId)->ref_user_type_id;
 $empId = Controller::getEmpIdOfLoggedUser();
 $mainLinks = AdmLinks::model()->findAllByAttributes(array('lnk_parent_id' => 0, 'lnk_is_module' => 0), array('order' => 'lnk_order ASC'));
+
+//Pending Leaves 
+$penLeavesFirstApprover = LeaveApply::model()->findAllByAttributes(array('lv_first_sup_id' => $empId, 'lv_first_sup_approved' => 0, 'lv_approved_final_status' => 0));
+$penLeavesSecondApprover = LeaveApply::model()->findAllByAttributes(array('lv_sec_sup_id' => $empId, 'lv_first_sup_approved' => 1, 'lv_sec_sup_approved' => 0, 'lv_approved_final_status' => 0));
+
+//Pending Short Leave
 $pendingSLeavesFirstApprover = ShortLeave::model()->findAllByAttributes(array('approver_id' => $empId, 'approver_status' => 0, 'final_status' => 0));
 $pendingSLeavesSecondApprover = ShortLeave::model()->findAllByAttributes(array('second_approver_id' => $empId, 'approver_status' => 1, 'second_approver_status' => 0, 'final_status' => 0));
-$notificationCount = count($pendingSLeavesFirstApprover) + count($pendingSLeavesSecondApprover);
+
+$notificationCount = count($pendingSLeavesFirstApprover) + count($pendingSLeavesSecondApprover) + count($penLeavesFirstApprover)+ count($penLeavesSecondApprover);  
 ?>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -50,12 +57,18 @@ $notificationCount = count($pendingSLeavesFirstApprover) + count($pendingSLeaves
                     <span class="n-count"><?php echo $notificationCount; ?></span>
                 </a>
                 <ul class="dropdown-menu">
+                    <?php if (count($penLeavesFirstApprover) > 0) { ?>
+                        <li><a href="<?php echo Yii::app()->baseUrl; ?>/Leave/ViewPendingLeaves">Approve Leave(<?php echo count($penLeavesFirstApprover) ?>)</a></li>
+                    <?php } ?>    
+                    <?php if (count($penLeavesSecondApprover) > 0) { ?>
+                        <li><a href="<?php echo Yii::app()->baseUrl; ?>/Leave/ViewPendingLeaveSecondApprover">Approve Leave - Second Approver(<?php echo count($penLeavesSecondApprover) ?>)</a></li>
+                    <?php } ?>      
                     <?php if (count($pendingSLeavesFirstApprover) > 0) { ?>
                         <li><a href="<?php echo Yii::app()->baseUrl; ?>/ShortLeave/ViewPendingShortLeave">Approve Short Leave(<?php echo count($pendingSLeavesFirstApprover) ?>)</a></li>
                     <?php } ?>
                     <?php if (count($pendingSLeavesSecondApprover) > 0) { ?>
                         <li><a href="<?php echo Yii::app()->baseUrl; ?>/ShortLeave/ViewPendingShortLeaveSecondApprover">Approve Short Leave - Second Approver(<?php echo count($pendingSLeavesSecondApprover) ?>)</a></li>
-                    <?php } ?>    
+                    <?php } ?>   
                 </ul>
             </li>
 
