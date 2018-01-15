@@ -97,10 +97,10 @@ class Controller extends CController {
 
         if (!empty($_REQUEST['activeStatus']) && ($_REQUEST['activeStatus'] == "inactive")) {
             $str .= " AND empl.empl_employment_status = 'inactive'";
-        }else{
-              $str .= " AND empl.empl_employment_status = 'active'";
+        } else {
+            $str .= " AND empl.empl_employment_status = 'active'";
         }
-        
+
         if (!empty($_REQUEST['searchEmployeeText']) && $_REQUEST['searchEmployeeText'] != 'undefined') {
             $str .= " AND  ( emp.emp_full_name Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_name_with_initials Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_display_name Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.epf_no Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.empno Like '%" . $_REQUEST['searchEmployeeText'] . "%' OR emp.emp_nic Like '%" . $_REQUEST['searchEmployeeText'] . "%')";
         }
@@ -132,12 +132,12 @@ class Controller extends CController {
     public function getActiveFilter() {
         return array('active' => 'Active', 'inactive' => 'Inactive');
     }
-    
-    public function getShortLeaveFinalStatus() { 
+
+    public function getShortLeaveFinalStatus() {
         $array = array(
             '0' => 'Pending',
             '1' => 'Approved',
-            '2' => 'Reject'   
+            '2' => 'Reject'
         );
         return $array;
     }
@@ -210,6 +210,8 @@ class Controller extends CController {
             $dateArr[] = date('Y-m-d', $startStamp);
             $startStamp = strtotime(' +1 day ', $startStamp);
         }
+
+        $dateArr = isset($dateArr) ? $dateArr : array();
         return $dateArr;
     }
 
@@ -225,18 +227,54 @@ class Controller extends CController {
     public static function getFirstSuperior($empId) {
         $empData = EmpBasic::model()->findByPk($empId);
 
+        $array = array();
         if (count($empData) > 0) {
             if ($empData->is_enable_emp_sup_one == 1) {
-                $firstSup = EmpBasic::model()->findByPk($empData->emp_sup_one);
+                if ($empData->emp_sup_one == 0) {
+                    $status = 2; // Superior Not Set
+                    $emp = 0;
+                } else {
+                    $status = 1;
+                    $firstSup = EmpBasic::model()->findByPk($empData->emp_sup_one);
+                    $emp = $firstSup->emp_id;
+                }
 
-                $arr['status'] = '';
-                $arr['empId'] = '';
+                $arr['status'] = $status;
+                $arr['empId'] = $emp;
+            } else {
+                $arr['status'] = 3; // No nedd superior
+                $arr['empId'] = 0;
             }
+            array_push($array, $arr);
         }
+     
+        return $array;
     }
 
     public static function getSecondSuperior($empId) {
-        
+        $empData = EmpBasic::model()->findByPk($empId);
+        $array = array();
+        if (count($empData) > 0) {
+            if ($empData->is_enable_emp_sup_two == 1) {
+                if ($empData->emp_sup_two == 0) {
+                    $status = 2; // Superior Not Set
+                    $emp = 0;
+                } else {
+                    $status = 1;
+                    $secondSup = EmpBasic::model()->findByPk($empData->emp_sup_two);
+                    $emp = $secondSup->emp_id;
+                }
+
+                $arr['status'] = $status;
+                $arr['empId'] = $emp;
+            } else {
+                $arr['status'] = 3; // No nedd superior
+                $arr['empId'] = 0;
+            }
+            array_push($array, $arr);
+        }
+  
+        return $array;
     }
 
 //    public function 

@@ -27,6 +27,16 @@ class Leave {
         $employmentData = Employment::model()->findByAttributes(array('ref_emp_id' => $empId));
         $joinedDate = $employmentData->empl_joined_date;
 
+        $firstSup = Controller::getFirstSuperior($empId);
+        $secondSup = Controller::getSecondSuperior($empId);
+
+        if ($firstSup[0]['status'] == 2 || $secondSup[0]['status'] == 2) {         
+            $statusArray['status'] = 0;
+            $statusArray['msg'] = "Please Contact HR and Setup your Superiors...";           
+            return $statusArray;
+            exit;
+        }
+
         if ($leaveTypeData->is_enable_earnleave_for_joined_year == 1 && $company->com_leave_proc_year == date('Y', strtotime($joinedDate))) {
             $leaveCount = yii::app()->db->createCommand("SELECT SUM(lad.lvd_count) AS leaveCount FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id "
                             . "WHERE la.ref_emp_id=" . $empId . " AND la.ref_lv_type_id=" . $leaveTypeId . " AND YEAR(lad.lvd_day)=" . $company->com_leave_proc_year . ";")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
@@ -82,6 +92,93 @@ class Leave {
             $askedLeaveAmount += $leave[1] == 0 ? 1 : 0.5;
         }
 
+        //Validating Previouse days leave types blend
+        $blendLeaveTypes = AdmBlendLeaveTypes::model()->findAllByAttributes(array('ref_lv_type_id' => $leaveTypeId));
+        $blendLeaveTypes = CHtml::listData($blendLeaveTypes, 'blt_id', 'blend_lvtype');
+
+        $askedLeaveDaysArray = array_column($leaveApplyDates, 0);
+        $daysBefore = Controller::returnDates(date('Y-m-d', strtotime($askedLeaveDaysArray[0] . '-7 days')), date('Y-m-d', strtotime($askedLeaveDaysArray[0] . '-1 days')));
+        $daysBefore = array_reverse($daysBefore);
+
+        $daysInRange = count($askedLeaveDaysArray) > 1 ? Controller::returnDates($askedLeaveDaysArray[0], $askedLeaveDaysArray[count($askedLeaveDaysArray) - 1]) : array();
+        $daysAfter = Controller::returnDates(date('Y-m-d', strtotime($askedLeaveDaysArray[count($askedLeaveDaysArray) - 1] . '+1 days')), date('Y-m-d', strtotime($askedLeaveDaysArray[0] . '+7 days')));
+
+        //Before days
+        $blendStatus = 1;
+        foreach ($daysBefore as $day) {
+            $isShiftAvailable = DailyAttendance::model()->getEmpWorkshift($empId, $day);
+            $isHoliday = AdmConfigHolidays::model()->findByAttributes(array('holiday_date' => $day));
+            $appliedLeave = yii::app()->db->createCommand("SELECT * FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id WHERE la.ref_emp_id=" . $empId . " AND lad.lvd_day='" . $day . "'")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+            if ($blendStatus == 1 && (count($isHoliday) > 0 || $isShiftAvailable[8] == 0) && count($appliedLeave) == 0) {
+                $blendStatus = 1;
+                break;
+            } elseif ($blendStatus == 1 && count($appliedLeave) > 0) {
+                $availableInBlendArray = array_search($appliedLeave[0]->ref_lv_type_id, $blendLeaveTypes) === false ? 0 : 1;
+                if ($availableInBlendArray == 0 && $appliedLeave[0]->ref_lv_type_id != $leaveTypeId) {
+                    $blendStatus = 0;
+                    $statusArray['status'] = 0;
+                    $statusArray['msg'] = "You Cannot Blend Leave Types...";
+                    return $statusArray;
+                    exit;
+                }
+            } elseif ($blendStatus == 1 && count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {
+                break;
+            }
+        }
+
+        //In Range
+        $blendStatus = 1;
+        foreach ($daysInRange as $day) {
+            $isShiftAvailable = DailyAttendance::model()->getEmpWorkshift($empId, $day);
+            $isHoliday = AdmConfigHolidays::model()->findByAttributes(array('holiday_date' => $day));
+            $appliedLeave = yii::app()->db->createCommand("SELECT * FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id WHERE la.ref_emp_id=" . $empId . " AND lad.lvd_day='" . $day . "'")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+            if ($blendStatus == 1 && (count($isHoliday) > 0 || $isShiftAvailable[8] == 0) && count($appliedLeave) == 0) {
+                $blendStatus = 1;
+                break;
+            } elseif ($blendStatus == 1 && count($appliedLeave) > 0) {
+                $availableInBlendArray = array_search($appliedLeave[0]['ref_lv_type_id'], $blendLeaveTypes) === false ? 0 : 1;
+                if ($availableInBlendArray == 0) {
+                    $blendStatus = 0;
+                    $statusArray['status'] = 0;
+                    $statusArray['msg'] = "You Cannot Blend Leave Types...";
+                    return $statusArray;
+                    exit;
+                }
+            } elseif ($blendStatus == 1 && count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {
+                $blendStatus = 1;
+                break;
+            }
+        }
+
+        //After Range
+        $blendStatus = 1;
+        foreach ($daysAfter as $day) {
+            $isShiftAvailable = DailyAttendance::model()->getEmpWorkshift($empId, $day);
+            $isHoliday = AdmConfigHolidays::model()->findByAttributes(array('holiday_date' => $day));
+            $appliedLeave = yii::app()->db->createCommand("SELECT * FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id WHERE la.ref_emp_id=" . $empId . " AND lad.lvd_day='" . $day . "'")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+            if ($blendStatus == 1 && (count($isHoliday) > 0 || $isShiftAvailable[8] == 0) && count($appliedLeave) == 0) {
+                $blendStatus = 1;
+                break;
+            } elseif ($blendStatus == 1 && count($appliedLeave) > 0) {
+                $availableInBlendArray = array_search($appliedLeave[0]->ref_lv_type_id, $blendLeaveTypes) === false ? 0 : 1;
+                if ($availableInBlendArray == 0 && $appliedLeave[0]->ref_lv_type_id != $leaveTypeId) {
+                    $blendStatus = 0;
+                    $statusArray['status'] = 0;
+                    $statusArray['msg'] = "You Cannot Blend Leave Types...";
+                    return $statusArray;
+                    exit;
+                }
+            } elseif ($blendStatus == 1 && count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {
+                $blendStatus = 1;
+                break;
+            }
+        }
+
+
+
         if ($leaveBalance < $askedLeaveAmount) {
             $statusArray['status'] = 0;
             $statusArray['msg'] = "Your Leave Balance is not Enough...";
@@ -103,13 +200,40 @@ class Leave {
             exit;
         }
 
-        if ($leaveTypeData->lt_min_no_of_concecutive_leaves_at_once > 0 && $leaveBalance > $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {           
-            $days = Controller::returnDates($askedLeaveDaysArray[0], $askedLeaveDaysArray[count($askedLeaveDaysArray) - 1]);
+        if ($leaveTypeData->lt_min_no_of_concecutive_leaves_at_once > 0 && $leaveBalance > $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {
             $askedLeaveDaysArray = array_column($leaveApplyDates, 0);
+            $days = Controller::returnDates($askedLeaveDaysArray[0], $askedLeaveDaysArray[count($askedLeaveDaysArray) - 1]);
 
             $status = 0;
-            $noOfConcecDays = 0;
 
+            $noOfConcecDaysBack = 0;
+            foreach ($daysBefore as $day) {
+                $isShiftAvailable = DailyAttendance::model()->getEmpWorkshift($empId, $day);
+                $isHoliday = AdmConfigHolidays::model()->findByAttributes(array('holiday_date' => $day));
+                $appliedLeave = yii::app()->db->createCommand("SELECT * FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id WHERE la.ref_emp_id=" . $empId . " AND lad.lvd_day='" . $day . "'")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+                if ((count($isHoliday) > 0 || $isShiftAvailable[8] == 0) && count($appliedLeave) == 0) {
+                    
+                } elseif (count($appliedLeave) > 0) {
+                    $availableInBlendArray = array_search($appliedLeave[0]->ref_lv_type_id, $blendLeaveTypes) === false ? 0 : 1;
+                    if ($availableInBlendArray == 0 && $appliedLeave[0]->ref_lv_type_id == $leaveTypeId) {
+                        $noOfConcecDaysBack += 1;
+                    } else {
+                        $noOfConcecDaysBack = 0;
+                        break;
+                    }
+                } elseif (count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {
+                    break;
+                }
+            }
+
+            $noOfConcecDays = $noOfConcecDaysBack;
+            if ($noOfConcecDays >= $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {
+                $statusArray['status'] = 1;
+                $statusArray['msg'] = "";
+                return $statusArray;
+                exit;
+            }
             foreach ($days as $day) {
                 $availableInArray = array_search($day, $askedLeaveDaysArray) === false ? 0 : 1;
 
@@ -124,15 +248,45 @@ class Leave {
                     }
                 } else {
                     $noOfConcecDays += 1;
-                    if ($noOfConcecDays == $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {
-                        $noOfConcecDays = 0;
+                    if ($noOfConcecDays >= $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {
                         $statusArray['status'] = 1;
                         $statusArray['msg'] = "";
                         return $statusArray;
                         exit;
-                    } else {
-                        
                     }
+                }
+            }
+
+            $noOfConcecDaysAfter = $noOfConcecDays;
+            if ($noOfConcecDaysAfter >= $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {
+                $statusArray['status'] = 1;
+                $statusArray['msg'] = "";
+                return $statusArray;
+                exit;
+            }
+            foreach ($daysAfter as $day) {
+                $isShiftAvailable = DailyAttendance::model()->getEmpWorkshift($empId, $day);
+                $isHoliday = AdmConfigHolidays::model()->findByAttributes(array('holiday_date' => $day));
+                $appliedLeave = yii::app()->db->createCommand("SELECT * FROM leave_apply la LEFT JOIN leave_apply_data lad ON la.lv_id=lad.ref_lv_id WHERE la.ref_emp_id=" . $empId . " AND lad.lvd_day='" . $day . "'")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
+                if ((count($isHoliday) > 0 || $isShiftAvailable[8] == 0) && count($appliedLeave) == 0) {
+                    
+                } elseif (count($appliedLeave) > 0) {
+                    $availableInBlendArray = array_search($appliedLeave[0]->ref_lv_type_id, $blendLeaveTypes) === false ? 0 : 1;
+                    if ($availableInBlendArray == 0 && $appliedLeave[0]->ref_lv_type_id == $leaveTypeId) {
+                        $noOfConcecDaysAfter += 1;
+                        if ($noOfConcecDaysAfter >= $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once) {
+                            $statusArray['status'] = 1;
+                            $statusArray['msg'] = "";
+                            return $statusArray;
+                            exit;
+                        }
+                    } else {
+                        $noOfConcecDaysAfter = 0;
+                        break;
+                    }
+                } elseif (count($appliedLeave) == 0 && (count($isHoliday) == 0 || $isShiftAvailable[8] != 0)) {
+                    break;
                 }
             }
 
@@ -140,6 +294,8 @@ class Leave {
             $statusArray['msg'] = "You have to Apply " . $leaveTypeData->lt_min_no_of_concecutive_leaves_at_once . " concecutive Days.";
             return $statusArray;
             exit;
+        } else {
+            $status = 1;
         }
 
         $statusArray['status'] = $status;

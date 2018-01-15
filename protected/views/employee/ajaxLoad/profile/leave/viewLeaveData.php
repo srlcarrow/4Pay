@@ -44,7 +44,7 @@
                             </div>
 
                             <ul id="empLoad" class="drop-result">
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -151,7 +151,9 @@
             dataType: 'json',
             success: function (responce) {
                 if (responce.code == 200) {
-
+                    loadLeaveData();
+                    loadLeaveHistory();
+                    sweetAlert('Successfull Leave Applied...!', responce.msg);
                 } else {
                     sweetAlert('Can Not Apply Leave!', responce.msg);
                 }
