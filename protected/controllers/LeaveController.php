@@ -92,18 +92,23 @@ class LeaveController extends Controller {
         $status = Leave::validateLeave($_POST['empId'], $_POST["leaveTypeId"], $_POST["startDate"], $_POST["endDate"], $leaveApplyDates);
 
         if ($status['status'] == 1) {
+            $firstSup = Controller::getFirstSuperior($_POST['empId']);
+            $secondSup = Controller::getSecondSuperior($_POST['empId']);
+
+         
             $leaveApply = new LeaveApply();
             $leaveApply->lv_apply_date = date('Y-m-d');
             $leaveApply->ref_emp_id = $_POST['empId'];
             $leaveApply->ref_lv_type_id = $_POST["leaveTypeId"];
+            $leaveApply->lv_purpose = $_POST["lvPurpose"];
             $leaveApply->lv_from = $_POST["startDate"];
             $leaveApply->lv_to = $_POST["endDate"];
 
             $leaveApply->lv_no_of_leaves = 0;
 
             $leaveApply->lv_coverup_id = $_POST["coverupId"];
-            $leaveApply->lv_first_sup_id = 0;
-            $leaveApply->lv_sec_sup_id = 0;
+            $leaveApply->lv_first_sup_id = $firstSup[0]['status'] == 1 || $firstSup[0]['status'] == 3 ? $firstSup[0]['empId'] : 0;
+            $leaveApply->lv_sec_sup_id = $secondSup[0]['status'] == 1 || $secondSup[0]['status'] == 3 ? $secondSup[0]['empId'] : 0;
 
             $leaveApply->lv_coverup_approved = 0;
             $leaveApply->lv_first_sup_approved = 0;

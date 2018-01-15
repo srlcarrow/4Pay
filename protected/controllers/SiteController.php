@@ -129,7 +129,7 @@ class SiteController extends Controller {
 
         foreach ($branches as $branch) {
             $noOfEmployees = yii::app()->db->createCommand("SELECT COUNT(*) AS empCount  FROM emp_basic eb LEFT JOIN emp_employment ee ON eb.emp_id=ee.ref_emp_id WHERE ee.empl_employment_status='active' AND ee.ref_branch_id=" . $branch->br_id . ";")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
-            $noOfAttendance = yii::app()->db->createCommand("SELECT COUNT(*) AS noOfAttendance FROM att_attendance aa LEFT JOIN emp_employment ee ON aa.ref_emp_id=ee.ref_emp_id WHERE ee.ref_branch_id=" . $branch->br_id . "; ")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+            $noOfAttendance = yii::app()->db->createCommand("SELECT COUNT(*) AS noOfAttendance FROM att_attendance aa LEFT JOIN emp_employment ee ON aa.ref_emp_id=ee.ref_emp_id WHERE ee.ref_branch_id=" . $branch->br_id . " AND aa.day='" . date('Y-m-d') . "'; ")->setFetchMode(PDO::FETCH_OBJ)->queryAll();
 
             array_push($array, array($branch->br_name, (int) $noOfEmployees[0]->empCount, (int) $noOfAttendance[0]->noOfAttendance));
         }

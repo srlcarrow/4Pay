@@ -1,0 +1,19 @@
+.status {
+  display: inline-block;
+  margin-right: 5px;
+  width: 10px;
+  height: 10px;
+  vertical-align: middle;
+
+  &.holiday {
+    background: $holidayColor;
+  }
+
+  &.leave {
+    background: $leaveColor;
+  }
+
+  &.disable {
+    background: $disableColor;
+  }
+}

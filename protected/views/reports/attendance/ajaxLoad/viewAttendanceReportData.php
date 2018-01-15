@@ -3,7 +3,12 @@
         <div class="card">
 
             <div class="card-header">
-                <h1>Attendance </h1>
+                <div class="row">
+                    <h1 class="col-md-4">Attendance </h1>
+                    <div class="col-md-8 text-right">
+                        <button type="button" class="btn btn-primary">Download</button>
+                    </div>
+                </div>
             </div>
 
             <div class="card-content">
