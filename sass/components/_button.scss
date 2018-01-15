@@ -54,19 +54,20 @@
 }
 
 .btn-default {
-  color: rgba($black,$lighten);
+  color: rgba($black, $lighten);
   background: $defaultBtnBgColor;
   border: 1px solid $defaultBtnBgColor;
 
   @mixin ho {
     background: darken($defaultBtnBgColor, 5%);
     border: 1px solid darken($defaultBtnBgColor, 5%);
-  };
+  }
+;
 
   &:active,
   &:focus,
   &:hover {
-   @include ho;
+    @include ho;
   }
 
   &:active {
@@ -109,5 +110,51 @@
       background: rgba(98, 6, 49, 0.86);
       color: $white;
     }
+  }
+}
+
+.file-uploader {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  background: $defaultBtnBgColor;
+  color: rgba($black, .56);
+  text-align: center;
+  padding: 7px 15px;
+  border: 1px solid $defaultBtnBgColor;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    background: darken($defaultBtnBgColor, 5%);
+  }
+
+  input[type="file"] {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.file-uploader-wrapper {
+  .file-uploader {
+  }
+
+  span {
+    color: rgba($black, $lighten-x);
+    font-size: 14px;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    width: 120px;
   }
 }

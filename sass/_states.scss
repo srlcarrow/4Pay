@@ -157,3 +157,17 @@ label {
   }
 
 }
+
+.modal-dialog {
+  .modal-header {
+    border: none;
+    padding: 30px;
+  }
+  .modal-body {
+    padding: 30px;
+  }
+  .modal-footer {
+    border: none;
+    padding: 30px;
+  }
+}

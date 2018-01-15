@@ -6,7 +6,14 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
         <div class="card">
             <div class="card-content">
                 <div class="search-box">
-                    <div class="item width-84">
+                    <div class="item width-20">
+                        <input type="text" name="" class="form-control datepicker-2" placeholder="Start Date"
+                        >
+                    </div>
+                    <div class="item width-20">
+                        <input type="text" name="" class="form-control datepicker-2" placeholder="End Date">
+                    </div>
+                    <div class="item width-54">
                         <input type="text" name="searchEmployeeText" class="form-control" placeholder="Search"
                                onkeyup="searchData(1)">
                     </div>
@@ -78,76 +85,106 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 <div class="row mb-30">
     <div class="col-md-12">
         <div class="card">
-            <?php
-            if (count($reqBasicFields) > 0) {
-                foreach ($reqBasicFields as $key => $reqBasicField) {
-                    $ischecked = "";
-                    if (in_array($reqBasicField, $defaultChecked)) {
-                        $ischecked = "checked = checked";
-                    }
-                    ?>
-                    <div class="col-md-2 ">
-                        <div class="checkbox">
-                            <input data-label="<?php echo $reqBasicField; ?>" <?php echo $ischecked; ?>
-                                   name="<?php echo $key; ?>" value="1"
-                                   id="<?php echo $key; ?>"
-                                   type="checkbox">
-                            <label for="<?php echo $key; ?>"><?php echo $reqBasicField; ?></label>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12 mb-30">
+                            <h5 class="text-primary text-uppercase">Lorem ipsum</h5>
+                            <div class="row pt-5">
+                                <?php
+                                if (count($reqBasicFields) > 0) {
+                                    foreach ($reqBasicFields as $key => $reqBasicField) {
+                                        $ischecked = "";
+                                        if (in_array($reqBasicField, $defaultChecked)) {
+                                            $ischecked = "checked = checked";
+                                        }
+                                        ?>
+                                        <div class="col-md-2 ">
+                                            <div class="checkbox">
+                                                <input data-label="<?php echo $reqBasicField; ?>" <?php echo $ischecked; ?>
+                                                       name="<?php echo $key; ?>" value="1"
+                                                       id="<?php echo $key; ?>"
+                                                       type="checkbox">
+                                                <label for="<?php echo $key; ?>"><?php echo $reqBasicField; ?></label>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </div>
                         </div>
-                    </div>
-                    <?php
-                }
-            }
-            ?>
-            <?php
-            if (count($reqAttendanceFields) > 0) {
-                ?>
-                <?php
-                foreach ($reqAttendanceFields as $key => $reqAttendanceField) {
-                    $ischecked = "";
-                    if (in_array($reqAttendanceField, $defaultChecked)) {
-                        $ischecked = "checked = checked";
-                    }
-                    ?>
-                    <div class="col-md-2 ">
-                        <div class="checkbox">
 
-                            <input data-label="<?php echo $reqAttendanceField; ?>" <?php echo $ischecked; ?>
-                                   name="<?php echo $key; ?>" value="1"
-                                   id="<?php echo $key; ?>"
-                                   type="checkbox">
-                            <label for="<?php echo $key; ?>"><?php echo $reqAttendanceField; ?></label>
+                        <div class="col-md-12 mb-30">
+                            <h5 class="text-primary text-uppercase">Lorem ipsum</h5>
+                            <div class="row pt-5">
+                                <?php
+                                if (count($reqAttendanceFields) > 0) {
+                                    ?>
+                                    <?php
+                                    foreach ($reqAttendanceFields as $key => $reqAttendanceField) {
+                                        $ischecked = "";
+                                        if (in_array($reqAttendanceField, $defaultChecked)) {
+                                            $ischecked = "checked = checked";
+                                        }
+                                        ?>
+                                        <div class="col-md-2 ">
+                                            <div class="checkbox">
+
+                                                <input data-label="<?php echo $reqAttendanceField; ?>" <?php echo $ischecked; ?>
+                                                       name="<?php echo $key; ?>" value="1"
+                                                       id="<?php echo $key; ?>"
+                                                       type="checkbox">
+                                                <label for="<?php echo $key; ?>"><?php echo $reqAttendanceField; ?></label>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </div>
                         </div>
-                    </div>
-                    <?php
-                }
-            }
-            ?>
-            <?php
-            if (count($reqEmploymentFields) > 0) {
-                ?>
-                <?php
-                foreach ($reqEmploymentFields as $key => $reqEmploymentField) {
-                    $ischecked = "";
-                    if (in_array($reqEmploymentField, $defaultChecked)) {
-                        $ischecked = "checked = checked";
-                    }
-                    ?>
-                    <div class="col-md-2 ">
-                        <div class="checkbox">
 
-                            <input data-label="<?php echo $reqEmploymentField; ?>" <?php echo $ischecked; ?>
-                                   name="<?php echo $key; ?>" value="1"
-                                   id="<?php echo $key; ?>"
-                                   type="checkbox">
-                            <label for="<?php echo $key; ?>"><?php echo $reqEmploymentField; ?></label>
+                        <div class="col-md-12">
+                            <h5 class="text-primary text-uppercase">Lorem ipsum</h5>
+                            <div class="row pt-5">
+                                <?php
+                                if (count($reqEmploymentFields) > 0) {
+                                    ?>
+                                    <?php
+                                    foreach ($reqEmploymentFields as $key => $reqEmploymentField) {
+                                        $ischecked = "";
+                                        if (in_array($reqEmploymentField, $defaultChecked)) {
+                                            $ischecked = "checked = checked";
+                                        }
+                                        ?>
+                                        <div class="col-md-2 ">
+                                            <div class="checkbox">
+
+                                                <input data-label="<?php echo $reqEmploymentField; ?>" <?php echo $ischecked; ?>
+                                                       name="<?php echo $key; ?>" value="1"
+                                                       id="<?php echo $key; ?>"
+                                                       type="checkbox">
+                                                <label for="<?php echo $key; ?>"><?php echo $reqEmploymentField; ?></label>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </div>
                         </div>
-                    </div>
-                    <?php
-                }
-            }
-            ?>
 
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-right">
+                    <button type="button" class="btn btn-danger" onclick="searchData(1)">Search</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -162,6 +199,8 @@ $form = $this->beginWidget('CActiveForm', array('id' => 'searchF2'));
 
 
 <script>
+
+    datePicker({ele:'.datepicker-2',position: 'bottom left',})
 
     var result = [];
     var arrayLabel = [];
