@@ -24,14 +24,14 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                             <label for="id_all"></label>
                                         </div>
                                     </th>
-                                    <th>EPF</th>
+                                    <!--<th>EPF</th>-->
                                     <th>EMP</th>
                                     <th>Name</th>
                                     <?php
                                     foreach ($leaveTypes as $leaveType) {
                                         ?>
                                         <th><?php echo $leaveType->lt_name; ?></th>
-                                        <th>Is Enable</th>
+                                        <th>Y/N</th>
                                         <?php
                                     }
                                     ?>
@@ -56,7 +56,7 @@ $leaveTypes = AdmLeavetypes::model()->findAll();
                                                 <label for="id_<?php echo $employee->emp_id; ?>"></label>
                                             </div>
                                         </td>
-                                        <td><?php echo $employee->epf_no; ?></td>
+                                        <!--<td><?php //echo $employee->epf_no; ?></td>-->
                                         <td><?php echo $employee->empno; ?></td>
                                         <td><?php echo $employee->emp_name_with_initials; ?></td>
                                         <?php
