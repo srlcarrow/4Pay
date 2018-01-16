@@ -79,7 +79,7 @@
         ?>
     </div>
 
-    <div class="col-md-6 no-select loadAjaxDate">
+    <div class="col-md-6 col-md-offset-1 no-select loadAjaxDate">
 
     </div>
 
