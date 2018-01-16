@@ -40,6 +40,7 @@
         var selectedLvType = $("#type option:selected").val();
 
         fetch({
+            appendTo:'#ajaxLoadData',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewLeaveData'; ?>",
             data: {selectedLvType: selectedLvType},
@@ -51,6 +52,7 @@
 
     function loadLeaveHistory() {
         fetch({
+            appendTo:'#ajaxLoadLeaveHistory',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewSelfLeaveHistory'; ?>",
             data: "",
