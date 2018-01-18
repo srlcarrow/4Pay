@@ -29,6 +29,12 @@
     vertical-align: middle;
     width: 100%;
   }
+
+  &.cell-width-0 {
+    .cell {
+      width: auto !important;
+    }
+  }
 }
 
 .no-wrap {
@@ -157,7 +163,8 @@ span.error-val {
     border-width: 2px;
   }
 
-  &:nth-child(6) {
+  &:last-child {
     border-color: transparent;
   }
+
 }

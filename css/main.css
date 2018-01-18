@@ -69,6 +69,8 @@ ul {
     display: table-cell;
     vertical-align: middle;
     width: 100%; }
+  .ds-table-block.cell-width-0 .cell, .cell-width-0.search-box .cell, .ds-table-block.cell-width-0 .search-box .item, .search-box .ds-table-block.cell-width-0 .item, .cell-width-0.search-box .item {
+    width: auto !important; }
 
 .no-wrap {
   white-space: nowrap; }
@@ -546,7 +548,7 @@ span.error-val {
     border-color: rgba(255, 255, 255, 0.56); }
   .white-border-right.w-2 {
     border-width: 2px; }
-  .white-border-right:nth-child(6) {
+  .white-border-right:last-child {
     border-color: transparent; }
 
 /*Card*/
@@ -709,6 +711,18 @@ table.cm-table th, table.cm-table td {
 
 .table-bordered {
   border: 1px solid #fff; }
+
+table tr.leave td, table tr.leave span {
+  color: #fa432b; }
+
+table tr.holiday td, table tr.holiday span {
+  color: #fabb05; }
+
+table tr.short-leave td, table tr.short-leave span {
+  color: #0288d1; }
+
+table tr.disable td, table tr.disable span {
+  color: rgba(18, 75, 78, 0.24); }
 
 .search-box {
   -webkit-border-radius: 2px;

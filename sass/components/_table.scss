@@ -6,15 +6,15 @@ table.table {
     color: $white;
 
     tr {
-     th {
-       padding:6px 8px;
-       vertical-align: middle;
+      th {
+        padding: 6px 8px;
+        vertical-align: middle;
 
-       &.th-checkbox {
-         padding-top:10px;
-         padding-bottom:0;
-       }
-     }
+        &.th-checkbox {
+          padding-top: 10px;
+          padding-bottom: 0;
+        }
+      }
     }
   }
 
@@ -22,13 +22,13 @@ table.table {
 
     tr {
       td {
-        padding:6px 8px;
+        padding: 6px 8px;
       }
     }
   }
 
-  &.table-bordered > thead >tr >td ,
-  &.table-bordered > thead >tr >th {
+  &.table-bordered > thead > tr > td,
+  &.table-bordered > thead > tr > th {
     border: 1px solid rgba(221, 221, 221, 0.4);
   }
 
@@ -71,3 +71,31 @@ table.cm-table {
 .table-bordered {
   border: 1px solid #fff;
 }
+
+table {
+  tr.leave {
+    td, span {
+      color: $leaveColor;
+    }
+  }
+
+  tr.holiday {
+    td, span {
+      color: $holidayColor;
+    }
+  }
+
+  tr.short-leave {
+    td, span {
+      color: $primaryColor;
+    }
+  }
+
+  tr.disable {
+    td, span {
+      color: $disableColor;
+    }
+  }
+
+}
+
