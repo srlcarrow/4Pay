@@ -7,11 +7,55 @@
     $maxLeavsPerDay = $shortLeaveSetting->max_leaves_per_day;
     ?>
 
-    <div class="card-header">
-        <h1>Short Leave Requisition</h1>
-    </div>
+    <!--    <div class="card-header">-->
+    <!--        <h1>Short Leave Requisition</h1>-->
+    <!--    </div>-->
 
     <div class="card-content">
+
+        <div class="row m-m-30">
+            <div class="col-md-12 pl-0 pr-0 bg-primary-dark mb-30">
+                <div class="ds-table-block width-100">
+
+                    <div class="cell width-20 pl-30 pr-30 ">
+                        <div class="pt-25 pb-25">
+                            <div class="f-24 text-nowrap">
+                                <span class="text-white f-500">2</span>
+                                <span class="text-white">hrs</span>
+                            </div>
+                            <h6 class="text-uppercase lighten-2 text-white f-14">January</h6>
+                        </div>
+                    </div>
+
+                    <div class="cell width-80 pl-30 pr-30">
+                        <div class="pt-25 pb-25">
+                            <div class="ds-table-block width-1">
+
+                                <div class="width-1 text-nowrap cell pr-30 white-border-right w-2 lighten-2">
+                                    <div class="f-24  ds-block text-white f-500 line-h-20">
+                                        <span class="text-white">1.5</span>
+                                        <span class="f-400">hrs</span>
+                                    </div>
+                                    <span class="f-14 ds-block text-white lighten-2 f-300">Utilize</span>
+                                </div>
+
+                                <div class="width-1 text-nowrap cell pl-30">
+                                    <div class="f-24 ds-block text-white f-500 line-h-20">
+                                        <span class="text-white">30</span>
+                                        <span class="f-400">min</span>
+                                    </div>
+                                    <span class="f-14 ds-block text-white lighten-2 f-300">Balance</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
         <div class="row form-wrapper">
             <div class="col-md-8">
                 <div class="form-group">
@@ -185,7 +229,7 @@
     }
 
     datePicker({
-        ele:'.input-datepicker'
+        ele: '.input-datepicker'
     })
 
 </script>
