@@ -1013,6 +1013,8 @@ table tr.disable td, table tr.disable span {
     background: #fabb05; }
   .status.leave {
     background: #fa432b; }
+  .status.short-leave {
+    background: #0288d1; }
   .status.disable {
     background: rgba(18, 75, 78, 0.24); }
 
