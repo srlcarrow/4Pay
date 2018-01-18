@@ -171,7 +171,7 @@ span.error-val {
 
 .popup {
   position: absolute;
-  background: $white;
+  background: $dangerBtnBgColor;
   -webkit-box-shadow: 0 2px 2px rgba($black, 0.10);
   -moz-box-shadow: 0 2px 2px rgba($black, 0.10);
   box-shadow: 0 2px 2px rgba($black, 0.10);
@@ -191,12 +191,12 @@ span.error-val {
 
     li {
       font-size: $base-font-size;
-      color: rgba($black, $lighten-x);
+      color: rgba($white, $lighten-x);
 
       & > span:first-child {
         display: inline-block;
         width: 15px;
-        color: rgba($black, $lighten-xx)
+        color: rgba($white, $lighten-xx);
       }
     }
 

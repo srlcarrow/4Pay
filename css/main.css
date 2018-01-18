@@ -553,7 +553,7 @@ span.error-val {
 
 .popup {
   position: absolute;
-  background: #fff;
+  background: #d14836;
   -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
@@ -570,11 +570,11 @@ span.error-val {
     padding: 0; }
     .popup.leave ul li {
       font-size: 14px;
-      color: rgba(0, 0, 0, 0.56); }
+      color: rgba(255, 255, 255, 0.56); }
       .popup.leave ul li > span:first-child {
         display: inline-block;
         width: 15px;
-        color: rgba(0, 0, 0, 0.3); }
+        color: rgba(255, 255, 255, 0.3); }
     .popup.leave ul li:not(:last-child) {
       margin-bottom: 15px; }
 
