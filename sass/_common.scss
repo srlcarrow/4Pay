@@ -191,14 +191,18 @@ span.error-val {
 
     li {
       font-size: $base-font-size;
-      color: rgba($white, $lighten-x);
+      color: $white;
 
       & > span:first-child {
         display: inline-block;
         width: 15px;
-        color: rgba($white, $lighten-xx);
+        color: rgba($white, $lighten-x);
+      }
+      & > span:last-child {
+        color: rgba($white, $lighten-x);
       }
     }
+
 
     li:not(:last-child) {
       margin-bottom: 15px;
