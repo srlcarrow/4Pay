@@ -84,3 +84,23 @@
     }
   }
 }
+
+@mixin fontSize {
+  $fontSize: (10, 12, 14, 16, 18, 20, 24, 28, 30, 32, 34, 36, 38, 40);
+
+  @each $size in $fontSize {
+    .f-#{$size} {
+      font-size: $size + px !important;
+    }
+  }
+}
+
+@mixin fontWeight {
+  $fontSize: (100, 300, 400, 500, 700);
+
+  @each $size in $fontSize {
+    .f-#{$size} {
+      font-weight: $size !important;
+    }
+  }
+}

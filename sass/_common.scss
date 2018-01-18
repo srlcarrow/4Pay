@@ -44,7 +44,23 @@
 @include text-color($black, 'black');
 
 @include textWithoutHover($black, 'black');
+@include textWithoutHover($white, 'white');
 @include textWithoutHover($primaryColor, 'primary');
+
+@include fontSize();
+@include fontWeight();
+
+.line-h-20 {
+  line-height: 20px !important;
+}
+
+.line-h-14 {
+  line-height: 14px !important;
+}
+
+.bg-primary-dark {
+  background: $primaryDark;
+}
 
 .text-info {
   font-size: 16px;
@@ -128,4 +144,20 @@ span.error-val {
     max-height: 210px;
   }
 
+}
+
+.white-border-right {
+  border-right: 3px solid $white;
+
+  &.lighten-2 {
+    border-color: rgba($white, $lighten-x);
+  }
+
+  &.w-2 {
+    border-width: 2px;
+  }
+
+  &:nth-child(6) {
+    border-color: transparent;
+  }
 }

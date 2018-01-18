@@ -400,6 +400,15 @@ ul {
   .text-black.lighten-3 {
     color: rgba(0, 0, 0, 0.3); }
 
+.text-white {
+  color: #fff; }
+  .text-white.lighten-1 {
+    color: rgba(255, 255, 255, 0.86); }
+  .text-white.lighten-2 {
+    color: rgba(255, 255, 255, 0.56); }
+  .text-white.lighten-3 {
+    color: rgba(255, 255, 255, 0.3); }
+
 .text-primary {
   color: #0288d1; }
   .text-primary.lighten-1 {
@@ -408,6 +417,72 @@ ul {
     color: rgba(2, 136, 209, 0.56); }
   .text-primary.lighten-3 {
     color: rgba(2, 136, 209, 0.3); }
+
+.f-10 {
+  font-size: 10px !important; }
+
+.f-12 {
+  font-size: 12px !important; }
+
+.f-14 {
+  font-size: 14px !important; }
+
+.f-16 {
+  font-size: 16px !important; }
+
+.f-18 {
+  font-size: 18px !important; }
+
+.f-20 {
+  font-size: 20px !important; }
+
+.f-24 {
+  font-size: 24px !important; }
+
+.f-28 {
+  font-size: 28px !important; }
+
+.f-30 {
+  font-size: 30px !important; }
+
+.f-32 {
+  font-size: 32px !important; }
+
+.f-34 {
+  font-size: 34px !important; }
+
+.f-36 {
+  font-size: 36px !important; }
+
+.f-38 {
+  font-size: 38px !important; }
+
+.f-40 {
+  font-size: 40px !important; }
+
+.f-100 {
+  font-weight: 100 !important; }
+
+.f-300 {
+  font-weight: 300 !important; }
+
+.f-400 {
+  font-weight: 400 !important; }
+
+.f-500 {
+  font-weight: 500 !important; }
+
+.f-700 {
+  font-weight: 700 !important; }
+
+.line-h-20 {
+  line-height: 20px !important; }
+
+.line-h-14 {
+  line-height: 14px !important; }
+
+.bg-primary-dark {
+  background: #014c75; }
 
 .text-info {
   font-size: 16px;
@@ -464,6 +539,15 @@ span.error-val {
 
 .scroll.max-height-210 {
   max-height: 210px; }
+
+.white-border-right {
+  border-right: 3px solid #fff; }
+  .white-border-right.lighten-2 {
+    border-color: rgba(255, 255, 255, 0.56); }
+  .white-border-right.w-2 {
+    border-width: 2px; }
+  .white-border-right:nth-child(6) {
+    border-color: transparent; }
 
 /*Card*/
 .card {
@@ -1074,6 +1158,9 @@ label {
 .p-lr-100 {
   padding-left: 100px !important;
   padding-right: 100px !important; }
+
+.m-m-30 {
+  margin: -30px !important; }
 
 .mt-0 {
   margin-top: 0px !important; }

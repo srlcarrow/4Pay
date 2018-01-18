@@ -1,5 +1,63 @@
 <div class="card flat mt-30">
-    <div class="card-content">      
+    <div class="card-content">
+
+        <div class="row m-m-30">
+            <div class="col-md-12 pl-0 pr-0 bg-primary-dark mb-30">
+                <div class="ds-table-block width-1">
+
+                    <div class="cell width-1 pl-30 pr-30 white-border-right">
+                        <div class="pt-25 pb-25">
+                            <div class="text-uppercase text-nowrap mb-28">
+                                <span class="f-16 text-white lighten-1">Annual</span>
+                                <span class="f-16 text-white lighten-1 ml-10 mr-10">=</span>
+                                <span class="f-24 text-white f-500">14</span>
+                            </div>
+
+                            <div class="ds-table-block width-1">
+
+                                <div class="width-1 cell pr-15 white-border-right w-2 lighten-2">
+                                    <span class="f-24 ds-block text-white f-500 line-h-20">7</span>
+                                    <span class="f-14 ds-block text-white lighten-2 f-300">Utilize</span>
+                                </div>
+
+                                <div class="width-1 cell pl-15">
+                                    <span class="f-24 ds-block text-white f-500 line-h-20">7</span>
+                                    <span class="f-14 ds-block text-white lighten-2 f-300">Balance</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cell width-1 pl-30 pr-30 white-border-right">
+                        <div class="pt-25 pb-25">
+                            <div class="text-uppercase text-nowrap mb-28">
+                                <span class="f-16 text-white lighten-1">Annual</span>
+                                <span class="f-16 text-white lighten-1 ml-10 mr-10">=</span>
+                                <span class="f-24 text-white f-500">14</span>
+                            </div>
+
+                            <div class="ds-table-block width-1">
+
+                                <div class="width-1 cell pr-15 white-border-right w-2 lighten-2">
+                                    <span class="f-24 ds-block text-white f-500 line-h-20">7</span>
+                                    <span class="f-14 ds-block text-white lighten-2 f-300">Utilize</span>
+                                </div>
+
+                                <div class="width-1 cell pl-15">
+                                    <span class="f-24 ds-block text-white f-500 line-h-20">7</span>
+                                    <span class="f-14 ds-block text-white lighten-2 f-300">Balance</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
         <div class="row form-wrapper">
             <div class="col-md-4">
                 <div class="row form-wrapper">
@@ -23,7 +81,7 @@
 
                 </div>
             </div>
-        </div>   
+        </div>
         <div id="ajaxLoadData"></div>
     </div>
 </div>
@@ -40,7 +98,7 @@
         var selectedLvType = $("#type option:selected").val();
 
         fetch({
-            appendTo:'#ajaxLoadData',
+            appendTo: '#ajaxLoadData',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewLeaveData'; ?>",
             data: {selectedLvType: selectedLvType},
@@ -52,7 +110,7 @@
 
     function loadLeaveHistory() {
         fetch({
-            appendTo:'#ajaxLoadLeaveHistory',
+            appendTo: '#ajaxLoadLeaveHistory',
             type: 'POST',
             url: "<?php echo Yii::app()->baseUrl . '/Employee/ViewSelfLeaveHistory'; ?>",
             data: "",
