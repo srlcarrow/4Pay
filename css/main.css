@@ -757,17 +757,26 @@ table.cm-table th, table.cm-table td {
 .table-bordered {
   border: 1px solid #fff; }
 
-table tr.leave td, table tr.leave span {
-  color: #fa432b; }
+table tr td:first-child:before {
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  display: inline-block; }
 
-table tr.holiday td, table tr.holiday span {
-  color: #fabb05; }
+table tr.leave td:first-child:before {
+  background: #fa432b; }
 
-table tr.short-leave td, table tr.short-leave span {
-  color: #0288d1; }
+table tr.holiday td:first-child:before {
+  background: #fabb05; }
 
-table tr.disable td, table tr.disable span {
-  color: rgba(18, 75, 78, 0.24); }
+table tr.short-leave td:first-child:before {
+  background: #0288d1; }
+
+table tr.disable td:first-child:before {
+  background: rgba(18, 75, 78, 0.24); }
 
 .search-box {
   -webkit-border-radius: 2px;

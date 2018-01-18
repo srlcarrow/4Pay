@@ -74,27 +74,48 @@ table.cm-table {
 }
 
 table {
+  tr {
+    td:first-child {
+      &:before {
+        width: 5px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        content: '';
+        display: inline-block;
+      }
+    }
+  }
   tr.leave {
-    td, span {
-      color: $leaveColor;
+    td:first-child {
+      &:before {
+        background: $leaveColor;
+      }
     }
   }
 
   tr.holiday {
-    td, span {
-      color: $holidayColor;
+    td:first-child {
+      &:before {
+        background: $holidayColor;
+      }
     }
   }
 
   tr.short-leave {
-    td, span {
-      color: $primaryColor;
+    td:first-child {
+      &:before {
+        background: $primaryColor;
+      }
     }
   }
 
   tr.disable {
-    td, span {
-      color: $disableColor;
+    td:first-child {
+      &:before {
+        background: $disableColor;
+      }
     }
   }
 
