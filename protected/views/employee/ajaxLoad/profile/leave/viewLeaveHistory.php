@@ -46,6 +46,24 @@
                 </div>
             </div>
 
+
+<!--            <span class="more leave-more"></span>-->
+<!--            <div class="popup leave">-->
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <span class="mr-8">Mo</span>-->
+<!--                        <span>2018-01-12 Full Day</span>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span class="width-10 mr-8">Tu</span>-->
+<!--                        <span>2018-01-13 Full Day</span>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span class="width-10 mr-8">We</span>-->
+<!--                        <span>2018-01-14 Half Day</span>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
         </div>
     </div>
 </div>

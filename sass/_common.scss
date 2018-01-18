@@ -168,3 +168,58 @@ span.error-val {
   }
 
 }
+
+.popup {
+  position: absolute;
+  background: $white;
+  -webkit-box-shadow: 0 2px 2px rgba($black, 0.10);
+  -moz-box-shadow: 0 2px 2px rgba($black, 0.10);
+  box-shadow: 0 2px 2px rgba($black, 0.10);
+  padding: 15px 20px;
+  z-index: 1;
+  white-space: nowrap;
+  display: none;
+}
+
+.popup.leave {
+  left: 98%;
+  bottom: -8px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      font-size: $base-font-size;
+      color: rgba($black, $lighten-x);
+
+      & > span:first-child {
+        display: inline-block;
+        width: 15px;
+        color: rgba($black, $lighten-xx)
+      }
+    }
+
+    li:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.more {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  display: inline-block;
+  background: url("./../images/icon/button/i6/ic-16-search.png");
+}
+
+.leave-more {
+  position: absolute;
+  right: 8px;
+  top: 9px;
+}
+
+.leave-more:hover + .popup.leave {
+  display: block;
+}

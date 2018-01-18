@@ -551,6 +551,48 @@ span.error-val {
   .white-border-right:last-child {
     border-color: transparent; }
 
+.popup {
+  position: absolute;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  z-index: 1;
+  white-space: nowrap;
+  display: none; }
+
+.popup.leave {
+  left: 98%;
+  bottom: -8px; }
+  .popup.leave ul {
+    margin: 0;
+    padding: 0; }
+    .popup.leave ul li {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.56); }
+      .popup.leave ul li > span:first-child {
+        display: inline-block;
+        width: 15px;
+        color: rgba(0, 0, 0, 0.3); }
+    .popup.leave ul li:not(:last-child) {
+      margin-bottom: 15px; }
+
+.more {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  display: inline-block;
+  background: url("./../images/icon/button/i6/ic-16-search.png"); }
+
+.leave-more {
+  position: absolute;
+  right: 8px;
+  top: 9px; }
+
+.leave-more:hover + .popup.leave {
+  display: block; }
+
 /*Card*/
 .card {
   position: relative;
@@ -679,7 +721,8 @@ table.table > thead {
       padding-bottom: 0; }
 
 table.table > tbody tr td {
-  padding: 6px 8px; }
+  padding: 6px 8px;
+  position: relative; }
 
 table.table.table-bordered > thead > tr > td,
 table.table.table-bordered > thead > tr > th {
